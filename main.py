@@ -61,8 +61,8 @@ def language(message):
                                          url='https://t.me/hostmasteruz')
 
         lg6 = types.InlineKeyboardButton('Услуги и платежи', callback_data='pay_services')
-        lg7 = types.KeyboardButton('Назад')
-        markup.add(lg1, lg2, lg3, lg4, lg5, lg6, lg7)
+
+        markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
         bot.send_message(message.chat.id, 'Что вас интересует ?', reply_markup=markup)
         bot.register_message_handler(message.chat.id, 'Что вас интересует ?', reply_markup=markup)
 
