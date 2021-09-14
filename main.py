@@ -69,11 +69,12 @@ def language(message):
 
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
+
     text = f'<b>{message.from_user.first_name}</b> пишет боту...'
     markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
     lg1 = types.KeyboardButton('🇷🇺Russian🇷🇺')
     lg2 = types.KeyboardButton('🇺🇿Uzbek🇺🇿')
-    markup.add(lg1, lg2, lg3)
+    markup.add(lg1, lg2)
     bot.send_message(332749197, text, parse_mode='html')
     bot.reply_to(message, "Iltimos, tilni tanlang\n\nПожалуйста, выберите язык", reply_markup=markup)
     bot.register_next_step_handler(message, language)
