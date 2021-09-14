@@ -40,8 +40,9 @@ bot = telebot.TeleBot('1978328105:AAFXdSFd7-1voK87s7WBxu5a-DKPGmW1JN0')
 @bot.callback_query_handler(func=lambda call: True)
 def callback(call):
     if call.message:
-        if call.data == 'support':
-            bot.send_message(call.message.chat.id, 'Сайт')
+        if call.data == 'pay_services':
+            bot.send_message(call.message.chat.id,
+                             'Для получения информации об используемых услугах и платежах - вам необходимо пройти авторизацию')
 
 
 @bot.message_handler(commands=['us'])
@@ -58,7 +59,7 @@ def language(message):
                                          url='https://t.me/hostmasteruz')
 
         lg6 = types.InlineKeyboardButton('Услуги и платежи', callback_data='pay_services',
-                                         url='https://www.hostmaster.uz/vds/tariffs/')
+                                         )
         markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
         bot.send_message(message.chat.id, 'Что вас интересует ?', reply_markup=markup)
         bot.register_message_handler(message.chat.id, 'Что вас интересует ?', reply_markup=markup)
@@ -67,7 +68,7 @@ def language(message):
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
     text = f'<b>{message.from_user.first_name}</b> пишет боту...'
-    markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
+    markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
     lg1 = types.KeyboardButton('🇷🇺Russian🇷🇺')
     lg2 = types.KeyboardButton('🇺🇿Uzbek🇺🇿')
     markup.add(lg1, lg2)
