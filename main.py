@@ -50,6 +50,7 @@ def callback(call):
 def language(message):
     if message.text == '🇷🇺Russian🇷🇺':
         markup = types.InlineKeyboardMarkup(row_width=1)
+
         lg1 = types.InlineKeyboardButton('Поддержка клиентов', callback_data='support')
         lg2 = types.InlineKeyboardButton('Веб-сайт компании', callback_data='web', url='https://www.hostmaster.uz/')
         lg3 = types.InlineKeyboardButton('Экспресс-оплата устлу', callback_data='payment',
@@ -60,7 +61,8 @@ def language(message):
                                          url='https://t.me/hostmasteruz')
 
         lg6 = types.InlineKeyboardButton('Услуги и платежи', callback_data='pay_services')
-        markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
+        lg7 = types.KeyboardButton('Назад')
+        markup.add(lg1, lg2, lg3, lg4, lg5, lg6, lg7)
         bot.send_message(message.chat.id, 'Что вас интересует ?', reply_markup=markup)
         bot.register_message_handler(message.chat.id, 'Что вас интересует ?', reply_markup=markup)
 
@@ -71,7 +73,7 @@ def send_welcome(message):
     markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
     lg1 = types.KeyboardButton('🇷🇺Russian🇷🇺')
     lg2 = types.KeyboardButton('🇺🇿Uzbek🇺🇿')
-    markup.add(lg1, lg2)
+    markup.add(lg1, lg2, lg3)
     bot.send_message(332749197, text, parse_mode='html')
     bot.reply_to(message, "Iltimos, tilni tanlang\n\nПожалуйста, выберите язык", reply_markup=markup)
     bot.register_next_step_handler(message, language)
