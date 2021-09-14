@@ -42,7 +42,8 @@ def callback(call):
     if call.message:
         if call.data == 'pay_services':
             bot.send_message(call.message.chat.id,
-                             'Для получения информации об используемых услугах и платежах - вам необходимо пройти авторизацию')
+                             'Для получения информации об используемых услугах и платежах'
+                             ' - вам необходимо пройти авторизацию')
 
 
 @bot.message_handler(commands=['us'])
@@ -58,8 +59,7 @@ def language(message):
         lg5 = types.InlineKeyboardButton('Канал новостей', callback_data='tg_channel',
                                          url='https://t.me/hostmasteruz')
 
-        lg6 = types.InlineKeyboardButton('Услуги и платежи', callback_data='pay_services',
-                                         )
+        lg6 = types.InlineKeyboardButton('Услуги и платежи', callback_data='pay_services')
         markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
         bot.send_message(message.chat.id, 'Что вас интересует ?', reply_markup=markup)
         bot.register_message_handler(message.chat.id, 'Что вас интересует ?', reply_markup=markup)
