@@ -174,17 +174,17 @@ def info(message):
         bot.send_message(message.chat.id,
                          'Оптимально для сайта небольшой компании: 36 900 сум/мес'
                          '\n2 Gb на диске\nСайтов - unlimited'
-                         '\nSSL-сертификат бесплатно\nТрафик - unlimited', parse_mode='html',reply_markup=but)
+                         '\nSSL-сертификат бесплатно\nТрафик - unlimited', parse_mode='html', reply_markup=but)
     elif message.text == 'Control':
         bot.send_message(message.chat.id,
                          f'Идеально для корпоративного сайта: 49 900 сум/мес'
                          f'\n3 Gb на диске\nСайтов - unlimited'
-                         f'\nSSL-сертификат бесплатно\nТрафик - unlimited',parse_mode='html')
+                         f'\nSSL-сертификат бесплатно\nТрафик - unlimited', parse_mode='html')
     elif message.text == 'Space':
         bot.send_message(message.chat.id,
                          f'Для старта интернет-магазина: 59 900 сум/мес'
                          f'\n5 Gb на диске\nСайтов - unlimited'
-                         f'\nSSL-сертификат бесплатно\nТрафик - unlimited',parse_mode='html')
+                         f'\nSSL-сертификат бесплатно\nТрафик - unlimited', parse_mode='html')
     elif message.text == 'VIP 1':
         bot.send_message(message.chat.id,
                          f'Для интернет-магазина или портала: 109 900 сум/мес'
@@ -345,6 +345,24 @@ def tarifs(message):
         markup.add(vip1, vip2, vip3, vip4, back)
         bot.send_message(message.chat.id, 'О каком тарифе хотите получить информацию', reply_markup=markup)
         bot.register_next_step_handler(message, info)
+
+    elif message.text == 'Назад':
+        markup = types.InlineKeyboardMarkup(row_width=1)
+
+        lg1 = types.InlineKeyboardButton('Поддержка клиентов', callback_data='support')
+        lg2 = types.InlineKeyboardButton('Веб-сайт компании', callback_data='web', url='https://www.hostmaster.uz/')
+        lg3 = types.InlineKeyboardButton('Экспресс-оплата устлу', callback_data='payment',
+                                         url='https://www.hostmaster.uz/pay')
+        lg4 = types.InlineKeyboardButton('Персональный кабинет', callback_data='cabinet')
+        lg5 = types.InlineKeyboardButton('Канал новостей', callback_data='tg_channel',
+                                         url='https://t.me/hostmasteruz')
+
+        lg6 = types.InlineKeyboardButton('Услуги и платежи', callback_data='pay_services')
+
+        markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
+        bot.send_message(message.chat.id,
+                         'Главное меню',
+                         reply_markup=markup)
 
 
 bot.polling(none_stop=True)
