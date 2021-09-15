@@ -1,12 +1,40 @@
 import telebot
-import sqlite3
 from telebot import types
 from telebot.types import Message
 
 bot = telebot.TeleBot('1978328105:AAFXdSFd7-1voK87s7WBxu5a-DKPGmW1JN0')
+import pymysql
+import mysql.connector
+
+mysql_db_name = 'hostmasteruz_base'
+mysql_db_login = 'hostmasteruz_pbot'
+mysql_db_password = 'bcaxoZyAXDGc'
+
+connection = pymysql.connect(host='62.209.143.131',
+                             user='hostmasteruz_pbot',
+                             password='bcaxoZyAXDGc',
+                             database='hostmasteruz_base',
+                             charset='utf8mb4',
+                             cursorclass=pymysql.cursors.DictCursor)
+
+with connection:
+    cur = connection.cursor()
+    cur.execute('SELECT password_hash FROM user WHERE username = "hostmastervds@gmail.com"')
+    rows = cur.fetchall()
+    for i in rows:
+        print(i)
 
 
-@bot.callback_query_handler(func=lambda call: True)
+# mydb = mysql.connector.connect(
+#     host="62.209.143.131",
+#     user="hostmasteruz_pbot",
+#     password="bcaxoZyAXDGc",
+#     database='hostmasteruz_base',
+#
+# )
+
+
+# @bot.callback_query_handler(func=lambda call: True)
 # def language(call):
 #     try:
 #         if call.message:
@@ -45,6 +73,8 @@ def callback(call):
                              'Для получения информации об используемых услугах и платежах'
                              ' - вам необходимо пройти авторизацию')
 
+        if call.data == 'cabinet':
+            bot.send_message(call.message.chat.id,'Введите логин')
 
 @bot.message_handler(commands=['us'])
 def language(message):
@@ -69,7 +99,6 @@ def language(message):
 
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
-
     text = f'<b>{message.from_user.first_name}</b> пишет боту...'
     markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
     lg1 = types.KeyboardButton('🇷🇺Russian🇷🇺')
