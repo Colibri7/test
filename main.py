@@ -4,6 +4,9 @@ bot = telebot.TeleBot('1978328105:AAFXdSFd7-1voK87s7WBxu5a-DKPGmW1JN0')
 
 import pymysql
 
+import pymysql
+
+bot.remove_webhook()
 connection = pymysql.connect(host='62.209.143.131',
                              user='hostmasteruz_pbot',
                              password='bcaxoZyAXDGc',
@@ -51,29 +54,53 @@ connection = pymysql.connect(host='62.209.143.131',
 #
 #     except Exception as e:
 #         print(repr(e))
+from datetime import datetime
 
 with connection:
-    cur = connection.cursor()
-    cur.execute('SELECT * FROM user')
-    rows = cur.fetchall()
+    # username
+    cur1 = connection.cursor()
+    cur1.execute('SELECT username FROM user')
+    rows1 = cur1.fetchall()
+    # password
+    cur2 = connection.cursor()
+    cur2.execute('SELECT password_hash FROM user')
+    rows2 = cur2.fetchall()
+
+
+    cur3 = connection.cursor()
+    cur3.execute('SELECT `user`.`id`, `user`.`username`, `contact`.`balance` FROM `user`, `contact` WHERE `user`.`id` = `contact`.`userid` AND `contact`.`balance` < 0 ORDER BY `user`.`id`, `user`.`username`, `contact`.`balance` DESC')
+    rows3 = cur3.fetchall()
 
     logins = []
     passwords = []
-    for i in rows:
+    minus = []
+    for i in rows1:
         logins.append(i['username'])
-        passwords.append(i["password_hash"])
+
+    for j in rows2:
+        passwords.append(j["password_hash"])
+
+    for m in rows3:
+        print(m["username"],m['balance'])
+
+        # i["created_at"] = datetime.fromtimestamp(i["created_at"]).strftime('%d.%B.%Y: %H:%M')
+
+
+def contact(message):
+    bot.send_message(message.chat.id, 'asd')
 
 
 def password(message):
     if message.text in passwords:
         bot.send_message(message.chat.id,
-                         f'Пользователь успешно привязан к телеграм-боту')
+                         f'Пользователь успешно привязан к телеграм-боту.')
+        bot.register_next_step_handler(message, contact)
     else:
         bot.send_message(message.chat.id, f'Пароль введен неправильно, попробуйте еще раз')
 
 
 def log(message):
-    if message.text in logins:
+    if message.text.lower() in logins:
         bot.send_message(message.chat.id, f'Введите пароль')
     else:
         markup = types.InlineKeyboardMarkup(row_width=1)
@@ -150,10 +177,10 @@ def info(message):
                          f'\n<b>При оплате за месяц:</b>\n'
                          f'Для посадочных и персональных страниц\n'
                          f'<b>24 900</b> сум/мес\n'
-                         f'<b>1 Gb</b> на диске\nСайтов - <b>unlimited</b>\n'
-                         f'SSL-сертификат бесплатно'
-                         f'\nТрафик - <b>unlimited</b>\nТестовый период 7 дней'
-                         f'\n<b>При оплате за год:</b>\n'
+                         f'<b>1 Gb</b> на диске\nСайтов: <b>unlimited</b>\n'
+                         f'SSL: сертификат бесплатно'
+                         f'\nТрафик: <b>unlimited</b>\nТестовый период 7 дней'
+                         f'\nПри оплате за год:\n'
                          f'<b>24 900</b> сум/мес\n<b>238 800</b> сум/год\n'
                          f'Доменов UZ в подарок 1 шт*', parse_mode='html', reply_markup=but)
 
@@ -172,45 +199,72 @@ def info(message):
         bot.register_next_step_handler(message, tarifs)
     elif message.text == 'Shift':
         bot.send_message(message.chat.id,
-                         'Оптимально для сайта небольшой компании: 36 900 сум/мес'
-                         '\n2 Gb на диске\nСайтов - unlimited'
-                         '\nSSL-сертификат бесплатно\nТрафик - unlimited', parse_mode='html', reply_markup=but)
+                         'Оптимально для сайта небольшой компании: <b>36 900</b> сум/мес'
+                         '\n<b>2 Gb</b> на диске\nСайтов: <b>unlimited</b>'
+                         '\nSSL: сертификат бесплатно\nТрафик: <b>unlimited</b>'
+                         '\nТестовый период 7 дней'
+                         f'\nПри оплате за год:\n'
+                         f'<b>29 900</b> сум/мес\n<b>358 800</b> сум/год\n'
+                         f'Доменов UZ в подарок 1 шт*', parse_mode='html', reply_markup=but)
     elif message.text == 'Control':
         bot.send_message(message.chat.id,
                          f'Идеально для корпоративного сайта: 49 900 сум/мес'
-                         f'\n3 Gb на диске\nСайтов - unlimited'
-                         f'\nSSL-сертификат бесплатно\nТрафик - unlimited', parse_mode='html')
+                         f'\n3 Gb на диске\nСайтов: unlimited'
+                         f'\nSSL: сертификат бесплатно\nТрафик: unlimited'
+                         '\nТестовый период 7 дней'
+                         f'\nПри оплате за год:\n'
+                         f'<b>39 900</b> сум/мес\n<b>478 800</b> сум/год\n'
+                         f'Доменов UZ в подарок 2 шт*', parse_mode='html')
     elif message.text == 'Space':
         bot.send_message(message.chat.id,
                          f'Для старта интернет-магазина: 59 900 сум/мес'
                          f'\n5 Gb на диске\nСайтов - unlimited'
-                         f'\nSSL-сертификат бесплатно\nТрафик - unlimited', parse_mode='html')
+                         f'\nSSL-сертификат бесплатно\nТрафик - unlimited'
+                         '\nТестовый период 7 дней'
+                         f'\n<b>При оплате за год:</b>\n'
+                         f'<b>49 900</b> сум/мес\n<b>598 800</b> сум/год\n'
+                         f'Доменов UZ в подарок 2 шт*', parse_mode='html')
     elif message.text == 'VIP 1':
         bot.send_message(message.chat.id,
                          f'Для интернет-магазина или портала: 109 900 сум/мес'
                          f'\n10 Gb на диске\nСайтов - unlimited'
-                         f'\nSSL-сертификат бесплатно\nТрафик - unlimited',
-                         parse_mode='html')
+                         f'\nSSL-сертификат бесплатно\nТрафик - unlimited'
+                         f'\nТестовый период 7 дней'
+                         f'\n<b>При оплате за год:</b>\n'
+                         f'<b>99 900</b> сум/мес\n<b>1 198 800</b> сум/год\n'
+                         f'Доменов UZ в подарок 3 шт*', parse_mode='html')
 
     elif message.text == 'VIP 2':
         bot.send_message(message.chat.id,
                          f'Оптимально для Интернет-портала: 159 900 сум/мес'
                          f'\n20 Gb на диске\nСайтов - unlimited'
-                         f'\nSSL-сертификат бесплатно\nТрафик - unlimited',
+                         f'\nSSL-сертификат бесплатно\nТрафик - unlimited'
+                         f'\nТестовый период 7 дней'
+                         f'\n<b>При оплате за год:</b>\n'
+                         f'<b>149 900 </b> сум/мес\n<b>1 798 800</b> сум/год\n'
+                         f'Доменов UZ в подарок 3 шт*',
                          parse_mode='html')
 
     elif message.text == 'VIP 3':
         bot.send_message(message.chat.id,
                          f'Много сайтов и доменов): 219 900 сум/мес'
                          f'\n30 Gb на диске\nСайтов - unlimited'
-                         f'\nSSL-сертификат бесплатно\nТрафик - unlimited',
+                         f'\nSSL-сертификат бесплатно\nТрафик - unlimited'
+                         f'\nТестовый период 7 дней'
+                         f'\n<b>При оплате за год:</b>\n'
+                         f'<b>199 900</b> сум/мес\n<b>2 398 800</b> сум/год\n'
+                         f'Доменов UZ в подарок 5 шт*',
                          parse_mode='html')
 
     elif message.text == 'VIP 4':
         bot.send_message(message.chat.id,
                          f'Для крупного портала или интернет-магазина: 269 900 сум/мес'
                          f'\n<b>100 Gb</b> на диске\nСайтов - unlimited'
-                         f'\nSSL-сертификат бесплатно\nТрафик - unlimited',
+                         f'\nSSL-сертификат бесплатно\nТрафик - unlimited'
+                         f'\nТестовый период 7 дней'
+                         f'\n<b>При оплате за год:</b>\n'
+                         f'<b>249 900</b> сум/мес\n<b>2 998 800</b> сум/год\n'
+                         f'Доменов UZ в подарок 5 шт*',
                          parse_mode='html')
 
     elif message.text == 'WordPress 1':
@@ -365,4 +419,5 @@ def tarifs(message):
                          reply_markup=markup)
 
 
-bot.polling(none_stop=True)
+if __name__ == '__main__':
+    bot.polling(none_stop=True)
