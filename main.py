@@ -1,11 +1,10 @@
+import crypt
+
 import telebot
 from telebot import types
+import pymysql
 
 bot = telebot.TeleBot('1978328105:AAFXdSFd7-1voK87s7WBxu5a-DKPGmW1JN0')
-
-import pymysql
-
-import pymysql
 
 bot.remove_webhook()
 connection = pymysql.connect(host='62.209.143.131',
@@ -16,28 +15,7 @@ connection = pymysql.connect(host='62.209.143.131',
                              cursorclass=pymysql.cursors.DictCursor
                              )
 
-# mydb = mysql.connector.connect(
-#     host="62.209.143.131",
-#     user="hostmasteruz_pbot",
-#     password="bcaxoZyAXDGc",
-#     database='hostmasteruz_base',
-#
-# )
 
-
-# @bot.callback_query_handler(func=lambda call: True)
-# def language(call):
-#     try:
-#         if call.message:
-#             if call.data == 'ru':
-#                 bot.send_message(call.message.chat.id, 'Это информационный бот компании Hostmaster.Hostmaster – '
-#                                                        'Хостинг провайдер и регистратор доменов в '
-#                                                        'Узбекистане, в Ташкенте.Наш телефон: 71-202-55-11')
-#                 bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-#                                       text=f'Выбран язык: <b>Русский</b>',
-#                                       reply_markup=None, parse_mode='html')
-#                 bot.register_next_step_handler(call.message, uslugi)
-#
 #
 #             elif call.data == 'uz':
 #                 bot.send_message(call.message.chat.id,
@@ -55,13 +33,7 @@ connection = pymysql.connect(host='62.209.143.131',
 #
 #     except Exception as e:
 #         print(repr(e))
-from datetime import datetime
 
-
-# password
-# cur2 = connection.cursor()
-# cur2.execute('SELECT password_hash FROM user')
-# rows2 = cur2.fetchall()
 
 # cur3 = connection.cursor()
 # cur3.execute(
@@ -71,55 +43,76 @@ from datetime import datetime
 # i["created_at"] = datetime.fromtimestamp(i["created_at"]).strftime('%d.%B.%Y: %H:%M')
 
 
-def contact(message):
+def info_about_user(message):
     bot.send_message(message.chat.id, 'asd')
 
 
-def password(message):
-    text = message.text
-    bot.send_message(message.chat.id,'g')
-
-
 def log(message):
-    text = message.text
-    with connection:
-        cursor = connection.cursor()
-        cursor.execute(
-            'SELECT username FROM user WHERE username = %(username)s', {'username': text})
-        checkUsername = cursor.fetchone()
-        if text == checkUsername["username"]:
-            bot.send_message(message.chat.id, f'Введите пароль')
-            bot.register_next_step_handler(message, password)
+    def password(message):
+        out = crypt.crypt(message.text, checkUsername["password_hash"])
+        key = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
+        back = types.KeyboardButton('вернуться в главное меню')
+        key.add(back)
+        if checkUsername["password_hash"] == out:
+            bot.send_message(message.chat.id, 'Successfully logged in ', reply_markup=key)
+            min = connection.cursor()
+            min.execute(
+                'SELECT `user`.`id`, `user`.`username`, `contact`.`balance` FROM `user`, `contact` WHERE'
+                ' `user`.`id` = `contact`.`userid` AND `contact`.`balance` < 0'
+                ' ORDER BY `user`.`id`, `user`.`username`, `contact`.`balance` DESC')
+            check = min.fetchall()
+            for u in check:
+                if login in u.values():
+                    bot.send_message(message.chat.id,
+                                     f'u vas zadoljnost\nusername: {u["username"]}\nbalance: {u["balance"]}')
+
         else:
-            markup = types.InlineKeyboardMarkup(row_width=1)
-            reg = types.InlineKeyboardButton('Зарегестрироваться', callback_data='reg',
-                                             url='https://www.hostmaster.uz/site/login/')
-            markup.add(reg)
-            bot.send_message(message.chat.id, 'Пользователь не найден. '
-                                              'Требуется регистрация нового пользователя на сайте',
-                             reply_markup=markup)
+            bot.send_message(message.chat.id, 'Wrong password or mail')
+            bot.register_next_step_handler(message, password)
+        bot.register_next_step_handler(message, language)
+
+    login = message.text
+    cursor = connection.cursor()
+    cursor.execute('SELECT username FROM user')
+    checkUsername = cursor.fetchall()
+    list = []
+    for i in checkUsername:
+        list.append(i["username"])
+    if message.text in list:
+        cursor.execute('SELECT password_hash FROM user WHERE username=%(username)s', {'username': login})
+        checkUsername = cursor.fetchone()
+        bot.send_message(message.chat.id, 'enter password')
+        bot.register_next_step_handler(message, password)
+    else:
+        key = types.InlineKeyboardMarkup(row_width=1)
+
+        lg1 = types.InlineKeyboardButton('зарегистрироваться', callback_data='register',
+                                         url='https://hostmaster.uz/site/signup/')
+        key.add(lg1)
+        bot.send_message(message.chat.id, 'вам следует зарегистрироваться ', reply_markup=key)
+        bot.register_next_step_handler(message, log)
 
 
 def language(message):
-    if message.text == '🇷🇺Russian🇷🇺':
-        markup = types.InlineKeyboardMarkup(row_width=1)
+    # if message.text == '🇷🇺Russian🇷🇺':
+    markup = types.InlineKeyboardMarkup(row_width=1)
 
-        lg1 = types.InlineKeyboardButton('Поддержка клиентов', callback_data='support')
-        lg2 = types.InlineKeyboardButton('Веб-сайт компании', callback_data='web', url='https://www.hostmaster.uz/')
-        lg3 = types.InlineKeyboardButton('Экспресс-оплата устлу', callback_data='payment',
-                                         url='https://www.hostmaster.uz/pay')
-        lg4 = types.InlineKeyboardButton('Персональный кабинет', callback_data='cabinet')
-        lg5 = types.InlineKeyboardButton('Канал новостей', callback_data='tg_channel',
-                                         url='https://t.me/hostmasteruz')
+    lg1 = types.InlineKeyboardButton('Поддержка клиентов', callback_data='support')
+    lg2 = types.InlineKeyboardButton('Веб-сайт компании', callback_data='web', url='https://www.hostmaster.uz/')
+    lg3 = types.InlineKeyboardButton('Экспресс-оплата устлу', callback_data='payment',
+                                     url='https://www.hostmaster.uz/pay')
+    lg4 = types.InlineKeyboardButton('Персональный кабинет', callback_data='cabinet')
+    lg5 = types.InlineKeyboardButton('Канал новостей', callback_data='tg_channel',
+                                     url='https://t.me/hostmasteruz')
 
-        lg6 = types.InlineKeyboardButton('Услуги и платежи', callback_data='pay_services')
+    lg6 = types.InlineKeyboardButton('Услуги и платежи', callback_data='pay_services')
 
-        markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
-        bot.send_message(message.chat.id,
-                         'Это информационный бот компании Hostmaster.'
-                         '\nHostmaster – Хостинг провайдер и регистратор доменов в'
-                         '\nУзбекистане, в Ташкенте.\nНаш телефон: 71-202-55-11',
-                         reply_markup=markup)
+    markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
+    bot.send_message(message.chat.id,
+                     'Это информационный бот компании Hostmaster.'
+                     '\nHostmaster – Хостинг провайдер и регистратор доменов в'
+                     '\nУзбекистане, в Ташкенте.\nНаш телефон: 71-202-55-11',
+                     reply_markup=markup)
 
 
 @bot.callback_query_handler(func=lambda call: True)
@@ -137,7 +130,7 @@ def callback(call):
         bot.register_next_step_handler(call.message, tarifs)
     if call.data == 'cabinet':
         bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                              text=f'Надо ввести логин:',
+                              text=f'Enter mail:',
                               reply_markup=None, parse_mode='html')
         bot.register_next_step_handler(call.message, log)
 
