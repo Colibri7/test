@@ -1,5 +1,6 @@
 import telebot
 from telebot import types
+
 bot = telebot.TeleBot('1978328105:AAFXdSFd7-1voK87s7WBxu5a-DKPGmW1JN0')
 
 import pymysql
@@ -56,34 +57,18 @@ connection = pymysql.connect(host='62.209.143.131',
 #         print(repr(e))
 from datetime import datetime
 
-with connection:
-    # username
-    cur1 = connection.cursor()
-    cur1.execute('SELECT username FROM user')
-    rows1 = cur1.fetchall()
-    # password
-    cur2 = connection.cursor()
-    cur2.execute('SELECT password_hash FROM user')
-    rows2 = cur2.fetchall()
 
+# password
+# cur2 = connection.cursor()
+# cur2.execute('SELECT password_hash FROM user')
+# rows2 = cur2.fetchall()
 
-    cur3 = connection.cursor()
-    cur3.execute('SELECT `user`.`id`, `user`.`username`, `contact`.`balance` FROM `user`, `contact` WHERE `user`.`id` = `contact`.`userid` AND `contact`.`balance` < 0 ORDER BY `user`.`id`, `user`.`username`, `contact`.`balance` DESC')
-    rows3 = cur3.fetchall()
+# cur3 = connection.cursor()
+# cur3.execute(
+#     'SELECT `user`.`id`, `user`.`username`, `contact`.`balance` FROM `user`, `contact` WHERE `user`.`id` = `contact`.`userid` AND `contact`.`balance` < 0 ORDER BY `user`.`id`, `user`.`username`, `contact`.`balance` DESC')
+# rows3 = cur3.fetchall()
 
-    logins = []
-    passwords = []
-    minus = []
-    for i in rows1:
-        logins.append(i['username'])
-
-    for j in rows2:
-        passwords.append(j["password_hash"])
-
-    for m in rows3:
-        print(m["username"],m['balance'])
-
-        # i["created_at"] = datetime.fromtimestamp(i["created_at"]).strftime('%d.%B.%Y: %H:%M')
+# i["created_at"] = datetime.fromtimestamp(i["created_at"]).strftime('%d.%B.%Y: %H:%M')
 
 
 def contact(message):
@@ -91,27 +76,28 @@ def contact(message):
 
 
 def password(message):
-    if message.text in passwords:
-        bot.send_message(message.chat.id,
-                         f'Пользователь успешно привязан к телеграм-боту.')
-        bot.register_next_step_handler(message, contact)
-    else:
-        bot.send_message(message.chat.id, f'Пароль введен неправильно, попробуйте еще раз')
+    text = message.text
+    bot.send_message(message.chat.id,'g')
 
 
 def log(message):
-    if message.text.lower() in logins:
-        bot.send_message(message.chat.id, f'Введите пароль')
-    else:
-        markup = types.InlineKeyboardMarkup(row_width=1)
-        reg = types.InlineKeyboardButton('Зарегестрироваться', callback_data='reg',
-                                         url='https://www.hostmaster.uz/site/login/')
-        markup.add(reg)
-        bot.send_message(message.chat.id, 'Пользователь не найден. '
-                                          'Требуется регистрация нового пользователя на сайте',
-                         reply_markup=markup)
-
-    bot.register_next_step_handler(message, password)
+    text = message.text
+    with connection:
+        cursor = connection.cursor()
+        cursor.execute(
+            'SELECT username FROM user WHERE username = %(username)s', {'username': text})
+        checkUsername = cursor.fetchone()
+        if text == checkUsername["username"]:
+            bot.send_message(message.chat.id, f'Введите пароль')
+            bot.register_next_step_handler(message, password)
+        else:
+            markup = types.InlineKeyboardMarkup(row_width=1)
+            reg = types.InlineKeyboardButton('Зарегестрироваться', callback_data='reg',
+                                             url='https://www.hostmaster.uz/site/login/')
+            markup.add(reg)
+            bot.send_message(message.chat.id, 'Пользователь не найден. '
+                                              'Требуется регистрация нового пользователя на сайте',
+                             reply_markup=markup)
 
 
 def language(message):
@@ -130,7 +116,9 @@ def language(message):
 
         markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
         bot.send_message(message.chat.id,
-                         'Это информационный бот компании Hostmaster.\nHostmaster – Хостинг провайдер и регистратор доменов в\nУзбекистане, в Ташкенте.\nНаш телефон: 71-202-55-11',
+                         'Это информационный бот компании Hostmaster.'
+                         '\nHostmaster – Хостинг провайдер и регистратор доменов в'
+                         '\nУзбекистане, в Ташкенте.\nНаш телефон: 71-202-55-11',
                          reply_markup=markup)
 
 
