@@ -5,7 +5,7 @@ import schedule as schedule
 import telebot
 from telebot import types
 import pymysql
-
+# tgbot
 bot = telebot.TeleBot('1978328105:AAFXdSFd7-1voK87s7WBxu5a-DKPGmW1JN0')
 
 bot.remove_webhook()
@@ -297,7 +297,6 @@ def log_uz(message):
                         text += f'{num}. {i["contactcompany"]}, balans: {i["balance"]} sum\n\n'
                     num += 1
                 bot.send_message(message.chat.id, text, reply_markup=key)
-
             # zadoljnsot
             # minus = connection.cursor()
             # minus.execute(
