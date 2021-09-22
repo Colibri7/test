@@ -1,4 +1,5 @@
 import crypt
+import time
 import requests
 import schedule as schedule
 import telebot
@@ -22,9 +23,30 @@ SQLALCHEMY_ENGINE_OPTIONS = {
 }
 
 
+#
+#             elif call.data == 'uz':
+#                 bot.send_message(call.message.chat.id,
+#                                  """Bu Hostmaster kompaniyasining axborot boti. Hostmaster - Xosting provayderi
+#                                  va domen registratori" O'zbekiston, Toshkentda. Bizning telefon: 71-202-55-11""")
+#                 bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+#                                       text=f'Выбран язык: <b>Узбекский</b>',
+#                                       reply_markup=None, parse_mode='html')
+#
+#             # remove inline buttons
+#
 #             # show alert
 #             bot.answer_callback_query(callback_query_id=call.id, show_alert=False,
 #                                       text="NEW LINE SOLUTIONS")
+#
+#
+#     except Exception as e:
+#         print(repr(e))
+
+
+# cur3 = connection.cursor()
+# cur3.execute(
+#     'SELECT `user`.`id`, `user`.`username`, `contact`.`balance` FROM `user`, `contact` WHERE `user`.`id` = `contact`.`userid` AND `contact`.`balance` < 0 ORDER BY `user`.`id`, `user`.`username`, `contact`.`balance` DESC')
+# rows3 = cur3.fetchall()
 
 # i["created_at"] = datetime.fromtimestamp(i["created_at"]).strftime('%d.%B.%Y: %H:%M')
 
@@ -69,7 +91,6 @@ def func(message):
                          reply_markup=markup_uz)
 
 
-# time
 def telegram_bot_sendtext(bot_message):
     bot_token = '1978328105:AAFXdSFd7-1voK87s7WBxu5a-DKPGmW1JN0'
     bot_chatID = '332749197'
@@ -92,16 +113,16 @@ def report():
         for i in check:
             list.append(f'usernmae: {i["username"]} | balance: {i["balance"]}')
 
-        my_balance = list[:3]
+        my_balance = list[:3]  ## Replace this number with an API call to fetch your account balance
         my_message = 'Уважаемый "Наименование контакта"!\n' \
                      'Ваш баланс: -ХХХХ сум\nУбедительно просим погасить задолженность и ' \
                      'внести оплату за используемые услуги!\n' \
-                     'По вопросам просим обращаться @hostmaster_support!'
+                     'По вопросам просим обращаться @hostmaster_support!'  ## Customize your message
         telegram_bot_sendtext(my_message)
 
 
-# schedule.every().day.at("11:53").do(report)
-# --------------------------------------------
+schedule.every().day.at("11:53").do(report)
+
 
 @bot.message_handler(commands=['start', 'menu'])
 def send_welcome(message):
@@ -153,7 +174,10 @@ def log(message):
                 text = ''
                 num = 1
                 for i in checkContact:
-                    text += f'Наименование контакта {num}: {i["contactname"]}, баланс: {i["balance"]} сум\n\n'
+                    if i["contactcompany"] == None:
+                        text += f'{num}. {i["contactname"]}, баланс: {i["balance"]} сум\n\n'
+                    else:
+                        text += f'{num}.{i["contactcompany"]}, баланс: {i["balance"]} сум\n\n'
                     num += 1
                 bot.send_message(message.chat.id, text, reply_markup=key)
 
@@ -189,7 +213,6 @@ def log(message):
                              '\nHostmaster – Хостинг провайдер и регистратор доменов в'
                              '\nУзбекистане, в Ташкенте.\nНаш телефон: 71-202-55-11',
                              reply_markup=markup)
-
         else:
             bot.send_message(message.chat.id, 'Неверный пароль или почта', reply_markup=key)
             bot.register_next_step_handler(message, password)
@@ -202,7 +225,7 @@ def log(message):
     for i in checkUsername:
         list.append(i["username"])
 
-    if message.text in list:
+    if message.text.lower() in list:
         cursor.execute('SELECT password_hash FROM user WHERE username=%(username)s', {'username': login})
         checkUsername = cursor.fetchone()
         bot.send_message(message.chat.id, 'Введите пароль:')
@@ -268,7 +291,10 @@ def log_uz(message):
                 text = ''
                 num = 1
                 for i in checkContact:
-                    text += f'Shartnoma nomi {num}: {i["contactname"]}, balans: {i["balance"]} sum\n\n'
+                    if i["contactcompany"] == None:
+                        text += f'{num}. {i["contactname"]}, balans: {i["balance"]} sum\n\n'
+                    else:
+                        text += f'{num}. {i["contactcompany"]}, balans: {i["balance"]} sum\n\n'
                     num += 1
                 bot.send_message(message.chat.id, text, reply_markup=key)
 
@@ -314,11 +340,10 @@ def log_uz(message):
     cursor = connection.cursor()
     cursor.execute('SELECT username FROM user')
     checkUsername = cursor.fetchall()
-
     list = []
     for i in checkUsername:
         list.append(i["username"])
-    if message.text in list:
+    if message.text.lower() in list:
         cursor.execute('SELECT password_hash FROM user WHERE username=%(username)s', {'username': login})
         checkUsername = cursor.fetchone()
         bot.send_message(message.chat.id, 'Parol kiriting')
@@ -378,7 +403,7 @@ def language(message):
         markup_ru = types.InlineKeyboardMarkup(row_width=2)
         lg1 = types.InlineKeyboardButton('Поддержка клиентов', callback_data='support')
         lg2 = types.InlineKeyboardButton('Веб-сайт компании', callback_data='web', url='https://www.hostmaster.uz/')
-        lg3 = types.InlineKeyboardButton('Экспресс-оплата устлу', callback_data='payment',
+        lg3 = types.InlineKeyboardButton('Экспресс-оплата услуг', callback_data='payment',
                                          url='https://www.hostmaster.uz/pay')
         lg4 = types.InlineKeyboardButton('Баланс', callback_data='cabinet')
         lg5 = types.InlineKeyboardButton('Канал новостей', callback_data='tg_channel',
