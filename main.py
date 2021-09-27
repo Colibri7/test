@@ -1,10 +1,12 @@
 import crypt
+import re
 import time
 import requests
 import schedule as schedule
 import telebot
 from telebot import types
 import pymysql
+
 # tgbot
 bot = telebot.TeleBot('1978328105:AAFXdSFd7-1voK87s7WBxu5a-DKPGmW1JN0')
 
@@ -43,7 +45,7 @@ def func(message):
         lg7 = types.InlineKeyboardButton('Настройки', callback_data='settings')
         lg8 = types.InlineKeyboardButton('Связь с менедежером', callback_data='connect')
 
-        markup.add(lg1, lg2, lg3, lg4, lg5, lg6, lg7,lg8)
+        markup.add(lg1, lg2, lg3, lg4, lg5, lg6, lg7, lg8)
         bot.send_message(message.chat.id,
                          'Это информационный бот компании Hostmaster.'
                          '\nHostmaster – Хостинг провайдер и регистратор доменов в'
@@ -70,8 +72,6 @@ def func(message):
                          reply_markup=markup_uz)
 
 
-
-
 @bot.message_handler(commands=['start', 'menu'])
 def send_welcome(message):
     text = f'<b>{message.from_user.first_name}</b> пишет боту'
@@ -96,6 +96,24 @@ def send_welcome(message):
 
 @bot.message_handler(content_types=['text'])
 def log(message):
+    def test_email(your_pattern):
+        pattern = re.compile(your_pattern)
+        lis = []
+        lis.append(message)
+        for email in lis:
+            if not re.match(pattern, email):
+                bot.send_message(message.chat.id, f'You failed to match {email}')
+            else:
+                bot.send_message(message.chat.id,'Поздравляем! Вы успешно прошли регистрацию! ')
+
+    # my pattern that is passed as argument in my function is here!
+    pattern = r"\"?([-a-zA-Z0-9.`?{}]+@\w+\.\w+)\"?"
+
+    if message.text == 'Зарегистрироваться':
+        bot.send_message(message.chat.id, 'Для регистрации, пожалуйста, введите следующие данные:')
+        bot.send_message(message.chat.id, 'Адрес е-майл:')
+        bot.register_next_step_handler(message, test_email)
+
     def password(message):
         out = crypt.crypt(message.text, checkUsername["password_hash"])
         key = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
@@ -190,8 +208,6 @@ def log(message):
         lg8 = types.InlineKeyboardButton('Связь с менедежером', callback_data='connect')
 
         markup_ru.add(lg1, lg2, lg3, lg4, lg5, lg6, lg7, lg8)
-
-
 
         bot.send_message(message.chat.id,
                          'Это информационный бот компании Hostmaster.'
@@ -381,9 +397,12 @@ def callback(call):
         bot.send_message(call.message.chat.id, 'Что вас интересует ?', reply_markup=mark)
 
     elif call.data == 'cabinet':
-        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                              text=f'Введите адрес электронной почты:',
-                              reply_markup=None, parse_mode='html')
+        mark = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
+        reg = types.KeyboardButton('Зарегистрироваться')
+        login = types.KeyboardButton('Вход для клиентов')
+        menu = types.KeyboardButton('Главное меню')
+        mark.add(reg, login, menu)
+        bot.send_message(call.message.chat.id, 'Вход/Регистрация', reply_markup=mark)
         bot.register_next_step_handler(call.message, log)
     elif call.data == 'settings':
         mark = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
@@ -412,8 +431,6 @@ def callback(call):
         bot.send_message(call.message.chat.id, 'Til ozgartirish', reply_markup=mark)
 
         bot.register_next_step_handler(call.message, language)
-
-
 
 
 bot.polling(none_stop=True)
