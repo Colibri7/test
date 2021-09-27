@@ -347,18 +347,18 @@ def language(message):
                          reply_markup=markup_uz)
 
     elif message.text == '🇷🇺Russian🇷🇺':
-        markup_ru = types.InlineKeyboardMarkup(row_width=2)
-        lg1 = types.InlineKeyboardButton('Поддержка клиентов', callback_data='support')
-        lg2 = types.InlineKeyboardButton('Веб-сайт компании', callback_data='web', url='https://www.hostmaster.uz/')
-        lg3 = types.InlineKeyboardButton('Экспресс-оплата услуг', callback_data='payment',
-                                         url='https://www.hostmaster.uz/pay')
-        lg4 = types.InlineKeyboardButton('Баланс', callback_data='cabinet')
-        lg5 = types.InlineKeyboardButton('Канал новостей', callback_data='tg_channel',
-                                         url='https://t.me/hostmasteruz')
+        markup = types.InlineKeyboardMarkup(row_width=2)
+        lg1 = types.InlineKeyboardButton('Мои домены', callback_data='my_domains')
+        lg2 = types.InlineKeyboardButton('Мои хостинги', callback_data='my_hostings')
+        lg3 = types.InlineKeyboardButton('Мои VDS', callback_data='my_vds')
+        lg4 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
+        lg5 = types.InlineKeyboardButton('Вход/Регистрация', callback_data='cabinet')
 
-        lg6 = types.InlineKeyboardButton('Услуги и платежи', callback_data='pay_services')
+        lg6 = types.InlineKeyboardButton('Оплата', callback_data='pay_services')
         lg7 = types.InlineKeyboardButton('Настройки', callback_data='settings')
-        markup_ru.add(lg1, lg2, lg3, lg4, lg5, lg6, lg7)
+        lg8 = types.InlineKeyboardButton('Связь с менедежером', callback_data='connect')
+
+        markup.add(lg1, lg2, lg3, lg4, lg5, lg6, lg7, lg8)
 
         bot.send_message(message.chat.id,
                          'Это информационный бот компании Hostmaster.'
