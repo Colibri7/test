@@ -347,7 +347,7 @@ def language(message):
                          reply_markup=markup_uz)
 
     elif message.text == '🇷🇺Russian🇷🇺':
-        markup = types.InlineKeyboardMarkup(row_width=2)
+        markup_ru = types.InlineKeyboardMarkup(row_width=2)
         lg1 = types.InlineKeyboardButton('Мои домены', callback_data='my_domains')
         lg2 = types.InlineKeyboardButton('Мои хостинги', callback_data='my_hostings')
         lg3 = types.InlineKeyboardButton('Мои VDS', callback_data='my_vds')
@@ -358,7 +358,7 @@ def language(message):
         lg7 = types.InlineKeyboardButton('Настройки', callback_data='settings')
         lg8 = types.InlineKeyboardButton('Связь с менедежером', callback_data='connect')
 
-        markup.add(lg1, lg2, lg3, lg4, lg5, lg6, lg7, lg8)
+        markup_ru.add(lg1, lg2, lg3, lg4, lg5, lg6, lg7, lg8)
 
         bot.send_message(message.chat.id,
                          'Это информационный бот компании Hostmaster.'
