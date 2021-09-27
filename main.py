@@ -4,11 +4,12 @@ import time
 import requests
 import schedule as schedule
 import telebot
+
 from telebot import types
 import pymysql
 
 # tgbot
-bot = telebot.TeleBot('1978328105:AAFXdSFd7-1voK87s7WBxu5a-DKPGmW1JN0')
+bot = telebot.TeleBot('1880043980:AAEbIjxC08omMEu252-Mph49zR9kuLkQ-Ek')
 
 bot.remove_webhook()
 connection = pymysql.connect(host='62.209.143.131',
@@ -31,6 +32,7 @@ SQLALCHEMY_ENGINE_OPTIONS = {
 # rows3 = cur3.fetchall()
 
 # i["created_at"] = datetime.fromtimestamp(i["created_at"]).strftime('%d.%B.%Y: %H:%M')
+
 
 def func(message):
     if message.text == 'Главное меню':
@@ -95,56 +97,43 @@ def send_welcome(message):
 
 
 @bot.message_handler(content_types=['text'])
-def log(message):
-    def test_email(your_pattern):
-        pattern = re.compile(your_pattern)
-        lis = []
-        lis.append(message)
-        for email in lis:
-            if not re.match(pattern, email):
-                bot.send_message(message.chat.id, f'You failed to match {email}')
-            else:
-                bot.send_message(message.chat.id,'Поздравляем! Вы успешно прошли регистрацию! ')
-
-    # my pattern that is passed as argument in my function is here!
-    pattern = r"\"?([-a-zA-Z0-9.`?{}]+@\w+\.\w+)\"?"
-
+def login_reg(message):
     if message.text == 'Зарегистрироваться':
         bot.send_message(message.chat.id, 'Для регистрации, пожалуйста, введите следующие данные:')
         bot.send_message(message.chat.id, 'Адрес е-майл:')
-        bot.register_next_step_handler(message, test_email)
 
+
+    elif message.text == 'Вход для клиентов':
+        bot.send_message(message.chat.id, 'Адрес е-майл:')
+        bot.register_next_step_handler(message, log)
+
+
+@bot.message_handler(content_types=['text'])
+def log(message):
     def password(message):
+
         out = crypt.crypt(message.text, checkUsername["password_hash"])
         key = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
         back = types.KeyboardButton('Главное меню')
         key.add(back)
         if checkUsername["password_hash"] == out:
+            markup_ru = types.InlineKeyboardMarkup(row_width=2)
+            lg1 = types.InlineKeyboardButton('Мои домены', callback_data='my_domains')
+            lg2 = types.InlineKeyboardButton('Мои хостинги', callback_data='my_hostings')
+            lg3 = types.InlineKeyboardButton('Мои VDS', callback_data='my_vds')
+            lg4 = types.InlineKeyboardButton('Мои контакты', callback_data='contacts')
+            lg5 = types.InlineKeyboardButton('Вход/Регистрация', callback_data='cabinet')
 
-            # contacts
-            min = connection.cursor()
-            min.execute(
-                'SELECT id,password_hash FROM user WHERE username=%(username)s', {'username': login})
+            lg6 = types.InlineKeyboardButton('Оплата', callback_data='pay_services')
+            lg7 = types.InlineKeyboardButton('Настройки', callback_data='settings')
+            lg8 = types.InlineKeyboardButton('Связь с менедежером', callback_data='connect')
 
-            check = min.fetchall()
-            for i in check:
-                id = i["id"]
+            markup_ru.add(lg1, lg2, lg3, lg4, lg5, lg6, lg7, lg8)
 
-                id_connect = connection.cursor()
-
-                id_connect.execute(
-                    'SELECT * FROM contact WHERE userid=%(userid)s', {'userid': id})
-                checkContact = id_connect.fetchall()
-                text = ''
-                num = 1
-                for i in checkContact:
-                    if i["contactcompany"] == None:
-                        text += f'{num}. {i["contactname"]}, баланс: {i["balance"]} сум\n\n'
-                    else:
-                        text += f'{num}.{i["contactcompany"]}, баланс: {i["balance"]} сум\n\n'
-                    num += 1
-                bot.send_message(message.chat.id, text, reply_markup=key)
-
+            bot.send_message(message.chat.id,
+                             'Поздравляем! Вы успешно прошли авторизацию!',
+                             reply_markup=markup_ru)
+            bot.register_next_step_handler(message, callback)
             # zadoljnsot
             # minus = connection.cursor()
             # minus.execute(
@@ -156,9 +145,7 @@ def log(message):
             #     if login in i.values():
             #         bot.send_message(message.chat.id,
             #                          f'U vas zadoljnost na accounte {i["username"]}: {i["balance"]} sum')
-
-            bot.register_next_step_handler(message, func)
-        elif message.text == "Главное меню":
+        elif message.text == 'Главное меню':
             markup = types.InlineKeyboardMarkup(row_width=2)
             lg1 = types.InlineKeyboardButton('Мои домены', callback_data='my_domains')
             lg2 = types.InlineKeyboardButton('Мои хостинги', callback_data='my_hostings')
@@ -171,13 +158,16 @@ def log(message):
             lg8 = types.InlineKeyboardButton('Связь с менедежером', callback_data='connect')
 
             markup.add(lg1, lg2, lg3, lg4, lg5, lg6, lg7, lg8)
-
             bot.send_message(message.chat.id,
                              'Это информационный бот компании Hostmaster.'
                              '\nHostmaster – Хостинг провайдер и регистратор доменов в'
                              '\nУзбекистане, в Ташкенте.\nНаш телефон: 71-202-55-11',
                              reply_markup=markup)
+            bot.register_next_step_handler(message, language)
         else:
+            key = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
+            lg1 = types.KeyboardButton("Главное меню")
+            key.add(lg1)
             bot.send_message(message.chat.id, 'Неверный пароль или почта', reply_markup=key)
             bot.register_next_step_handler(message, password)
 
@@ -195,7 +185,7 @@ def log(message):
         bot.send_message(message.chat.id, 'Введите пароль:')
         bot.register_next_step_handler(message, password)
 
-    elif message.text == 'Back':
+    elif message.text == 'Главное меню':
         markup_ru = types.InlineKeyboardMarkup(row_width=2)
         lg1 = types.InlineKeyboardButton('Мои домены', callback_data='my_domains')
         lg2 = types.InlineKeyboardButton('Мои хостинги', callback_data='my_hostings')
@@ -214,16 +204,12 @@ def log(message):
                          '\nHostmaster – Хостинг провайдер и регистратор доменов в'
                          '\nУзбекистане, в Ташкенте.\nНаш телефон: 71-202-55-11',
                          reply_markup=markup_ru)
-    elif message.text == 'Зарегистрировать':
-        bot.send_message(message.chat.id, 'Вам следует зарегистрироваться hostmaster.uz')
 
     else:
         key = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
-
-        lg1 = types.KeyboardButton('Зарегистрировать')
-        lg2 = types.KeyboardButton("Back")
-        key.add(lg1, lg2)
-        bot.send_message(message.chat.id, 'Povtorite popitku ', reply_markup=key)
+        lg1 = types.KeyboardButton("Главное меню")
+        key.add(lg1)
+        bot.send_message(message.chat.id, 'Повторите попытку', reply_markup=key)
         bot.register_next_step_handler(message, log)
 
 
@@ -403,7 +389,14 @@ def callback(call):
         menu = types.KeyboardButton('Главное меню')
         mark.add(reg, login, menu)
         bot.send_message(call.message.chat.id, 'Вход/Регистрация', reply_markup=mark)
-        bot.register_next_step_handler(call.message, log)
+        bot.register_next_step_handler(call.message, login_reg)
+
+    elif call.data == 'contacts':
+
+        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                              text='My contacts',
+                              reply_markup=None, parse_mode='html')
+
     elif call.data == 'settings':
         mark = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
         lg1 = types.KeyboardButton('🇷🇺Russian🇷🇺')
@@ -414,6 +407,7 @@ def callback(call):
         bot.send_message(call.message.chat.id, 'Change language', reply_markup=mark)
 
         bot.register_next_step_handler(call.message, language)
+
         # uzb
     elif call.data == 'Balans':
         bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
