@@ -1,15 +1,15 @@
 import crypt
-import re
-import time
-import requests
-import schedule as schedule
+from datetime import timedelta
+
 import telebot
 
 from telebot import types
 import pymysql
 
 # tgbot
-bot = telebot.TeleBot('1978328105:AAHA029XULUg36BJBaubkCD-7Tl6LOe-8bU')
+
+
+bot = telebot.TeleBot('1978328105:AAHVZQ2dq43H_ZHBuZpjxwZnoQ47mU6sgUg')
 
 bot.remove_webhook()
 connection = pymysql.connect(host='62.209.143.131',
@@ -107,33 +107,233 @@ def login_reg(message):
         bot.send_message(message.chat.id, 'Адрес е-майл:')
         bot.register_next_step_handler(message, log)
 
+    elif message.text == 'Главное меню':
+        markup = types.InlineKeyboardMarkup(row_width=2)
+        lg1 = types.InlineKeyboardButton('Мои домены', callback_data='my_domains')
+        lg2 = types.InlineKeyboardButton('Мои хостинги', callback_data='my_hostings')
+        lg3 = types.InlineKeyboardButton('Мои VDS', callback_data='my_vds')
+        lg4 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
+        lg5 = types.InlineKeyboardButton('Вход/Регистрация', callback_data='cabinet')
 
+        lg6 = types.InlineKeyboardButton('Оплата', callback_data='pay_services')
+        lg7 = types.InlineKeyboardButton('Настройки', callback_data='settings')
+        lg8 = types.InlineKeyboardButton('Связь с менедежером', callback_data='connect')
+
+        markup.add(lg1, lg2, lg3, lg4, lg5, lg6, lg7, lg8)
+        bot.send_message(message.chat.id,
+                         'Главное меню',
+                         reply_markup=markup)
+        bot.register_next_step_handler(message, language)
+
+
+@bot.message_handler(content_types=['text'])
 @bot.message_handler(content_types=['text'])
 def log(message):
     def password(message):
+        def after_login(message):
+            def order(message):
+                def domen_check(message):
+                    def domain_order(message):
+                        if message.text == 'Да':
+                            text_dom = f'<b>{message.from_user.first_name}</b> забронирован Домен <b>{dom}</b>'
+                            bot.send_message(332749197, text_dom, parse_mode='html')
+                            bot.send_message(message.chat.id, 'Домен успешно забронирован! Перейти к оплате.')
+
+                        elif message.text == 'Нет':
+                            mark = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
+                            domen = types.KeyboardButton('Домен')
+                            hosting = types.KeyboardButton('Хостинг')
+                            vds_vps = types.KeyboardButton('VDS/VPS')
+                            menu = types.KeyboardButton('Главное меню')
+                            mark.add(domen, hosting, vds_vps, menu)
+                            bot.send_message(message.chat.id, 'Что вы хотите заказать?', reply_markup=mark)
+                            bot.register_next_step_handler(message, order)
+
+                    dom = message.text
+
+                    if message.text == 'Главное меню':
+                        mark = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
+                        domen = types.KeyboardButton('Домен')
+                        hosting = types.KeyboardButton('Хостинг')
+                        vds_vps = types.KeyboardButton('VDS/VPS')
+                        menu = types.KeyboardButton('Главное меню')
+                        mark.add(domen, hosting, vds_vps, menu)
+                        bot.send_message(message.chat.id, 'Chto xotite zakazat?', reply_markup=mark)
+                        bot.register_next_step_handler(message, order)
+                    else:
+                        domain = connection.cursor()
+                        domain.execute(
+                            'SELECT mydomainname FROM mydomain')
+
+                        check = domain.fetchall()
+                        list = []
+                        for i in check:
+                            list.append(i["mydomainname"])
+
+                        if dom.lower() in list:
+                            bot.send_message(message.chat.id, 'Домен занят')
+                            bot.register_next_step_handler(message, domen_check)
+                        else:
+                            mark = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
+                            yes = types.KeyboardButton('Да')
+                            no = types.KeyboardButton('Нет')
+                            mark.add(yes, no)
+                            bot.send_message(message.chat.id, 'Домен свободен! Забронировать ?', reply_markup=mark)
+                            bot.register_next_step_handler(message, domain_order)
+
+                            bot.send_message(message.from_user.first_name, 'Order domain')
+
+                if message.text == 'Домен':
+                    mark = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
+                    back = types.KeyboardButton('Главное меню')
+                    mark.add(back)
+                    bot.send_message(message.chat.id, f'Заказ новго домена UZ\nВведите домен: ……. .UZ. ',
+                                     reply_markup=mark)
+                    bot.register_next_step_handler(message, domen_check)
+                elif message.text == 'Хостинг':
+                    mark = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
+                    back = types.KeyboardButton('Главное меню')
+                    mark.add(back)
+                    bot.send_message(message.chat.id, f'Введите название домена, для которого Вы желаете хостинг:',
+                                     reply_markup=mark)
+                elif message.text == 'VDS/VPS':
+                    mark = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
+                    back = types.KeyboardButton('Главное меню')
+                    mark.add(back)
+                    bot.send_message(message.chat.id, f'Выберите тариф:',
+                                     reply_markup=mark)
+
+                elif message.text == 'Главное меню':
+                    markup_ru = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
+                    lg1 = types.KeyboardButton('Мои домены')
+                    lg2 = types.KeyboardButton('Мои хостинги')
+                    lg3 = types.KeyboardButton('Мои VDS')
+                    lg4 = types.KeyboardButton('Мои контакты')
+                    lg5 = types.KeyboardButton('Заказать')
+
+                    lg6 = types.KeyboardButton('Оплата')
+                    lg7 = types.KeyboardButton('Настройки')
+                    lg8 = types.KeyboardButton('Связь с менедежером')
+
+                    markup_ru.add(lg1, lg2, lg3, lg4, lg5, lg6, lg7, lg8)
+
+                    bot.send_message(message.chat.id,
+                                     'Главное меню',
+                                     reply_markup=markup_ru)
+                    bot.register_next_step_handler(message, after_login)
+
+            if message.text == 'Мои контакты':
+                for i in check:
+                    id = i["id"]
+                    id_connect = connection.cursor()
+                    id_connect.execute(
+                        'SELECT * FROM contact WHERE userid=%(userid)s', {'userid': id})
+                    checkContact = id_connect.fetchall()
+                    text = ''
+                    num = 1
+                    for i in checkContact:
+                        if i["contactcompany"] == None:
+                            text += f'{num}. {i["contactname"]}, balans: {i["balance"]} sum\n\n'
+                        else:
+                            text += f'{num}. {i["contactcompany"]}, balans: {i["balance"]} sum\n\n'
+                        num += 1
+                    bot.send_message(message.chat.id, text)
+                bot.register_next_step_handler(message, after_login)
+            elif message.text == 'Мои хостинги':
+                for i in check:
+                    id = i["id"]
+                    id_connect = connection.cursor()
+                    id_connect.execute(
+                        'SELECT * FROM hostcontract WHERE status=1 and user_id=%(user_id)s', {'user_id': id})
+                    checkContact = id_connect.fetchall()
+                    if checkContact:
+                        for i in checkContact:
+                            if i["status"] == 1:
+                                i["status"] = 'Active'
+                            bot.send_message(message.chat.id,
+                                             f'{i["hostcontractdomain"]}, Тариф: {i["cptariff"]}, Статус: {i["status"]}\n')
+                    else:
+                        bot.send_message(message.chat.id, "У вас нет хостингов")
+
+                bot.register_next_step_handler(message, after_login)
+            elif message.text == 'Мои домены':
+                for i in check:
+                    id = i["id"]
+                    id_connect = connection.cursor()
+                    id_connect.execute(
+                        'SELECT * FROM mydomain WHERE status IN (-2,0,1,3) and userid=%(userid)s', {'userid': id})
+                    checkContact = id_connect.fetchall()
+                    if checkContact:
+                        for i in checkContact:
+                            if i["status"] == -2:
+                                i["status"] = 'A_REG'
+                            elif i["status"] == 0:
+                                i["status"] = 'R_REG'
+                            elif i["status"] == 1:
+                                i["status"] = 'ACTIVE'
+                            elif i["status"] == 3:
+                                i["status"] = 'W_RED'
+                            bot.send_message(message.chat.id,
+                                             f'{i["mydomainname"]}, Статус: {i["status"]}, Дата окончания: {(i["expired"] + timedelta(hours=5)).strftime("%d/%m/%Y")}\n')
+                    else:
+                        bot.send_message(message.chat.id, 'У вас нет доменов')
+
+                bot.register_next_step_handler(message, after_login)
+            elif message.text == 'Мои VDS':
+                for i in check:
+                    id = i["id"]
+                    id_connect = connection.cursor()
+                    id_connect.execute(
+                        'SELECT * FROM vdscontract WHERE status IN (0,1) and user_id=%(user_id)s', {'user_id': id})
+                    checkContact = id_connect.fetchall()
+
+                    if checkContact:
+                        for i in checkContact:
+                            if i["status"] == 1:
+                                i["status"] = 'Active'
+                            elif i["status"] == 0:
+                                i["status"] = 'Block'
+
+                            bot.send_message(message.chat.id, f'{i["vdshostname"]}, Тариф:  , Статус: {i["status"]}')
+                    else:
+                        bot.send_message(message.chat.id, 'У вас нет VDS')
+
+                bot.register_next_step_handler(message, after_login)
+            elif message.text == 'Заказать':
+                mark = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
+                domen = types.KeyboardButton('Домен')
+                hosting = types.KeyboardButton('Хостинг')
+                vds_vps = types.KeyboardButton('VDS/VPS')
+                menu = types.KeyboardButton('Главное меню')
+                mark.add(domen, hosting, vds_vps, menu)
+                bot.send_message(message.chat.id, 'Chto xotite zakazat?', reply_markup=mark)
+                bot.register_next_step_handler(message, order)
 
         out = crypt.crypt(message.text, checkUsername["password_hash"])
-        key = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
-        back = types.KeyboardButton('Главное меню')
-        key.add(back)
-        if checkUsername["password_hash"] == out:
-            markup_ru = types.InlineKeyboardMarkup(row_width=2)
-            lg1 = types.InlineKeyboardButton('Мои домены', callback_data='my_domains')
-            lg2 = types.InlineKeyboardButton('Мои хостинги', callback_data='my_hostings')
-            lg3 = types.InlineKeyboardButton('Мои VDS', callback_data='my_vds')
-            lg4 = types.InlineKeyboardButton('Мои контакты', callback_data='contacts')
-            lg5 = types.InlineKeyboardButton('Вход/Регистрация', callback_data='cabinet')
 
-            lg6 = types.InlineKeyboardButton('Оплата', callback_data='pay_services')
-            lg7 = types.InlineKeyboardButton('Настройки', callback_data='settings')
-            lg8 = types.InlineKeyboardButton('Связь с менедежером', callback_data='connect')
+        if checkUsername["password_hash"] == out:
+            min = connection.cursor()
+            min.execute(
+                'SELECT id,password_hash FROM user WHERE username=%(username)s', {'username': login})
+
+            check = min.fetchall()
+            markup_ru = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
+            lg1 = types.KeyboardButton('Мои домены')
+            lg2 = types.KeyboardButton('Мои хостинги')
+            lg3 = types.KeyboardButton('Мои VDS')
+            lg4 = types.KeyboardButton('Мои контакты')
+            lg5 = types.KeyboardButton('Заказать')
+
+            lg6 = types.KeyboardButton('Оплата')
+            lg7 = types.KeyboardButton('Настройки')
+            lg8 = types.KeyboardButton('Связь с менедежером')
 
             markup_ru.add(lg1, lg2, lg3, lg4, lg5, lg6, lg7, lg8)
 
             bot.send_message(message.chat.id,
                              'Поздравляем! Вы успешно прошли авторизацию!',
                              reply_markup=markup_ru)
-            bot.register_next_step_handler(message, callback)
+            bot.register_next_step_handler(message, after_login)
             # zadoljnsot
             # minus = connection.cursor()
             # minus.execute(
@@ -247,6 +447,7 @@ def log_uz(message):
                         text += f'{num}. {i["contactcompany"]}, balans: {i["balance"]} sum\n\n'
                     num += 1
                 bot.send_message(message.chat.id, text, reply_markup=key)
+
             # zadoljnsot
             # minus = connection.cursor()
             # minus.execute(
