@@ -9,7 +9,7 @@ import pymysql
 # tgbot
 
 
-bot = telebot.TeleBot('1978328105:AAHVZQ2dq43H_ZHBuZpjxwZnoQ47mU6sgUg')
+bot = telebot.TeleBot('1978328105:AAHNZLe2FjakYDurKKiz5bs3oxyBlMY_YVM')
 
 bot.remove_webhook()
 connection = pymysql.connect(host='62.209.143.131',
@@ -127,17 +127,127 @@ def login_reg(message):
 
 
 @bot.message_handler(content_types=['text'])
-@bot.message_handler(content_types=['text'])
 def log(message):
     def password(message):
         def after_login(message):
             def order(message):
+                def hosting_check(message):
+                    def list_tarif(message):
+                        def finish(message):
+
+                            if message.text == 'Главное меню':
+                                mark = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True,
+                                                                 one_time_keyboard=True)
+                                domen = types.KeyboardButton('Домен')
+                                hosting = types.KeyboardButton('Хостинг')
+                                vds_vps = types.KeyboardButton('VDS/VPS')
+                                menu = types.KeyboardButton('Главное меню')
+                                mark.add(domen, hosting, vds_vps, menu)
+                                bot.send_message(message.chat.id, 'Главное меню', reply_markup=mark)
+                                bot.register_next_step_handler(message, order)
+                            else:
+                                text_host = f'name: <b>{message.from_user.first_name}\nusername: @{message.from_user.username}</b>\nnumber: {message.contact.phone_number}\nзаказал Хостинг <b>{tarif}</b>'
+                                mark = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True,
+                                                                 one_time_keyboard=True)
+                                con = types.KeyboardButton('Связаться с менеджером!')
+                                menu = types.KeyboardButton('Главное меню')
+                                mark.add(con, menu)
+                                bot.send_message(message.chat.id,
+                                                 'Заказ успешно принят, в ближайшее время наш менеджер свяжется с Вами.',
+                                                 reply_markup=mark)
+                                bot.send_message(332749197, text_host, parse_mode='html')
+                                bot.register_next_step_handler(message, order)
+
+                        if message.text == 'Главное меню':
+                            mark = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
+                            domen = types.KeyboardButton('Домен')
+                            hosting = types.KeyboardButton('Хостинг')
+                            vds_vps = types.KeyboardButton('VDS/VPS')
+                            menu = types.KeyboardButton('Главное меню')
+                            mark.add(domen, hosting, vds_vps, menu)
+                            bot.send_message(message.chat.id, 'Главное меню', reply_markup=mark)
+                            bot.register_next_step_handler(message, order)
+                        else:
+                            tarif = message.text
+                            keyboard = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True,
+                                                                 one_time_keyboard=True)
+                            reg_btn = types.KeyboardButton(text='Отправить номер телефона', request_contact=True)
+                            menu = types.KeyboardButton('Главное меню')
+                            keyboard.add(reg_btn, menu)
+                            bot.send_message(message.chat.id, 'оставьте свой номер телефона', reply_markup=keyboard)
+                            bot.register_next_step_handler(message, finish)
+
+                    if message.text == 'Главное меню':
+                        mark = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
+                        domen = types.KeyboardButton('Домен')
+                        hosting = types.KeyboardButton('Хостинг')
+                        vds_vps = types.KeyboardButton('VDS/VPS')
+                        menu = types.KeyboardButton('Главное меню')
+                        mark.add(domen, hosting, vds_vps, menu)
+                        bot.send_message(message.chat.id, 'Главное меню', reply_markup=mark)
+                        bot.register_next_step_handler(message, order)
+                    else:
+                        host_name = message.text
+                        tarifs = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
+                        start = types.KeyboardButton('Start 60 000 сум')
+                        universal = types.KeyboardButton('Universal 120 000 сум')
+                        active = types.KeyboardButton('Active 216 000 сум')
+                        super = types.KeyboardButton('Super 300 000 сум')
+                        mega = types.KeyboardButton('Mega 480 000 сум')
+                        menu = types.KeyboardButton('Главное меню')
+                        tarifs.add(start, universal, active, super, mega, menu)
+                        bot.send_message(message.chat.id, 'Выберите тариф:', reply_markup=tarifs)
+                        bot.register_next_step_handler(message, list_tarif)
+
                 def domen_check(message):
                     def domain_order(message):
+                        def finish3(message):
+                            def payment(message):
+                                if message.text == 'Главное меню':
+                                    mark = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True,
+                                                                     one_time_keyboard=True)
+                                    domen = types.KeyboardButton('Домен')
+                                    hosting = types.KeyboardButton('Хостинг')
+                                    vds_vps = types.KeyboardButton('VDS/VPS')
+                                    menu = types.KeyboardButton('Главное меню')
+                                    mark.add(domen, hosting, vds_vps, menu)
+                                    bot.send_message(message.chat.id, 'Главное меню', reply_markup=mark)
+                                    bot.register_next_step_handler(message, order)
+
+                            if message.text == 'Главное меню':
+                                mark = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True,
+                                                                 one_time_keyboard=True)
+                                domen = types.KeyboardButton('Домен')
+                                hosting = types.KeyboardButton('Хостинг')
+                                vds_vps = types.KeyboardButton('VDS/VPS')
+                                menu = types.KeyboardButton('Главное меню')
+                                mark.add(domen, hosting, vds_vps, menu)
+                                bot.send_message(message.chat.id, 'Главное меню', reply_markup=mark)
+                                bot.register_next_step_handler(message, order)
+
+                            else:
+                                text_dom = f'name: <b>{message.from_user.first_name}\nusername: @{message.from_user.username}</b>\nnumber: {message.contact.phone_number}\nзабронирован Домен <b>{dom}</b>'
+                                bot.send_message(332749197, text_dom, parse_mode='html')
+                                mark = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True,
+                                                                 one_time_keyboard=True)
+                                yes = types.KeyboardButton('Да')
+                                later = types.KeyboardButton('Позже')
+                                con = types.KeyboardButton('Связаться с менеджером!')
+                                menu = types.KeyboardButton('Главное меню')
+                                mark.add(yes, later, con, menu)
+                                bot.send_message(message.chat.id, 'Домен успешно забронирован! Перейти к оплате.',
+                                                 reply_markup=mark)
+                                bot.register_next_step_handler(message, payment)
+
                         if message.text == 'Да':
-                            text_dom = f'<b>{message.from_user.first_name}</b> забронирован Домен <b>{dom}</b>'
-                            bot.send_message(332749197, text_dom, parse_mode='html')
-                            bot.send_message(message.chat.id, 'Домен успешно забронирован! Перейти к оплате.')
+                            vds = message.text
+                            keyboard = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True,
+                                                                 one_time_keyboard=True)
+                            reg_btn = types.KeyboardButton(text='Отправить номер телефона', request_contact=True)
+                            menu = types.KeyboardButton('Главное меню')
+                            keyboard.add(reg_btn, menu)
+                            bot.send_message(message.chat.id, 'оставьте свой номер телефона', reply_markup=keyboard)
+                            bot.register_next_step_handler(message, finish3)
 
                         elif message.text == 'Нет':
                             mark = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
@@ -150,7 +260,6 @@ def log(message):
                             bot.register_next_step_handler(message, order)
 
                     dom = message.text
-
                     if message.text == 'Главное меню':
                         mark = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
                         domen = types.KeyboardButton('Домен')
@@ -180,11 +289,55 @@ def log(message):
                             mark.add(yes, no)
                             bot.send_message(message.chat.id, 'Домен свободен! Забронировать ?', reply_markup=mark)
                             bot.register_next_step_handler(message, domain_order)
-
                             bot.send_message(message.from_user.first_name, 'Order domain')
 
+                def vds_vps(message):
+                    def finish2(message):
+                        if message.text == 'Главное меню':
+                            mark = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
+                            domen = types.KeyboardButton('Домен')
+                            hosting = types.KeyboardButton('Хостинг')
+                            vds_vps = types.KeyboardButton('VDS/VPS')
+                            menu = types.KeyboardButton('Главное меню')
+                            mark.add(domen, hosting, vds_vps, menu)
+                            bot.send_message(message.chat.id, 'Главное меню', reply_markup=mark)
+                            bot.register_next_step_handler(message, order)
+                        else:
+
+                            text_host = f'name: <b>{message.from_user.first_name}\nusername: @{message.from_user.username}</b>\nnumber: {message.contact.phone_number}\nзаказал vds <b>{vds}</b>'
+                            mark = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True,
+                                                             one_time_keyboard=True)
+                            con = types.KeyboardButton('Связаться с менеджером!')
+                            menu = types.KeyboardButton('Главное меню')
+                            mark.add(con, menu)
+                            bot.send_message(message.chat.id,
+                                             'Заказ успешно принят, в ближайшее время наш менеджер свяжется с Вами.',
+                                             reply_markup=mark)
+
+                            bot.send_message(332749197, text_host, parse_mode='html')
+                            bot.register_next_step_handler(message, order)
+
+                    if message.text == 'Главное меню':
+                        mark = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
+                        domen = types.KeyboardButton('Домен')
+                        hosting = types.KeyboardButton('Хостинг')
+                        vds_vps = types.KeyboardButton('VDS/VPS')
+                        menu = types.KeyboardButton('Главное меню')
+                        mark.add(domen, hosting, vds_vps, menu)
+                        bot.send_message(message.chat.id, 'Главное меню', reply_markup=mark)
+                        bot.register_next_step_handler(message, order)
+                    else:
+                        vds = message.text
+                        keyboard = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True,
+                                                             one_time_keyboard=True)
+                        reg_btn = types.KeyboardButton(text='Отправить номер телефона', request_contact=True)
+                        menu = types.KeyboardButton('Главное меню')
+                        keyboard.add(reg_btn, menu)
+                        bot.send_message(message.chat.id, 'оставьте свой номер телефона', reply_markup=keyboard)
+                        bot.register_next_step_handler(message, finish2)
+
                 if message.text == 'Домен':
-                    mark = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
+                    mark = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
                     back = types.KeyboardButton('Главное меню')
                     mark.add(back)
                     bot.send_message(message.chat.id, f'Заказ новго домена UZ\nВведите домен: ……. .UZ. ',
@@ -196,13 +349,20 @@ def log(message):
                     mark.add(back)
                     bot.send_message(message.chat.id, f'Введите название домена, для которого Вы желаете хостинг:',
                                      reply_markup=mark)
+                    bot.register_next_step_handler(message, hosting_check)
                 elif message.text == 'VDS/VPS':
-                    mark = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
+                    vds_tarif = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2, one_time_keyboard=True)
+                    vds1 = types.KeyboardButton('VDS-1')
+                    vds2 = types.KeyboardButton('VDS-2')
+                    vds3 = types.KeyboardButton('VDS-3')
+                    vds4 = types.KeyboardButton('VDS-4')
+                    vds5 = types.KeyboardButton('VDS-5')
                     back = types.KeyboardButton('Главное меню')
-                    mark.add(back)
-                    bot.send_message(message.chat.id, f'Выберите тариф:',
-                                     reply_markup=mark)
+                    vds_tarif.add(vds1, vds2, vds3, vds4, vds5, back)
 
+                    bot.send_message(message.chat.id, f'Выберите тариф:',
+                                     reply_markup=vds_tarif)
+                    bot.register_next_step_handler(message, vds_vps)
                 elif message.text == 'Главное меню':
                     markup_ru = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
                     lg1 = types.KeyboardButton('Мои домены')
@@ -210,13 +370,10 @@ def log(message):
                     lg3 = types.KeyboardButton('Мои VDS')
                     lg4 = types.KeyboardButton('Мои контакты')
                     lg5 = types.KeyboardButton('Заказать')
-
                     lg6 = types.KeyboardButton('Оплата')
                     lg7 = types.KeyboardButton('Настройки')
                     lg8 = types.KeyboardButton('Связь с менедежером')
-
                     markup_ru.add(lg1, lg2, lg3, lg4, lg5, lg6, lg7, lg8)
-
                     bot.send_message(message.chat.id,
                                      'Главное меню',
                                      reply_markup=markup_ru)
