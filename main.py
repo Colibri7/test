@@ -9,7 +9,7 @@ import pymysql
 # tgbot
 
 
-bot = telebot.TeleBot('1978328105:AAHNZLe2FjakYDurKKiz5bs3oxyBlMY_YVM')
+bot = telebot.TeleBot('1978328105:AAEVkuJU2V7GYXwuXj9dGYTXWNaW41BrzNk')
 
 bot.remove_webhook()
 connection = pymysql.connect(host='62.209.143.131',
@@ -403,12 +403,14 @@ def log(message):
                     id_connect.execute(
                         'SELECT * FROM hostcontract WHERE status=1 and user_id=%(user_id)s', {'user_id': id})
                     checkContact = id_connect.fetchall()
+                    num = 1
                     if checkContact:
                         for i in checkContact:
                             if i["status"] == 1:
                                 i["status"] = 'Active'
                             bot.send_message(message.chat.id,
-                                             f'{i["hostcontractdomain"]}, Тариф: {i["cptariff"]}, Статус: {i["status"]}\n')
+                                             f'{num}.{i["hostcontractdomain"]}, Тариф: {i["cptariff"]}, Статус: {i["status"]}\n')
+                            num+=1
                     else:
                         bot.send_message(message.chat.id, "У вас нет хостингов")
 
@@ -420,6 +422,7 @@ def log(message):
                     id_connect.execute(
                         'SELECT * FROM mydomain WHERE status IN (-2,0,1,3) and userid=%(userid)s', {'userid': id})
                     checkContact = id_connect.fetchall()
+                    num = 1
                     if checkContact:
                         for i in checkContact:
                             if i["status"] == -2:
@@ -431,7 +434,8 @@ def log(message):
                             elif i["status"] == 3:
                                 i["status"] = 'W_RED'
                             bot.send_message(message.chat.id,
-                                             f'{i["mydomainname"]}, Статус: {i["status"]}, Дата окончания: {(i["expired"] + timedelta(hours=5)).strftime("%d/%m/%Y")}\n')
+                                             f'{num}.{i["mydomainname"]}, Статус: {i["status"]}, Дата окончания: {(i["expired"] + timedelta(hours=5)).strftime("%d/%m/%Y")}\n')
+                            num+=1
                     else:
                         bot.send_message(message.chat.id, 'У вас нет доменов')
 
@@ -441,17 +445,22 @@ def log(message):
                     id = i["id"]
                     id_connect = connection.cursor()
                     id_connect.execute(
-                        'SELECT * FROM vdscontract WHERE status IN (0,1) and user_id=%(user_id)s', {'user_id': id})
+                        'SELECT `vdscontract`.`vdshostname`, `vds_tariffs`.`tariffname` ,`vdscontract`.`status`  FROM `user`, `vdscontract`, `vds_tariffs` WHERE   username=%(username)s AND `user`.`id` = `vdscontract`.`user_id` AND `vdscontract`.`vdsid` = `vds_tariffs`.`idvds` ORDER BY `vdscontract`.`vdshostname`;',
+                        {'username': login})
                     checkContact = id_connect.fetchall()
-
+                    num = 1
                     if checkContact:
                         for i in checkContact:
                             if i["status"] == 1:
                                 i["status"] = 'Active'
                             elif i["status"] == 0:
                                 i["status"] = 'Block'
+                            else:
+                                i["status"] = 'Deleted'
 
-                            bot.send_message(message.chat.id, f'{i["vdshostname"]}, Тариф:  , Статус: {i["status"]}')
+                            bot.send_message(message.chat.id,
+                                             f'vds{num}-{i["vdshostname"]}, Тариф: {i["tariffname"]} , Статус: {i["status"]}')
+                            num += 1
                     else:
                         bot.send_message(message.chat.id, 'У вас нет VDS')
 
