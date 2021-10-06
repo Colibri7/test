@@ -13,7 +13,11 @@ import pymysql
 bot = telebot.TeleBot('1978328105:AAGedv0tEzZr6DMT7ukqRftDPreIqqaNle4')
 
 
+def send_message():
+    bot.send_message(332749197, 'Hello')
 
+
+schedule.every().day.at("17:05").do(send_message())
 
 
 bot.remove_webhook()
@@ -574,11 +578,7 @@ def callback(call):
         bot.register_next_step_handler(call.message, language)
 
 
-def send_message():
-    bot.send_message(332749197, 'Hello')
 
-
-schedule.every().day.at("17:05").do(send_message())
 
 
 bot.polling(none_stop=True)
