@@ -10,14 +10,14 @@ import pymysql
 # tgbot
 
 
-bot = telebot.TeleBot('1978328105:AAGedv0tEzZr6DMT7ukqRftDPreIqqaNle4')
+bot = telebot.TeleBot('1978328105:AAFPYHwATfzi8E6neQk43ATO8GGKh51hQK4')
 
-#
-# def send_message():
-#     bot.send_message(332749197, 'Hello')
-#
-#
-# schedule.every().day.at("17:05").do(send_message())
+
+def send_message():
+    bot.send_message(332749197, 'Hello')
+
+
+schedule.every().day.at("17:23").do(send_message())
 
 
 bot.remove_webhook()
@@ -33,14 +33,6 @@ SQLALCHEMY_ENGINE_OPTIONS = {
     "pool_pre_ping": True,
     "pool_recycle": 300,
 }
-
-# cur3 = connection.cursor()
-# cur3.execute(
-#     'SELECT `user`.`id`, `user`.`username`, `contact`.`balance` FROM `user`, `contact` WHERE `user`.`id` = `contact`.`userid` AND `contact`.`balance` < 0 ORDER BY `user`.`id`, `user`.`username`, `contact`.`balance` DESC')
-# rows3 = cur3.fetchall()
-
-# i["created_at"] = datetime.fromtimestamp(i["created_at"]).strftime('%d.%B.%Y: %H:%M')
-
 
 def func(message):
     if message.text == 'Главное меню':
@@ -78,6 +70,7 @@ def func(message):
                          reply_markup=markup_uz)
 
 
+# Start bot
 @bot.message_handler(commands=['start', 'menu'])
 def send_welcome(message):
     text = f'<b>{message.from_user.first_name}</b> пишет боту'
@@ -278,7 +271,6 @@ def log(message):
             bot.send_message(message.chat.id,
                              'Поздравляем! Вы успешно прошли авторизацию!',
                              reply_markup=markup_ru)
-            bot.register_next_step_handler(message, after_login)
             chat_id = message.chat.id
             first_name = message.chat.first_name
             last_name = message.chat.last_name
@@ -307,7 +299,7 @@ def log(message):
                 print(query)
                 cursor.execute(query)
 
-
+            bot.register_next_step_handler(message, after_login)
             # zadoljnsot
             # minus = connection.cursor()
             # minus.execute(
