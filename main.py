@@ -580,9 +580,9 @@ def send_message():
 
 schedule.every().day.at("17:05").do(send_message())
 
-while True:
-    bot.polling(none_stop=True)
-    schedule.run_pending()
-    time.sleep(1)
+
+bot.polling(none_stop=True)
+
+
 
 
