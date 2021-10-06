@@ -10,7 +10,7 @@ import pymysql
 # tgbot
 
 
-bot = telebot.TeleBot('1978328105:AAF6x3yH7HRxQNACrT7pxC_h4p8Ebekp5Zw')
+bot = telebot.TeleBot('1978328105:AAHqz2gKWlErDCvoCj5plF5VMBluGZM103g')
 
 
 # def send_message():
