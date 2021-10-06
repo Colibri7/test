@@ -12,15 +12,16 @@ import pymysql
 
 bot = telebot.TeleBot('1978328105:AAFPYHwATfzi8E6neQk43ATO8GGKh51hQK4')
 
-
-def send_message():
-    bot.send_message(332749197, 'Hello')
-
-
-schedule.every().day.at("17:23").do(send_message())
+# время отправки
+# def send_message():
+#     bot.send_message(332749197, 'Hello')
+#
+#
+# schedule.every().day.at("17:23").do(send_message())
 
 
 bot.remove_webhook()
+# подключение к базе
 connection = pymysql.connect(host='62.209.143.131',
                              user='hostmasteruz_pbot',
                              password='bcaxoZyAXDGc',
@@ -70,7 +71,7 @@ def func(message):
                          reply_markup=markup_uz)
 
 
-# Start bot
+# Старт бота
 @bot.message_handler(commands=['start', 'menu'])
 def send_welcome(message):
     text = f'<b>{message.from_user.first_name}</b> пишет боту'
@@ -80,12 +81,7 @@ def send_welcome(message):
     lg3 = types.InlineKeyboardButton('Вход/Регистрация', callback_data='cabinet')
     lg4 = types.InlineKeyboardButton('Оплата', callback_data='pay_services')
     lg5 = types.InlineKeyboardButton('Настройки', callback_data='settings')
-    chat_id = message.chat.id
-    first_name = message.chat.first_name
-    last_name = message.chat.last_name
-    username = message.chat.username
-    timestamp = message.date
-    dt_obj = datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d %H:%M:%S')
+
     markup.add(lg1, lg2, lg3, lg4, lg5)
 
     bot.send_message(332749197, text, parse_mode='html')
@@ -333,6 +329,7 @@ def log(message):
             bot.send_message(message.chat.id, 'Неверный пароль или почта', reply_markup=key)
             bot.register_next_step_handler(message, password)
 
+    # проверка логина
     login = message.text
     cursor = connection.cursor()
     cursor.execute('SELECT username FROM user')
@@ -340,7 +337,7 @@ def log(message):
     list = []
     for i in checkUsername:
         list.append(i["username"])
-
+    # если логин есть в базе , проверяет пароль
     if message.text.lower() in list:
         cursor.execute('SELECT password_hash FROM user WHERE username=%(username)s', {'username': login})
         checkUsername = cursor.fetchone()
