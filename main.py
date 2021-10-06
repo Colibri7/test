@@ -12,12 +12,12 @@ import pymysql
 
 bot = telebot.TeleBot('1978328105:AAGedv0tEzZr6DMT7ukqRftDPreIqqaNle4')
 
-
-def send_message():
-    bot.send_message(332749197, 'Hello')
-
-
-schedule.every().day.at("17:05").do(send_message())
+#
+# def send_message():
+#     bot.send_message(332749197, 'Hello')
+#
+#
+# schedule.every().day.at("17:05").do(send_message())
 
 
 bot.remove_webhook()
