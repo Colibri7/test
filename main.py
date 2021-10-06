@@ -1,6 +1,7 @@
 import crypt
 from datetime import timedelta, datetime
-
+import time
+import schedule
 import telebot
 
 from telebot import types
@@ -9,7 +10,11 @@ import pymysql
 # tgbot
 
 
-bot = telebot.TeleBot('1978328105:AAESLrPga7KRfzdGiI9ZI-leMXrizKvRmNU')
+bot = telebot.TeleBot('1978328105:AAGedv0tEzZr6DMT7ukqRftDPreIqqaNle4')
+
+
+
+
 
 bot.remove_webhook()
 connection = pymysql.connect(host='62.209.143.131',
@@ -90,20 +95,6 @@ def send_welcome(message):
     bot.send_message(message.chat.id,
                      """Это информационный бот компании Hostmaster.Hostmaster – Хостинг провайдер и регистратор доменов в Узбекистане, в Ташкенте.Наш телефон: 71-202-55-11\n\nBu Hostmaster kompaniyasining axborot boti. Hostmaster - Xosting provayderi va domen registratori  O'zbekiston, Toshkentda. Bizning telefon: 71-202-55-11""",
                      reply_markup=markup)
-    connection = pymysql.connect(host='62.209.143.131',
-                                 user='hostmasteruz_pbot',
-                                 password='bcaxoZyAXDGc',
-                                 database='hostmasteruz_bot',
-                                 charset='utf8mb4',
-                                 cursorclass=pymysql.cursors.DictCursor
-                                 )
-    cursor = connection.cursor()
-    query = "INSERT INTO `sardorbot` (`tg_id`, `tg_username`, `tg_first_name`, `tg_last_name`, `updated`) " \
-            "VALUES ({0},'{1}','{2}','{3}','{4}') ON DUPLICATE KEY UPDATE `tg_username` = '{1}', `tg_first_name` = '{2}', `tg_last_name` = '{3}', `updated` = '{4}'".format(
-        chat_id, username, first_name, last_name, dt_obj)
-
-    print(query)
-    cursor.execute(query)
 
 
 @bot.message_handler(content_types=['text'])
@@ -283,6 +274,34 @@ def log(message):
             bot.send_message(message.chat.id,
                              'Поздравляем! Вы успешно прошли авторизацию!',
                              reply_markup=markup_ru)
+            chat_id = message.chat.id
+            first_name = message.chat.first_name
+            last_name = message.chat.last_name
+            username = message.chat.username
+            timestamp = message.date
+            dt_obj = datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d %H:%M:%S')
+            bot_con = pymysql.connect(host='62.209.143.131',
+                                         user='hostmasteruz_pbot',
+                                         password='bcaxoZyAXDGc',
+                                         database='hostmasteruz_bot',
+                                         charset='utf8mb4',
+                                         cursorclass=pymysql.cursors.DictCursor
+                                          )
+            min = connection.cursor()
+            min.execute(
+                'SELECT `user`.`id`  FROM `user` WHERE username=%(username)s', {'username': login})
+            check = min.fetchall()
+            for i in check:
+                id = i["id"]
+
+                cursor = bot_con.cursor()
+                query = "INSERT INTO `sardorbot` (`tg_id`, `tg_username`, `tg_first_name`, `tg_last_name`, `updated`,`b_username`,`b_userid`) " \
+                        "VALUES ({0},'{1}','{2}','{3}','{4}','{5}','{6}') ON DUPLICATE KEY UPDATE `tg_username` = '{1}', `tg_first_name` = '{2}', `tg_last_name` = '{3}', `updated` = '{4}',`b_username`='{5}',`b_userid`='{6}'".format(
+                    chat_id, username, first_name, last_name, dt_obj,login,id)
+
+                print(query)
+                cursor.execute(query)
+
             bot.register_next_step_handler(message, after_login)
             # zadoljnsot
             # minus = connection.cursor()
@@ -555,4 +574,15 @@ def callback(call):
         bot.register_next_step_handler(call.message, language)
 
 
-bot.polling(none_stop=True)
+def send_message():
+    bot.send_message(332749197, 'Hello')
+
+
+schedule.every().day.at("17:05").do(send_message())
+
+while True:
+    bot.polling(none_stop=True)
+    schedule.run_pending()
+    time.sleep(1)
+
+
