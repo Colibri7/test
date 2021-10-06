@@ -278,6 +278,7 @@ def log(message):
             bot.send_message(message.chat.id,
                              'Поздравляем! Вы успешно прошли авторизацию!',
                              reply_markup=markup_ru)
+            bot.register_next_step_handler(message, after_login)
             chat_id = message.chat.id
             first_name = message.chat.first_name
             last_name = message.chat.last_name
@@ -306,7 +307,7 @@ def log(message):
                 print(query)
                 cursor.execute(query)
 
-            bot.register_next_step_handler(message, after_login)
+
             # zadoljnsot
             # minus = connection.cursor()
             # minus.execute(
