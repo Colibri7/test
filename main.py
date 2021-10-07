@@ -1,7 +1,5 @@
 import crypt
 from datetime import timedelta, datetime
-import time
-import schedule
 import telebot
 
 from telebot import types
@@ -10,7 +8,7 @@ import pymysql
 # tgbot
 
 
-bot = telebot.TeleBot('1978328105:AAHqz2gKWlErDCvoCj5plF5VMBluGZM103g')
+bot = telebot.TeleBot('1978328105:AAGhzbGnst2JXi3ItuJYgIVmcaw2jKksuPg')
 
 
 # def send_message():
@@ -80,12 +78,7 @@ def send_welcome(message):
     lg3 = types.InlineKeyboardButton('Вход/Регистрация', callback_data='cabinet')
     lg4 = types.InlineKeyboardButton('Оплата', callback_data='pay_services')
     lg5 = types.InlineKeyboardButton('Настройки', callback_data='settings')
-    chat_id = message.chat.id
-    first_name = message.chat.first_name
-    last_name = message.chat.last_name
-    username = message.chat.username
-    timestamp = message.date
-    dt_obj = datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d %H:%M:%S')
+
     markup.add(lg1, lg2, lg3, lg4, lg5)
 
     bot.send_message(332749197, text, parse_mode='html')
