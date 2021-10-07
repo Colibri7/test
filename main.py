@@ -8,14 +8,7 @@ import pymysql
 # tgbot
 
 
-bot = telebot.TeleBot('1978328105:AAEOUbLnpQR8IKam27I0mnWFHK-vdzLgqH0')
-
-
-# def send_message():
-#     bot.send_message(332749197, 'Hello')
-#
-#
-# schedule.every().day.at("17:23").do(send_message())
+bot = telebot.TeleBot('1978328105:AAEDRCnYGIv9mcxHQUe4kzMZLpce3NWAcMc')
 
 
 bot.remove_webhook()
@@ -31,7 +24,11 @@ SQLALCHEMY_ENGINE_OPTIONS = {
     "pool_pre_ping": True,
     "pool_recycle": 300,
 }
-
+# def send_message():
+#     bot.send_message(332749197, 'Hello')
+#
+#
+# schedule.every().day.at("17:23").do(send_message())
 def func(message):
     if message.text == 'Главное меню':
         markup = types.InlineKeyboardMarkup(row_width=2)
