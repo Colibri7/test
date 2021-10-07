@@ -1,15 +1,12 @@
 import crypt
-from datetime import timedelta, datetime
-import telebot
+import datetime
+from datetime import datetime
 
+import telebot
 from telebot import types
 import pymysql
 
-# tgbot
-
-
-bot = telebot.TeleBot('1978328105:AAEDRCnYGIv9mcxHQUe4kzMZLpce3NWAcMc')
-
+bot = telebot.TeleBot('1978328105:AAFvS8YVSsbLEMvByPjpJZeoD-aVkSA12SY')
 
 bot.remove_webhook()
 connection = pymysql.connect(host='62.209.143.131',
@@ -24,11 +21,16 @@ SQLALCHEMY_ENGINE_OPTIONS = {
     "pool_pre_ping": True,
     "pool_recycle": 300,
 }
+
+
+
 # def send_message():
 #     bot.send_message(332749197, 'Hello')
 #
 #
 # schedule.every().day.at("17:23").do(send_message())
+
+
 def func(message):
     if message.text == 'Главное меню':
         markup = types.InlineKeyboardMarkup(row_width=2)
@@ -153,7 +155,7 @@ def log(message):
                                 elif i["status"] == 3:
                                     i["status"] = 'W_RED'
                                 bot.send_message(message.chat.id,
-                                                 f'{num}.{i["mydomainname"]}, Статус: {i["status"]}, Дата окончания: {(i["expired"] + timedelta(hours=5)).strftime("%d/%m/%Y")}\n')
+                                                 f'{num}.{i["mydomainname"]}, Статус: {i["status"]}, Дата окончания: {(i["expired"] + datetime.timedelta(hours=5)).strftime("%d/%m/%Y")}\n')
                                 num += 1
                         else:
                             bot.send_message(message.chat.id, 'У вас нет доменов')
