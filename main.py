@@ -1,12 +1,13 @@
 import crypt
 import datetime
-from datetime import datetime
-
+import time
+from time import mktime
+from datetime import datetime,timedelta
 import telebot
 from telebot import types
 import pymysql
 
-bot = telebot.TeleBot('1978328105:AAFdoohCzcUa6NqzZO4IKLdq_oDA4spLVaQ')
+bot = telebot.TeleBot('1978328105:AAHarw7VR7tAtfWX6igW-Nyy4MsZ1-mwBFo')
 
 bot.remove_webhook()
 connection = pymysql.connect(host='62.209.143.131',
@@ -125,12 +126,13 @@ def log(message):
                             'SELECT * FROM hostcontract WHERE status=1 and user_id=%(user_id)s', {'user_id': id})
                         checkContact = id_connect.fetchall()
                         num = 1
+                        host_text = ''
                         if checkContact:
                             for i in checkContact:
                                 if i["status"] == 1:
                                     i["status"] = 'Active'
-                                bot.send_message(message.chat.id,
-                                                 f'{num}.{i["hostcontractdomain"]}, Тариф: {i["cptariff"]}, Статус: {i["status"]}\n')
+                                host_text +=f'{num}.{i["hostcontractdomain"]}, Тариф: {i["cptariff"]}, Статус: {i["status"]}\n'
+                                bot.send_message(message.chat.id,host_text)
                                 num += 1
                         else:
                             bot.send_message(message.chat.id, "У вас нет хостингов")
@@ -144,8 +146,10 @@ def log(message):
                             'SELECT * FROM mydomain WHERE status IN (-2,0,1,3) and userid=%(userid)s', {'userid': id})
                         checkContact = id_connect.fetchall()
                         num = 1
+                        domen_text=''
                         if checkContact:
                             for i in checkContact:
+
                                 if i["status"] == -2:
                                     i["status"] = 'A_REG'
                                 elif i["status"] == 0:
@@ -154,8 +158,9 @@ def log(message):
                                     i["status"] = 'ACTIVE'
                                 elif i["status"] == 3:
                                     i["status"] = 'W_RED'
-                                bot.send_message(message.chat.id,
-                                                 f'{num}.{i["mydomainname"]}, Статус: {i["status"]}, Дата окончания: {(i["expired"] + datetime.timedelta(hours=5)).strftime("%d/%m/%Y")}\n')
+
+                                domen_text +=f'{num}.{i["mydomainname"]}.uz, Статус: {(i["status"])}, Дата окончания:{i["expired"].strftime("%d/%m/%Y")}'
+                                bot.send_message(message.chat.id,domen_text)
                                 num += 1
                         else:
                             bot.send_message(message.chat.id, 'У вас нет доменов')
@@ -170,7 +175,7 @@ def log(message):
                             {'username': login})
                         checkContact = id_connect.fetchall()
                         num = 1
-                        text = ''
+                        vds_text = ''
                         if checkContact:
                             for i in checkContact:
                                 if i["status"] == 1:
@@ -179,8 +184,8 @@ def log(message):
                                     i["status"] = 'Block'
                                 else:
                                     i["status"] = 'Deleted'
-                                text += f'vds{num}-{i["vdshostname"]}, Тариф: {i["tariffname"]} , Статус: {i["status"]}'
-                                bot.send_message(message.chat.id, text)
+                                vds_text += f'vds{num}-{i["vdshostname"]}, Тариф: {i["tariffname"]} , Статус: {i["status"]}'
+                                bot.send_message(message.chat.id, vds_text)
                                 num += 1
                         else:
                             bot.send_message(message.chat.id, 'У вас нет VDS')
@@ -263,33 +268,33 @@ def log(message):
             bot.send_message(message.chat.id,
                              'Поздравляем! Вы успешно прошли авторизацию!',
                              reply_markup=markup_ru)
-            # chat_id = message.chat.id
-            # first_name = message.chat.first_name
-            # last_name = message.chat.last_name
-            # username = message.chat.username
-            # timestamp = message.date
-            # dt_obj = datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d %H:%M:%S')
-            # bot_con = pymysql.connect(host='62.209.143.131',
-            #                              user='hostmasteruz_pbot',
-            #                              password='bcaxoZyAXDGc',
-            #                              database='hostmasteruz_bot',
-            #                              charset='utf8mb4',
-            #                              cursorclass=pymysql.cursors.DictCursor
-            #                               )
-            # min = connection.cursor()
-            # min.execute(
-            #     'SELECT `user`.`id`  FROM `user` WHERE username=%(username)s', {'username': login})
-            # check = min.fetchall()
-            # for i in check:
-            #     id = i["id"]
-            #
-            #     cursor = bot_con.cursor()
-            #     query = "INSERT INTO `sardorbot` (`tg_id`, `tg_username`, `tg_first_name`, `tg_last_name`, `updated`,`b_username`,`b_userid`) " \
-            #             "VALUES ({0},'{1}','{2}','{3}','{4}','{5}','{6}') ON DUPLICATE KEY UPDATE `tg_username` = '{1}', `tg_first_name` = '{2}', `tg_last_name` = '{3}', `updated` = '{4}',`b_username`='{5}',`b_userid`='{6}'".format(
-            #         chat_id, username, first_name, last_name, dt_obj,login,id)
-            #
-            #     print(query)
-            #     cursor.execute(query)
+            chat_id = message.chat.id
+            first_name = message.chat.first_name
+            last_name = message.chat.last_name
+            username = message.chat.username
+            timestamp = message.date
+            dt_obj = datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d %H:%M:%S')
+            bot_con = pymysql.connect(host='62.209.143.131',
+                                         user='hostmasteruz_pbot',
+                                         password='bcaxoZyAXDGc',
+                                         database='hostmasteruz_bot',
+                                         charset='utf8mb4',
+                                         cursorclass=pymysql.cursors.DictCursor
+                                          )
+            min = connection.cursor()
+            min.execute(
+                'SELECT `user`.`id`  FROM `user` WHERE username=%(username)s', {'username': login})
+            check = min.fetchall()
+            for i in check:
+                id = i["id"]
+
+                cursor = bot_con.cursor()
+                query = "INSERT INTO `sardorbot` (`tg_id`, `tg_username`, `tg_first_name`, `tg_last_name`, `updated`,`b_username`,`b_userid`) " \
+                        "VALUES ({0},'{1}','{2}','{3}','{4}','{5}','{6}') ON DUPLICATE KEY UPDATE `tg_username` = '{1}', `tg_first_name` = '{2}', `tg_last_name` = '{3}', `updated` = '{4}',`b_username`='{5}',`b_userid`='{6}'".format(
+                    chat_id, username, first_name, last_name, dt_obj,login,id)
+
+                print(query)
+                cursor.execute(query)
 
             bot.register_next_step_handler(message, after_login)
             # zadoljnsot
