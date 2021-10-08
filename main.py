@@ -7,7 +7,7 @@ import telebot
 from telebot import types
 import pymysql
 
-bot = telebot.TeleBot('1978328105:AAHarw7VR7tAtfWX6igW-Nyy4MsZ1-mwBFo')
+bot = telebot.TeleBot('1978328105:AAF_wkHwPd13e0C_pMlr8l2PLQOX2-xvG3I')
 
 bot.remove_webhook()
 connection = pymysql.connect(host='62.209.143.131',
@@ -571,8 +571,9 @@ def callback(call):
 
 
 
-bot.polling(none_stop=True)
 
+
+bot.infinity_polling()
 
 
 
