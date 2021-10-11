@@ -7,7 +7,7 @@ import telebot
 from telebot import types
 import pymysql
 
-bot = telebot.TeleBot('1978328105:AAEaDKcB-XROaLcKzuf1QB2Smu0CEkVjhSU',threaded=False)
+bot = telebot.TeleBot('1978328105:AAFTJl0fN-Cuszmdwjh384ZmDLMz_swZ3qk',threaded=False)
 
 bot.remove_webhook()
 connection = pymysql.connect(host='62.209.143.131',
