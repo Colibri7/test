@@ -229,9 +229,9 @@ def log(message):
                     markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
                     lg1 = types.KeyboardButton('Мои услуги')
                     lg2 = types.KeyboardButton('Мои контакты')
-                    lg3 = types.KeyboardButton('Главное меню')
 
-                    markup_ru.add(lg1, lg2, lg3)
+
+                    markup_ru.add(lg1, lg2)
 
                     bot.send_message(message.chat.id,
                                      'Главное меню',
@@ -266,18 +266,7 @@ def log(message):
                 markup.add(lg1, lg2, lg3, lg4, lg5)
                 bot.send_message(message.chat.id, 'Какую услугу хотите посмотреть ?', reply_markup=markup)
                 bot.register_next_step_handler(message, uslugi)
-            elif message.text == 'Главное меню':
-                markup = types.InlineKeyboardMarkup(row_width=2)
-                lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
-                lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
-                lg3 = types.InlineKeyboardButton('Вход/Регистрация', callback_data='cabinet')
-                lg4 = types.InlineKeyboardButton('Оплата', callback_data='pay_services')
-                lg5 = types.InlineKeyboardButton('Настройки', callback_data='settings')
-                markup.add(lg1, lg2, lg3, lg4, lg5)
-                bot.send_message(message.chat.id,
-                                 'Главное меню',
-                                 reply_markup=markup)
-                bot.register_next_step_handler(message, language)
+
 
         out = crypt.crypt(message.text, checkUsername["password_hash"])
 
@@ -290,9 +279,9 @@ def log(message):
             markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
             lg1 = types.KeyboardButton('Мои услуги')
             lg2 = types.KeyboardButton('Мои контакты')
-            lg3 = types.KeyboardButton('Главное меню')
+            # lg3 = types.KeyboardButton('Главное меню')
 
-            markup_ru.add(lg1, lg2, lg3)
+            markup_ru.add(lg1, lg2)
 
             bot.send_message(message.chat.id,
                              'Поздравляем! Вы успешно прошли авторизацию!',
