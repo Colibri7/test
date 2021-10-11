@@ -2,13 +2,12 @@ import crypt
 import datetime
 import time
 
-from datetime import datetime,timedelta
+from datetime import datetime
 import telebot
 from telebot import types
 import pymysql
 
-bot = telebot.TeleBot('1978328105:AAFCTmpUAZYB3c9422zGNieiuRkU9yqJFNE',threaded=False)
-
+bot = telebot.TeleBot('1978328105:AAFCTmpUAZYB3c9422zGNieiuRkU9yqJFNE', threaded=False)
 
 connection = pymysql.connect(host='62.209.143.131',
                              user='hostmasteruz_pbot',
@@ -36,22 +35,22 @@ def domain_60():
         date = '{:%d-%m-%Y}'.format(i["expired"])
         if i["contactcompany"] == None:
             return bot.send_message(some_id, f'Уважаемый {i["contactname"]}!\n'
-                                      f'Уведомляем Вас о том, что срок действия Вашего домена\n'
-                                      f'{i["mydomainname"]}.uz истекает {date} года.\n'
-                                      f'Просим Вас ознакомиться с тарифами (ссылка на страницу сайта)\n'
-                                      f'на продление регистрации доменов, оплатить\nсоответствующую сумму'
-                                      f'и сообщить менеджеру о продлении\nдомена. В случае неоплаты,'
-                                      f'Ваш домен будет свободен для\nрегистрации другим лицом.\n'
-                                      f'С уважением, команда Hostmaster!')
+                                             f'Уведомляем Вас о том, что срок действия Вашего домена\n'
+                                             f'{i["mydomainname"]}.uz истекает {date} года.\n'
+                                             f'Просим Вас ознакомиться с тарифами (ссылка на страницу сайта)\n'
+                                             f'на продление регистрации доменов, оплатить\nсоответствующую сумму'
+                                             f'и сообщить менеджеру о продлении\nдомена. В случае неоплаты,'
+                                             f'Ваш домен будет свободен для\nрегистрации другим лицом.\n'
+                                             f'С уважением, команда Hostmaster!')
         else:
             return bot.send_message(some_id, f'Уважаемый {i["contactcompany"]}!\n'
-                                      f'Уведомляем Вас о том, что срок действия Вашего домена\n'
-                                      f'{i["mydomainname"]}.uz истекает {date} года.\n'
-                                      f'Просим Вас ознакомиться с тарифами (ссылка на страницу сайта)\n'
-                                      f'на продление регистрации доменов, оплатить\nсоответствующую сумму'
-                                      f'и сообщить менеджеру о продлении\nдомена. В случае неоплаты,'
-                                      f'Ваш домен будет свободен для\nрегистрации другим лицом.\n'
-                                      f'С уважением, команда Hostmaster!')
+                                             f'Уведомляем Вас о том, что срок действия Вашего домена\n'
+                                             f'{i["mydomainname"]}.uz истекает {date} года.\n'
+                                             f'Просим Вас ознакомиться с тарифами (ссылка на страницу сайта)\n'
+                                             f'на продление регистрации доменов, оплатить\nсоответствующую сумму'
+                                             f'и сообщить менеджеру о продлении\nдомена. В случае неоплаты,'
+                                             f'Ваш домен будет свободен для\nрегистрации другим лицом.\n'
+                                             f'С уважением, команда Hostmaster!')
 
 
 # def send_message():
@@ -230,7 +229,6 @@ def log(message):
                     lg1 = types.KeyboardButton('Мои услуги')
                     lg2 = types.KeyboardButton('Мои контакты')
 
-
                     markup_ru.add(lg1, lg2)
 
                     bot.send_message(message.chat.id,
@@ -266,7 +264,6 @@ def log(message):
                 markup.add(lg1, lg2, lg3, lg4, lg5)
                 bot.send_message(message.chat.id, 'Какую услугу хотите посмотреть ?', reply_markup=markup)
                 bot.register_next_step_handler(message, uslugi)
-
 
         out = crypt.crypt(message.text, checkUsername["password_hash"])
 
@@ -327,8 +324,8 @@ def log(message):
     last_name = message.chat.last_name
     username = message.chat.username
     timestamp = message.date
-    date = (timestamp + datetime.timedelta(hours=5)).strftime('%H:%M:%S')
-    dt_obj = datetime.fromtimestamp(date).strftime('%Y-%m-%d %H:%M:%S')
+
+    dt_obj = (datetime.fromtimestamp(timestamp) + datetime.timedelta(hours=5)).strftime('%Y-%m-%d %H:%M:%S')
     bot_con = pymysql.connect(host='62.209.143.131',
                               user='hostmasteruz_pbot',
                               password='bcaxoZyAXDGc',
@@ -586,6 +583,7 @@ def callback(call):
 
         bot.register_next_step_handler(call.message, language)
 
+
 #
 # def schedule_checker():
 #     while True:
@@ -600,8 +598,6 @@ while True:
         telebot.logger.error(e)  # или просто print(e) если у вас логгера нет,
         # или import traceback; traceback.print_exc() для печати полной инфы
         time.sleep(15)
-
-
 
 # bot.polling(none_stop=True,interval=0)
 # if __name__ == "__main__":
