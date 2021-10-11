@@ -1,16 +1,15 @@
 import crypt
 import datetime
 import time
-from threading import Thread
-import schedule
-from datetime import datetime, timedelta
+
+from datetime import datetime
 import telebot
 from telebot import types
 import pymysql
 
-bot = telebot.TeleBot('1978328105:AAElZIst_0-BUnqDMQ2Kp1O7n1nGqeQ-l_Y')
+bot = telebot.TeleBot('1978328105:AAEaDKcB-XROaLcKzuf1QB2Smu0CEkVjhSU',threaded=False)
 
-# bot.remove_webhook()
+bot.remove_webhook()
 connection = pymysql.connect(host='62.209.143.131',
                              user='hostmasteruz_pbot',
                              password='bcaxoZyAXDGc',
@@ -37,24 +36,29 @@ def domain_60():
         date = '{:%d-%m-%Y}'.format(i["expired"])
         if i["contactcompany"] == None:
             return bot.send_message(some_id, f'Уважаемый {i["contactname"]}!\n'
-                                             f'Уведомляем Вас о том, что срок действия Вашего домена\n'
-                                             f'{i["mydomainname"]}.uz истекает {date} года.\n'
-                                             f'Просим Вас ознакомиться с тарифами (ссылка на страницу сайта)\n'
-                                             f'на продление регистрации доменов, оплатить\nсоответствующую сумму'
-                                             f'и сообщить менеджеру о продлении\nдомена. В случае неоплаты,'
-                                             f'Ваш домен будет свободен для\nрегистрации другим лицом.\n'
-                                             f'С уважением, команда Hostmaster!')
+                                      f'Уведомляем Вас о том, что срок действия Вашего домена\n'
+                                      f'{i["mydomainname"]}.uz истекает {date} года.\n'
+                                      f'Просим Вас ознакомиться с тарифами (ссылка на страницу сайта)\n'
+                                      f'на продление регистрации доменов, оплатить\nсоответствующую сумму'
+                                      f'и сообщить менеджеру о продлении\nдомена. В случае неоплаты,'
+                                      f'Ваш домен будет свободен для\nрегистрации другим лицом.\n'
+                                      f'С уважением, команда Hostmaster!')
         else:
             return bot.send_message(some_id, f'Уважаемый {i["contactcompany"]}!\n'
-                                             f'Уведомляем Вас о том, что срок действия Вашего домена\n'
-                                             f'{i["mydomainname"]}.uz истекает {date} года.\n'
-                                             f'Просим Вас ознакомиться с тарифами (ссылка на страницу сайта)\n'
-                                             f'на продление регистрации доменов, оплатить\nсоответствующую сумму'
-                                             f'и сообщить менеджеру о продлении\nдомена. В случае неоплаты,'
-                                             f'Ваш домен будет свободен для\nрегистрации другим лицом.\n'
-                                             f'С уважением, команда Hostmaster!')
+                                      f'Уведомляем Вас о том, что срок действия Вашего домена\n'
+                                      f'{i["mydomainname"]}.uz истекает {date} года.\n'
+                                      f'Просим Вас ознакомиться с тарифами (ссылка на страницу сайта)\n'
+                                      f'на продление регистрации доменов, оплатить\nсоответствующую сумму'
+                                      f'и сообщить менеджеру о продлении\nдомена. В случае неоплаты,'
+                                      f'Ваш домен будет свободен для\nрегистрации другим лицом.\n'
+                                      f'С уважением, команда Hostmaster!')
 
 
+# def send_message():
+#     bot.send_message(332749197, 'Hello')
+#
+#
+# schedule.every().day.at("17:23").do(send_message())
 
 
 def func(message):
@@ -592,12 +596,22 @@ def callback(call):
 
         bot.register_next_step_handler(call.message, language)
 
-        #
+#
 # def schedule_checker():
 #     while True:
 #         schedule.run_pending()
 #         time.sleep(1)
-bot.polling(none_stop=True)
+
+while True:
+    try:
+        bot.polling(none_stop=True)
+
+    except Exception as e:
+        telebot.logger.error(e)  # или просто print(e) если у вас логгера нет,
+        # или import traceback; traceback.print_exc() для печати полной инфы
+        time.sleep(15)
+
+
 
 # bot.polling(none_stop=True,interval=0)
 # if __name__ == "__main__":
