@@ -1,15 +1,16 @@
 import crypt
 import datetime
 import time
-from time import mktime
-from datetime import datetime,timedelta
+from threading import Thread
+import schedule
+from datetime import datetime, timedelta
 import telebot
 from telebot import types
 import pymysql
 
-bot = telebot.TeleBot('1978328105:AAF_wkHwPd13e0C_pMlr8l2PLQOX2-xvG3I')
+bot = telebot.TeleBot('1978328105:AAElZIst_0-BUnqDMQ2Kp1O7n1nGqeQ-l_Y')
 
-bot.remove_webhook()
+# bot.remove_webhook()
 connection = pymysql.connect(host='62.209.143.131',
                              user='hostmasteruz_pbot',
                              password='bcaxoZyAXDGc',
@@ -22,14 +23,38 @@ SQLALCHEMY_ENGINE_OPTIONS = {
     "pool_pre_ping": True,
     "pool_recycle": 300,
 }
+some_id = 332749197
 
 
+def domain_60():
+    min = connection.cursor()
+    min.execute(
+        "SELECT `mydomain`.`idmydomain`, `mydomain`.`userid`, `mydomain`.`mydomainname`, NOW() as now_datetime, `mydomain`.`expired`, `contact`.`contactname`, `contact`.`contactcompany` FROM `mydomain`, `contact` WHERE DATE(`mydomain`.`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 60 DAY)) AND `mydomain`.`mydomaincontactcust` = `contact`.`idcontact`;"
+    )
+    domain_60 = min.fetchall()
 
-# def send_message():
-#     bot.send_message(332749197, 'Hello')
-#
-#
-# schedule.every().day.at("17:23").do(send_message())
+    for i in domain_60:
+        date = '{:%d-%m-%Y}'.format(i["expired"])
+        if i["contactcompany"] == None:
+            return bot.send_message(some_id, f'Уважаемый {i["contactname"]}!\n'
+                                             f'Уведомляем Вас о том, что срок действия Вашего домена\n'
+                                             f'{i["mydomainname"]}.uz истекает {date} года.\n'
+                                             f'Просим Вас ознакомиться с тарифами (ссылка на страницу сайта)\n'
+                                             f'на продление регистрации доменов, оплатить\nсоответствующую сумму'
+                                             f'и сообщить менеджеру о продлении\nдомена. В случае неоплаты,'
+                                             f'Ваш домен будет свободен для\nрегистрации другим лицом.\n'
+                                             f'С уважением, команда Hostmaster!')
+        else:
+            return bot.send_message(some_id, f'Уважаемый {i["contactcompany"]}!\n'
+                                             f'Уведомляем Вас о том, что срок действия Вашего домена\n'
+                                             f'{i["mydomainname"]}.uz истекает {date} года.\n'
+                                             f'Просим Вас ознакомиться с тарифами (ссылка на страницу сайта)\n'
+                                             f'на продление регистрации доменов, оплатить\nсоответствующую сумму'
+                                             f'и сообщить менеджеру о продлении\nдомена. В случае неоплаты,'
+                                             f'Ваш домен будет свободен для\nрегистрации другим лицом.\n'
+                                             f'С уважением, команда Hostmaster!')
+
+
 
 
 def func(message):
@@ -131,8 +156,8 @@ def log(message):
                             for i in checkContact:
                                 if i["status"] == 1:
                                     i["status"] = 'Active'
-                                host_text +=f'{num}.{i["hostcontractdomain"]}, Тариф: {i["cptariff"]}, Статус: {i["status"]}\n'
-                                bot.send_message(message.chat.id,host_text)
+                                host_text += f'{num}.{i["hostcontractdomain"]}, Тариф: {i["cptariff"]}, Статус: {i["status"]}\n'
+                                bot.send_message(message.chat.id, host_text)
                                 num += 1
                         else:
                             bot.send_message(message.chat.id, "У вас нет хостингов")
@@ -146,7 +171,7 @@ def log(message):
                             'SELECT * FROM mydomain WHERE status IN (-2,0,1,3) and userid=%(userid)s', {'userid': id})
                         checkContact = id_connect.fetchall()
                         num = 1
-                        domen_text=''
+                        domen_text = ''
                         if checkContact:
                             for i in checkContact:
 
@@ -159,8 +184,8 @@ def log(message):
                                 elif i["status"] == 3:
                                     i["status"] = 'W_RED'
 
-                                domen_text +=f'{num}.{i["mydomainname"]}.uz, Статус: {(i["status"])}, Дата окончания:{i["expired"].strftime("%d/%m/%Y")}'
-                                bot.send_message(message.chat.id,domen_text)
+                                domen_text += f'{num}.{i["mydomainname"]}.uz, Статус: {(i["status"])}, Дата окончания:{i["expired"].strftime("%d/%m/%Y")}'
+                                bot.send_message(message.chat.id, domen_text)
                                 num += 1
                         else:
                             bot.send_message(message.chat.id, 'У вас нет доменов')
@@ -268,33 +293,6 @@ def log(message):
             bot.send_message(message.chat.id,
                              'Поздравляем! Вы успешно прошли авторизацию!',
                              reply_markup=markup_ru)
-            chat_id = message.chat.id
-            first_name = message.chat.first_name
-            last_name = message.chat.last_name
-            username = message.chat.username
-            timestamp = message.date
-            dt_obj = datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d %H:%M:%S')
-            bot_con = pymysql.connect(host='62.209.143.131',
-                                         user='hostmasteruz_pbot',
-                                         password='bcaxoZyAXDGc',
-                                         database='hostmasteruz_bot',
-                                         charset='utf8mb4',
-                                         cursorclass=pymysql.cursors.DictCursor
-                                          )
-            min = connection.cursor()
-            min.execute(
-                'SELECT `user`.`id`  FROM `user` WHERE username=%(username)s', {'username': login})
-            check = min.fetchall()
-            for i in check:
-                id = i["id"]
-
-                cursor = bot_con.cursor()
-                query = "INSERT INTO `sardorbot` (`tg_id`, `tg_username`, `tg_first_name`, `tg_last_name`, `updated`,`b_username`,`b_userid`) " \
-                        "VALUES ({0},'{1}','{2}','{3}','{4}','{5}','{6}') ON DUPLICATE KEY UPDATE `tg_username` = '{1}', `tg_first_name` = '{2}', `tg_last_name` = '{3}', `updated` = '{4}',`b_username`='{5}',`b_userid`='{6}'".format(
-                    chat_id, username, first_name, last_name, dt_obj,login,id)
-
-                print(query)
-                cursor.execute(query)
 
             bot.register_next_step_handler(message, after_login)
             # zadoljnsot
@@ -331,6 +329,33 @@ def log(message):
             bot.register_next_step_handler(message, password)
 
     login = message.text
+    chat_id = message.chat.id
+    first_name = message.chat.first_name
+    last_name = message.chat.last_name
+    username = message.chat.username
+    timestamp = message.date
+    dt_obj = datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d %H:%M:%S')
+    bot_con = pymysql.connect(host='62.209.143.131',
+                              user='hostmasteruz_pbot',
+                              password='bcaxoZyAXDGc',
+                              database='hostmasteruz_bot',
+                              charset='utf8mb4',
+                              cursorclass=pymysql.cursors.DictCursor
+                              )
+    min = connection.cursor()
+    min.execute(
+        'SELECT `user`.`id`  FROM `user` WHERE username=%(username)s', {'username': login})
+    check = min.fetchall()
+    for i in check:
+        id = i["id"]
+
+        cursor = bot_con.cursor()
+        query = "INSERT INTO `sardorbot` (`tg_id`, `tg_username`, `tg_first_name`, `tg_last_name`, `updated`,`b_username`,`b_userid`) " \
+                "VALUES ({0},'{1}','{2}','{3}','{4}','{5}','{6}') ON DUPLICATE KEY UPDATE `tg_username` = '{1}', `tg_first_name` = '{2}', `tg_last_name` = '{3}', `updated` = '{4}',`b_username`='{5}',`b_userid`='{6}'".format(
+            chat_id, username, first_name, last_name, dt_obj, login, id)
+
+        print(query)
+        cursor.execute(query)
     cursor = connection.cursor()
     cursor.execute('SELECT username FROM user')
     checkUsername = cursor.fetchall()
@@ -567,13 +592,15 @@ def callback(call):
 
         bot.register_next_step_handler(call.message, language)
 
+        #
+# def schedule_checker():
+#     while True:
+#         schedule.run_pending()
+#         time.sleep(1)
+bot.polling(none_stop=True)
 
-
-
-
-
-
-bot.infinity_polling()
-
-
-
+# bot.polling(none_stop=True,interval=0)
+# if __name__ == "__main__":
+#     schedule.every(10).seconds.do(domain_60)
+#
+#     Thread(target=schedule_checker).start()
