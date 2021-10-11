@@ -327,7 +327,8 @@ def log(message):
     last_name = message.chat.last_name
     username = message.chat.username
     timestamp = message.date
-    dt_obj = datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d %H:%M:%S')
+    date = (timestamp + datetime.timedelta(hours=5)).strftime('%H:%M:%S')
+    dt_obj = datetime.fromtimestamp(date).strftime('%Y-%m-%d %H:%M:%S')
     bot_con = pymysql.connect(host='62.209.143.131',
                               user='hostmasteruz_pbot',
                               password='bcaxoZyAXDGc',
