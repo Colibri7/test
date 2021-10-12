@@ -594,8 +594,8 @@ def callback(call):
 #         time.sleep(1)
 
 
-
-bot.infinity_polling(True)
+bot.polling(none_stop=True)
+# bot.infinity_polling(True)
 
 
 
