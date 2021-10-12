@@ -593,14 +593,11 @@ def callback(call):
 #         schedule.run_pending()
 #         time.sleep(1)
 
-while True:
-    try:
-        bot.infinity_polling(True)
 
-    except Exception as e:
-        telebot.logger.error(e)  # или просто print(e) если у вас логгера нет,
-        # или import traceback; traceback.print_exc() для печати полной инфы
-        time.sleep(15)
+
+bot.infinity_polling(True)
+
+
 
 
 
