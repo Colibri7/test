@@ -17,6 +17,51 @@ connection = pymysql.connect(host='62.209.143.131',
                              cursorclass=pymysql.cursors.DictCursor
                              )
 
+# -------------------------
+# рассылка сообщений
+
+# min = connection.cursor()
+# min.execute(
+#     "SELECT `hostcontract`.`user_id`, `hostcontract`.`hostcontractdomain`, `hosting`.`hostingname`, ROUND(`hosting`.`hostingcost` / 12) as abon_month, `contact`.`contactname`, `contact`.`contactcompany`,LAST_DAY(NOW()) FROM `hostcontract`, `hosting`, `contact` WHERE `hostcontract`.`status` = 1 AND `contact`.`balance` < `hosting`.`hostingcost` / 12 AND `hostcontract`.`hostingid` = `hosting`.`idhosting` AND `hostcontract`.`contactid` = `contact`.`idcontact` ;"
+# )
+# hosting = min.fetchall()
+# connection_2 = pymysql.connect(host='62.209.143.131',
+#                                user='hostmasteruz_pbot',
+#                                password='bcaxoZyAXDGc',
+#                                database='hostmasteruz_bot',
+#                                charset='utf8mb4',
+#                                cursorclass=pymysql.cursors.DictCursor
+#                                )
+#
+# min_2 = connection_2.cursor()
+# min_2.execute(
+#     "SELECT  `b_userid` FROM `sardorbot`"
+# )
+# b_id = min_2.fetchall()
+# arr  = [2999,678]
+# for u in hosting:
+#     date = '{:%d-%m-%Y}'.format(u["LAST_DAY(NOW())"])
+#     for q in b_id:
+#         arr.append(q["b_userid"])
+#
+#     for i in arr:
+#         if i == u["user_id"]:
+#             print()
+#             if u["contactcompany"] == None:
+#                 print(f'contactname: {u["contactname"]}\nuserid: {u["user_id"]}\ndate: {date}\nabon_month: {u["abon_month"]}\ndomain: {u["hostcontractdomain"]}\ntarif: {u["hostingname"]}')
+#                 # print(f'Уважаемый {u["contactname"]} {u["user_id"]} !\n'
+#                 #       f'Уведомляем Вас о необходимости оплаты услуг за использование услуги'
+#                 #       f' Хостинга на будущий месяц до {date}  в соответствии с выбранным'
+#                 #       f'тарифом {u["hostingname"]} в размере {u["abon_month"]} {u["hostcontractdomain"]} сум. '
+#                 #       f'В случае неоплаты, услуга будет отключена ! С уважением, команда Hostmaster!')
+#             else:
+#                 print(f'contactname: {u["contactcompany"]}\nuserid: {u["user_id"]} date: {date}\nabon_month: {u["abon_month"]}\ndomain: {u["hostcontractdomain"]}\ntarif: {u["hostingname"]}')
+#
+# -------------------------------
+
+
+
+
 SQLALCHEMY_ENGINE_OPTIONS = {
     "pool_pre_ping": True,
     "pool_recycle": 300,
@@ -710,8 +755,3 @@ while True:
         # или import traceback; traceback.print_exc() для печати полной инфы
         time.sleep(15)
 
-# bot.polling(none_stop=True,interval=0)
-# if __name__ == "__main__":
-#     schedule.every(10).seconds.do(domain_60)
-#
-#     Thread(target=schedule_checker).start()
