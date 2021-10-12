@@ -595,7 +595,7 @@ def callback(call):
 
 while True:
     try:
-        bot.polling(none_stop=True)
+        bot.infinity_polling(True)
 
     except Exception as e:
         telebot.logger.error(e)  # или просто print(e) если у вас логгера нет,
