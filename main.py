@@ -1,7 +1,10 @@
 import crypt
 import datetime
 import time
+import time
+from threading import Thread
 
+import schedule
 from datetime import datetime
 import telebot
 from telebot import types
@@ -740,11 +743,22 @@ def callback(call):
         bot.register_next_step_handler(call.message, language)
 
 
-#
-# def schedule_checker():
-#     while True:
-#         schedule.run_pending()
-#         time.sleep(1)
+
+def schedule_checker():
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
+
+
+def function_to_run():
+    return bot.send_message(some_id, "This is a message to send.")
+
+
+if __name__ == "__main__":
+    # schedule.every(2).seconds.do(function_to_run)
+    schedule.every().day.at('11:00').do(function_to_run)
+
+    Thread(target=schedule_checker).start()
 
 while True:
     try:
