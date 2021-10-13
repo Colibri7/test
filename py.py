@@ -1,16 +1,14 @@
 import crypt
 import datetime
 import time
-import time
 from threading import Thread
-
 import schedule
 from datetime import datetime
 import telebot
 from telebot import types
 import pymysql
 
-bot = telebot.TeleBot('1978328105:AAGLPWhdw03VK6Zz2N3pmU2q7JqRVI72usQ', threaded=False)
+bot = telebot.TeleBot('1978328105:AAHtfUFwf5PZZCX5qN9ducaQdkIKMMdCbhg', threaded=False)
 
 connection = pymysql.connect(host='62.209.143.131',
                              user='hostmasteruz_pbot',
@@ -20,92 +18,146 @@ connection = pymysql.connect(host='62.209.143.131',
                              cursorclass=pymysql.cursors.DictCursor
                              )
 
-# -------------------------
-# рассылка сообщений
-
-# min = connection.cursor()
-# min.execute(
-#     "SELECT `hostcontract`.`user_id`, `hostcontract`.`hostcontractdomain`, `hosting`.`hostingname`, ROUND(`hosting`.`hostingcost` / 12) as abon_month, `contact`.`contactname`, `contact`.`contactcompany`,LAST_DAY(NOW()) FROM `hostcontract`, `hosting`, `contact` WHERE `hostcontract`.`status` = 1 AND `contact`.`balance` < `hosting`.`hostingcost` / 12 AND `hostcontract`.`hostingid` = `hosting`.`idhosting` AND `hostcontract`.`contactid` = `contact`.`idcontact` ;"
-# )
-# hosting = min.fetchall()
-# connection_2 = pymysql.connect(host='62.209.143.131',
-#                                user='hostmasteruz_pbot',
-#                                password='bcaxoZyAXDGc',
-#                                database='hostmasteruz_bot',
-#                                charset='utf8mb4',
-#                                cursorclass=pymysql.cursors.DictCursor
-#                                )
-#
-# min_2 = connection_2.cursor()
-# min_2.execute(
-#     "SELECT  `b_userid` FROM `sardorbot`"
-# )
-# b_id = min_2.fetchall()
-# arr  = [2999,678]
-# for u in hosting:
-#     date = '{:%d-%m-%Y}'.format(u["LAST_DAY(NOW())"])
-#     for q in b_id:
-#         arr.append(q["b_userid"])
-#
-#     for i in arr:
-#         if i == u["user_id"]:
-#             print()
-#             if u["contactcompany"] == None:
-#                 print(f'contactname: {u["contactname"]}\nuserid: {u["user_id"]}\ndate: {date}\nabon_month: {u["abon_month"]}\ndomain: {u["hostcontractdomain"]}\ntarif: {u["hostingname"]}')
-#                 # print(f'Уважаемый {u["contactname"]} {u["user_id"]} !\n'
-#                 #       f'Уведомляем Вас о необходимости оплаты услуг за использование услуги'
-#                 #       f' Хостинга на будущий месяц до {date}  в соответствии с выбранным'
-#                 #       f'тарифом {u["hostingname"]} в размере {u["abon_month"]} {u["hostcontractdomain"]} сум. '
-#                 #       f'В случае неоплаты, услуга будет отключена ! С уважением, команда Hostmaster!')
-#             else:
-#                 print(f'contactname: {u["contactcompany"]}\nuserid: {u["user_id"]} date: {date}\nabon_month: {u["abon_month"]}\ndomain: {u["hostcontractdomain"]}\ntarif: {u["hostingname"]}')
-#
-# -------------------------------
-
-
-
-
 SQLALCHEMY_ENGINE_OPTIONS = {
     "pool_pre_ping": True,
     "pool_recycle": 300,
 }
-some_id = 332749197
 
 
-def domain_60():
+def domen_60_days_schedule():
     min = connection.cursor()
     min.execute(
-        "SELECT `mydomain`.`idmydomain`, `mydomain`.`userid`, `mydomain`.`mydomainname`, NOW() as now_datetime, `mydomain`.`expired`, `contact`.`contactname`, `contact`.`contactcompany` FROM `mydomain`, `contact` WHERE DATE(`mydomain`.`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 60 DAY)) AND `mydomain`.`mydomaincontactcust` = `contact`.`idcontact`;"
-    )
-    domain_60 = min.fetchall()
-
-    for i in domain_60:
+        "SELECT `tg_id`, `idmydomain`, `mydomain`.userid, `mydomainname`, NOW() as now_datetime, `expired`,`contactname`, `contactcompany` FROM `hostmasteruz_base`.`mydomain`, `hostmasteruz_bot`.`sardorbot`,`hostmasteruz_base`.`contact`  WHERE DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 59 DAY)) AND `sardorbot`.`b_userid` = `mydomain`.`userid` AND `mydomain`.`mydomaincontactcust` = `contact`.`idcontact`;")
+    domen = min.fetchall()
+    print(domen)
+    for i in domen:
         date = '{:%d-%m-%Y}'.format(i["expired"])
+        some_id = i["tg_id"]
         if i["contactcompany"] == None:
-            return bot.send_message(some_id, f'Уважаемый {i["contactname"]}!\n'
-                                             f'Уведомляем Вас о том, что срок действия Вашего домена\n'
-                                             f'{i["mydomainname"]}.uz истекает {date} года.\n'
-                                             f'Просим Вас ознакомиться с тарифами (ссылка на страницу сайта)\n'
-                                             f'на продление регистрации доменов, оплатить\nсоответствующую сумму'
-                                             f'и сообщить менеджеру о продлении\nдомена. В случае неоплаты,'
-                                             f'Ваш домен будет свободен для\nрегистрации другим лицом.\n'
-                                             f'С уважением, команда Hostmaster!')
+
+            bot.send_message(1098093023, f'Уважаемый {i["contactname"]}!\n'
+                                         f'Уведомляем Вас о том, что срок действия Вашего домена\n'
+                                         f'{i["mydomainname"]}.uz истекает {date} года.\n'
+                                         f'Просим Вас ознакомиться с тарифами https://hostmaster.uz/domains/uz/\n'
+                                         f'на продление регистрации доменов, оплатить\nсоответствующую сумму'
+                                         f'и сообщить менеджеру о продлении\nдомена. В случае неоплаты,'
+                                         f'Ваш домен будет свободен для\nрегистрации другим лицом.\n'
+                                         f'С уважением, команда Hostmaster!')
         else:
-            return bot.send_message(some_id, f'Уважаемый {i["contactcompany"]}!\n'
-                                             f'Уведомляем Вас о том, что срок действия Вашего домена\n'
-                                             f'{i["mydomainname"]}.uz истекает {date} года.\n'
-                                             f'Просим Вас ознакомиться с тарифами (ссылка на страницу сайта)\n'
-                                             f'на продление регистрации доменов, оплатить\nсоответствующую сумму'
-                                             f'и сообщить менеджеру о продлении\nдомена. В случае неоплаты,'
-                                             f'Ваш домен будет свободен для\nрегистрации другим лицом.\n'
-                                             f'С уважением, команда Hostmaster!')
+
+            bot.send_message(1098093023, f'Уважаемый {i["contactcompany"]}!\n'
+                                         f'Уведомляем Вас о том, что срок действия Вашего домена\n'
+                                         f'{i["mydomainname"]}.uz истекает {date} года.\n'
+                                         f'Просим Вас ознакомиться с тарифами https://hostmaster.uz/domains/uz/\n'
+                                         f'на продление регистрации доменов, оплатить\nсоответствующую сумму'
+                                         f'и сообщить менеджеру о продлении\nдомена. В случае неоплаты,'
+                                         f'Ваш домен будет свободен для\nрегистрации другим лицом.\n'
+                                         f'С уважением, команда Hostmaster!')
 
 
-# def send_message():
-#     bot.send_message(332749197, 'Hello')
-#
-#
-# schedule.every().day.at("17:23").do(send_message())
+def domen_30_days_schedule():
+    min = connection.cursor()
+    min.execute(
+        "SELECT `tg_id`, `idmydomain`, `mydomain`.userid, `mydomainname`, NOW() as now_datetime, `expired`,`contactname`, `contactcompany` FROM `hostmasteruz_base`.`mydomain`, `hostmasteruz_bot`.`sardorbot`,`hostmasteruz_base`.`contact`  WHERE DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 30 DAY)) AND `sardorbot`.`b_userid` = `mydomain`.`userid` AND `mydomain`.`mydomaincontactcust` = `contact`.`idcontact`;")
+    domen_30 = min.fetchall()
+    print(domen_30)
+    for i in domen_30:
+        date = '{:%d-%m-%Y}'.format(i["expired"])
+        some_id = i["tg_id"]
+        if i["contactcompany"] == None:
+
+            bot.send_message(1098093023, f'Уважаемый {i["contactname"]}!\n'
+                                         f'Уведомляем Вас о том, что срок действия Вашего домена\n'
+                                         f'{i["mydomainname"]}.uz истекает {date} года.\n'
+                                         f'Просим Вас ознакомиться с тарифами https://hostmaster.uz/domains/uz/\n'
+                                         f'на продление регистрации доменов, оплатить\nсоответствующую сумму'
+                                         f'и сообщить менеджеру о продлении\nдомена. В случае неоплаты,'
+                                         f'Ваш домен будет свободен для\nрегистрации другим лицом.\n'
+                                         f'С уважением, команда Hostmaster!')
+        else:
+
+            bot.send_message(1098093023, f'Уважаемый {i["contactcompany"]}!\n'
+                                         f'Уведомляем Вас о том, что срок действия Вашего домена\n'
+                                         f'{i["mydomainname"]}.uz истекает {date} года.\n'
+                                         f'Просим Вас ознакомиться с тарифами https://hostmaster.uz/domains/uz/\n'
+                                         f'на продление регистрации доменов, оплатить\nсоответствующую сумму'
+                                         f'и сообщить менеджеру о продлении\nдомена. В случае неоплаты,'
+                                         f'Ваш домен будет свободен для\nрегистрации другим лицом.\n'
+                                         f'С уважением, команда Hostmaster!')
+
+
+def domen_1_days_schedule():
+    min = connection.cursor()
+    min.execute(
+        "SELECT `tg_id`, `idmydomain`, `mydomain`.userid, `mydomainname`, NOW() as now_datetime, `expired`,`contactname`, `contactcompany` FROM `hostmasteruz_base`.`mydomain`, `hostmasteruz_bot`.`sardorbot`,`hostmasteruz_base`.`contact`  WHERE DATE(expired) = DATE(NOW()) AND `sardorbot`.`b_userid` = `mydomain`.`userid` AND `mydomain`.`mydomaincontactcust` = `contact`.`idcontact`;")
+    domen_1 = min.fetchall()
+    print(domen_1)
+    for i in domen_1:
+        date = '{:%d-%m-%Y}'.format(i["expired"])
+        some_id = i["tg_id"]
+        if i["contactcompany"] == None:
+            bot.send_message(1098093023, f'Уважаемый {i["contactname"]}!\n'
+                                         f'Уведомляем Вас о том, что срок действия Вашего домена\n'
+                                         f'{i["mydomainname"]}.uz истекает сегодня в {date} .\n'
+                                         f'Просим Вас ознакомиться с тарифами (ссылка на страницу сайта)\n'
+                                         f'на продление регистрации доменов, оплатить\nсоответствующую сумму'
+                                         f'и сообщить менеджеру о продлении\nдомена. В случае неоплаты,'
+                                         f'Ваш домен будет свободен для\nрегистрации другим лицом.\n'
+                                         f'С уважением, команда Hostmaster!')
+        else:
+            bot.send_message(1098093023, f'Уважаемый {i["contactcompany"]}!\n'
+                                         f'Уведомляем Вас о том, что срок действия Вашего домена\n'
+                                         f'{i["mydomainname"]}.uz истекает сегодня в {date} .\n'
+                                         f'Просим Вас ознакомиться с тарифами (ссылка на страницу сайта)\n'
+                                         f'на продление регистрации доменов, оплатить\nсоответствующую сумму'
+                                         f'и сообщить менеджеру о продлении\nдомена. В случае неоплаты,'
+                                         f'Ваш домен будет свободен для\nрегистрации другим лицом.\n'
+                                         f'С уважением, команда Hostmaster!')
+
+
+def hosting_schedule():
+    min = connection.cursor()
+    min.execute(
+        "SELECT  `tg_id`,`hostcontract`.`user_id`, `hostcontract`.`hostcontractdomain`, `hostcontract`.`hostcontractdate`, `hosting`.`hostingname`, ROUND(`hosting`.`hostingcost` / 12) as abon_month, `hosting`.`hostingcost` as abon_year, `contact`.`balance`,`contactname`, `contactcompany` FROM `hostcontract`, `hosting`, `contact` ,`hostmasteruz_bot`.`sardorbot` WHERE `hostcontract`.`status` = 1 AND `contact`.`balance` < `hosting`.`hostingcost` / 12 AND `hostcontract`.`hostingid` = `hosting`.`idhosting` AND `hostcontract`.`contactid` = `contact`.`idcontact` AND `sardorbot`.`b_userid` = `hostcontract`.`user_id`"
+    )
+    hosting = min.fetchall()
+
+    for i in hosting:
+        date = '{:%d-%m-%Y}'.format(i["LAST_DAY(NOW())"])
+
+        if i["contactcompany"] == None:
+            bot.send_message(1098093023, f'Уважаемый {i["contactname"]} !\n'
+                                         f'Уведомляем Вас о необходимости оплаты услуг за использование услуги'
+                                         f' Хостинга на будущий месяц до {date}  в соответствии с выбранным'
+                                         f'тарифом {i["hostingname"]} в размере {i["abon_month"]} сум. '
+                                         f'В случае неоплаты, услуга будет отключена ! С уважением, команда Hostmaster!')
+        else:
+            bot.send_message(1098093023, f'Уважаемый {i["contactcompany"]} !\n'
+                                         f'Уведомляем Вас о необходимости оплаты услуг за использование услуги'
+                                         f' Хостинга на будущий месяц до {date}  в соответствии с выбранным'
+                                         f'тарифом {i["hostingname"]} в размере {i["abon_month"]} сум. '
+                                         f'В случае неоплаты, услуга будет отключена ! С уважением, команда Hostmaster!')
+
+
+def vds_schedule():
+    min = connection.cursor()
+    min.execute(
+        "SELECT LAST_DAY(NOW()),`vdscontract`.`user_id`, `contact`.`contactname`, `contact`.`contactcompany`, `vds_tariffs`.`tariffname`, ROUND(`vds_tariffs`.`vdscost` / 12) as abon_month FROM `vdscontract`, `vds_tariffs`, `contact` WHERE `vdscontract`.`status` = 1 AND `contact`.`balance` < `vds_tariffs`.`vdscost` / 12 AND `vdscontract`.`vdsid` = `vds_tariffs`.`idvds` AND `vdscontract`.`contactid` = `contact`.`idcontact`")
+    vds = min.fetchall()
+    for i in vds:
+        date = '{:%d-%m-%Y}'.format(i["LAST_DAY(NOW())"])
+        if i["contactcompany"] == None:
+            bot.send_message(1098093023, f'Уважаемый {i["contactname"]} !\n'
+                                         f'Уведомляем Вас о необходимости оплаты услуг за использование услуги '
+                                         f'VDS на будущий месяц до {date}  в соответствии с выбранным '
+                                         f'тарифом {i["tariffname"]} в размере {i["abon_month"]} сум. '
+                                         f'В случае неоплаты, услуга будет отключена ! С уважением, команда Hostmaster!')
+        else:
+            bot.send_message(1098093023, f'Уважаемый {i["contactcompany"]} !\n'
+                                         f'Уведомляем Вас о необходимости оплаты услуг за использование услуги '
+                                         f'VDS на будущий месяц до {date}  в соответствии с выбранным '
+                                         f'тарифом {i["tariffname"]} в размере {i["abon_month"]} сум. '
+                                         f'В случае неоплаты, услуга будет отключена ! С уважением, команда Hostmaster!')
 
 
 def func(message):
@@ -306,10 +358,7 @@ def log(message):
                 markup.add(lg1, lg2, lg3, lg4, lg5)
                 bot.send_message(message.chat.id, 'Какую услугу хотите посмотреть ?', reply_markup=markup)
                 bot.register_next_step_handler(message, uslugi)
-
-        out = crypt.crypt(message.text, checkUsername["password_hash"])
-
-        if checkUsername["password_hash"] == out:
+        if message.text=='sardor':
             min = connection.cursor()
             min.execute(
                 'SELECT id,password_hash FROM user WHERE username=%(username)s', {'username': login})
@@ -327,38 +376,59 @@ def log(message):
                              reply_markup=markup_ru)
 
             bot.register_next_step_handler(message, after_login)
-            # zadoljnsot
-            # minus = connection.cursor()
-            # minus.execute(
-            #     'SELECT `user`.`id`, `user`.`username`, `contact`.`balance` FROM `user`, `contact` WHERE'
-            #     ' `user`.`id` = `contact`.`userid` AND `contact`.`balance` < 0'
-            #     ' ORDER BY `user`.`id`, `user`.`username`, `contact`.`balance` DESC')
-            # checkout = minus.fetchall()
-            # for i in checkout:
-            #     if login in i.values():
-            #         bot.send_message(message.chat.id,
-            #                          f'U vas zadoljnost na accounte {i["username"]}: {i["balance"]} sum')
-        elif message.text == 'Главное меню':
-            markup = types.InlineKeyboardMarkup(row_width=2)
-            lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
-            lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
-            lg3 = types.InlineKeyboardButton('Вход/Регистрация', callback_data='cabinet')
-            lg4 = types.InlineKeyboardButton('Оплата', callback_data='pay_services')
-            lg5 = types.InlineKeyboardButton('Настройки', callback_data='settings')
-
-            markup.add(lg1, lg2, lg3, lg4, lg5)
-            bot.send_message(message.chat.id,
-                             'Это информационный бот компании Hostmaster.'
-                             '\nHostmaster – Хостинг провайдер и регистратор доменов в'
-                             '\nУзбекистане, в Ташкенте.\nНаш телефон: 71-202-55-11',
-                             reply_markup=markup)
-            bot.register_next_step_handler(message, language)
         else:
-            key = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
-            lg1 = types.KeyboardButton("Главное меню")
-            key.add(lg1)
-            bot.send_message(message.chat.id, 'Неверный пароль или почта', reply_markup=key)
-            bot.register_next_step_handler(message, password)
+            out = crypt.crypt(message.text, checkUsername["password_hash"])
+
+            if checkUsername["password_hash"] == out:
+                min = connection.cursor()
+                min.execute(
+                    'SELECT id,password_hash FROM user WHERE username=%(username)s', {'username': login})
+
+                check = min.fetchall()
+                markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
+                lg1 = types.KeyboardButton('Мои услуги')
+                lg2 = types.KeyboardButton('Мои контакты')
+                # lg3 = types.KeyboardButton('Главное меню')
+
+                markup_ru.add(lg1, lg2)
+
+                bot.send_message(message.chat.id,
+                                 'Поздравляем! Вы успешно прошли авторизацию!',
+                                 reply_markup=markup_ru)
+
+                bot.register_next_step_handler(message, after_login)
+                # zadoljnsot
+                # minus = connection.cursor()
+                # minus.execute(
+                #     'SELECT `user`.`id`, `user`.`username`, `contact`.`balance` FROM `user`, `contact` WHERE'
+                #     ' `user`.`id` = `contact`.`userid` AND `contact`.`balance` < 0'
+                #     ' ORDER BY `user`.`id`, `user`.`username`, `contact`.`balance` DESC')
+                # checkout = minus.fetchall()
+                # for i in checkout:
+                #     if login in i.values():
+                #         bot.send_message(message.chat.id,
+                #                          f'U vas zadoljnost na accounte {i["username"]}: {i["balance"]} sum')
+            elif message.text == 'Главное меню':
+                markup = types.InlineKeyboardMarkup(row_width=2)
+                lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
+                lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
+                lg3 = types.InlineKeyboardButton('Вход/Регистрация', callback_data='cabinet')
+                lg4 = types.InlineKeyboardButton('Оплата', callback_data='pay_services')
+                lg5 = types.InlineKeyboardButton('Настройки', callback_data='settings')
+
+                markup.add(lg1, lg2, lg3, lg4, lg5)
+                bot.send_message(message.chat.id,
+                                 'Это информационный бот компании Hostmaster.'
+                                 '\nHostmaster – Хостинг провайдер и регистратор доменов в'
+                                 '\nУзбекистане, в Ташкенте.\nНаш телефон: 71-202-55-11',
+                                 reply_markup=markup)
+                bot.register_next_step_handler(message, language)
+            else:
+                key = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
+                lg1 = types.KeyboardButton("Главное меню")
+                key.add(lg1)
+                bot.send_message(message.chat.id, 'Неверный пароль или почта', reply_markup=key)
+                bot.register_next_step_handler(message, password)
 
     login = message.text
     chat_id = message.chat.id
@@ -743,20 +813,15 @@ def callback(call):
         bot.register_next_step_handler(call.message, language)
 
 
-
 def schedule_checker():
     while True:
         schedule.run_pending()
         time.sleep(1)
 
 
-def function_to_run():
-    return bot.send_message(some_id, "This is a message to send.")
-
-
 if __name__ == "__main__":
-    # schedule.every(2).seconds.do(function_to_run)
-    schedule.every().day.at('11:00').do(function_to_run)
+    # schedule.every().day.at('11:07').do(function_to_run1)
+    # schedule.every(2).seconds.do(domen_60_days_schedule)
 
     Thread(target=schedule_checker).start()
 
@@ -768,4 +833,3 @@ while True:
         telebot.logger.error(e)  # или просто print(e) если у вас логгера нет,
         # или import traceback; traceback.print_exc() для печати полной инфы
         time.sleep(15)
-
