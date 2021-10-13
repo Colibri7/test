@@ -8,7 +8,7 @@ import telebot
 from telebot import types
 import pymysql
 
-bot = telebot.TeleBot('1978328105:AAHtfUFwf5PZZCX5qN9ducaQdkIKMMdCbhg', threaded=False)
+bot = telebot.TeleBot('1978328105:AAH8hcb2b6CQ4_ZnHx6fHPVr9aLjH8fR7f0', threaded=False)
 
 connection = pymysql.connect(host='62.209.143.131',
                              user='hostmasteruz_pbot',
@@ -25,6 +25,7 @@ SQLALCHEMY_ENGINE_OPTIONS = {
 
 
 def domen_60_days_schedule():
+
     min = connection.cursor()
     min.execute(
         "SELECT `tg_id`, `idmydomain`, `mydomain`.userid, `mydomainname`, NOW() as now_datetime, `expired`,`contactname`, `contactcompany` FROM `hostmasteruz_base`.`mydomain`, `hostmasteruz_bot`.`sardorbot`,`hostmasteruz_base`.`contact`  WHERE DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 59 DAY)) AND `sardorbot`.`b_userid` = `mydomain`.`userid` AND `mydomain`.`mydomaincontactcust` = `contact`.`idcontact`;")
@@ -35,7 +36,7 @@ def domen_60_days_schedule():
         some_id = i["tg_id"]
         if i["contactcompany"] == None:
 
-            bot.send_message(1098093023, f'Уважаемый {i["contactname"]}!\n'
+            bot.send_message(332749197, f'Уважаемый {i["contactname"]}!\n'
                                          f'Уведомляем Вас о том, что срок действия Вашего домена\n'
                                          f'{i["mydomainname"]}.uz истекает {date} года.\n'
                                          f'Просим Вас ознакомиться с тарифами https://hostmaster.uz/domains/uz/\n'
@@ -45,7 +46,7 @@ def domen_60_days_schedule():
                                          f'С уважением, команда Hostmaster!')
         else:
 
-            bot.send_message(1098093023, f'Уважаемый {i["contactcompany"]}!\n'
+            bot.send_message(332749197, f'Уважаемый {i["contactcompany"]}!\n'
                                          f'Уведомляем Вас о том, что срок действия Вашего домена\n'
                                          f'{i["mydomainname"]}.uz истекает {date} года.\n'
                                          f'Просим Вас ознакомиться с тарифами https://hostmaster.uz/domains/uz/\n'
@@ -56,6 +57,7 @@ def domen_60_days_schedule():
 
 
 def domen_30_days_schedule():
+
     min = connection.cursor()
     min.execute(
         "SELECT `tg_id`, `idmydomain`, `mydomain`.userid, `mydomainname`, NOW() as now_datetime, `expired`,`contactname`, `contactcompany` FROM `hostmasteruz_base`.`mydomain`, `hostmasteruz_bot`.`sardorbot`,`hostmasteruz_base`.`contact`  WHERE DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 30 DAY)) AND `sardorbot`.`b_userid` = `mydomain`.`userid` AND `mydomain`.`mydomaincontactcust` = `contact`.`idcontact`;")
@@ -66,7 +68,7 @@ def domen_30_days_schedule():
         some_id = i["tg_id"]
         if i["contactcompany"] == None:
 
-            bot.send_message(1098093023, f'Уважаемый {i["contactname"]}!\n'
+            bot.send_message(332749197, f'Уважаемый {i["contactname"]}!\n'
                                          f'Уведомляем Вас о том, что срок действия Вашего домена\n'
                                          f'{i["mydomainname"]}.uz истекает {date} года.\n'
                                          f'Просим Вас ознакомиться с тарифами https://hostmaster.uz/domains/uz/\n'
@@ -76,7 +78,7 @@ def domen_30_days_schedule():
                                          f'С уважением, команда Hostmaster!')
         else:
 
-            bot.send_message(1098093023, f'Уважаемый {i["contactcompany"]}!\n'
+            bot.send_message(332749197, f'Уважаемый {i["contactcompany"]}!\n'
                                          f'Уведомляем Вас о том, что срок действия Вашего домена\n'
                                          f'{i["mydomainname"]}.uz истекает {date} года.\n'
                                          f'Просим Вас ознакомиться с тарифами https://hostmaster.uz/domains/uz/\n'
@@ -96,7 +98,7 @@ def domen_1_days_schedule():
         date = '{:%d-%m-%Y}'.format(i["expired"])
         some_id = i["tg_id"]
         if i["contactcompany"] == None:
-            bot.send_message(1098093023, f'Уважаемый {i["contactname"]}!\n'
+            bot.send_message(332749197, f'Уважаемый {i["contactname"]}!\n'
                                          f'Уведомляем Вас о том, что срок действия Вашего домена\n'
                                          f'{i["mydomainname"]}.uz истекает сегодня в {date} .\n'
                                          f'Просим Вас ознакомиться с тарифами (ссылка на страницу сайта)\n'
@@ -105,7 +107,7 @@ def domen_1_days_schedule():
                                          f'Ваш домен будет свободен для\nрегистрации другим лицом.\n'
                                          f'С уважением, команда Hostmaster!')
         else:
-            bot.send_message(1098093023, f'Уважаемый {i["contactcompany"]}!\n'
+            bot.send_message(332749197, f'Уважаемый {i["contactcompany"]}!\n'
                                          f'Уведомляем Вас о том, что срок действия Вашего домена\n'
                                          f'{i["mydomainname"]}.uz истекает сегодня в {date} .\n'
                                          f'Просим Вас ознакомиться с тарифами (ссылка на страницу сайта)\n'
@@ -124,7 +126,7 @@ def hosting_schedule():
 
     for i in hosting:
         date = '{:%d-%m-%Y}'.format(i["LAST_DAY(NOW())"])
-
+        some_id = i["tg_id"]
         if i["contactcompany"] == None:
             bot.send_message(1098093023, f'Уважаемый {i["contactname"]} !\n'
                                          f'Уведомляем Вас о необходимости оплаты услуг за использование услуги'
@@ -147,13 +149,13 @@ def vds_schedule():
     for i in vds:
         date = '{:%d-%m-%Y}'.format(i["LAST_DAY(NOW())"])
         if i["contactcompany"] == None:
-            bot.send_message(1098093023, f'Уважаемый {i["contactname"]} !\n'
+            bot.send_message(332749197, f'Уважаемый {i["contactname"]} !\n'
                                          f'Уведомляем Вас о необходимости оплаты услуг за использование услуги '
                                          f'VDS на будущий месяц до {date}  в соответствии с выбранным '
                                          f'тарифом {i["tariffname"]} в размере {i["abon_month"]} сум. '
                                          f'В случае неоплаты, услуга будет отключена ! С уважением, команда Hostmaster!')
         else:
-            bot.send_message(1098093023, f'Уважаемый {i["contactcompany"]} !\n'
+            bot.send_message(332749197, f'Уважаемый {i["contactcompany"]} !\n'
                                          f'Уведомляем Вас о необходимости оплаты услуг за использование услуги '
                                          f'VDS на будущий месяц до {date}  в соответствии с выбранным '
                                          f'тарифом {i["tariffname"]} в размере {i["abon_month"]} сум. '
@@ -358,7 +360,8 @@ def log(message):
                 markup.add(lg1, lg2, lg3, lg4, lg5)
                 bot.send_message(message.chat.id, 'Какую услугу хотите посмотреть ?', reply_markup=markup)
                 bot.register_next_step_handler(message, uslugi)
-        if message.text=='sardor':
+
+        if message.text == 'sardor':
             min = connection.cursor()
             min.execute(
                 'SELECT id,password_hash FROM user WHERE username=%(username)s', {'username': login})
@@ -794,7 +797,12 @@ def callback(call):
 
         bot.register_next_step_handler(call.message, language)
 
-        # uzb
+    elif call.data == 'my_contacts':
+
+        bot.send_message(call.message.chat.id, 'Change language', reply_markup=mark)
+
+        bot.register_next_step_handler(call.message, language)
+
     elif call.data == "ro'yxatdan_o'tish":
         bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                               text=f'Mail kiriting:',
@@ -813,6 +821,13 @@ def callback(call):
         bot.register_next_step_handler(call.message, language)
 
 
+def job2():
+    day_of_month = datetime.now().day
+    print(day_of_month)
+    if day_of_month ==13:
+        bot.send_message(332749197, 'hello')
+
+
 def schedule_checker():
     while True:
         schedule.run_pending()
@@ -820,8 +835,9 @@ def schedule_checker():
 
 
 if __name__ == "__main__":
-    # schedule.every().day.at('11:07').do(function_to_run1)
-    # schedule.every(2).seconds.do(domen_60_days_schedule)
+    schedule.every().day.at('22:00').do(vds_schedule)
+    schedule.every().day.at("22:10").do(hosting_schedule)
+    schedule.every().day.at("17:35").do(domen_60_days_schedule)
 
     Thread(target=schedule_checker).start()
 
