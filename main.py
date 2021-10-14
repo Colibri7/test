@@ -827,7 +827,7 @@ def schedule_checker():
 
 if __name__ == "__main__":
     schedule.every().day.at("11:32").do(domen_60_days_schedule)
-    schedule.every().day.at("11:31").do(domen_30_days_schedule)
+    schedule.every().day.at("11:35").do(domen_30_days_schedule)
     schedule.every().day.at("10:22").do(domen_1_days_schedule)
     schedule.every().day.at('11:02').do(vds_schedule)
     schedule.every().day.at("11:04").do(hosting_schedule)
