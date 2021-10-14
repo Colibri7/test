@@ -140,18 +140,19 @@ def hosting_schedule():
 def vds_schedule():
     min = connection.cursor()
     min.execute(
-        "SELECT `tg_id`,`vdscontract`.`user_id`, `contact`.`contactname`, `contact`.`contactcompany`,`vdscontract`.`vdshostname`, `vdscontract`.`vdscontractdate`, `vds_tariffs`.`tariffname`, ROUND(`vds_tariffs`.`vdscost` / 12) as abon_month, `vds_tariffs`.`vdscost` as abon_year, `contact`.`balance` FROM `hostmasteruz_base`.`vdscontract`, `hostmasteruz_base`.`vds_tariffs`, `hostmasteruz_base`.`contact`,`hostmasteruz_bot`.`sardorbot` WHERE `vdscontract`.`status` = 1 AND `contact`.`balance` < `vds_tariffs`.`vdscost` / 12 AND `vdscontract`.`vdsid` = `vds_tariffs`.`idvds` AND `vdscontract`.`contactid` = `contact`.`idcontact` AND `sardorbot`.`b_userid` = `vdscontract`.`user_id`;")
+        "SELECT LAST_DAY(NOW()),`tg_id`,`vdscontract`.`user_id`, `contact`.`contactname`, `contact`.`contactcompany`,`vdscontract`.`vdshostname`, `vdscontract`.`vdscontractdate`, `vds_tariffs`.`tariffname`, ROUND(`vds_tariffs`.`vdscost` / 12) as abon_month, `vds_tariffs`.`vdscost` as abon_year, `contact`.`balance` FROM `vdscontract`, `vds_tariffs`, `contact`,`hostmasteruz_bot`.`sardorbot` WHERE `vdscontract`.`status` = 1 AND `contact`.`balance` < `vds_tariffs`.`vdscost` / 12 AND `vdscontract`.`vdsid` = `vds_tariffs`.`idvds` AND `vdscontract`.`contactid` = `contact`.`idcontact` AND `sardorbot`.`b_userid` = `vdscontract`.`user_id`")
     vds = min.fetchall()
     for i in vds:
         date = '{:%d-%m-%Y}'.format(i["LAST_DAY(NOW())"])
+        some_id  = i["tg_id"]
         if i["contactcompany"] == None:
-            bot.send_message(332749197, f'Уважаемый {i["contactname"]} !\n'
+            bot.send_message(some_id, f'Уважаемый {i["contactname"]} !\n'
                                          f'Уведомляем Вас о необходимости оплаты услуг за использование услуги '
                                          f'VDS на будущий месяц до {date}  в соответствии с выбранным '
                                          f'тарифом {i["tariffname"]} в размере {i["abon_month"]} сум. '
                                          f'В случае неоплаты, услуга будет отключена ! С уважением, команда Hostmaster!')
         else:
-            bot.send_message(332749197, f'Уважаемый {i["contactcompany"]} !\n'
+            bot.send_message(some_id, f'Уважаемый {i["contactcompany"]} !\n'
                                          f'Уведомляем Вас о необходимости оплаты услуг за использование услуги '
                                          f'VDS на будущий месяц до {date}  в соответствии с выбранным '
                                          f'тарифом {i["tariffname"]} в размере {i["abon_month"]} сум. '
@@ -831,8 +832,8 @@ if __name__ == "__main__":
     schedule.every().day.at("11:44").do(domen_60_days_schedule)
     schedule.every().day.at("11:43").do(domen_30_days_schedule)
     schedule.every().day.at("12:10").do(domen_1_days_schedule)
-    # schedule.every().day.at('11:02').do(vds_schedule)
-    schedule.every().day.at("12:30").do(hosting_schedule)
+    schedule.every().day.at('13:00').do(vds_schedule)
+    schedule.every().day.at("13:01").do(hosting_schedule)
 
 
     Thread(target=schedule_checker).start()
