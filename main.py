@@ -128,17 +128,17 @@ def hosting_schedule():
         date = '{:%d-%m-%Y}'.format(i["LAST_DAY(NOW())"])
         some_id = i["tg_id"]
         if i["contactcompany"] == None:
-            bot.send_message(1098093023, f'Уважаемый {i["contactname"]} !\n'
+            bot.send_message(332749197, f'Уважаемый {i["contactname"]} !\n'
                                          f'Уведомляем Вас о необходимости оплаты услуг за использование услуги'
                                          f' Хостинга на будущий месяц до {date}  в соответствии с выбранным'
                                          f'тарифом {i["hostingname"]} в размере {i["abon_month"]} сум. '
-                                         f'В случае неоплаты, услуга будет отключена ! С уважением, команда Hostmaster!')
+                                         f'В случае неоплаты, услуга будет отключена !\nС уважением, команда Hostmaster!')
         else:
-            bot.send_message(1098093023, f'Уважаемый {i["contactcompany"]} !\n'
+            bot.send_message(332749197, f'Уважаемый {i["contactcompany"]} !\n'
                                          f'Уведомляем Вас о необходимости оплаты услуг за использование услуги'
                                          f' Хостинга на будущий месяц до {date}  в соответствии с выбранным'
                                          f'тарифом {i["hostingname"]} в размере {i["abon_month"]} сум. '
-                                         f'В случае неоплаты, услуга будет отключена ! С уважением, команда Hostmaster!')
+                                         f'В случае неоплаты, услуга будет отключена !\nС уважением, команда Hostmaster!')
 
 
 def vds_schedule():
@@ -835,9 +835,9 @@ def schedule_checker():
 
 
 if __name__ == "__main__":
-    schedule.every().day.at('10:02').do(vds_schedule)
-    schedule.every().day.at("10:03").do(hosting_schedule)
-    schedule.every().day.at("10:04").do(domen_60_days_schedule)
+    schedule.every().day.at('10:06').do(vds_schedule)
+    schedule.every().day.at("10:08").do(hosting_schedule)
+    schedule.every().day.at("10:10").do(domen_60_days_schedule)
 
     Thread(target=schedule_checker).start()
 
