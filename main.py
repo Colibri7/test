@@ -123,13 +123,13 @@ def hosting_schedule():
         date = '{:%d-%m-%Y}'.format(i["LAST_DAY(NOW())"])
         some_id = i["tg_id"]
         if i["contactcompany"] == None:
-            bot.send_message(some_id, f'Уважаемый {i["contactname"]} !\n'
+            bot.send_message(332749197, f'Уважаемый {i["contactname"]} !\n'
                                          f'Уведомляем Вас о необходимости оплаты услуг за использование услуги'
                                          f' Хостинга на будущий месяц до {date}  в соответствии с выбранным'
                                          f'тарифом {i["hostingname"]} в размере {i["abon_month"]} сум. '
                                          f'В случае неоплаты, услуга будет отключена !\nС уважением, команда Hostmaster!')
         else:
-            bot.send_message(some_id, f'Уважаемый {i["contactcompany"]} !\n'
+            bot.send_message(332749197, f'Уважаемый {i["contactcompany"]} !\n'
                                          f'Уведомляем Вас о необходимости оплаты услуг за использование услуги'
                                          f' Хостинга на будущий месяц до {date}  в соответствии с выбранным'
                                          f'тарифом {i["hostingname"]} в размере {i["abon_month"]} сум. '
@@ -831,7 +831,7 @@ if __name__ == "__main__":
     schedule.every().day.at("11:43").do(domen_30_days_schedule)
     schedule.every().day.at("10:22").do(domen_1_days_schedule)
     # schedule.every().day.at('11:02').do(vds_schedule)
-    schedule.every().day.at("12:02").do(hosting_schedule)
+    schedule.every().day.at("12:04").do(hosting_schedule)
 
 
     Thread(target=schedule_checker).start()
