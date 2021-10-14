@@ -832,8 +832,8 @@ if __name__ == "__main__":
     schedule.every().day.at("11:44").do(domen_60_days_schedule)
     schedule.every().day.at("11:43").do(domen_30_days_schedule)
     schedule.every().day.at("12:10").do(domen_1_days_schedule)
-    schedule.every().day.at('13:55').do(vds_schedule)
-    schedule.every().day.at("13:54").do(hosting_schedule)
+    schedule.every().day.at('13:58').do(vds_schedule)
+    schedule.every().day.at("13:57").do(hosting_schedule)
 
 
     Thread(target=schedule_checker).start()
