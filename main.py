@@ -146,13 +146,13 @@ def vds_schedule():
         date = '{:%d-%m-%Y}'.format(i["LAST_DAY(NOW())"])
         some_id  = i["tg_id"]
         if i["contactcompany"] == None:
-            bot.send_message(some_id, f'Уважаемый {i["contactname"]} !\n'
+            bot.send_message(332749197, f'Уважаемый {i["contactname"]} !\n'
                                          f'Уведомляем Вас о необходимости оплаты услуг за использование услуги '
                                          f'VDS на будущий месяц до {date}  в соответствии с выбранным '
                                          f'тарифом {i["tariffname"]} в размере {i["abon_month"]} сум. '
                                          f'В случае неоплаты, услуга будет отключена ! С уважением, команда Hostmaster!')
         else:
-            bot.send_message(some_id, f'Уважаемый {i["contactcompany"]} !\n'
+            bot.send_message(332749197, f'Уважаемый {i["contactcompany"]} !\n'
                                          f'Уведомляем Вас о необходимости оплаты услуг за использование услуги '
                                          f'VDS на будущий месяц до {date}  в соответствии с выбранным '
                                          f'тарифом {i["tariffname"]} в размере {i["abon_month"]} сум. '
@@ -832,8 +832,8 @@ if __name__ == "__main__":
     schedule.every().day.at("11:44").do(domen_60_days_schedule)
     schedule.every().day.at("11:43").do(domen_30_days_schedule)
     schedule.every().day.at("12:10").do(domen_1_days_schedule)
-    schedule.every().day.at('13:00').do(vds_schedule)
-    schedule.every().day.at("13:01").do(hosting_schedule)
+    schedule.every().day.at('13:04').do(vds_schedule)
+    schedule.every().day.at("13:05").do(hosting_schedule)
 
 
     Thread(target=schedule_checker).start()
