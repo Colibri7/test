@@ -58,7 +58,7 @@ def domen_60_days_schedule():
 def domen_30_days_schedule():
     min = connection.cursor()
     min.execute(
-        "SELECT `tg_id`, `idmydomain`, `mydomain`.userid, `mydomainname`, NOW() as now_datetime, `expired`,`contactname`, `contactcompany` FROM `hostmasteruz_base`.`mydomain`, `hostmasteruz_bot`.`sardorbot`,`hostmasteruz_base`.`contact`  WHERE DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 30 DAY)) AND `sardorbot`.`b_userid` = `mydomain`.`userid` AND `mydomain`.`mydomaincontactcust` = `contact`.`idcontact`;")
+        "SELECT `tg_id`, `idmydomain`, `mydomain`.userid, `mydomainname`, NOW() as now_datetime, `expired`,`contactname`, `contactcompany` FROM `hostmasteruz_base`.`mydomain`, `hostmasteruz_bot`.`sardorbot`,`hostmasteruz_base`.`contact`  WHERE DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 28 DAY)) AND `sardorbot`.`b_userid` = `mydomain`.`userid` AND `mydomain`.`mydomaincontactcust` = `contact`.`idcontact`;")
     domen_30 = min.fetchall()
     print(domen_30)
     for i in domen_30:
@@ -302,9 +302,11 @@ def log(message):
                                     i["status"] = 'Block'
                                 else:
                                     i["status"] = 'Deleted'
-                                vds_text += f'vds{num}-{i["vdshostname"]}, Тариф: {i["tariffname"]} , Статус: {i["status"]}'
+                                vds_text += f'vds{num}-{i["vdshostname"]}\nТариф: {i["tariffname"]}\nСтатус: {i["status"]}'
                                 bot.send_message(message.chat.id, vds_text)
                                 num += 1
+
+
                         else:
                             bot.send_message(message.chat.id, 'У вас нет VDS')
 
@@ -828,7 +830,7 @@ def schedule_checker():
 
 if __name__ == "__main__":
     schedule.every().day.at("11:00").do(domen_60_days_schedule)
-    schedule.every().day.at("10:22").do(domen_30_days_schedule)
+    schedule.every().day.at("11:10").do(domen_30_days_schedule)
     schedule.every().day.at("10:22").do(domen_1_days_schedule)
     schedule.every().day.at('11:02').do(vds_schedule)
     schedule.every().day.at("11:04").do(hosting_schedule)
