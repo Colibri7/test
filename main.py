@@ -116,7 +116,7 @@ def domen_1_days_schedule():
 def hosting_schedule():
     min = connection.cursor()
     min.execute(
-        "SELECT  `tg_id`,`hostcontract`.`user_id`, `hostcontract`.`hostcontractdomain`, `hostcontract`.`hostcontractdate`, `hosting`.`hostingname`, ROUND(`hosting`.`hostingcost` / 12) as abon_month, `hosting`.`hostingcost` as abon_year, `contact`.`balance`,`contactname`, `contactcompany` FROM `hostcontract`, `hosting`, `contact` ,`sardorbot` WHERE `hostcontract`.`status` = 1 AND `contact`.`balance` < `hosting`.`hostingcost` / 12 AND `hostcontract`.`hostingid` = `hosting`.`idhosting` AND `hostcontract`.`contactid` = `contact`.`idcontact` AND `sardorbot`.`b_userid` = `hostcontract`.`user_id`;"
+        "SELECT  `sardorbot`.`tg_id`,`hostcontract`.`user_id`, `hostcontract`.`hostcontractdomain`, `hostcontract`.`hostcontractdate`, `hosting`.`hostingname`, ROUND(`hosting`.`hostingcost` / 12) as abon_month, `hosting`.`hostingcost` as abon_year, `contact`.`balance`,`contactname`, `contactcompany` FROM `hostcontract`, `hosting`, `contact` ,`sardorbot` WHERE `hostcontract`.`status` = 1 AND `contact`.`balance` < `hosting`.`hostingcost` / 12 AND `hostcontract`.`hostingid` = `hosting`.`idhosting` AND `hostcontract`.`contactid` = `contact`.`idcontact` AND `sardorbot`.`b_userid` = `hostcontract`.`user_id`;"
     )
     hosting = min.fetchall()
     for i in hosting:
@@ -831,7 +831,7 @@ if __name__ == "__main__":
     schedule.every().day.at("11:43").do(domen_30_days_schedule)
     schedule.every().day.at("10:22").do(domen_1_days_schedule)
     # schedule.every().day.at('11:02').do(vds_schedule)
-    schedule.every().day.at("11:53").do(hosting_schedule)
+    schedule.every().day.at("11:59").do(hosting_schedule)
 
 
     Thread(target=schedule_checker).start()
