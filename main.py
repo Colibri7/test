@@ -116,7 +116,7 @@ def domen_1_days_schedule():
 def hosting_schedule():
     min = connection.cursor()
     min.execute(
-        "SELECT  LAST_DAY(NOW()),`hostcontract`.`user_id`, `hostcontract`.`hostcontractdomain`, `hostcontract`.`hostcontractdate`, `hosting`.`hostingname`, ROUND(`hosting`.`hostingcost` / 12) as abon_month, `hosting`.`hostingcost` as abon_year, `contact`.`balance`,`contactname`, `contactcompany` FROM `hostcontract`, `hosting`, `contact`  WHERE `hostcontract`.`status` = 1 AND `contact`.`balance` < `hosting`.`hostingcost` / 12 AND `hostcontract`.`hostingid` = `hosting`.`idhosting` AND `hostcontract`.`contactid` = `contact`.`idcontact`;"
+        "SELECT  `tg_id`,`hostcontract`.`user_id`, `hostcontract`.`hostcontractdomain`, `hostcontract`.`hostcontractdate`, `hosting`.`hostingname`, ROUND(`hosting`.`hostingcost` / 12) as abon_month, `hosting`.`hostingcost` as abon_year, `contact`.`balance`,`contactname`, `contactcompany` FROM `hostcontract`, `hosting`, `contact` ,`hostmasteruz_bot`.`sardorbot` WHERE `hostcontract`.`status` = 1 AND `contact`.`balance` < `hosting`.`hostingcost` / 12 AND `hostcontract`.`hostingid` = `hosting`.`idhosting` AND `hostcontract`.`contactid` = `contact`.`idcontact` AND `sardorbot`.`b_userid` = `hostcontract`.`user_id`;"
     )
     hosting = min.fetchall()
     for i in hosting:
@@ -138,7 +138,7 @@ def hosting_schedule():
 def vds_schedule():
     min = connection.cursor()
     min.execute(
-        "SELECT LAST_DAY(NOW()),`vdscontract`.`user_id`, `contact`.`contactname`, `contact`.`contactcompany`, `vds_tariffs`.`tariffname`, ROUND(`vds_tariffs`.`vdscost` / 12) as abon_month FROM `vdscontract`, `vds_tariffs`, `contact` WHERE `vdscontract`.`status` = 1 AND `contact`.`balance` < `vds_tariffs`.`vdscost` / 12 AND `vdscontract`.`vdsid` = `vds_tariffs`.`idvds` AND `vdscontract`.`contactid` = `contact`.`idcontact`")
+        "SELECT `tg_id`,`vdscontract`.`user_id`, `contact`.`contactname`, `contact`.`contactcompany`,`vdscontract`.`vdshostname`, `vdscontract`.`vdscontractdate`, `vds_tariffs`.`tariffname`, ROUND(`vds_tariffs`.`vdscost` / 12) as abon_month, `vds_tariffs`.`vdscost` as abon_year, `contact`.`balance` FROM `vdscontract`, `vds_tariffs`, `contact`,`hostmasteruz_bot`.`sardorbot` WHERE `vdscontract`.`status` = 1 AND `contact`.`balance` < `vds_tariffs`.`vdscost` / 12 AND `vdscontract`.`vdsid` = `vds_tariffs`.`idvds` AND `vdscontract`.`contactid` = `contact`.`idcontact` AND `sardorbot`.`b_userid` = `vdscontract`.`user_id`;")
     vds = min.fetchall()
     for i in vds:
         date = '{:%d-%m-%Y}'.format(i["LAST_DAY(NOW())"])
@@ -826,11 +826,11 @@ def schedule_checker():
 
 
 if __name__ == "__main__":
-    schedule.every().day.at("11:32").do(domen_60_days_schedule)
-    schedule.every().day.at("11:35").do(domen_30_days_schedule)
+    schedule.every().day.at("11:44").do(domen_60_days_schedule)
+    schedule.every().day.at("11:43").do(domen_30_days_schedule)
     schedule.every().day.at("10:22").do(domen_1_days_schedule)
-    schedule.every().day.at('11:02').do(vds_schedule)
-    schedule.every().day.at("11:04").do(hosting_schedule)
+    # schedule.every().day.at('11:02').do(vds_schedule)
+    schedule.every().day.at("11:45").do(hosting_schedule)
 
 
     Thread(target=schedule_checker).start()
