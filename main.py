@@ -250,8 +250,8 @@ def log(message):
                                 if i["status"] == 1:
                                     i["status"] = 'Active'
                                 host_text += f'{num}.{i["hostcontractdomain"]}, Тариф: {i["cptariff"]}, Статус: {i["status"]}\n'
-                                bot.send_message(message.chat.id, host_text)
                                 num += 1
+                            bot.send_message(message.chat.id, host_text)
                         else:
                             bot.send_message(message.chat.id, "У вас нет хостингов")
 
@@ -267,7 +267,6 @@ def log(message):
                         domen_text = ''
                         if checkContact:
                             for i in checkContact:
-
                                 if i["status"] == -2:
                                     i["status"] = 'A_REG'
                                 elif i["status"] == 0:
@@ -278,8 +277,8 @@ def log(message):
                                     i["status"] = 'W_RED'
 
                                 domen_text += f'{num}.{i["mydomainname"]}.uz, Статус: {(i["status"])}, Дата окончания:{i["expired"].strftime("%d/%m/%Y")}'
-                                bot.send_message(message.chat.id, domen_text)
                                 num += 1
+                            bot.send_message(message.chat.id, domen_text)
                         else:
                             bot.send_message(message.chat.id, 'У вас нет доменов')
 
@@ -303,10 +302,8 @@ def log(message):
                                 else:
                                     i["status"] = 'Deleted'
                                 vds_text += f'vds{num}-{i["vdshostname"]}\nТариф: {i["tariffname"]}\nСтатус: {i["status"]}'
-                                bot.send_message(message.chat.id, vds_text)
                                 num += 1
-
-
+                            bot.send_message(message.chat.id, vds_text)
                         else:
                             bot.send_message(message.chat.id, 'У вас нет VDS')
 
@@ -829,8 +826,8 @@ def schedule_checker():
 
 
 if __name__ == "__main__":
-    schedule.every().day.at("11:00").do(domen_60_days_schedule)
-    schedule.every().day.at("11:10").do(domen_30_days_schedule)
+    schedule.every().day.at("11:32").do(domen_60_days_schedule)
+    schedule.every().day.at("11:31").do(domen_30_days_schedule)
     schedule.every().day.at("10:22").do(domen_1_days_schedule)
     schedule.every().day.at('11:02').do(vds_schedule)
     schedule.every().day.at("11:04").do(hosting_schedule)
