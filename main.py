@@ -35,7 +35,7 @@ def domen_60_days_schedule():
         some_id = i["tg_id"]
         if i["contactcompany"] == None:
 
-            bot.send_message(332749197, f'Уважаемый {i["contactname"]}!\n'
+            bot.send_message(some_id, f'Уважаемый {i["contactname"]}!\n'
                                          f'Уведомляем Вас о том, что срок действия Вашего домена\n'
                                          f'{i["mydomainname"]}.uz истекает {date} года.\n'
                                          f'Просим Вас ознакомиться с тарифами https://hostmaster.uz/domains/uz/\n'
@@ -45,7 +45,7 @@ def domen_60_days_schedule():
                                          f'С уважением, команда Hostmaster!')
         else:
 
-            bot.send_message(332749197, f'Уважаемый {i["contactcompany"]}!\n'
+            bot.send_message(some_id, f'Уважаемый {i["contactcompany"]}!\n'
                                          f'Уведомляем Вас о том, что срок действия Вашего домена\n'
                                          f'{i["mydomainname"]}.uz истекает {date} года.\n'
                                          f'Просим Вас ознакомиться с тарифами https://hostmaster.uz/domains/uz/\n'
@@ -66,7 +66,7 @@ def domen_30_days_schedule():
         some_id = i["tg_id"]
         if i["contactcompany"] == None:
 
-            bot.send_message(332749197, f'Уважаемый {i["contactname"]}!\n'
+            bot.send_message(some_id, f'Уважаемый {i["contactname"]}!\n'
                                          f'Уведомляем Вас о том, что срок действия Вашего домена\n'
                                          f'{i["mydomainname"]}.uz истекает {date} года.\n'
                                          f'Просим Вас ознакомиться с тарифами https://hostmaster.uz/domains/uz/\n'
@@ -75,7 +75,7 @@ def domen_30_days_schedule():
                                          f'Ваш домен будет свободен для\nрегистрации другим лицом.\n'
                                          f'С уважением, команда Hostmaster!')
         else:
-            bot.send_message(332749197, f'Уважаемый {i["contactcompany"]}!\n'
+            bot.send_message(some_id, f'Уважаемый {i["contactcompany"]}!\n'
                                          f'Уведомляем Вас о том, что срок действия Вашего домена\n'
                                          f'{i["mydomainname"]}.uz истекает {date} года.\n'
                                          f'Просим Вас ознакомиться с тарифами https://hostmaster.uz/domains/uz/\n'
@@ -117,7 +117,7 @@ def domen_1_days_schedule():
 def hosting_schedule():
     min = connection.cursor()
     min.execute(
-        "SELECT  LAST_DAY(NOW()),`sardorbot`.`tg_id`,`hostcontract`.`user_id`, `hostcontract`.`hostcontractdomain`, `hostcontract`.`hostcontractdate`, `hosting`.`hostingname`, ROUND(`hosting`.`hostingcost` / 12) as abon_month, `hosting`.`hostingcost` as abon_year, `contact`.`balance`,`contactname`, `contactcompany` FROM `hostcontract`, `hosting`, `contact` ,`sardorbot` WHERE `hostcontract`.`status` = 1 AND `contact`.`balance` < `hosting`.`hostingcost` / 12 AND `hostcontract`.`hostingid` = `hosting`.`idhosting` AND `hostcontract`.`contactid` = `contact`.`idcontact` AND `sardorbot`.`b_userid` = `hostcontract`.`user_id`;"
+        "SELECT  LAST_DAY(NOW()),`sardorbot`.`tg_id`,`hostcontract`.`user_id`, `hostcontract`.`hostcontractdomain`, `hostcontract`.`hostcontractdate`, `hosting`.`hostingname`, ROUND(`hosting`.`hostingcost` / 12) as abon_month, `hosting`.`hostingcost` as abon_year, `contact`.`balance`,`contactname`, `contactcompany` FROM `hostmasteruz_base`.`hostcontract`, `hostmasteruz_base`.`hosting`, `hostmasteruz_base`.`contact` ,`hostmasteruz_bot`.`sardorbot` WHERE `hostcontract`.`status` = 1 AND `contact`.`balance` < `hosting`.`hostingcost` / 12 AND `hostcontract`.`hostingid` = `hosting`.`idhosting` AND `hostcontract`.`contactid` = `contact`.`idcontact` AND `sardorbot`.`b_userid` = `hostcontract`.`user_id`;"
     )
     hosting = min.fetchall()
     for i in hosting:
@@ -140,7 +140,7 @@ def hosting_schedule():
 def vds_schedule():
     min = connection.cursor()
     min.execute(
-        "SELECT `tg_id`,`vdscontract`.`user_id`, `contact`.`contactname`, `contact`.`contactcompany`,`vdscontract`.`vdshostname`, `vdscontract`.`vdscontractdate`, `vds_tariffs`.`tariffname`, ROUND(`vds_tariffs`.`vdscost` / 12) as abon_month, `vds_tariffs`.`vdscost` as abon_year, `contact`.`balance` FROM `vdscontract`, `vds_tariffs`, `contact`,`hostmasteruz_bot`.`sardorbot` WHERE `vdscontract`.`status` = 1 AND `contact`.`balance` < `vds_tariffs`.`vdscost` / 12 AND `vdscontract`.`vdsid` = `vds_tariffs`.`idvds` AND `vdscontract`.`contactid` = `contact`.`idcontact` AND `sardorbot`.`b_userid` = `vdscontract`.`user_id`;")
+        "SELECT `tg_id`,`vdscontract`.`user_id`, `contact`.`contactname`, `contact`.`contactcompany`,`vdscontract`.`vdshostname`, `vdscontract`.`vdscontractdate`, `vds_tariffs`.`tariffname`, ROUND(`vds_tariffs`.`vdscost` / 12) as abon_month, `vds_tariffs`.`vdscost` as abon_year, `contact`.`balance` FROM `hostmasteruz_base`.`vdscontract`, `hostmasteruz_base`.`vds_tariffs`, `hostmasteruz_base`.`contact`,`hostmasteruz_bot`.`sardorbot` WHERE `vdscontract`.`status` = 1 AND `contact`.`balance` < `vds_tariffs`.`vdscost` / 12 AND `vdscontract`.`vdsid` = `vds_tariffs`.`idvds` AND `vdscontract`.`contactid` = `contact`.`idcontact` AND `sardorbot`.`b_userid` = `vdscontract`.`user_id`;")
     vds = min.fetchall()
     for i in vds:
         date = '{:%d-%m-%Y}'.format(i["LAST_DAY(NOW())"])
@@ -832,7 +832,7 @@ if __name__ == "__main__":
     schedule.every().day.at("11:43").do(domen_30_days_schedule)
     schedule.every().day.at("12:10").do(domen_1_days_schedule)
     # schedule.every().day.at('11:02').do(vds_schedule)
-    schedule.every().day.at("12:04").do(hosting_schedule)
+    schedule.every().day.at("12:18").do(hosting_schedule)
 
 
     Thread(target=schedule_checker).start()
