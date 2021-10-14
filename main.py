@@ -116,19 +116,20 @@ def domen_1_days_schedule():
 def hosting_schedule():
     min = connection.cursor()
     min.execute(
-        "SELECT  `tg_id`,`hostcontract`.`user_id`, `hostcontract`.`hostcontractdomain`, `hostcontract`.`hostcontractdate`, `hosting`.`hostingname`, ROUND(`hosting`.`hostingcost` / 12) as abon_month, `hosting`.`hostingcost` as abon_year, `contact`.`balance`,`contactname`, `contactcompany` FROM `hostcontract`, `hosting`, `contact` ,`hostmasteruz_bot`.`sardorbot` WHERE `hostcontract`.`status` = 1 AND `contact`.`balance` < `hosting`.`hostingcost` / 12 AND `hostcontract`.`hostingid` = `hosting`.`idhosting` AND `hostcontract`.`contactid` = `contact`.`idcontact` AND `sardorbot`.`b_userid` = `hostcontract`.`user_id`;"
+        "SELECT  `tg_id`,`hostcontract`.`user_id`, `hostcontract`.`hostcontractdomain`, `hostcontract`.`hostcontractdate`, `hosting`.`hostingname`, ROUND(`hosting`.`hostingcost` / 12) as abon_month, `hosting`.`hostingcost` as abon_year, `contact`.`balance`,`contactname`, `contactcompany` FROM `hostcontract`, `hosting`, `contact` ,`sardorbot` WHERE `hostcontract`.`status` = 1 AND `contact`.`balance` < `hosting`.`hostingcost` / 12 AND `hostcontract`.`hostingid` = `hosting`.`idhosting` AND `hostcontract`.`contactid` = `contact`.`idcontact` AND `sardorbot`.`b_userid` = `hostcontract`.`user_id`;"
     )
     hosting = min.fetchall()
     for i in hosting:
         date = '{:%d-%m-%Y}'.format(i["LAST_DAY(NOW())"])
+        some_id = i["tg_id"]
         if i["contactcompany"] == None:
-            bot.send_message(332749197, f'Уважаемый {i["contactname"]} !\n'
+            bot.send_message(some_id, f'Уважаемый {i["contactname"]} !\n'
                                          f'Уведомляем Вас о необходимости оплаты услуг за использование услуги'
                                          f' Хостинга на будущий месяц до {date}  в соответствии с выбранным'
                                          f'тарифом {i["hostingname"]} в размере {i["abon_month"]} сум. '
                                          f'В случае неоплаты, услуга будет отключена !\nС уважением, команда Hostmaster!')
         else:
-            bot.send_message(332749197, f'Уважаемый {i["contactcompany"]} !\n'
+            bot.send_message(some_id, f'Уважаемый {i["contactcompany"]} !\n'
                                          f'Уведомляем Вас о необходимости оплаты услуг за использование услуги'
                                          f' Хостинга на будущий месяц до {date}  в соответствии с выбранным'
                                          f'тарифом {i["hostingname"]} в размере {i["abon_month"]} сум. '
@@ -830,7 +831,7 @@ if __name__ == "__main__":
     schedule.every().day.at("11:43").do(domen_30_days_schedule)
     schedule.every().day.at("10:22").do(domen_1_days_schedule)
     # schedule.every().day.at('11:02').do(vds_schedule)
-    schedule.every().day.at("11:45").do(hosting_schedule)
+    schedule.every().day.at("11:53").do(hosting_schedule)
 
 
     Thread(target=schedule_checker).start()
