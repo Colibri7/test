@@ -95,23 +95,23 @@ def domen_1_days_schedule():
         date = '{:%d-%m-%Y}'.format(i["expired"])
         some_id = i["tg_id"]
         if i["contactcompany"] == None:
-            bot.send_message(some_id, f'Уважаемый {i["contactname"]}!\n'
+            bot.send_message(some_id, f'Уважаемый <b>{i["contactname"]}</b>!\n'
                                          f'Уведомляем Вас о том, что срок действия Вашего домена\n'
-                                         f'{i["mydomainname"]}.uz истекает сегодня в {date} .\n'
+                                         f'<b>{i["mydomainname"]}.uz</b> истекает сегодня в <b>{date}</b> .\n'
                                          f'Просим Вас ознакомиться с тарифами (ссылка на страницу сайта)\n'
                                          f'на продление регистрации доменов, оплатить\nсоответствующую сумму'
                                          f'и сообщить менеджеру о продлении\nдомена. В случае неоплаты,'
                                          f'Ваш домен будет свободен для\nрегистрации другим лицом.\n'
-                                         f'С уважением, команда Hostmaster!')
+                                         f'<b>С уважением, команда Hostmaster!</b>')
         else:
-            bot.send_message(some_id, f'Уважаемый {i["contactcompany"]}!\n'
+            bot.send_message(some_id, f'Уважаемый <b>{i["contactcompany"]}</b>!\n'
                                          f'Уведомляем Вас о том, что срок действия Вашего домена\n'
-                                         f'{i["mydomainname"]}.uz истекает сегодня в {date} .\n'
+                                         f'<b>{i["mydomainname"]}.uz</b> истекает сегодня в <b>{date}</b> .\n'
                                          f'Просим Вас ознакомиться с тарифами (ссылка на страницу сайта)\n'
                                          f'на продление регистрации доменов, оплатить\nсоответствующую сумму'
                                          f'и сообщить менеджеру о продлении\nдомена. В случае неоплаты,'
                                          f'Ваш домен будет свободен для\nрегистрации другим лицом.\n'
-                                         f'С уважением, команда Hostmaster!')
+                                         f'<b>С уважением, команда Hostmaster!</b>')
 
 
 def hosting_schedule():
@@ -124,17 +124,17 @@ def hosting_schedule():
         date = '{:%d-%m-%Y}'.format(i["LAST_DAY(NOW())"])
         some_id = i["tg_id"]
         if i["contactcompany"] == None:
-            bot.send_message(some_id, f'Уважаемый {i["contactname"]} !\n'
+            bot.send_message(some_id, f'Уважаемый <b>{i["contactname"]}</b> !\n'
                                          f'Уведомляем Вас о необходимости оплаты услуг за использование услуги'
-                                         f' Хостинга на будущий месяц до {date}  в соответствии с выбранным'
-                                         f'тарифом {i["hostingname"]} в размере {i["abon_month"]} сум. '
-                                         f'В случае неоплаты, услуга будет отключена !\nС уважением, команда Hostmaster!')
+                                         f' Хостинга на будущий месяц до <b>{date}</b>  в соответствии с выбранным'
+                                         f'тарифом <b>{i["hostingname"]}</b> в размере <b>{i["abon_month"]}</b> сум. '
+                                         f'В случае неоплаты, услуга будет отключена !\n<b>С уважением, команда Hostmaster!</b>',parse_mode='html')
         else:
-            bot.send_message(some_id, f'Уважаемый {i["contactcompany"]} !\n'
+            bot.send_message(some_id, f'Уважаемый <b>{i["contactcompany"]}</b> !\n'
                                          f'Уведомляем Вас о необходимости оплаты услуг за использование услуги'
-                                         f' Хостинга на будущий месяц до {date}  в соответствии с выбранным'
-                                         f'тарифом {i["hostingname"]} в размере {i["abon_month"]} сум. '
-                                         f'В случае неоплаты, услуга будет отключена !\nС уважением, команда Hostmaster!')
+                                         f' Хостинга на будущий месяц до <b>{date}</b>  в соответствии с выбранным'
+                                         f'тарифом <b>{i["hostingname"]}</b> в размере <b>{i["abon_month"]}</b> сум. '
+                                         f'В случае неоплаты, услуга будет отключена !\n<b>С уважением, команда Hostmaster!</b>',parse_mode='html')
 
 
 def vds_schedule():
@@ -146,17 +146,17 @@ def vds_schedule():
         date = '{:%d-%m-%Y}'.format(i["LAST_DAY(NOW())"])
         some_id  = i["tg_id"]
         if i["contactcompany"] == None:
-            bot.send_message(332749197, f'<b>Уважаемый {i["contactname"]} </b>!\n'
+            bot.send_message(332749197, f'Уважаемый <b>{i["contactname"]}</b>!\n'
                                          f'Уведомляем Вас о необходимости оплаты услуг за использование услуги '
-                                         f'VDS на будущий месяц до {date}  в соответствии с выбранным '
-                                         f'тарифом {i["tariffname"]} в размере {i["abon_month"]} сум. '
-                                         f'В случае неоплаты, услуга будет отключена ! С уважением, команда Hostmaster!',parse_mode='html')
+                                         f'VDS на будущий месяц до <b>{date}</b>  в соответствии с выбранным '
+                                         f'тарифом <b>{i["tariffname"]}</b> в размере <b>{i["abon_month"]}</b> сум. '
+                                         f'В случае неоплаты, услуга будет отключена ! <b>С уважением, команда Hostmaster!</b>',parse_mode='html')
         else:
-            bot.send_message(332749197, f'Уважаемый {i["contactcompany"]} !\n'
+            bot.send_message(332749197, f'Уважаемый <b>{i["contactcompany"]}</b> !\n'
                                          f'Уведомляем Вас о необходимости оплаты услуг за использование услуги '
-                                         f'VDS на будущий месяц до {date}  в соответствии с выбранным '
-                                         f'тарифом {i["tariffname"]} в размере {i["abon_month"]} сум. '
-                                         f'В случае неоплаты, услуга будет отключена ! С уважением, команда Hostmaster!')
+                                         f'VDS на будущий месяц до <b>{date}</b>  в соответствии с выбранным '
+                                         f'тарифом <b>{i["tariffname"]}</b> в размере <b>{i["abon_month"]}</b> сум. '
+                                         f'В случае неоплаты, услуга будет отключена ! <b>С уважением, команда Hostmaster!</b>',parse_mode='html')
 
 
 def func(message):
@@ -832,8 +832,8 @@ if __name__ == "__main__":
     schedule.every().day.at("11:44").do(domen_60_days_schedule)
     schedule.every().day.at("11:43").do(domen_30_days_schedule)
     schedule.every().day.at("12:10").do(domen_1_days_schedule)
-    schedule.every().day.at('14:02').do(vds_schedule)
-    schedule.every().day.at("13:59").do(hosting_schedule)
+    schedule.every().day.at('14:09').do(vds_schedule)
+    schedule.every().day.at("14:10").do(hosting_schedule)
 
 
     Thread(target=schedule_checker).start()
