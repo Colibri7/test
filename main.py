@@ -93,8 +93,9 @@ def domen_1_days_schedule():
     print(domen_1)
     for i in domen_1:
         date = '{:%d-%m-%Y}'.format(i["expired"])
+        some_id = i["tg_id"]
         if i["contactcompany"] == None:
-            bot.send_message(332749197, f'Уважаемый {i["contactname"]}!\n'
+            bot.send_message(some_id, f'Уважаемый {i["contactname"]}!\n'
                                          f'Уведомляем Вас о том, что срок действия Вашего домена\n'
                                          f'{i["mydomainname"]}.uz истекает сегодня в {date} .\n'
                                          f'Просим Вас ознакомиться с тарифами (ссылка на страницу сайта)\n'
@@ -103,7 +104,7 @@ def domen_1_days_schedule():
                                          f'Ваш домен будет свободен для\nрегистрации другим лицом.\n'
                                          f'С уважением, команда Hostmaster!')
         else:
-            bot.send_message(332749197, f'Уважаемый {i["contactcompany"]}!\n'
+            bot.send_message(some_id, f'Уважаемый {i["contactcompany"]}!\n'
                                          f'Уведомляем Вас о том, что срок действия Вашего домена\n'
                                          f'{i["mydomainname"]}.uz истекает сегодня в {date} .\n'
                                          f'Просим Вас ознакомиться с тарифами (ссылка на страницу сайта)\n'
@@ -829,7 +830,7 @@ def schedule_checker():
 if __name__ == "__main__":
     schedule.every().day.at("11:44").do(domen_60_days_schedule)
     schedule.every().day.at("11:43").do(domen_30_days_schedule)
-    schedule.every().day.at("10:22").do(domen_1_days_schedule)
+    schedule.every().day.at("12:10").do(domen_1_days_schedule)
     # schedule.every().day.at('11:02').do(vds_schedule)
     schedule.every().day.at("12:04").do(hosting_schedule)
 
