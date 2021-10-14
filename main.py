@@ -341,24 +341,28 @@ def log(message):
                         "SELECT  LAST_DAY(NOW()),`hostcontract`.`user_id`, `hostcontract`.`hostcontractdomain`, `hostcontract`.`hostcontractdate`, `hosting`.`hostingname`, ROUND(`hosting`.`hostingcost` / 12) as abon_month, `hosting`.`hostingcost` as abon_year, `contact`.`balance`,`contactname`, `contactcompany` FROM `hostcontract`, `hosting`, `contact`  WHERE `hostcontract`.`status` = 1 AND `contact`.`balance` < `hosting`.`hostingcost` / 12 AND `hostcontract`.`hostingid` = `hosting`.`idhosting` AND `hostcontract`.`contactid` = `contact`.`idcontact`"
                     )
                     hosting = min.fetchall()
+                    host_text=''
+                    number = 1
                     for i in hosting:
                         date = '{:%d-%m-%Y}'.format(i["LAST_DAY(NOW())"])
                         if i["contactcompany"] == None:
-                            bot.send_message(message.chat.id, f'id: {i["user_id"]}\n'
-                                                              f'контакт: <b>{i["contactname"]}</b>\n'
-                                                              f'хостинг: <b>{i["hostingname"]}</b>\n'
-                                                              f'дата окончания: <b>{date}</b>\n'
-                                                              f'тариф: <b>{i["hostingname"]}</b>\n'
-                                                              f'сумма: <b>{i["abon_month"]}</b> сум. ',
-                                             parse_mode='html')
+                            host_text += f'id: {i["user_id"]}\n'
+                            f'контакт: <b>{i["contactname"]}</b>\n'
+                            f'хостинг: <b>{i["hostingname"]}</b>\n'
+                            f'дата окончания: <b>{date}</b>\n'
+                            f'тариф: <b>{i["hostingname"]}</b>\n'
+                            f'сумма: <b>{i["abon_month"]}</b> сум.'
+
                         else:
-                            bot.send_message(message.chat.id, f'id: {i["user_id"]}\n'
-                                                              f'контакт: <b>{i["contactcompany"]}</b>\n'
-                                                              f'хостинг: <b>{i["hostingname"]}</b>\n'
-                                                              f'дата окончания: <b>{date}</b>\n'
-                                                              f'тариф: <b>{i["hostingname"]}</b>\n'
-                                                              f'сумма: <b>{i["abon_month"]}</b> сум. ',
-                                             parse_mode='html')
+                            host_text += f'id: {i["user_id"]}\n'
+                            f'контакт: <b>{i["contactcompany"]}</b>\n'
+                            f'хостинг: <b>{i["hostingname"]}</b>\n'
+                            f'дата окончания: <b>{date}</b>\n'
+                            f'тариф: <b>{i["hostingname"]}</b>\n'
+                            f'сумма: <b>{i["abon_month"]}</b> сум.'
+
+                    bot.send_message(message.chat.id, host_text, parse_mode='html')
+                    bot.register_next_step_handler(message, doljniki)
 
                 elif message.text == 'Должники по vds':
                     pass
@@ -375,9 +379,9 @@ def log(message):
                                      'Главное меню',
                                      reply_markup=markup_ru)
 
-                    bot.register_next_step_handler(message, after_login)
+                bot.register_next_step_handler(message, after_login)
 
-                bot.register_next_step_handler(message, doljniki)
+
 
             if message.text == 'Мои контакты':
                 for i in check:
