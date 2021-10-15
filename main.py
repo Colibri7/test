@@ -295,7 +295,7 @@ def log(message):
                                 else:
                                     vds_text += f'vds{num}. <b>{i["vdshostname"]}</b>\nТариф: {i["tariffname"]}\nСтатус: {i["status"]}\n'
                                     num += 1
-                                bot.send_message(message.chat.id, vds_text, parse_mode='html')
+                            bot.send_message(message.chat.id, vds_text, parse_mode='html')
                         else:
                             bot.send_message(message.chat.id, 'У вас нет VDS')
 
