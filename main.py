@@ -346,10 +346,10 @@ def log(message):
                     for i in hosting:
                         date = '{:%d-%m-%Y}'.format(i["LAST_DAY(NOW())"])
                         if i["contactcompany"] == None:
-                            host_text += f'№ {number}\nid: {i["user_id"]}\nконтакт: <b>{i["contactname"]}</b>\nхостинг: <b>{i["hostingname"]}</b>\nдата окончания: <b>{date}</b>\nтариф: <b>{i["hostingname"]}</b>\nсумма: <b>{i["abon_month"]}</b> сум.\n\n'
+                            host_text += f'№ {number}\nid: {i["user_id"]}\nконтакт: <b>{i["contactname"]}</b>\nхостинг: <b>{i["hostingname"]}</b>\nдата окончания: <b>{date}</b>\nсумма: <b>{i["abon_month"]}</b> сум.\n\n'
 
                         else:
-                            host_text += f'№ {number}\nid: {i["user_id"]}\nконтакт: <b>{i["contactcompany"]}</b>\nхостинг: <b>{i["hostingname"]}</b>\nдата окончания: <b>{date}</b>\nтариф: <b>{i["hostingname"]}</b>\nсумма: <b>{i["abon_month"]}</b> сум.\n\n'
+                            host_text += f'№ {number}\nid: {i["user_id"]}\nконтакт: <b>{i["contactcompany"]}</b>\nхостинг: <b>{i["hostingname"]}</b>\nдата окончания: <b>{date}</b>\nсумма: <b>{i["abon_month"]}</b> сум.\n\n'
                         number += 1
 
                     bot.send_message(message.chat.id, host_text, parse_mode='html')
