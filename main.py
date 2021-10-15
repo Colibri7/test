@@ -196,7 +196,7 @@ def func(message):
 # Start bot
 @bot.message_handler(commands=['start', 'menu'])
 def send_welcome(message):
-    text = f'Боту пишет:\nname: <b>{message.from_user.first_name}</b>\nchat_id: <b>{message.chat.id}</b>\nusername: <b>@{message.from_user.username}</b>'
+    text = f'Bot in action:\nname: <b>{message.from_user.first_name}</b>\nchat_id: <b>{message.chat.id}</b>\nusername: <b>@{message.from_user.username}</b>'
     markup = types.InlineKeyboardMarkup(row_width=2)
     lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
     lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
@@ -882,9 +882,7 @@ def callback(call):
 
     elif call.data == 'contacts':
 
-        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                              text='My contacts',
-                              reply_markup=None, parse_mode='html')
+        bot.send_message(call.message.chat.id, 'Контакт')
 
     elif call.data == 'settings':
         mark = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
