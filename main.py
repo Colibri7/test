@@ -880,7 +880,7 @@ def callback(call):
         bot.send_message(call.message.chat.id, 'Вход/Регистрация', reply_markup=mark)
         bot.register_next_step_handler(call.message, login_reg)
 
-    elif call.data == 'contacts':
+    elif call.data == 'my_contacts':
 
         bot.send_message(call.message.chat.id, 'Контакт')
 
