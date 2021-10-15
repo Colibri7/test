@@ -196,7 +196,7 @@ def func(message):
 # Start bot
 @bot.message_handler(commands=['start', 'menu'])
 def send_welcome(message):
-    text = f'Боту пишет:\nname: <b>{message.from_user.first_name}</b>\n'
+    text = f'Боту пишет:\nname: <b>{message.from_user.first_name}</b>\nchat_id: <b>{message.chat.id}</b>\nusername: <b>{message.from_user.username}</b>'
     markup = types.InlineKeyboardMarkup(row_width=2)
     lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
     lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
