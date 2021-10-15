@@ -1022,9 +1022,9 @@ def callback(call):
                                 i["status"] = 'Block'
                             else:
                                 i["status"] = 'Deleted'
-                            vds_text += f'vds{num}-{i["vdshostname"]}\nТариф: {i["tariffname"]}\nСтатус: {i["status"]}\n'
+                            vds_text += f'vds{num}. <b>{i["vdshostname"]}</b>\nТариф: {i["tariffname"]}\nСтатус: {i["status"]}\n'
                             num += 1
-                        bot.send_message(message.chat.id, vds_text)
+                        bot.send_message(message.chat.id, vds_text,parse_mode='html')
                     else:
                         bot.send_message(message.chat.id, 'У вас нет VDS')
 
