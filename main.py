@@ -898,106 +898,106 @@ def callback(call):
             num += 1
         bot.send_message(call.message.chat.id, 'Контакты')
         bot.send_message(call.message.chat.id, text)
-    elif call.data =='my_services':
-        def uslugi(message):
-            if message.text == 'Мои хостинги':
-                for i in check:
-                    id = i["id"]
-                    id_connect = connection.cursor()
-                    id_connect.execute(
-                        'SELECT * FROM hostcontract WHERE status=1 and user_id=%(user_id)s', {'user_id': id})
-                    checkContact = id_connect.fetchall()
-                    num = 1
-                    host_text = ''
-                    if checkContact:
-                        for i in checkContact:
-                            if i["status"] == 1:
-                                i["status"] = 'Active'
-                            host_text += f'{num}.{i["hostcontractdomain"]}, Тариф: {i["cptariff"]}, Статус: {i["status"]}\n'
-                            num += 1
-                        bot.send_message(message.chat.id, host_text)
-                    else:
-                        bot.send_message(message.chat.id, "У вас нет хостингов")
-
-                bot.register_next_step_handler(message, uslugi)
-            elif message.text == 'Мои домены':
-                for i in check:
-                    id = i["id"]
-                    id_connect = connection.cursor()
-                    id_connect.execute(
-                        'SELECT * FROM mydomain WHERE status IN (-2,0,1,3) and userid=%(userid)s', {'userid': id})
-                    checkContact = id_connect.fetchall()
-                    num = 1
-                    domen_text = ''
-                    if checkContact:
-                        for i in checkContact:
-                            if i["status"] == -2:
-                                i["status"] = 'A_REG'
-                            elif i["status"] == 0:
-                                i["status"] = 'R_REG'
-                            elif i["status"] == 1:
-                                i["status"] = 'ACTIVE'
-                            elif i["status"] == 3:
-                                i["status"] = 'W_RED'
-
-                            domen_text += f'{num}.{i["mydomainname"]}.uz, Статус: {(i["status"])}, Дата окончания:{i["expired"].strftime("%d/%m/%Y")}'
-                            num += 1
-                        bot.send_message(message.chat.id, domen_text)
-                    else:
-                        bot.send_message(message.chat.id, 'У вас нет доменов')
-
-                bot.register_next_step_handler(message, uslugi)
-            elif message.text == 'Мои VDS':
-                for i in check:
-                    id = i["id"]
-                    id_connect = connection.cursor()
-                    id_connect.execute(
-                        'SELECT `vdscontract`.`vdshostname`, `vds_tariffs`.`tariffname` ,`vdscontract`.`status`  FROM `user`, `vdscontract`, `vds_tariffs` WHERE   username=%(username)s AND `user`.`id` = `vdscontract`.`user_id` AND `vdscontract`.`vdsid` = `vds_tariffs`.`idvds` ORDER BY `vdscontract`.`vdshostname`;',
-                        {'username': login})
-                    checkContact = id_connect.fetchall()
-                    num = 1
-                    vds_text = ''
-                    if checkContact:
-                        for i in checkContact:
-                            if i["status"] == 1:
-                                i["status"] = 'Active'
-                            elif i["status"] == 0:
-                                i["status"] = 'Block'
-                            else:
-                                i["status"] = 'Deleted'
-                            vds_text += f'vds{num}-{i["vdshostname"]}\nТариф: {i["tariffname"]}\nСтатус: {i["status"]}'
-                            num += 1
-                        bot.send_message(message.chat.id, vds_text)
-                    else:
-                        bot.send_message(message.chat.id, 'У вас нет VDS')
-
-                bot.register_next_step_handler(message, uslugi)
-            elif message.text == 'Мои сервера':
-
-                bot.send_message(message.chat.id, 'У вас нет сервера')
-
-                bot.register_next_step_handler(message, uslugi)
-            elif message.text == 'Главное меню':
-                markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
-                lg1 = types.KeyboardButton('Мои услуги')
-                lg2 = types.KeyboardButton('Мои контакты')
-
-                markup_ru.add(lg1, lg2)
-
-                bot.send_message(message.chat.id,
-                                 'Главное меню',
-                                 reply_markup=markup_ru)
-                bot.register_next_step_handler(message, callback)
-        markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
-        lg1 = types.KeyboardButton('Мои хостинги')
-        lg2 = types.KeyboardButton('Мои домены')
-        lg3 = types.KeyboardButton('Мои VDS')
-        lg4 = types.KeyboardButton('Мои сервера')
-
-        lg5 = types.KeyboardButton('Главное меню')
-        markup.add(lg1, lg2, lg3, lg4, lg5)
-        bot.send_message(call.message.chat.id, 'Какую услугу хотите посмотреть ?', reply_markup=markup)
-        bot.register_next_step_handler(call.message, uslugi)
+    # elif call.data =='my_services':
+    #     def uslugi(message):
+    #         if message.text == 'Мои хостинги':
+    #             for i in check:
+    #                 id = i["id"]
+    #                 id_connect = connection.cursor()
+    #                 id_connect.execute(
+    #                     'SELECT * FROM hostcontract WHERE status=1 and user_id=%(user_id)s', {'user_id': id})
+    #                 checkContact = id_connect.fetchall()
+    #                 num = 1
+    #                 host_text = ''
+    #                 if checkContact:
+    #                     for i in checkContact:
+    #                         if i["status"] == 1:
+    #                             i["status"] = 'Active'
+    #                         host_text += f'{num}.{i["hostcontractdomain"]}, Тариф: {i["cptariff"]}, Статус: {i["status"]}\n'
+    #                         num += 1
+    #                     bot.send_message(message.chat.id, host_text)
+    #                 else:
+    #                     bot.send_message(message.chat.id, "У вас нет хостингов")
+    #
+    #             bot.register_next_step_handler(message, uslugi)
+    #         elif message.text == 'Мои домены':
+    #             for i in check:
+    #                 id = i["id"]
+    #                 id_connect = connection.cursor()
+    #                 id_connect.execute(
+    #                     'SELECT * FROM mydomain WHERE status IN (-2,0,1,3) and userid=%(userid)s', {'userid': id})
+    #                 checkContact = id_connect.fetchall()
+    #                 num = 1
+    #                 domen_text = ''
+    #                 if checkContact:
+    #                     for i in checkContact:
+    #                         if i["status"] == -2:
+    #                             i["status"] = 'A_REG'
+    #                         elif i["status"] == 0:
+    #                             i["status"] = 'R_REG'
+    #                         elif i["status"] == 1:
+    #                             i["status"] = 'ACTIVE'
+    #                         elif i["status"] == 3:
+    #                             i["status"] = 'W_RED'
+    #
+    #                         domen_text += f'{num}.{i["mydomainname"]}.uz, Статус: {(i["status"])}, Дата окончания:{i["expired"].strftime("%d/%m/%Y")}'
+    #                         num += 1
+    #                     bot.send_message(message.chat.id, domen_text)
+    #                 else:
+    #                     bot.send_message(message.chat.id, 'У вас нет доменов')
+    #
+    #             bot.register_next_step_handler(message, uslugi)
+    #         elif message.text == 'Мои VDS':
+    #             for i in check:
+    #                 id = i["id"]
+    #                 id_connect = connection.cursor()
+    #                 id_connect.execute(
+    #                     'SELECT `vdscontract`.`vdshostname`, `vds_tariffs`.`tariffname` ,`vdscontract`.`status`  FROM `user`, `vdscontract`, `vds_tariffs` WHERE   username=%(username)s AND `user`.`id` = `vdscontract`.`user_id` AND `vdscontract`.`vdsid` = `vds_tariffs`.`idvds` ORDER BY `vdscontract`.`vdshostname`;',
+    #                     {'username': login})
+    #                 checkContact = id_connect.fetchall()
+    #                 num = 1
+    #                 vds_text = ''
+    #                 if checkContact:
+    #                     for i in checkContact:
+    #                         if i["status"] == 1:
+    #                             i["status"] = 'Active'
+    #                         elif i["status"] == 0:
+    #                             i["status"] = 'Block'
+    #                         else:
+    #                             i["status"] = 'Deleted'
+    #                         vds_text += f'vds{num}-{i["vdshostname"]}\nТариф: {i["tariffname"]}\nСтатус: {i["status"]}'
+    #                         num += 1
+    #                     bot.send_message(message.chat.id, vds_text)
+    #                 else:
+    #                     bot.send_message(message.chat.id, 'У вас нет VDS')
+    #
+    #             bot.register_next_step_handler(message, uslugi)
+    #         elif message.text == 'Мои сервера':
+    #
+    #             bot.send_message(message.chat.id, 'У вас нет сервера')
+    #
+    #             bot.register_next_step_handler(message, uslugi)
+    #         elif message.text == 'Главное меню':
+    #             markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
+    #             lg1 = types.KeyboardButton('Мои услуги')
+    #             lg2 = types.KeyboardButton('Мои контакты')
+    #
+    #             markup_ru.add(lg1, lg2)
+    #
+    #             bot.send_message(message.chat.id,
+    #                              'Главное меню',
+    #                              reply_markup=markup_ru)
+    #             bot.register_next_step_handler(message, callback)
+    #     markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
+    #     lg1 = types.KeyboardButton('Мои хостинги')
+    #     lg2 = types.KeyboardButton('Мои домены')
+    #     lg3 = types.KeyboardButton('Мои VDS')
+    #     lg4 = types.KeyboardButton('Мои сервера')
+    #
+    #     lg5 = types.KeyboardButton('Главное меню')
+    #     markup.add(lg1, lg2, lg3, lg4, lg5)
+    #     bot.send_message(call.message.chat.id, 'Какую услугу хотите посмотреть ?', reply_markup=markup)
+    #     bot.register_next_step_handler(call.message, uslugi)
 
 
     elif call.data == 'settings':
