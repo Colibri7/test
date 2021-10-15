@@ -331,7 +331,6 @@ def log(message):
                                      'Главное меню',
                                      reply_markup=markup_ru)
                     bot.register_next_step_handler(message, after_login)
-
             def doljniki(message):
                 if message.text == 'Должники по домену':
                     min = connection.cursor()
@@ -348,6 +347,23 @@ def log(message):
                             domain_text += f'№ {number}\nid: {i["user_id"]}\nконтакт: <b>{i["contactcompany"]}</b>\nдомен: <b>{i["mydomainname"]}</b>\nдата окончания: <b>{date}</b>\n\n'
                         number += 1
                     bot.send_message(message.chat.id, domain_text, parse_mode='html')
+                    bot.register_next_step_handler(message, doljniki)
+                elif message.text == 'Должники по vsd':
+                    min = connection.cursor()
+                    min.execute(
+                        "SELECT LAST_DAY(NOW()),`vdscontract`.`user_id`, `contact`.`contactname`, `contact`.`contactcompany`,`vdscontract`.`vdshostname`, `vdscontract`.`vdscontractdate`, `vds_tariffs`.`tariffname`, ROUND(`vds_tariffs`.`vdscost` / 12) as abon_month, `vds_tariffs`.`vdscost` as abon_year, `contact`.`balance` FROM `vdscontract`, `vds_tariffs`, `contact` WHERE `vdscontract`.`status` = 1 AND `contact`.`balance` < `vds_tariffs`.`vdscost` / 12 AND `vdscontract`.`vdsid` = `vds_tariffs`.`idvds` AND `vdscontract`.`contactid` = `contact`.`idcontact`;")
+                    vds = min.fetchall()
+                    number = 1
+                    vds_text = ''
+                    for i in vds:
+                        date = '{:%d-%m-%Y}'.format(i["LAST_DAY(NOW())"])
+                        if i["contactcompany"] == None:
+                            vds_text += f'№ {number}\nid: {i["user_id"]}\nконтакт: <b>{i["contactname"]}</b>\nvds: <b>{i["vdshostname"]}</b>\nтариф: {i["tariffname"]}\nдата окончания: <b>{date}</b>\nбаланс: {i["balance"]}\nсумма: <b>{i["abon_month"]}</b> сум.\n\n'
+
+                        else:
+                            vds_text += f'№ {number}\nid: {i["user_id"]}\nконтакт: <b>{i["contactcompany"]}</b>\nvds: <b>{i["vdshostname"]}</b>\nтариф: {i["tariffname"]}\nдата окончания: <b>{date}</b>\nбаланс: {i["balance"]}\nсумма: <b>{i["abon_month"]}</b> сум.\n\n'
+                        number += 1
+                    bot.send_message(message.chat.id, vds_text, parse_mode='html')
                     bot.register_next_step_handler(message, doljniki)
                 elif message.text == 'Должники по хостингу':
                     min = connection.cursor()
@@ -368,41 +384,6 @@ def log(message):
 
                     bot.send_message(message.chat.id, host_text, parse_mode='html')
                     bot.register_next_step_handler(message, doljniki)
-                elif message.text == 'Должники по vds':
-                    min = connection.cursor()
-                    min.execute(
-                        "SELECT  LAST_DAY(NOW()),`hostcontract`.`user_id`, `hostcontract`.`hostcontractdomain`, `hostcontract`.`hostcontractdate`, `hosting`.`hostingname`, ROUND(`hosting`.`hostingcost` / 12) as abon_month, `hosting`.`hostingcost` as abon_year, `contact`.`balance`,`contactname`, `contactcompany` FROM `hostcontract`, `hosting`, `contact`  WHERE `hostcontract`.`status` = 1 AND `contact`.`balance` < `hosting`.`hostingcost` / 12 AND `hostcontract`.`hostingid` = `hosting`.`idhosting` AND `hostcontract`.`contactid` = `contact`.`idcontact`"
-                    )
-                    hosting = min.fetchall()
-                    host_text = ''
-                    number = 1
-                    for i in hosting:
-                        date = '{:%d-%m-%Y}'.format(i["LAST_DAY(NOW())"])
-                        if i["contactcompany"] == None:
-                            host_text += f'№ {number}\nid: {i["user_id"]}\nконтакт: <b>{i["contactname"]}</b>\nхостинг: <b>{i["hostingname"]}</b>\nдата окончания: <b>{date}</b>\nсумма: <b>{i["abon_month"]}</b> сум.\n\n'
-
-                        else:
-                            host_text += f'№ {number}\nid: {i["user_id"]}\nконтакт: <b>{i["contactcompany"]}</b>\nхостинг: <b>{i["hostingname"]}</b>\nдата окончания: <b>{date}</b>\nсумма: <b>{i["abon_month"]}</b> сум.\n\n'
-                        number += 1
-
-                    bot.send_message(message.chat.id, host_text, parse_mode='html')
-                    bot.register_next_step_handler(message, doljniki)
-                    # min = connection.cursor()
-                    # min.execute(
-                    #     "SELECT LAST_DAY(NOW()),`vdscontract`.`user_id`, `contact`.`contactname`, `contact`.`contactcompany`,`vdscontract`.`vdshostname`, `vdscontract`.`vdscontractdate`, `vds_tariffs`.`tariffname`, ROUND(`vds_tariffs`.`vdscost` / 12) as abon_month, `vds_tariffs`.`vdscost` as abon_year, `contact`.`balance` FROM `vdscontract`, `vds_tariffs`, `contact` WHERE `vdscontract`.`status` = 1 AND `contact`.`balance` < `vds_tariffs`.`vdscost` / 12 AND `vdscontract`.`vdsid` = `vds_tariffs`.`idvds` AND `vdscontract`.`contactid` = `contact`.`idcontact`")
-                    # vds = min.fetchall()
-                    # number = 1
-                    # vds_text = ''
-                    # for i in vds:
-                    #     date = '{:%d-%m-%Y}'.format(i["LAST_DAY(NOW())"])
-                    #     if i["contactcompany"] == None:
-                    #         vds_text += f'№ {number}\nid: {i["user_id"]}\nконтакт: <b>{i["contactname"]}</b>\nvds: <b>{i["vdshostname"]}</b>\nтариф: {i["tariffname"]}\nдата окончания: <b>{date}</b>\nбаланс: {i["balance"]}\nсумма: <b>{i["abon_month"]}</b> сум.\n\n'
-                    #
-                    #     else:
-                    #         vds_text += f'№ {number}\nid: {i["user_id"]}\nконтакт: <b>{i["contactcompany"]}</b>\nvds: <b>{i["vdshostname"]}</b>\nтариф: {i["tariffname"]}\nдата окончания: <b>{date}</b>\nбаланс: {i["balance"]}\nсумма: <b>{i["abon_month"]}</b> сум.\n\n'
-                    #     number += 1
-                    # bot.send_message(message.chat.id, vds_text, parse_mode='html')
-                    # bot.register_next_step_handler(message, doljniki)
                 elif message.text == 'Главное меню':
                     markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
                     lg1 = types.KeyboardButton('Мои услуги')
