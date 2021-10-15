@@ -1006,11 +1006,11 @@ def callback(call):
                 bot.register_next_step_handler(message, uslugi)
             elif message.text == 'Мои VDS':
                 for i in check:
-                    id = i["b_userid"]
+
                     id_connect = connection.cursor()
                     id_connect.execute(
                         'SELECT `vdscontract`.`vdshostname`, `vds_tariffs`.`tariffname` ,`vdscontract`.`status`  FROM `user`, `vdscontract`, `vds_tariffs` WHERE   username=%(username)s AND `user`.`id` = `vdscontract`.`user_id` AND `vdscontract`.`vdsid` = `vds_tariffs`.`idvds` ORDER BY `vdscontract`.`vdshostname`;',
-                        {'username': login})
+                        {'username': i["b_userid"]})
                     checkContact = id_connect.fetchall()
                     num = 1
                     vds_text = ''
