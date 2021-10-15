@@ -293,10 +293,9 @@ def log(message):
                                 elif i["status"] == 0:
                                     i["status"] = 'Block'
                                 else:
-                                    i["status"] = 'Deleted'
-                                vds_text += f'vds{num}-{i["vdshostname"]}\nТариф: {i["tariffname"]}\nСтатус: {i["status"]}'
-                                num += 1
-                            bot.send_message(message.chat.id, vds_text)
+                                    vds_text += f'vds{num}. <b>{i["vdshostname"]}</b>\nТариф: {i["tariffname"]}\nСтатус: {i["status"]}\n'
+                                    num += 1
+                                bot.send_message(message.chat.id, vds_text, parse_mode='html')
                         else:
                             bot.send_message(message.chat.id, 'У вас нет VDS')
 
