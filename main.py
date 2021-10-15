@@ -386,6 +386,8 @@ def log(message):
                         else:
                             vds_text += f'№ {number}\nid: {i["user_id"]}\nконтакт: <b>{i["contactcompany"]}</b>\nvds: <b>{i["vdshostname"]}</b>\nтариф: {i["tariffname"]}\nдата окончания: <b>{date}</b>\nбаланс: {i["balance"]}\nсумма: <b>{i["abon_month"]}</b> сум.\n\n'
                         number += 1
+                    bot.send_message(message.chat.id, vds_text, parse_mode='html')
+                    bot.register_next_step_handler(message, doljniki)
 
                 elif message.text == 'Главное меню':
                     markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
