@@ -349,8 +349,6 @@ def log(message):
                         number += 1
                     bot.send_message(message.chat.id, domain_text, parse_mode='html')
                     bot.register_next_step_handler(message, doljniki)
-
-
                 elif message.text == 'Должники по хостингу':
                     min = connection.cursor()
                     min.execute(
@@ -370,7 +368,6 @@ def log(message):
 
                     bot.send_message(message.chat.id, host_text, parse_mode='html')
                     bot.register_next_step_handler(message, doljniki)
-
                 elif message.text == 'Должники по vds':
                     min = connection.cursor()
                     min.execute(
@@ -388,7 +385,6 @@ def log(message):
                         number += 1
                     bot.send_message(message.chat.id, vds_text, parse_mode='html')
                     bot.register_next_step_handler(message, doljniki)
-
                 elif message.text == 'Главное меню':
                     markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
                     lg1 = types.KeyboardButton('Мои услуги')
@@ -400,8 +396,7 @@ def log(message):
                     bot.send_message(message.chat.id,
                                      'Главное меню',
                                      reply_markup=markup_ru)
-
-                bot.register_next_step_handler(message, after_login)
+                    bot.register_next_step_handler(message, after_login)
 
             if message.text == 'Мои контакты':
                 for i in check:
