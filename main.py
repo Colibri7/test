@@ -344,7 +344,6 @@ def log(message):
                         date = '{:%d-%m-%Y}'.format(i["expired"])
                         if i["contactcompany"] == None:
                             domain_text += f'№ {number}\nid: {i["user_id"]}\nконтакт: <b>{i["contactname"]}</b>\nдомен: <b>{i["mydomainname"]}</b>\nдата окончания: <b>{date}</b>\n\n'
-
                         else:
                             domain_text += f'№ {number}\nid: {i["user_id"]}\nконтакт: <b>{i["contactcompany"]}</b>\nдомен: <b>{i["mydomainname"]}</b>\nдата окончания: <b>{date}</b>\n\n'
                         number += 1
@@ -373,7 +372,20 @@ def log(message):
                     bot.register_next_step_handler(message, doljniki)
 
                 elif message.text == 'Должники по vds':
-                    pass
+                    min = connection.cursor()
+                    min.execute(
+                        "SELECT `vdscontract`.`user_id`, `contact`.`contactname`, `contact`.`contactcompany`,`vdscontract`.`vdshostname`, `vdscontract`.`vdscontractdate`, `vds_tariffs`.`tariffname`, ROUND(`vds_tariffs`.`vdscost` / 12) as abon_month, `vds_tariffs`.`vdscost` as abon_year, `contact`.`balance` FROM `vdscontract`, `vds_tariffs`, `contact` WHERE `vdscontract`.`status` = 1 AND `contact`.`balance` < `vds_tariffs`.`vdscost` / 12 AND `vdscontract`.`vdsid` = `vds_tariffs`.`idvds` AND `vdscontract`.`contactid` = `contact`.`idcontact`")
+                    vds = min.fetchall()
+                    number = 1
+                    vds_text = ''
+                    for i in vds:
+                        date = '{:%d-%m-%Y}'.format(i["LAST_DAY(NOW())"])
+                        if i["contactcompany"] == None:
+                            vds_text += f'№ {number}\nid: {i["user_id"]}\nконтакт: <b>{i["contactname"]}</b>\nvds: <b>{i["vdshostname"]}</b>\nтариф: {i["tariffname"]}\nдата окончания: <b>{date}</b>\nбаланс: {i["balance"]}\nсумма: <b>{i["abon_month"]}</b> сум.\n\n'
+
+                        else:
+                            vds_text += f'№ {number}\nid: {i["user_id"]}\nконтакт: <b>{i["contactcompany"]}</b>\nvds: <b>{i["vdshostname"]}</b>\nтариф: {i["tariffname"]}\nдата окончания: <b>{date}</b>\nбаланс: {i["balance"]}\nсумма: <b>{i["abon_month"]}</b> сум.\n\n'
+                        number += 1
 
                 elif message.text == 'Главное меню':
                     markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
