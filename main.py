@@ -334,9 +334,10 @@ def log(message):
 
             def doljniki(message):
                 if message.text == 'Должники по домену':
-                    min= connection.cursor()
-                    min.execute("SELECT `idmydomain`, `mydomain`.userid, `mydomainname`, NOW() as now_datetime, `expired`,`contactname`, `contactcompany` FROM `hostmasteruz_base`.`mydomain`,`hostmasteruz_base`.`contact`  WHERE DATE(expired) = DATE(NOW()) AND `mydomain`.`mydomaincontactcust` = `contact`.`idcontact`;")
-                    domain=min.fetchall()
+                    min = connection.cursor()
+                    min.execute(
+                        "SELECT `idmydomain`, `mydomain`.userid, `mydomainname`, NOW() as now_datetime, `expired`,`contactname`, `contactcompany` FROM `hostmasteruz_base`.`mydomain`,`hostmasteruz_base`.`contact`  WHERE DATE(expired) = DATE(NOW()) AND `mydomain`.`mydomaincontactcust` = `contact`.`idcontact`;")
+                    domain = min.fetchall()
                     domain_text = ''
                     number = 1
                     for i in domain:
@@ -357,7 +358,7 @@ def log(message):
                         "SELECT  LAST_DAY(NOW()),`hostcontract`.`user_id`, `hostcontract`.`hostcontractdomain`, `hostcontract`.`hostcontractdate`, `hosting`.`hostingname`, ROUND(`hosting`.`hostingcost` / 12) as abon_month, `hosting`.`hostingcost` as abon_year, `contact`.`balance`,`contactname`, `contactcompany` FROM `hostcontract`, `hosting`, `contact`  WHERE `hostcontract`.`status` = 1 AND `contact`.`balance` < `hosting`.`hostingcost` / 12 AND `hostcontract`.`hostingid` = `hosting`.`idhosting` AND `hostcontract`.`contactid` = `contact`.`idcontact`"
                     )
                     hosting = min.fetchall()
-                    host_text=''
+                    host_text = ''
                     number = 1
                     for i in hosting:
                         date = '{:%d-%m-%Y}'.format(i["LAST_DAY(NOW())"])
@@ -387,8 +388,6 @@ def log(message):
                                      reply_markup=markup_ru)
 
                 bot.register_next_step_handler(message, after_login)
-
-
 
             if message.text == 'Мои контакты':
                 for i in check:
