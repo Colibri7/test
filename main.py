@@ -331,24 +331,35 @@ def log(message):
                                      'Главное меню',
                                      reply_markup=markup_ru)
                     bot.register_next_step_handler(message, after_login)
+
             def doljniki(message):
-                if message.text == 'Должники по домену':
-                    min = connection.cursor()
-                    min.execute(
-                        "SELECT `idmydomain`, `mydomain`.userid, `mydomainname`, NOW() as now_datetime, `expired`,`contactname`, `contactcompany` FROM `hostmasteruz_base`.`mydomain`,`hostmasteruz_base`.`contact`  WHERE DATE(expired) = DATE(NOW()) AND `mydomain`.`mydomaincontactcust` = `contact`.`idcontact`;")
-                    domain = min.fetchall()
-                    domain_text = ''
-                    number = 1
-                    for i in domain:
-                        date = '{:%d-%m-%Y}'.format(i["expired"])
-                        if i["contactcompany"] == None:
-                            domain_text += f'№ {number}\nid: {i["user_id"]}\nконтакт: <b>{i["contactname"]}</b>\nдомен: <b>{i["mydomainname"]}</b>\nдата окончания: <b>{date}</b>\n\n'
-                        else:
-                            domain_text += f'№ {number}\nid: {i["user_id"]}\nконтакт: <b>{i["contactcompany"]}</b>\nдомен: <b>{i["mydomainname"]}</b>\nдата окончания: <b>{date}</b>\n\n'
-                        number += 1
-                    bot.send_message(message.chat.id, domain_text, parse_mode='html')
-                    bot.register_next_step_handler(message, doljniki)
-                elif message.text == 'Должники по vsd':
+                def doljniki_domen(message):
+                    if message.text == 'Домен':
+                        min = connection.cursor()
+                        min.execute(
+                            "SELECT `idmydomain`, `userid`, `mydomainname`, NOW() as now_datetime, `expired` FROM `mydomain` WHERE DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 60 DAY))")
+                        domendays_60 = min.fetchall()
+                        days_60 = ''
+                        n = 1
+                        for i in domendays_60:
+                            days_60 += f'{n}. {i["mydomainname"]}'
+                            n += 1
+                        bot.send_message(message.chat.id, days_60)
+
+                if message.text == 'Домен':
+                    markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
+                    lg1 = types.KeyboardButton('60 дней')
+                    lg2 = types.KeyboardButton('30 дней')
+                    lg3 = types.KeyboardButton('10 дней')
+                    lg4 = types.KeyboardButton('Сегодня')
+                    lg5 = types.KeyboardButton('Главное меню')
+                    markup.add(lg1, lg2, lg3, lg4, lg5)
+                    bot.send_message(message.chat.id, 'Должники Доменов', reply_markup=markup)
+                    bot.register_next_step_handler(message, doljniki_domen)
+
+
+
+                elif message.text == '30 дней':
                     min = connection.cursor()
                     min.execute(
                         "SELECT LAST_DAY(NOW()),`vdscontract`.`user_id`, `contact`.`contactname`, `contact`.`contactcompany`,`vdscontract`.`vdshostname`, `vdscontract`.`vdscontractdate`, `vds_tariffs`.`tariffname`, ROUND(`vds_tariffs`.`vdscost` / 12) as abon_month, `vds_tariffs`.`vdscost` as abon_year, `contact`.`balance` FROM `vdscontract`, `vds_tariffs`, `contact` WHERE `vdscontract`.`status` = 1 AND `contact`.`balance` < `vds_tariffs`.`vdscost` / 12 AND `vdscontract`.`vdsid` = `vds_tariffs`.`idvds` AND `vdscontract`.`contactid` = `contact`.`idcontact`;")
@@ -365,7 +376,7 @@ def log(message):
                         number += 1
                     bot.send_message(message.chat.id, vds_text, parse_mode='html')
                     bot.register_next_step_handler(message, doljniki)
-                elif message.text == 'Должники по хостингу':
+                elif message.text == 'сегодня':
                     min = connection.cursor()
                     min.execute(
                         "SELECT  LAST_DAY(NOW()),`hostcontract`.`user_id`, `hostcontract`.`hostcontractdomain`, `hostcontract`.`hostcontractdate`, `hosting`.`hostingname`, ROUND(`hosting`.`hostingcost` / 12) as abon_month, `hosting`.`hostingcost` as abon_year, `contact`.`balance`,`contactname`, `contactcompany` FROM `hostcontract`, `hosting`, `contact`  WHERE `hostcontract`.`status` = 1 AND `contact`.`balance` < `hosting`.`hostingcost` / 12 AND `hostcontract`.`hostingid` = `hosting`.`idhosting` AND `hostcontract`.`contactid` = `contact`.`idcontact`"
@@ -427,9 +438,9 @@ def log(message):
                 bot.register_next_step_handler(message, uslugi)
             elif message.text == 'Должники':
                 markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
-                lg1 = types.KeyboardButton('Должники по домену')
-                lg2 = types.KeyboardButton('Должники по хостингу')
-                lg3 = types.KeyboardButton('Должники по vsd')
+                lg1 = types.KeyboardButton('Домен')
+                lg2 = types.KeyboardButton('Хостинг')
+                lg3 = types.KeyboardButton('VDS')
                 lg4 = types.KeyboardButton('Главное меню')
                 markup.add(lg1, lg2, lg3, lg4)
                 bot.send_message(message.chat.id, 'Должники', reply_markup=markup)
