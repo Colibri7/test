@@ -881,6 +881,19 @@ def callback(call):
         bot.register_next_step_handler(call.message, login_reg)
 
     elif call.data == 'my_contacts':
+        bot_con = pymysql.connect(host='62.209.143.131',
+                                  user='hostmasteruz_pbot',
+                                  password='bcaxoZyAXDGc',
+                                  database='hostmasteruz_bot',
+                                  charset='utf8mb4',
+                                  cursorclass=pymysql.cursors.DictCursor
+                                  )
+        min = connection.cursor()
+        min.execute(
+            'SELECT `user`.`id`  FROM `user` WHERE username=%(username)s', {'username': login})
+        check = min.fetchall()
+        for i in check:
+            bot.send_message(call.message.chat.id,i)
 
         bot.send_message(call.message.chat.id, 'Контакт')
 
@@ -895,7 +908,7 @@ def callback(call):
 
         bot.register_next_step_handler(call.message, language)
 
-    elif call.data == 'my_contacts':
+    elif call.data == 'as':
 
         pass
 
