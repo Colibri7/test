@@ -405,7 +405,7 @@ def log(message):
                         lg3 = types.KeyboardButton('VDS')
                         lg4 = types.KeyboardButton('Главное меню')
                         markup.add(lg1, lg2, lg3, lg4)
-                        bot.send_message(message.chat.id, 'Должники', reply_markup=markup)
+                        bot.send_message(message.chat.id, 'Уведомление', reply_markup=markup)
                         bot.register_next_step_handler(message, doljniki)
                 if message.text == 'Домен':
                     markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
@@ -416,7 +416,7 @@ def log(message):
                     lg5 = types.KeyboardButton('Redemption')
                     lg6 = types.KeyboardButton('Назад')
                     markup.add(lg1, lg2, lg3, lg4, lg5,lg6)
-                    bot.send_message(message.chat.id, 'Должники Доменов', reply_markup=markup)
+                    bot.send_message(message.chat.id, 'Уведомление Доменов', reply_markup=markup)
                     bot.register_next_step_handler(message, doljniki_domen)
                 elif message.text == '...':
                     pass
@@ -424,7 +424,7 @@ def log(message):
                     markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
                     lg1 = types.KeyboardButton('Мои услуги')
                     lg2 = types.KeyboardButton('Мои контакты')
-                    lg3 = types.KeyboardButton('Должники')
+                    lg3 = types.KeyboardButton('Уведомление')
 
                     markup_ru.add(lg1, lg2, lg3)
 
@@ -480,7 +480,7 @@ def log(message):
             markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
             lg1 = types.KeyboardButton('Мои услуги')
             lg2 = types.KeyboardButton('Мои контакты')
-            lg3 = types.KeyboardButton('Должники')
+            lg3 = types.KeyboardButton('Уведомление')
 
             markup_ru.add(lg1, lg2, lg3)
 
