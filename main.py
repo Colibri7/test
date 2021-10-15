@@ -341,7 +341,7 @@ def log(message):
                         days_60 = ''
                         n = 1
                         for i in domendays_60:
-                            days_60 += f'{n}. {i["mydomainname"]}.uz (https://cctld.uz/whois/?domain={i["mydomainname"]}&zone=uz)\n'
+                            days_60 += f'{n}. (https://cctld.uz/whois/?domain={i["mydomainname"]}&zone=uz)\n'
                             n += 1
                         print(days_60)
                         bot.send_message(message.chat.id, days_60)
@@ -354,7 +354,7 @@ def log(message):
                         days_30 = ''
                         n = 1
                         for i in domendays_30:
-                            days_30 += f'{n}. {i["mydomainname"]}.uz (https://cctld.uz/whois/?domain={i["mydomainname"]}&zone=uz)\n'
+                            days_30 += f'{n}. (https://cctld.uz/whois/?domain={i["mydomainname"]}&zone=uz)\n'
                             n += 1
                         print(days_30)
                         bot.send_message(message.chat.id, days_30)
@@ -367,7 +367,7 @@ def log(message):
                         days_10 = ''
                         n = 1
                         for i in domendays_10:
-                            days_10 += f'{n}. {i["mydomainname"]}.uz (https://cctld.uz/whois/?domain={i["mydomainname"]}&zone=uz)\n'
+                            days_10 += f'{n}. (https://cctld.uz/whois/?domain={i["mydomainname"]}&zone=uz)\n'
                             n += 1
                         print(days_10)
                         bot.send_message(message.chat.id, days_10)
@@ -380,7 +380,7 @@ def log(message):
                         days_1 = ''
                         n = 1
                         for i in domendays_1:
-                            days_1 += f'{n}. {i["mydomainname"]}.uz (https://cctld.uz/whois/?domain={i["mydomainname"]}&zone=uz)\n'
+                            days_1 += f'{n}. (https://cctld.uz/whois/?domain={i["mydomainname"]}&zone=uz)\n'
                             n += 1
                         print(days_1)
                         bot.send_message(message.chat.id, days_1)
@@ -393,12 +393,12 @@ def log(message):
                         red = ''
                         n = 1
                         for i in redemption:
-                            red += f'{n}. {i["mydomainname"]}.uz (https://cctld.uz/whois/?domain={i["mydomainname"]}&zone=uz)\n'
+                            red += f'{n}. (https://cctld.uz/whois/?domain={i["mydomainname"]}&zone=uz)\n'
                             n += 1
                         print(red)
                         bot.send_message(message.chat.id, red)
                         bot.register_next_step_handler(message, doljniki_domen)
-                    elif message.text == 'Главное меню':
+                    elif message.text == 'Назад':
                         markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
                         lg1 = types.KeyboardButton('Домен')
                         lg2 = types.KeyboardButton('Хостинг')
@@ -407,7 +407,6 @@ def log(message):
                         markup.add(lg1, lg2, lg3, lg4)
                         bot.send_message(message.chat.id, 'Должники', reply_markup=markup)
                         bot.register_next_step_handler(message, doljniki)
-
                 if message.text == 'Домен':
                     markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
                     lg1 = types.KeyboardButton('60 дней')
@@ -415,7 +414,7 @@ def log(message):
                     lg3 = types.KeyboardButton('10 дней')
                     lg4 = types.KeyboardButton('Сегодня')
                     lg5 = types.KeyboardButton('Redemption')
-                    lg6 = types.KeyboardButton('Главное меню')
+                    lg6 = types.KeyboardButton('Назад')
                     markup.add(lg1, lg2, lg3, lg4, lg5,lg6)
                     bot.send_message(message.chat.id, 'Должники Доменов', reply_markup=markup)
                     bot.register_next_step_handler(message, doljniki_domen)
@@ -462,14 +461,14 @@ def log(message):
                 markup.add(lg1, lg2, lg3, lg4, lg5)
                 bot.send_message(message.chat.id, 'Какую услугу хотите посмотреть ?', reply_markup=markup)
                 bot.register_next_step_handler(message, uslugi)
-            elif message.text == 'Должники':
+            elif message.text == 'Уведомление':
                 markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
                 lg1 = types.KeyboardButton('Домен')
                 lg2 = types.KeyboardButton('Хостинг')
                 lg3 = types.KeyboardButton('VDS')
-                lg4 = types.KeyboardButton('Главное меню')
+                lg4 = types.KeyboardButton('Назад')
                 markup.add(lg1, lg2, lg3, lg4)
-                bot.send_message(message.chat.id, 'Должники', reply_markup=markup)
+                bot.send_message(message.chat.id, 'Уведомление', reply_markup=markup)
                 bot.register_next_step_handler(message, doljniki)
 
         if message.text == 'sardor':
