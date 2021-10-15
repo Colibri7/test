@@ -385,6 +385,19 @@ def log(message):
                         print(days_1)
                         bot.send_message(message.chat.id, days_1)
                         bot.register_next_step_handler(message, doljniki_domen)
+                    elif message.text == 'Redemption':
+                        min = connection.cursor()
+                        min.execute(
+                            "SELECT `idmydomain`, `userid`, `mydomainname`, NOW() as now_datetime, `expired` FROM `mydomain` WHERE status=3")
+                        redemption = min.fetchall()
+                        red = ''
+                        n = 1
+                        for i in redemption:
+                            red += f'{n}. {i["mydomainname"]}.uz (https://cctld.uz/whois/?domain={i["mydomainname"]}&zone=uz)\n'
+                            n += 1
+                        print(red)
+                        bot.send_message(message.chat.id, red)
+                        bot.register_next_step_handler(message, doljniki_domen)
                     elif message.text == 'Главное меню':
                         markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
                         lg1 = types.KeyboardButton('Домен')
@@ -401,8 +414,9 @@ def log(message):
                     lg2 = types.KeyboardButton('30 дней')
                     lg3 = types.KeyboardButton('10 дней')
                     lg4 = types.KeyboardButton('Сегодня')
-                    lg5 = types.KeyboardButton('Главное меню')
-                    markup.add(lg1, lg2, lg3, lg4, lg5)
+                    lg5 = types.KeyboardButton('Redemption')
+                    lg6 = types.KeyboardButton('Главное меню')
+                    markup.add(lg1, lg2, lg3, lg4, lg5,lg6)
                     bot.send_message(message.chat.id, 'Должники Доменов', reply_markup=markup)
                     bot.register_next_step_handler(message, doljniki_domen)
                 elif message.text == '...':
