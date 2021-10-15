@@ -342,7 +342,7 @@ def log(message):
                         days_60 = ''
                         n = 1
                         for i in domendays_60:
-                            days_60 += f'{n}. {i["mydomainname"]}'
+                            days_60 += f'{n}. {i["mydomainname"]}\n'
                             n += 1
                         bot.send_message(message.chat.id, days_60)
 
