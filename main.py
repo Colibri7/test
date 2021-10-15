@@ -8,7 +8,7 @@ import telebot
 from telebot import types
 import pymysql
 
-bot = telebot.TeleBot('1978328105:AAH8hcb2b6CQ4_ZnHx6fHPVr9aLjH8fR7f0', threaded=False)
+bot = telebot.TeleBot('1978328105:AAGKmfuYXfvWLIozdwLpjIRHoyZhXQmwlqw', threaded=False)
 
 connection = pymysql.connect(host='62.209.143.131',
                              user='hostmasteruz_pbot',
@@ -334,7 +334,7 @@ def log(message):
 
             def doljniki(message):
                 def doljniki_domen(message):
-                    if message.text == 'Домен':
+                    if message.text == '60 дней':
                         min = connection.cursor()
                         min.execute(
                             "SELECT `idmydomain`, `userid`, `mydomainname`, NOW() as now_datetime, `expired` FROM `mydomain` WHERE DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 60 DAY))")
@@ -342,9 +342,60 @@ def log(message):
                         days_60 = ''
                         n = 1
                         for i in domendays_60:
-                            days_60 += f'{n}. {i["mydomainname"]}\n'
+                            days_60 += f'{n}. {i["mydomainname"]}.uz (https://cctld.uz/whois/?domain={i["mydomainname"]}&zone=uz)\n'
                             n += 1
+                        print(days_60)
                         bot.send_message(message.chat.id, days_60)
+                        bot.register_next_step_handler(message, doljniki_domen)
+
+                    elif message.text == '30 дней':
+                        min = connection.cursor()
+                        min.execute(
+                            "SELECT `idmydomain`, `userid`, `mydomainname`, NOW() as now_datetime, `expired` FROM `mydomain` WHERE DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 30 DAY))")
+                        domendays_30 = min.fetchall()
+                        days_30 = ''
+                        n = 1
+                        for i in domendays_30:
+                            days_30 += f'{n}. {i["mydomainname"]}.uz (https://cctld.uz/whois/?domain={i["mydomainname"]}&zone=uz)\n'
+                            n += 1
+                        print(days_30)
+                        bot.send_message(message.chat.id, days_30)
+                        bot.register_next_step_handler(message, doljniki_domen)
+                    elif message.text == '10 дней':
+                        min = connection.cursor()
+                        min.execute(
+                            "SELECT `idmydomain`, `userid`, `mydomainname`, NOW() as now_datetime, `expired` FROM `mydomain` WHERE DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 10 DAY))")
+                        domendays_10 = min.fetchall()
+                        days_10 = ''
+                        n = 1
+                        for i in domendays_10:
+                            days_10 += f'{n}. {i["mydomainname"]}.uz (https://cctld.uz/whois/?domain={i["mydomainname"]}&zone=uz)\n'
+                            n += 1
+                        print(days_10)
+                        bot.send_message(message.chat.id, days_10)
+                        bot.register_next_step_handler(message, doljniki_domen)
+                    elif message.text == 'Сегодня':
+                        min = connection.cursor()
+                        min.execute(
+                            "SELECT `idmydomain`, `userid`, `mydomainname`, NOW() as now_datetime, `expired` FROM `mydomain` WHERE DATE(`expired`) = DATE(NOW())")
+                        domendays_1 = min.fetchall()
+                        days_1 = ''
+                        n = 1
+                        for i in domendays_1:
+                            days_1 += f'{n}. {i["mydomainname"]}.uz (https://cctld.uz/whois/?domain={i["mydomainname"]}&zone=uz)\n'
+                            n += 1
+                        print(days_1)
+                        bot.send_message(message.chat.id, days_1)
+                        bot.register_next_step_handler(message, doljniki_domen)
+                    elif message.text == 'Главное меню':
+                        markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
+                        lg1 = types.KeyboardButton('Домен')
+                        lg2 = types.KeyboardButton('Хостинг')
+                        lg3 = types.KeyboardButton('VDS')
+                        lg4 = types.KeyboardButton('Главное меню')
+                        markup.add(lg1, lg2, lg3, lg4)
+                        bot.send_message(message.chat.id, 'Должники', reply_markup=markup)
+                        bot.register_next_step_handler(message, doljniki)
 
                 if message.text == 'Домен':
                     markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
@@ -356,45 +407,8 @@ def log(message):
                     markup.add(lg1, lg2, lg3, lg4, lg5)
                     bot.send_message(message.chat.id, 'Должники Доменов', reply_markup=markup)
                     bot.register_next_step_handler(message, doljniki_domen)
-
-
-
-                elif message.text == '30 дней':
-                    min = connection.cursor()
-                    min.execute(
-                        "SELECT LAST_DAY(NOW()),`vdscontract`.`user_id`, `contact`.`contactname`, `contact`.`contactcompany`,`vdscontract`.`vdshostname`, `vdscontract`.`vdscontractdate`, `vds_tariffs`.`tariffname`, ROUND(`vds_tariffs`.`vdscost` / 12) as abon_month, `vds_tariffs`.`vdscost` as abon_year, `contact`.`balance` FROM `vdscontract`, `vds_tariffs`, `contact` WHERE `vdscontract`.`status` = 1 AND `contact`.`balance` < `vds_tariffs`.`vdscost` / 12 AND `vdscontract`.`vdsid` = `vds_tariffs`.`idvds` AND `vdscontract`.`contactid` = `contact`.`idcontact`;")
-                    vds = min.fetchall()
-                    number = 1
-                    vds_text = ''
-                    for i in vds:
-                        date = '{:%d-%m-%Y}'.format(i["LAST_DAY(NOW())"])
-                        if i["contactcompany"] == None:
-                            vds_text += f'№ {number}\nid: {i["user_id"]}\nконтакт: <b>{i["contactname"]}</b>\nvds: <b>{i["vdshostname"]}</b>\nтариф: {i["tariffname"]}\nдата окончания: <b>{date}</b>\nбаланс: {i["balance"]}\nсумма: <b>{i["abon_month"]}</b> сум.\n\n'
-
-                        else:
-                            vds_text += f'№ {number}\nid: {i["user_id"]}\nконтакт: <b>{i["contactcompany"]}</b>\nvds: <b>{i["vdshostname"]}</b>\nтариф: {i["tariffname"]}\nдата окончания: <b>{date}</b>\nбаланс: {i["balance"]}\nсумма: <b>{i["abon_month"]}</b> сум.\n\n'
-                        number += 1
-                    bot.send_message(message.chat.id, vds_text, parse_mode='html')
-                    bot.register_next_step_handler(message, doljniki)
-                elif message.text == 'сегодня':
-                    min = connection.cursor()
-                    min.execute(
-                        "SELECT  LAST_DAY(NOW()),`hostcontract`.`user_id`, `hostcontract`.`hostcontractdomain`, `hostcontract`.`hostcontractdate`, `hosting`.`hostingname`, ROUND(`hosting`.`hostingcost` / 12) as abon_month, `hosting`.`hostingcost` as abon_year, `contact`.`balance`,`contactname`, `contactcompany` FROM `hostcontract`, `hosting`, `contact`  WHERE `hostcontract`.`status` = 1 AND `contact`.`balance` < `hosting`.`hostingcost` / 12 AND `hostcontract`.`hostingid` = `hosting`.`idhosting` AND `hostcontract`.`contactid` = `contact`.`idcontact`"
-                    )
-                    hosting = min.fetchall()
-                    host_text = ''
-                    number = 1
-                    for i in hosting:
-                        date = '{:%d-%m-%Y}'.format(i["LAST_DAY(NOW())"])
-                        if i["contactcompany"] == None:
-                            host_text += f'№ {number}\nid: {i["user_id"]}\nконтакт: <b>{i["contactname"]}</b>\nхостинг: <b>{i["hostingname"]}</b>\nдата окончания: <b>{date}</b>\nсумма: <b>{i["abon_month"]}</b> сум.\n\n'
-
-                        else:
-                            host_text += f'№ {number}\nid: {i["user_id"]}\nконтакт: <b>{i["contactcompany"]}</b>\nхостинг: <b>{i["hostingname"]}</b>\nдата окончания: <b>{date}</b>\nсумма: <b>{i["abon_month"]}</b> сум.\n\n'
-                        number += 1
-
-                    bot.send_message(message.chat.id, host_text, parse_mode='html')
-                    bot.register_next_step_handler(message, doljniki)
+                elif message.text == '...':
+                    pass
                 elif message.text == 'Главное меню':
                     markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
                     lg1 = types.KeyboardButton('Мои услуги')
