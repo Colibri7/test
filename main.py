@@ -201,27 +201,18 @@ def send_welcome(message):
     lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
     lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
     lg3 = types.InlineKeyboardButton('Авторизация', callback_data='cabinet')
-    lg4 = types.InlineKeyboardButton('Связь с менедежером', callback_data='connect_admin',url='https://t.me/hostmaster_tech_support')
+    lg4 = types.InlineKeyboardButton('Связь с менедежером', callback_data='connect_admin',
+                                     url='https://t.me/hostmaster_tech_support')
     lg5 = types.InlineKeyboardButton('Перейти на сайт', callback_data='site', url='https://hostmaster.uz/')
     lg6 = types.InlineKeyboardButton('Настройки', callback_data='settings')
 
     markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
-    bot.send_message(332749197,text,parse_mode='html')
+    bot.send_message(332749197, text, parse_mode='html')
     bot.send_message(message.chat.id,
                      'Это информационный бот компании Hostmaster.'
                      '\nHostmaster – Хостинг провайдер и регистратор доменов в'
                      '\nУзбекистане, в Ташкенте.\nНаш телефон: 71-202-55-11',
                      reply_markup=markup)
-
-
-
-# @bot.message_handler(content_types=['text'])
-# def login_reg(message):
-#
-#     else:
-#         bot.register_next_step_handler(message, log)
-
-
 
 
 @bot.message_handler(content_types=['text'])
@@ -278,7 +269,7 @@ def log(message):
                     bot.register_next_step_handler(message, uslugi)
                 elif message.text == 'Мои VDS':
                     for i in check:
-                        id = i["id"]
+
                         id_connect = connection.cursor()
                         id_connect.execute(
                             'SELECT `vdscontract`.`vdshostname`, `vds_tariffs`.`tariffname` ,`vdscontract`.`status`  FROM `user`, `vdscontract`, `vds_tariffs` WHERE   username=%(username)s AND `user`.`id` = `vdscontract`.`user_id` AND `vdscontract`.`vdsid` = `vds_tariffs`.`idvds` ORDER BY `vdscontract`.`vdshostname`;',
@@ -305,7 +296,7 @@ def log(message):
 
                     bot.register_next_step_handler(message, uslugi)
                 elif message.text == 'Возврат':
-                    markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True,one_time_keyboard=True)
+                    markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
                     lg1 = types.KeyboardButton('Мои услуги')
                     lg2 = types.KeyboardButton('Мои контакты')
                     lg3 = types.KeyboardButton('Возврат')
@@ -314,6 +305,7 @@ def log(message):
                                      'Возврат',
                                      reply_markup=markup_ru)
                     bot.register_next_step_handler(message, after_login)
+
             def doljniki(message):
                 def doljniki_domen(message):
                     if message.text == '60 дней':
@@ -405,7 +397,7 @@ def log(message):
                 elif message.text == '...':
                     pass
                 elif message.text == 'Возврат':
-                    markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True,one_time_keyboard=True)
+                    markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
                     lg1 = types.KeyboardButton('Мои услуги')
                     lg2 = types.KeyboardButton('Мои контакты')
                     lg3 = types.KeyboardButton('Уведомления')
@@ -416,6 +408,7 @@ def log(message):
                                      'Возврат',
                                      reply_markup=markup_ru)
                 bot.register_next_step_handler(message, after_login)
+
             if message.text == 'Мои контакты':
                 for i in check:
                     id = i["id"]
@@ -457,11 +450,11 @@ def log(message):
                 lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
                 lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
                 lg3 = types.InlineKeyboardButton('Авторизация', callback_data='cabinet')
-                lg4 = types.InlineKeyboardButton('Связь с менедежером', callback_data='connect_admin')
-                lg5 = types.InlineKeyboardButton('Перейти на сайт', callback_data='site',url='https://hostmaster.uz/')
+                lg4 = types.InlineKeyboardButton('Связь с менедежером', callback_data='connect_admin',url='https://t.me/hostmaster_tech_support')
+                lg5 = types.InlineKeyboardButton('Перейти на сайт', callback_data='site', url='https://hostmaster.uz/')
                 lg6 = types.InlineKeyboardButton('Настройки', callback_data='settings')
 
-                markup.add(lg1, lg2, lg3, lg4, lg5,lg6)
+                markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
                 bot.send_message(message.chat.id,
                                  'Это информационный бот компании Hostmaster.'
                                  '\nHostmaster – Хостинг провайдер и регистратор доменов в'
@@ -475,7 +468,7 @@ def log(message):
                 'SELECT id,password_hash FROM user WHERE username=%(username)s', {'username': login})
 
             check = min.fetchall()
-            markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True,one_time_keyboard=True)
+            markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
             lg1 = types.KeyboardButton('Мои услуги')
             lg2 = types.KeyboardButton('Мои контакты')
             lg3 = types.KeyboardButton('Уведомления')
@@ -497,7 +490,7 @@ def log(message):
                     'SELECT id,password_hash FROM user WHERE username=%(username)s', {'username': login})
 
                 check = min.fetchall()
-                markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True,one_time_keyboard=True)
+                markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
                 lg1 = types.KeyboardButton('Мои услуги')
                 lg2 = types.KeyboardButton('Мои контакты')
                 lg3 = types.KeyboardButton('Возврат')
@@ -515,7 +508,7 @@ def log(message):
                 lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
                 lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
                 lg3 = types.InlineKeyboardButton('Авторизация', callback_data='cabinet')
-                lg4 = types.InlineKeyboardButton('Связь с менедежером', callback_data='connect_admin')
+                lg4 = types.InlineKeyboardButton('Связь с менедежером', callback_data='connect_admin',url='https://t.me/hostmaster_tech_support')
                 lg5 = types.InlineKeyboardButton('Перейти на сайт', callback_data='site', url='https://hostmaster.uz/')
                 lg6 = types.InlineKeyboardButton('Настройки', callback_data='settings')
 
@@ -532,6 +525,7 @@ def log(message):
                 key.add(lg1)
                 bot.send_message(message.chat.id, 'Неверный пароль или почта', reply_markup=key)
                 bot.register_next_step_handler(message, password)
+
     if message.text == 'Возврат':
         markup = types.InlineKeyboardMarkup(row_width=2)
         lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
@@ -542,7 +536,9 @@ def log(message):
 
         markup.add(lg1, lg2, lg3, lg4, lg5)
         bot.send_message(message.chat.id,
-                         'Возврат',
+                         'Это информационный бот компании Hostmaster.'
+                         '\nHostmaster – Хостинг провайдер и регистратор доменов в'
+                         '\nУзбекистане, в Ташкенте.\nНаш телефон: 71-202-55-11',
                          reply_markup=markup)
         bot.register_next_step_handler(message, language)
     else:
@@ -594,7 +590,7 @@ def log(message):
             lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
             lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
             lg3 = types.InlineKeyboardButton('Авторизация', callback_data='cabinet')
-            lg4 = types.InlineKeyboardButton('Связь с менедежером', callback_data='connect_admin')
+            lg4 = types.InlineKeyboardButton('Связь с менедежером', callback_data='connect_admin',url='https://t.me/hostmaster_tech_support')
             lg5 = types.InlineKeyboardButton('Перейти на сайт', callback_data='site', url='https://hostmaster.uz/')
             lg6 = types.InlineKeyboardButton('Настройки', callback_data='settings')
 
@@ -865,13 +861,13 @@ def language(message):
         bot.send_message(message.chat.id,
                          """Bu Hostmaster kompaniyasining axborot boti. Hostmaster - Xosting provayderi va domen registratori" O'zbekiston,Toshkentda. Bizning telefon: 71-202-55-11""",
                          reply_markup=markup_uz)
-
+        bot.register_next_step_handler(message, language)
     elif message.text == '🇷🇺Russian🇷🇺':
         markup_ru = types.InlineKeyboardMarkup(row_width=2)
         lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
         lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
         lg3 = types.InlineKeyboardButton('Авторизация', callback_data='cabinet')
-        lg4 = types.InlineKeyboardButton('Связь с менедежером', callback_data='connect_admin')
+        lg4 = types.InlineKeyboardButton('Связь с менедежером', callback_data='connect_admin',url='https://t.me/hostmaster_tech_support')
         lg5 = types.InlineKeyboardButton('Перейти на сайт', callback_data='site', url='https://hostmaster.uz/')
         lg6 = types.InlineKeyboardButton('Настройки', callback_data='settings')
 
@@ -882,12 +878,12 @@ def language(message):
                          '\nУзбекистане, в Ташкенте.\nНаш телефон: 71-202-55-11',
                          reply_markup=markup_ru)
         bot.register_next_step_handler(message, language)
-    elif message.text=='Возврат':
+    elif message.text == 'Возврат':
         markup = types.InlineKeyboardMarkup(row_width=2)
         lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
         lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
         lg3 = types.InlineKeyboardButton('Авторизация', callback_data='cabinet')
-        lg4 = types.InlineKeyboardButton('Связь с менедежером', callback_data='connect_admin')
+        lg4 = types.InlineKeyboardButton('Связь с менедежером', callback_data='connect_admin',url='https://t.me/hostmaster_tech_support')
         lg5 = types.InlineKeyboardButton('Перейти на сайт', callback_data='site', url='https://hostmaster.uz/')
         lg6 = types.InlineKeyboardButton('Настройки', callback_data='settings')
 
@@ -898,8 +894,6 @@ def language(message):
                          '\nУзбекистане, в Ташкенте.\nНаш телефон: 71-202-55-11',
                          reply_markup=markup)
         bot.register_next_step_handler(message, language)
-
-
 
 
 @bot.callback_query_handler(func=lambda call: True)
@@ -961,7 +955,8 @@ def callback(call):
                     id = i["b_userid"]
                     id_connect = connection.cursor()
                     id_connect.execute(
-                        'SELECT `hostcontract`.*, `hosting`.`hostingname` FROM `hostcontract`, `hosting` WHERE `hostcontract`.`status` IN (0,1) and `hostcontract`.`user_id` = %(user_id)s AND `hosting`.`idhosting` = `hostcontract`.`hostingid`', {'user_id': id})
+                        'SELECT `hostcontract`.*, `hosting`.`hostingname` FROM `hostcontract`, `hosting` WHERE `hostcontract`.`status` IN (0,1) and `hostcontract`.`user_id` = %(user_id)s AND `hosting`.`idhosting` = `hostcontract`.`hostingid`',
+                        {'user_id': id})
                     checkContact = id_connect.fetchall()
                     num = 1
                     host_text = ''
@@ -998,7 +993,7 @@ def callback(call):
 
                             domen_text += f'{num}. {i["mydomainname"]}.uz, <b>Активен до</b> {i["expired"].strftime("%d/%m/%Y")}\n'
                             num += 1
-                        bot.send_message(message.chat.id, domen_text,parse_mode='html')
+                        bot.send_message(message.chat.id, domen_text, parse_mode='html')
                     else:
                         bot.send_message(message.chat.id, 'У вас нет доменов')
 
@@ -1023,7 +1018,7 @@ def callback(call):
                                 i["status"] = 'Deleted'
                             vds_text += f'vds{num}. <b>{i["vdshostname"]}</b>\nТариф: {i["tariffname"]}\nСтатус: {i["status"]}\n'
                             num += 1
-                        bot.send_message(message.chat.id, vds_text,parse_mode='html')
+                        bot.send_message(message.chat.id, vds_text, parse_mode='html')
                     else:
                         bot.send_message(message.chat.id, 'У вас нет VDS')
 
@@ -1038,7 +1033,7 @@ def callback(call):
                 lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
                 lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
                 lg3 = types.InlineKeyboardButton('Авторизация', callback_data='cabinet')
-                lg4 = types.InlineKeyboardButton('Связь с менедежером', callback_data='connect_admin')
+                lg4 = types.InlineKeyboardButton('Связь с менедежером', callback_data='connect_admin',url='https://t.me/hostmaster_tech_support')
                 lg5 = types.InlineKeyboardButton('Перейти на сайт', callback_data='site', url='https://hostmaster.uz/')
                 lg6 = types.InlineKeyboardButton('Настройки', callback_data='settings')
 
@@ -1050,7 +1045,7 @@ def callback(call):
                                  reply_markup=markup)
                 bot.register_next_step_handler(message, language)
 
-        markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True,one_time_keyboard=True)
+        markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
         lg1 = types.KeyboardButton('Мои хостинги')
         lg2 = types.KeyboardButton('Мои домены')
         lg3 = types.KeyboardButton('Мои VDS')
@@ -1068,7 +1063,7 @@ def callback(call):
         lg2 = types.KeyboardButton('🇺🇿Uzbek🇺🇿')
         lg3 = types.KeyboardButton('Возврат')
 
-        mark.add(lg1, lg2,lg3)
+        mark.add(lg1, lg2, lg3)
 
         bot.send_message(call.message.chat.id, 'Change language', reply_markup=mark)
 
