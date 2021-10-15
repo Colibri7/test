@@ -334,7 +334,23 @@ def log(message):
 
             def doljniki(message):
                 if message.text == 'Должники по домену':
-                    pass
+                    min= connection.cursor()
+                    min.execute("SELECT `idmydomain`, `mydomain`.userid, `mydomainname`, NOW() as now_datetime, `expired`,`contactname`, `contactcompany` FROM `hostmasteruz_base`.`mydomain`,`hostmasteruz_base`.`contact`  WHERE DATE(expired) = DATE(NOW()) AND `mydomain`.`mydomaincontactcust` = `contact`.`idcontact`;")
+                    domain=min.fetchall()
+                    domain_text = ''
+                    number = 1
+                    for i in domain:
+                        date = '{:%d-%m-%Y}'.format(i["expired"])
+                        if i["contactcompany"] == None:
+                            domain_text += f'№ {number}\nid: {i["user_id"]}\nконтакт: <b>{i["contactname"]}</b>\nдомен: <b>{i["mydomainname"]}</b>\nдата окончания: <b>{date}</b>\n\n'
+
+                        else:
+                            domain_text += f'№ {number}\nid: {i["user_id"]}\nконтакт: <b>{i["contactcompany"]}</b>\nдомен: <b>{i["mydomainname"]}</b>\nдата окончания: <b>{date}</b>\n\n'
+                        number += 1
+                    bot.send_message(message.chat.id, domain_text, parse_mode='html')
+                    bot.register_next_step_handler(message, doljniki)
+
+
                 elif message.text == 'Должники по хостингу':
                     min = connection.cursor()
                     min.execute(
@@ -451,17 +467,7 @@ def log(message):
                                  reply_markup=markup_ru)
 
                 bot.register_next_step_handler(message, after_login)
-                # zadoljnsot
-                # minus = connection.cursor()
-                # minus.execute(
-                #     'SELECT `user`.`id`, `user`.`username`, `contact`.`balance` FROM `user`, `contact` WHERE'
-                #     ' `user`.`id` = `contact`.`userid` AND `contact`.`balance` < 0'
-                #     ' ORDER BY `user`.`id`, `user`.`username`, `contact`.`balance` DESC')
-                # checkout = minus.fetchall()
-                # for i in checkout:
-                #     if login in i.values():
-                #         bot.send_message(message.chat.id,
-                #                          f'U vas zadoljnost na accounte {i["username"]}: {i["balance"]} sum')
+
             elif message.text == 'Главное меню':
                 markup = types.InlineKeyboardMarkup(row_width=2)
                 lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
