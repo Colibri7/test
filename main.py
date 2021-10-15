@@ -331,7 +331,6 @@ def log(message):
                                      'Главное меню',
                                      reply_markup=markup_ru)
                     bot.register_next_step_handler(message, after_login)
-
             def doljniki(message):
                 def doljniki_domen(message):
                     if message.text == '60 дней':
@@ -347,7 +346,6 @@ def log(message):
                         print(days_60)
                         bot.send_message(message.chat.id, days_60)
                         bot.register_next_step_handler(message, doljniki_domen)
-
                     elif message.text == '30 дней':
                         min = connection.cursor()
                         min.execute(
@@ -922,11 +920,11 @@ def schedule_checker():
 
 
 if __name__ == "__main__":
-    schedule.every().day.at("11:44").do(domen_60_days_schedule)
-    schedule.every().day.at("11:43").do(domen_30_days_schedule)
-    schedule.every().day.at("12:10").do(domen_1_days_schedule)
-    schedule.every().day.at('14:09').do(vds_schedule)
-    schedule.every().day.at("14:10").do(hosting_schedule)
+    schedule.every().day.at("12:11").do(domen_60_days_schedule)
+    schedule.every().day.at("12:12").do(domen_30_days_schedule)
+    schedule.every().day.at("12:13").do(domen_1_days_schedule)
+    schedule.every().day.at('12:14').do(vds_schedule)
+    schedule.every().day.at("12:15").do(hosting_schedule)
 
     Thread(target=schedule_checker).start()
 
