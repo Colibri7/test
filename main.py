@@ -201,7 +201,7 @@ def send_welcome(message):
     lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
     lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
     lg3 = types.InlineKeyboardButton('Авторизация', callback_data='cabinet')
-    lg4 = types.InlineKeyboardButton('Связь с менедежером', callback_data='connect_admin',url='https://t.me/hostmaster_tech_support')
+    lg4 = types.InlineKeyboardButton('Связь с менеджером', callback_data='connect_admin',url='https://t.me/hostmaster_tech_support')
     lg5 = types.InlineKeyboardButton('Перейти на сайт', callback_data='site', url='https://hostmaster.uz/')
     lg6 = types.InlineKeyboardButton('Настройки', callback_data='settings')
 
@@ -294,7 +294,7 @@ def log(message):
                                     i["status"] = 'Block'
                                 else:
                                     i["status"] = 'Deleted'
-                                vds_text += f'<b>vds №{num}</b>. {i["vdshostname"]}\nТариф: {i["tariffname"]}\nСтатус: {i["status"]}\n'
+                                vds_text += f'<b>vds №{num}</b>. {i["vdshostname"]}\nТариф: {i["tariffname"]}\nСтатус: {i["status"]}\n\n'
                                 num += 1
                             bot.send_message(message.chat.id, vds_text,parse_mode='html')
                         else:
@@ -458,7 +458,7 @@ def log(message):
                 lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
                 lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
                 lg3 = types.InlineKeyboardButton('Авторизация', callback_data='cabinet')
-                lg4 = types.InlineKeyboardButton('Связь с менедежером', callback_data='connect_admin')
+                lg4 = types.InlineKeyboardButton('Связь с менеджером', callback_data='connect_admin',url='https://t.me/hostmaster_tech_support')
                 lg5 = types.InlineKeyboardButton('Перейти на сайт', callback_data='site',url='https://hostmaster.uz/')
                 lg6 = types.InlineKeyboardButton('Настройки', callback_data='settings')
 
@@ -516,7 +516,7 @@ def log(message):
                 lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
                 lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
                 lg3 = types.InlineKeyboardButton('Авторизация', callback_data='cabinet')
-                lg4 = types.InlineKeyboardButton('Связь с менедежером', callback_data='connect_admin')
+                lg4 = types.InlineKeyboardButton('Связь с менеджером', callback_data='connect_admin',url='https://t.me/hostmaster_tech_support')
                 lg5 = types.InlineKeyboardButton('Перейти на сайт', callback_data='site', url='https://hostmaster.uz/')
                 lg6 = types.InlineKeyboardButton('Настройки', callback_data='settings')
 
@@ -595,7 +595,7 @@ def log(message):
             lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
             lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
             lg3 = types.InlineKeyboardButton('Авторизация', callback_data='cabinet')
-            lg4 = types.InlineKeyboardButton('Связь с менедежером', callback_data='connect_admin')
+            lg4 = types.InlineKeyboardButton('Связь с менеджером', callback_data='connect_admin',url='https://t.me/hostmaster_tech_support')
             lg5 = types.InlineKeyboardButton('Перейти на сайт', callback_data='site', url='https://hostmaster.uz/')
             lg6 = types.InlineKeyboardButton('Настройки', callback_data='settings')
 
@@ -872,7 +872,7 @@ def language(message):
         lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
         lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
         lg3 = types.InlineKeyboardButton('Авторизация', callback_data='cabinet')
-        lg4 = types.InlineKeyboardButton('Связь с менедежером', callback_data='connect_admin')
+        lg4 = types.InlineKeyboardButton('Связь с менеджером', callback_data='connect_admin',url='https://t.me/hostmaster_tech_support')
         lg5 = types.InlineKeyboardButton('Перейти на сайт', callback_data='site', url='https://hostmaster.uz/')
         lg6 = types.InlineKeyboardButton('Настройки', callback_data='settings')
 
@@ -888,7 +888,7 @@ def language(message):
         lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
         lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
         lg3 = types.InlineKeyboardButton('Авторизация', callback_data='cabinet')
-        lg4 = types.InlineKeyboardButton('Связь с менедежером', callback_data='connect_admin')
+        lg4 = types.InlineKeyboardButton('Связь с менеджером', callback_data='connect_admin',url='https://t.me/hostmaster_tech_support')
         lg5 = types.InlineKeyboardButton('Перейти на сайт', callback_data='site', url='https://hostmaster.uz/')
         lg6 = types.InlineKeyboardButton('Настройки', callback_data='settings')
 
@@ -1039,7 +1039,7 @@ def callback(call):
                 lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
                 lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
                 lg3 = types.InlineKeyboardButton('Авторизация', callback_data='cabinet')
-                lg4 = types.InlineKeyboardButton('Связь с менедежером', callback_data='connect_admin')
+                lg4 = types.InlineKeyboardButton('Связь с менеджером', callback_data='connect_admin',url='https://t.me/hostmaster_tech_support')
                 lg5 = types.InlineKeyboardButton('Перейти на сайт', callback_data='site', url='https://hostmaster.uz/')
                 lg6 = types.InlineKeyboardButton('Настройки', callback_data='settings')
 
@@ -1074,10 +1074,6 @@ def callback(call):
         bot.send_message(call.message.chat.id, 'Change language', reply_markup=mark)
 
         bot.register_next_step_handler(call.message, language)
-
-    elif call.data == 'as':
-
-        pass
 
     elif call.data == "ro'yxatdan_o'tish":
         bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
