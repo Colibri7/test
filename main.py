@@ -537,7 +537,7 @@ def log(message):
                                  reply_markup=markup)
                 bot.register_next_step_handler(message, language)
             else:
-                key = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
+                key = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True,one_time_keyboard=True)
                 lg1 = types.KeyboardButton("Возврат")
                 key.add(lg1)
                 bot.send_message(message.chat.id, 'Неверный пароль или почта', reply_markup=key)
@@ -597,7 +597,7 @@ def log(message):
             bot.register_next_step_handler(message, language)
 
         else:
-            key = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
+            key = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True,one_time_keyboard=True)
             lg1 = types.KeyboardButton("Возврат")
             key.add(lg1)
             bot.send_message(message.chat.id, 'Повторите попытку', reply_markup=key)
