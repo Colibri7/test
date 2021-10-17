@@ -315,7 +315,7 @@ def log(message):
                         days_60 = ''
                         n = 1
                         for i in domendays_60:
-                            days_60 += f'{n}. (https://cctld.uz/whois/?domain={i["mydomainname"]}&zone=uz)\n'
+                            days_60 += f'{n}. {i["mydomainname"]}\n'
                             n += 1
                         print(days_60)
                         bot.send_message(message.chat.id, days_60)
@@ -328,7 +328,7 @@ def log(message):
                         days_30 = ''
                         n = 1
                         for i in domendays_30:
-                            days_30 += f'{n}. (https://cctld.uz/whois/?domain={i["mydomainname"]}&zone=uz)\n'
+                            days_30 += f'{n}. {i["mydomainname"]}\n'
                             n += 1
                         print(days_30)
                         bot.send_message(message.chat.id, days_30)
@@ -341,7 +341,7 @@ def log(message):
                         days_10 = ''
                         n = 1
                         for i in domendays_10:
-                            days_10 += f'{n}. (https://cctld.uz/whois/?domain={i["mydomainname"]}&zone=uz)\n'
+                            days_10 += f'{n}. {i["mydomainname"]}\n'
                             n += 1
                         print(days_10)
                         bot.send_message(message.chat.id, days_10)
@@ -354,7 +354,7 @@ def log(message):
                         days_1 = ''
                         n = 1
                         for i in domendays_1:
-                            days_1 += f'{n}. (https://cctld.uz/whois/?domain={i["mydomainname"]}&zone=uz)\n'
+                            days_1 += f'{n}. {i["mydomainname"]}\n'
                             n += 1
                         print(days_1)
                         bot.send_message(message.chat.id, days_1)
@@ -367,7 +367,7 @@ def log(message):
                         red = ''
                         n = 1
                         for i in redemption:
-                            red += f'{n}. (https://cctld.uz/whois/?domain={i["mydomainname"]}&zone=uz)\n'
+                            red += f'{n}. {i["mydomainname"]}\n'
                             n += 1
                         print(red)
                         bot.send_message(message.chat.id, red)
