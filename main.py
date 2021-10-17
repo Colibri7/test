@@ -315,7 +315,7 @@ def log(message):
                         days_60 = ''
                         n = 1
                         for i in domendays_60:
-                            days_60 += f'{n}. {i["mydomainname"]}\n'
+                            days_60 += f'{n}. {i["mydomainname"]}.uz\n'
                             n += 1
                         print(days_60)
                         bot.send_message(message.chat.id, days_60)
@@ -328,7 +328,7 @@ def log(message):
                         days_30 = ''
                         n = 1
                         for i in domendays_30:
-                            days_30 += f'{n}. {i["mydomainname"]}\n'
+                            days_30 += f'{n}. {i["mydomainname"]}.uz\n'
                             n += 1
                         print(days_30)
                         bot.send_message(message.chat.id, days_30)
@@ -341,7 +341,7 @@ def log(message):
                         days_10 = ''
                         n = 1
                         for i in domendays_10:
-                            days_10 += f'{n}. {i["mydomainname"]}\n'
+                            days_10 += f'{n}. {i["mydomainname"]}.uz\n'
                             n += 1
                         print(days_10)
                         bot.send_message(message.chat.id, days_10)
@@ -354,7 +354,7 @@ def log(message):
                         days_1 = ''
                         n = 1
                         for i in domendays_1:
-                            days_1 += f'{n}. {i["mydomainname"]}\n'
+                            days_1 += f'{n}. {i["mydomainname"]}.uz\n'
                             n += 1
                         print(days_1)
                         bot.send_message(message.chat.id, days_1)
@@ -367,7 +367,7 @@ def log(message):
                         red = ''
                         n = 1
                         for i in redemption:
-                            red += f'{n}. {i["mydomainname"]}\n'
+                            red += f'{n}. {i["mydomainname"]}.uz\n'
                             n += 1
                         print(red)
                         bot.send_message(message.chat.id, red)
@@ -393,15 +393,15 @@ def log(message):
                     markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
                     bot.send_message(message.chat.id, 'Уведомления Доменов', reply_markup=markup)
                     bot.register_next_step_handler(message, doljniki_domen)
-                elif message.text == '...':
-                    pass
+
                 elif message.text == 'Возврат':
                     markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True,one_time_keyboard=True)
                     lg1 = types.KeyboardButton('Мои услуги')
                     lg2 = types.KeyboardButton('Мои контакты')
                     lg3 = types.KeyboardButton('Уведомления')
+                    lg4 = types.KeyboardButton('Возврат')
 
-                    markup_ru.add(lg1, lg2, lg3)
+                    markup_ru.add(lg1, lg2, lg3,lg4)
 
                     bot.send_message(message.chat.id,
                                      'Возврат',
