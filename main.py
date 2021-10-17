@@ -505,6 +505,27 @@ def log(message):
 
                 markup_ru.add(lg1, lg2, lg3)
 
+                bot_con = pymysql.connect(host='62.209.143.131',
+                                          user='hostmasteruz_pbot',
+                                          password='bcaxoZyAXDGc',
+                                          database='hostmasteruz_bot',
+                                          charset='utf8mb4',
+                                          cursorclass=pymysql.cursors.DictCursor
+                                          )
+                min = connection.cursor()
+                min.execute(
+                    'SELECT `user`.`id`  FROM `user` WHERE username=%(username)s', {'username': login})
+                check = min.fetchall()
+                for i in check:
+                    id = i["id"]
+
+                    cursor = bot_con.cursor()
+                    query = "INSERT INTO `sardorbot` (`tg_id`, `tg_username`, `tg_first_name`, `tg_last_name`, `updated`,`b_username`,`b_userid`) " \
+                            "VALUES ({0},'{1}','{2}','{3}','{4}','{5}','{6}') ON DUPLICATE KEY UPDATE `tg_username` = '{1}', `tg_first_name` = '{2}', `tg_last_name` = '{3}', `updated` = '{4}',`b_username`='{5}',`b_userid`='{6}'".format(
+                        chat_id, username, first_name, last_name, dt_obj, login, id)
+
+                    print(query)
+                    cursor.execute(query)
                 bot.send_message(message.chat.id,
                                  'Поздравляем! Вы успешно прошли авторизацию!',
                                  reply_markup=markup_ru)
@@ -556,27 +577,7 @@ def log(message):
         dt_obj = datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d %H:%M:%S')
 
         print(dt_obj)
-        bot_con = pymysql.connect(host='62.209.143.131',
-                                  user='hostmasteruz_pbot',
-                                  password='bcaxoZyAXDGc',
-                                  database='hostmasteruz_bot',
-                                  charset='utf8mb4',
-                                  cursorclass=pymysql.cursors.DictCursor
-                                  )
-        min = connection.cursor()
-        min.execute(
-            'SELECT `user`.`id`  FROM `user` WHERE username=%(username)s', {'username': login})
-        check = min.fetchall()
-        for i in check:
-            id = i["id"]
 
-            cursor = bot_con.cursor()
-            query = "INSERT INTO `sardorbot` (`tg_id`, `tg_username`, `tg_first_name`, `tg_last_name`, `updated`,`b_username`,`b_userid`) " \
-                    "VALUES ({0},'{1}','{2}','{3}','{4}','{5}','{6}') ON DUPLICATE KEY UPDATE `tg_username` = '{1}', `tg_first_name` = '{2}', `tg_last_name` = '{3}', `updated` = '{4}',`b_username`='{5}',`b_userid`='{6}'".format(
-                chat_id, username, first_name, last_name, dt_obj, login, id)
-
-            print(query)
-            cursor.execute(query)
         cursor = connection.cursor()
         cursor.execute('SELECT username FROM user')
         checkUsername = cursor.fetchall()
