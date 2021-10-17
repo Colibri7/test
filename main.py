@@ -302,7 +302,9 @@ def log(message):
                     lg3 = types.KeyboardButton('Возврат')
                     markup_ru.add(lg1, lg2, lg3)
                     bot.send_message(message.chat.id,
-                                     'Возврат',
+                                     'Это информационный бот компании Hostmaster.'
+                                     '\nHostmaster – Хостинг провайдер и регистратор доменов в'
+                                     '\nУзбекистане, в Ташкенте.\nНаш телефон: 71-202-55-11',
                                      reply_markup=markup_ru)
                     bot.register_next_step_handler(message, after_login)
             def doljniki(message):
@@ -889,9 +891,6 @@ def language(message):
                          reply_markup=markup)
         bot.register_next_step_handler(message, language)
 
-
-
-
 @bot.callback_query_handler(func=lambda call: True)
 def callback(call):
     if call.data == 'cabinet':
@@ -995,7 +994,7 @@ def callback(call):
                 bot.register_next_step_handler(message, uslugi)
             elif message.text == 'Мои VDS':
                 for i in check:
-                    id = i["b_userid"]
+
                     id_connect = connection.cursor()
                     id_connect.execute(
                         'SELECT `vdscontract`.`vdshostname`, `vds_tariffs`.`tariffname` ,`vdscontract`.`status`  FROM `user`, `vdscontract`, `vds_tariffs` WHERE   username=%(username)s AND `user`.`id` = `vdscontract`.`user_id` AND `vdscontract`.`vdsid` = `vds_tariffs`.`idvds` ORDER BY `vdscontract`.`vdshostname`;',
