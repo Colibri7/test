@@ -214,16 +214,6 @@ def send_welcome(message):
                      reply_markup=markup)
 
 
-
-# @bot.message_handler(content_types=['text'])
-# def login_reg(message):
-#
-#     else:
-#         bot.register_next_step_handler(message, log)
-
-
-
-
 @bot.message_handler(content_types=['text'])
 def log(message):
     def password(message):
@@ -498,13 +488,16 @@ def log(message):
                     'SELECT id,password_hash FROM user WHERE username=%(username)s', {'username': login})
 
                 check = min.fetchall()
-                markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True,one_time_keyboard=True)
-                lg1 = types.KeyboardButton('Мои услуги')
-                lg2 = types.KeyboardButton('Мои контакты')
-                lg3 = types.KeyboardButton('Возврат')
+                markup = types.InlineKeyboardMarkup(row_width=2)
+                lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
+                lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
+                lg3 = types.InlineKeyboardButton('Авторизация', callback_data='cabinet')
+                lg4 = types.InlineKeyboardButton('Связь с менеджером', callback_data='connect_admin',
+                                                 url='https://t.me/hostmaster_tech_support')
+                lg5 = types.InlineKeyboardButton('Перейти на сайт', callback_data='site', url='https://hostmaster.uz/')
+                lg6 = types.InlineKeyboardButton('Настройки', callback_data='settings')
 
-                markup_ru.add(lg1, lg2, lg3)
-
+                markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
                 bot_con = pymysql.connect(host='62.209.143.131',
                                           user='hostmasteruz_pbot',
                                           password='bcaxoZyAXDGc',
@@ -523,15 +516,10 @@ def log(message):
                     query = "INSERT INTO `sardorbot` (`tg_id`, `tg_username`, `tg_first_name`, `tg_last_name`, `updated`,`b_username`,`b_userid`) " \
                             "VALUES ({0},'{1}','{2}','{3}','{4}','{5}','{6}') ON DUPLICATE KEY UPDATE `tg_username` = '{1}', `tg_first_name` = '{2}', `tg_last_name` = '{3}', `updated` = '{4}',`b_username`='{5}',`b_userid`='{6}'".format(
                         chat_id, username, first_name, last_name, dt_obj, login, id)
-
-                    print(query)
                     cursor.execute(query)
                 bot.send_message(message.chat.id,
                                  'Поздравляем! Вы успешно прошли авторизацию!',
-                                 reply_markup=markup_ru)
-
-                bot.register_next_step_handler(message, after_login)
-
+                                 reply_markup=markup)
             elif message.text == 'Возврат':
                 markup = types.InlineKeyboardMarkup(row_width=2)
                 lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
@@ -921,14 +909,14 @@ def callback(call):
                                   cursorclass=pymysql.cursors.DictCursor
                                   )
         min = bot_con.cursor()
-        print(min)
+
         tg_id = call.message.chat.id
-        print(tg_id)
+
         min.execute(
             'SELECT `hostmasteruz_base`.`contact`.*, `hostmasteruz_bot`.`sardorbot`.`b_userid` FROM `hostmasteruz_base`.`contact`, `hostmasteruz_bot`.`sardorbot` WHERE `hostmasteruz_bot`.`sardorbot`.`tg_id` = %(tg_id)s AND `hostmasteruz_base`.`contact`.`userid` = `hostmasteruz_bot`.`sardorbot`.`b_userid`;',
             {'tg_id': tg_id})
         check = min.fetchall()
-        print(check)
+
         text = ''
         num = 1
         for i in check:
