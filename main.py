@@ -208,10 +208,10 @@ def func(message):
 
         markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
         bot.send_message(message.chat.id,
-                         'Это информационный бот компании Hostmaster.'
+                         'Это информационный бот компании <b>Hostmaster.</b>'
                          '\nHostmaster – Хостинг провайдер и регистратор доменов в'
-                         '\nУзбекистане, в Ташкенте.\nНаш телефон: 71-202-55-11',
-                         reply_markup=markup)
+                         '\nУзбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
+                         reply_markup=markup,parse_mode='html')
         bot.register_next_step_handler(message, language)
 
     elif message.text == 'Bosh sahifa':
@@ -223,12 +223,12 @@ def func(message):
         lg5 = types.InlineKeyboardButton('Sozlamalar', callback_data='Sozlamalar')
         markup_uz.add(lg1, lg2, lg3, lg4, lg5)
         bot.send_message(message.chat.id,
-                         "Bu Hostmaster kompaniyasining "
+                         "Bu <b>Hostmaster</b> kompaniyasining "
                          "axborot boti.Hostmaster - Xosting "
                          "provayderi va domen registratori "
                          "O'zbekiston,Toshkentda. "
-                         "Bizning telefon: 71-202-55-11",
-                         reply_markup=markup_uz)
+                         "Bizning telefon: <b>71-202-55-11</b>",
+                         reply_markup=markup_uz,parse_mode='html')
 
 
 # Start bot
@@ -249,10 +249,10 @@ def send_welcome(message):
     markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
     bot.send_message(332749197, text, parse_mode='html')
     bot.send_message(message.chat.id,
-                     'Это информационный бот компании Hostmaster.'
+                     'Это информационный бот компании <b>Hostmaster.</b>'
                      '\nHostmaster – Хостинг провайдер и регистратор доменов в'
-                     '\nУзбекистане, в Ташкенте.\nНаш телефон: 71-202-55-11',
-                     reply_markup=markup)
+                     '\nУзбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
+                     reply_markup=markup,parse_mode='html')
 
 
 @bot.message_handler(content_types=['text'])
@@ -360,10 +360,10 @@ def log(message):
                     lg3 = types.KeyboardButton('Возврат')
                     markup_ru.add(lg1, lg2, lg3)
                     bot.send_message(message.chat.id,
-                                     'Это информационный бот компании Hostmaster.'
+                                     'Это информационный бот компании <b>Hostmaster.</b>'
                                      '\nHostmaster – Хостинг провайдер и регистратор доменов в'
-                                     '\nУзбекистане, в Ташкенте.\nНаш телефон: 71-202-55-11',
-                                     reply_markup=markup_ru)
+                                     '\nУзбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
+                                     reply_markup=markup_ru,parse_mode='html')
                     bot.register_next_step_handler(message, after_login)
 
             def doljniki(message):
@@ -465,10 +465,10 @@ def log(message):
                     markup_ru.add(lg1, lg2, lg3, lg4)
 
                     bot.send_message(message.chat.id,
-                                     'Это информационный бот компании Hostmaster.'
+                                     'Это информационный бот компании <b>Hostmaster.</b>'
                                      '\nHostmaster – Хостинг провайдер и регистратор доменов в'
-                                     '\nУзбекистане, в Ташкенте.\nНаш телефон: 71-202-55-11',
-                                     reply_markup=markup_ru)
+                                     '\nУзбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
+                                     reply_markup=markup_ru,parse_mode='html')
                 bot.register_next_step_handler(message, after_login)
 
             if message.text == 'Мои контакты':
@@ -519,10 +519,10 @@ def log(message):
 
                 markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
                 bot.send_message(message.chat.id,
-                                 'Это информационный бот компании Hostmaster.'
+                                 'Это информационный бот компании <b>Hostmaster.</b>'
                                  '\nHostmaster – Хостинг провайдер и регистратор доменов в'
-                                 '\nУзбекистане, в Ташкенте.\nНаш телефон: 71-202-55-11',
-                                 reply_markup=markup)
+                                 '\nУзбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
+                                 reply_markup=markup,parse_mode='html')
                 bot.register_next_step_handler(message, language)
 
         if message.text == 'sardor':
@@ -601,10 +601,10 @@ def log(message):
 
                 markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
                 bot.send_message(message.chat.id,
-                                 'Это информационный бот компании Hostmaster.'
+                                 'Это информационный бот компании <b>Hostmaster.</b>'
                                  '\nHostmaster – Хостинг провайдер и регистратор доменов в'
-                                 '\nУзбекистане, в Ташкенте.\nНаш телефон: 71-202-55-11',
-                                 reply_markup=markup)
+                                 '\nУзбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
+                                 reply_markup=markup,parse_mode='html')
                 bot.register_next_step_handler(message, language)
             else:
                 key = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
@@ -628,10 +628,10 @@ def log(message):
 
         markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
         bot.send_message(message.chat.id,
-                         'Это информационный бот компании Hostmaster.'
+                         'Это информационный бот компании <b>Hostmaster.</b>'
                          '\nHostmaster – Хостинг провайдер и регистратор доменов в'
-                         '\nУзбекистане, в Ташкенте.\nНаш телефон: 71-202-55-11',
-                         reply_markup=markup)
+                         '\nУзбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
+                         reply_markup=markup,parse_mode='html')
         bot.register_next_step_handler(message, language)
     else:
         login = message.text
@@ -669,10 +669,10 @@ def log(message):
 
             markup_ru.add(lg1, lg2, lg3, lg4, lg5, lg6)
             bot.send_message(message.chat.id,
-                             'Это информационный бот компании Hostmaster.'
+                             'Это информационный бот компании <b>Hostmaster.</b>'
                              '\nHostmaster – Хостинг провайдер и регистратор доменов в'
-                             '\nУзбекистане, в Ташкенте.\nНаш телефон: 71-202-55-11',
-                             reply_markup=markup_ru)
+                             '\nУзбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
+                             reply_markup=markup_ru,parse_mode='html')
             bot.register_next_step_handler(message, language)
 
         else:
@@ -798,10 +798,10 @@ def log_uz(message):
                     lg3 = types.KeyboardButton('Возврат')
                     markup_ru.add(lg1, lg2, lg3)
                     bot.send_message(message.chat.id,
-                                     'Это информационный бот компании Hostmaster.'
+                                     'Это информационный бот компании <b>Hostmaster.</b>'
                                      '\nHostmaster – Хостинг провайдер и регистратор доменов в'
-                                     '\nУзбекистане, в Ташкенте.\nНаш телефон: 71-202-55-11',
-                                     reply_markup=markup_ru)
+                                     '\nУзбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
+                                     reply_markup=markup_ru,parse_mode='html')
                     bot.register_next_step_handler(message, after_login_uz)
 
             def doljniki(message):
@@ -911,10 +911,10 @@ def log_uz(message):
                     markup_ru.add(lg1, lg2, lg3, lg4)
 
                     bot.send_message(message.chat.id,
-                                     'Это информационный бот компании Hostmaster.'
+                                     'Это информационный бот компании <b>Hostmaster.</b>'
                                      '\nHostmaster – Хостинг провайдер и регистратор доменов в'
-                                     '\nУзбекистане, в Ташкенте.\nНаш телефон: 71-202-55-11',
-                                     reply_markup=markup_ru)
+                                     '\nУзбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
+                                     reply_markup=markup_ru,parse_mode='html')
                 bot.register_next_step_handler(message, after_login_uz)
 
             if message.text == 'Мои контакты':
@@ -965,10 +965,10 @@ def log_uz(message):
 
                 markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
                 bot.send_message(message.chat.id,
-                                 'Это информационный бот компании Hostmaster.'
+                                 'Это информационный бот компании <b>Hostmaster.</b>'
                                  '\nHostmaster – Хостинг провайдер и регистратор доменов в'
-                                 '\nУзбекистане, в Ташкенте.\nНаш телефон: 71-202-55-11',
-                                 reply_markup=markup)
+                                 '\nУзбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
+                                 reply_markup=markup,parse_mode='html')
                 bot.register_next_step_handler(message, language)
 
         if message.text == 'sardor':
@@ -1036,11 +1036,12 @@ def log_uz(message):
                         chat_id, username, first_name, last_name, dt_obj, login, id)
                     cursor.execute(query)
                 bot.send_message(message.chat.id,
-                                 "Bu Hostmaster kompaniyasining "
+                                 "Bu <b>Hostmaster</b> kompaniyasining "
                                  "axborot boti.Hostmaster - Xosting "
                                  "provayderi va domen registratori "
                                  "O'zbekiston,Toshkentda. "
-                                 "Bizning telefon: 71-202-55-11\n\n<b>Tabriklaymiz! Siz avtorizatsiyadan muvaffaqiyatli o'tdingiz!</b>",
+                                 "Bizning telefon: <b>71-202-55-11</b>\n\n"
+                                 "<b>Tabriklaymiz! Siz avtorizatsiyadan muvaffaqiyatli o'tdingiz!</b>",
                                  reply_markup=markup_uz,parse_mode='html')
                 bot.send_message(332749197,
                                  f'{message.from_user.first_name} Successfully authorized')
@@ -1055,12 +1056,12 @@ def log_uz(message):
                 lg6 = types.InlineKeyboardButton('Sozlamalar', callback_data='sozlamalar')
                 markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
                 bot.send_message(message.chat.id,
-                                 "Bu Hostmaster kompaniyasining "
+                                 "Bu <b>Hostmaster</b> kompaniyasining "
                                  "axborot boti.Hostmaster - Xosting "
                                  "provayderi va domen registratori "
                                  "O'zbekiston,Toshkentda. "
-                                 "Bizning telefon: 71-202-55-11",
-                                 reply_markup=markup_uz)
+                                 "Bizning telefon: <b>71-202-55-11</b>",
+                                 reply_markup=markup_uz,parse_mode='html')
                 bot.register_next_step_handler(message, language)
             else:
                 key = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
@@ -1083,12 +1084,12 @@ def log_uz(message):
         lg6 = types.InlineKeyboardButton('Sozlamalar', callback_data='sozlamalar')
         markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
         bot.send_message(message.chat.id,
-                         "Bu Hostmaster kompaniyasining "
+                         "Bu <b>Hostmaster</b> kompaniyasining "
                          "axborot boti.Hostmaster - Xosting "
                          "provayderi va domen registratori "
                          "O'zbekiston,Toshkentda. "
-                         "Bizning telefon: 71-202-55-11",
-                         reply_markup=markup_uz)
+                         "Bizning telefon: <b>71-202-55-11</b>",
+                         reply_markup=markup_uz,parse_mode='html')
         bot.register_next_step_handler(message, language)
     else:
         login = message.text
@@ -1123,12 +1124,12 @@ def log_uz(message):
             lg6 = types.InlineKeyboardButton('Sozlamalar', callback_data='sozlamalar')
             markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
             bot.send_message(message.chat.id,
-                             "Bu Hostmaster kompaniyasining "
+                             "Bu <b>Hostmaster</b> kompaniyasining "
                              "axborot boti.Hostmaster - Xosting "
                              "provayderi va domen registratori "
                              "O'zbekiston,Toshkentda. "
-                             "Bizning telefon: 71-202-55-11",
-                             reply_markup=markup_uz)
+                             "Bizning telefon: <b>71-202-55-11</b>",
+                             reply_markup=markup_uz,parse_mode='html')
             bot.register_next_step_handler(message, language)
 
         else:
@@ -1154,12 +1155,12 @@ def language(message):
         lg6 = types.InlineKeyboardButton('Sozlamalar', callback_data='sozlamalar')
         markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
         bot.send_message(message.chat.id,
-                         "Bu Hostmaster kompaniyasining "
+                         "Bu <b>Hostmaster</b> kompaniyasining "
                          "axborot boti.Hostmaster - Xosting "
                          "provayderi va domen registratori "
                          "O'zbekiston,Toshkentda. "
-                         "Bizning telefon: 71-202-55-11",
-                         reply_markup=markup_uz)
+                         "Bizning telefon: <b>71-202-55-11</b>",
+                         reply_markup=markup_uz,parse_mode='html')
 
     elif message.text == '🇷🇺Russian🇷🇺':
         markup_ru = types.InlineKeyboardMarkup(row_width=2)
@@ -1173,10 +1174,10 @@ def language(message):
 
         markup_ru.add(lg1, lg2, lg3, lg4, lg5, lg6)
         bot.send_message(message.chat.id,
-                         'Это информационный бот компании Hostmaster.'
+                         'Это информационный бот компании <b>Hostmaster.</b>'
                          '\nHostmaster – Хостинг провайдер и регистратор доменов в'
-                         '\nУзбекистане, в Ташкенте.\nНаш телефон: 71-202-55-11',
-                         reply_markup=markup_ru)
+                         '\nУзбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
+                         reply_markup=markup_ru,parse_mode='html')
         bot.register_next_step_handler(message, language)
     elif message.text == 'Возврат':
         markup = types.InlineKeyboardMarkup(row_width=2)
@@ -1190,9 +1191,9 @@ def language(message):
 
         markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
         bot.send_message(message.chat.id,
-                         'Это информационный бот компании Hostmaster.'
+                         'Это информационный бот компании <b>Hostmaster.</b>'
                          '\nHostmaster – Хостинг провайдер и регистратор доменов в'
-                         '\nУзбекистане, в Ташкенте.\nНаш телефон: 71-202-55-11',
+                         '\nУзбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
                          reply_markup=markup)
         bot.register_next_step_handler(message, language)
 
@@ -1380,10 +1381,10 @@ def callback(call):
 
                 markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
                 bot.send_message(message.chat.id,
-                                 'Это информационный бот компании Hostmaster.'
+                                 'Это информационный бот компании <b>Hostmaster.</b>'
                                  '\nHostmaster – Хостинг провайдер и регистратор доменов в'
-                                 '\nУзбекистане, в Ташкенте.\nНаш телефон: 71-202-55-11',
-                                 reply_markup=markup)
+                                 '\nУзбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
+                                 reply_markup=markup,parse_mode='html')
                 bot.register_next_step_handler(message, language)
 
         markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
@@ -1554,11 +1555,11 @@ def callback(call):
                 lg6 = types.InlineKeyboardButton("Sozlamalar", callback_data='sozlamalar')
                 markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
                 bot.send_message(message.chat.id,
-                                 "Bu Hostmaster kompaniyasining "
+                                 "Bu <b>Hostmaster</b> kompaniyasining "
                                  "axborot boti.Hostmaster - Xosting "
                                  "provayderi va domen registratori "
                                  "O'zbekiston,Toshkentda. "
-                                 "Bizning telefon: 71-202-55-11",
+                                 "Bizning telefon: <b>71-202-55-11</b>",
                                  reply_markup=markup_uz)
                 bot.register_next_step_handler(message, language)
 
