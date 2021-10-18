@@ -209,8 +209,8 @@ def func(message):
         markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
         bot.send_message(message.chat.id,
                          'Это информационный бот компании <b>Hostmaster.</b>'
-                         '\nHostmaster – Хостинг провайдер и регистратор доменов в'
-                         '\nУзбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
+                         ' Hostmaster – Хостинг провайдер и регистратор доменов в'
+                         ' Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
                          reply_markup=markup,parse_mode='html')
         bot.register_next_step_handler(message, language)
 
@@ -250,8 +250,8 @@ def send_welcome(message):
     bot.send_message(332749197, text, parse_mode='html')
     bot.send_message(message.chat.id,
                      'Это информационный бот компании <b>Hostmaster.</b>'
-                     '\nHostmaster – Хостинг провайдер и регистратор доменов в'
-                     '\nУзбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
+                     ' Hostmaster – Хостинг провайдер и регистратор доменов в'
+                     ' Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
                      reply_markup=markup,parse_mode='html')
 
 
@@ -361,8 +361,8 @@ def log(message):
                     markup_ru.add(lg1, lg2, lg3)
                     bot.send_message(message.chat.id,
                                      'Это информационный бот компании <b>Hostmaster.</b>'
-                                     '\nHostmaster – Хостинг провайдер и регистратор доменов в'
-                                     '\nУзбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
+                                     ' Hostmaster – Хостинг провайдер и регистратор доменов в'
+                                     ' Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
                                      reply_markup=markup_ru,parse_mode='html')
                     bot.register_next_step_handler(message, after_login)
 
@@ -466,8 +466,8 @@ def log(message):
 
                     bot.send_message(message.chat.id,
                                      'Это информационный бот компании <b>Hostmaster.</b>'
-                                     '\nHostmaster – Хостинг провайдер и регистратор доменов в'
-                                     '\nУзбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
+                                     ' Hostmaster – Хостинг провайдер и регистратор доменов в'
+                                     ' Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
                                      reply_markup=markup_ru,parse_mode='html')
                 bot.register_next_step_handler(message, after_login)
 
@@ -520,8 +520,8 @@ def log(message):
                 markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
                 bot.send_message(message.chat.id,
                                  'Это информационный бот компании <b>Hostmaster.</b>'
-                                 '\nHostmaster – Хостинг провайдер и регистратор доменов в'
-                                 '\nУзбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
+                                 ' Hostmaster – Хостинг провайдер и регистратор доменов в'
+                                 ' Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
                                  reply_markup=markup,parse_mode='html')
                 bot.register_next_step_handler(message, language)
 
@@ -602,8 +602,8 @@ def log(message):
                 markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
                 bot.send_message(message.chat.id,
                                  'Это информационный бот компании <b>Hostmaster.</b>'
-                                 '\nHostmaster – Хостинг провайдер и регистратор доменов в'
-                                 '\nУзбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
+                                 ' Hostmaster – Хостинг провайдер и регистратор доменов в'
+                                 ' Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
                                  reply_markup=markup,parse_mode='html')
                 bot.register_next_step_handler(message, language)
             else:
@@ -629,8 +629,8 @@ def log(message):
         markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
         bot.send_message(message.chat.id,
                          'Это информационный бот компании <b>Hostmaster.</b>'
-                         '\nHostmaster – Хостинг провайдер и регистратор доменов в'
-                         '\nУзбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
+                         ' Hostmaster – Хостинг провайдер и регистратор доменов в'
+                         ' Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
                          reply_markup=markup,parse_mode='html')
         bot.register_next_step_handler(message, language)
     else:
@@ -670,8 +670,8 @@ def log(message):
             markup_ru.add(lg1, lg2, lg3, lg4, lg5, lg6)
             bot.send_message(message.chat.id,
                              'Это информационный бот компании <b>Hostmaster.</b>'
-                             '\nHostmaster – Хостинг провайдер и регистратор доменов в'
-                             '\nУзбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
+                             ' Hostmaster – Хостинг провайдер и регистратор доменов в'
+                             ' Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
                              reply_markup=markup_ru,parse_mode='html')
             bot.register_next_step_handler(message, language)
 
@@ -799,8 +799,8 @@ def log_uz(message):
                     markup_ru.add(lg1, lg2, lg3)
                     bot.send_message(message.chat.id,
                                      'Это информационный бот компании <b>Hostmaster.</b>'
-                                     '\nHostmaster – Хостинг провайдер и регистратор доменов в'
-                                     '\nУзбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
+                                     ' Hostmaster – Хостинг провайдер и регистратор доменов в'
+                                     ' Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
                                      reply_markup=markup_ru,parse_mode='html')
                     bot.register_next_step_handler(message, after_login_uz)
 
@@ -912,8 +912,8 @@ def log_uz(message):
 
                     bot.send_message(message.chat.id,
                                      'Это информационный бот компании <b>Hostmaster.</b>'
-                                     '\nHostmaster – Хостинг провайдер и регистратор доменов в'
-                                     '\nУзбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
+                                     ' Hostmaster – Хостинг провайдер и регистратор доменов в'
+                                     ' Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
                                      reply_markup=markup_ru,parse_mode='html')
                 bot.register_next_step_handler(message, after_login_uz)
 
@@ -966,8 +966,8 @@ def log_uz(message):
                 markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
                 bot.send_message(message.chat.id,
                                  'Это информационный бот компании <b>Hostmaster.</b>'
-                                 '\nHostmaster – Хостинг провайдер и регистратор доменов в'
-                                 '\nУзбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
+                                 ' Hostmaster – Хостинг провайдер и регистратор доменов в'
+                                 ' Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
                                  reply_markup=markup,parse_mode='html')
                 bot.register_next_step_handler(message, language)
 
@@ -1175,8 +1175,8 @@ def language(message):
         markup_ru.add(lg1, lg2, lg3, lg4, lg5, lg6)
         bot.send_message(message.chat.id,
                          'Это информационный бот компании <b>Hostmaster.</b>'
-                         '\nHostmaster – Хостинг провайдер и регистратор доменов в'
-                         '\nУзбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
+                         ' Hostmaster – Хостинг провайдер и регистратор доменов в'
+                         ' Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
                          reply_markup=markup_ru,parse_mode='html')
         bot.register_next_step_handler(message, language)
     elif message.text == 'Возврат':
@@ -1192,8 +1192,8 @@ def language(message):
         markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
         bot.send_message(message.chat.id,
                          'Это информационный бот компании <b>Hostmaster.</b>'
-                         '\nHostmaster – Хостинг провайдер и регистратор доменов в'
-                         '\nУзбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
+                         ' Hostmaster – Хостинг провайдер и регистратор доменов в'
+                         ' Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
                          reply_markup=markup)
         bot.register_next_step_handler(message, language)
 
@@ -1382,8 +1382,8 @@ def callback(call):
                 markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
                 bot.send_message(message.chat.id,
                                  'Это информационный бот компании <b>Hostmaster.</b>'
-                                 '\nHostmaster – Хостинг провайдер и регистратор доменов в'
-                                 '\nУзбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
+                                 ' Hostmaster – Хостинг провайдер и регистратор доменов в'
+                                 ' Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>',
                                  reply_markup=markup,parse_mode='html')
                 bot.register_next_step_handler(message, language)
 
