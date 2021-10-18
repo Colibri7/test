@@ -982,7 +982,7 @@ def callback(call):
                         for i in checkContact:
                             if i["status"] == 1:
                                 i["status"] = 'Active'
-                            host_text += f'{num}. {i["hostcontractdomain"]}, Тариф: {i["hostingname"]}, Статус: {i["status"]}\n'
+                            host_text += f'{num}. {i["hostcontractdomain"]}, Тариф: <b>{i["hostingname"]}</b>, Статус: <b>{i["status"]}</b>\n'
                             num += 1
                         bot.send_message(message.chat.id, host_text)
                     else:
@@ -1009,7 +1009,7 @@ def callback(call):
                             elif i["status"] == 3:
                                 i["status"] = 'W_RED'
 
-                            domen_text += f'{num}. {i["mydomainname"]}.uz, <b>Активен до</b> {i["expired"].strftime("%d/%m/%Y")}\n'
+                            domen_text += f'{num}. {i["mydomainname"]}.uz, Активен до <b>{i["expired"].strftime("%d/%m/%Y")}</b>\n'
                             num += 1
                         bot.send_message(message.chat.id, domen_text,parse_mode='html')
                     else:
@@ -1034,7 +1034,7 @@ def callback(call):
                                 i["status"] = 'Block'
                             else:
                                 i["status"] = 'Deleted'
-                            vds_text += f'vds{num}. {i["vdshostname"]}, Тариф: {i["tariffname"]}, Статус: {i["status"]}\n\n'
+                            vds_text += f'{num}. {i["vdshostname"]}, Тариф: <b>{i["tariffname"]}</b>, Статус: <b>{i["status"]}</b>\n\n'
                             num += 1
                         bot.send_message(message.chat.id, vds_text)
                     else:
@@ -1058,7 +1058,7 @@ def callback(call):
                                 i["status"] = 'Active'
                             elif i["status"] == 2:
                                 i["status"] = 'Block'
-                            ser_text += f'{num}. {i["colhostname"]}, Статус: {i["status"]}\n\n'
+                            ser_text += f'{num}. <b>{i["colhostname"]}</b>, Статус: <b>{i["status"]}</b>\n\n'
                             num += 1
                         bot.send_message(message.chat.id, ser_text)
                     else:
