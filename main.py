@@ -35,7 +35,7 @@ def domen_60_days_schedule():
         some_id = i["tg_id"]
         print(some_id)
         if i["contactcompany"] == None:
-            bot.send_message(some_id, f'Уважаемый {i["contactname"]}!\n'
+            bot.send_message(332749197, f'Уважаемый {i["contactname"]}!\n'
                                       f'Уведомляем Вас о том, что срок действия Вашего домена\n'
                                       f'{i["mydomainname"]}.uz истекает {date} года.\n'
                                       f'Просим Вас ознакомиться с тарифами https://hostmaster.uz/domains/uz/\n'
@@ -45,7 +45,7 @@ def domen_60_days_schedule():
                                       f'С уважением, команда Hostmaster!')
         else:
 
-            bot.send_message(some_id, f'Уважаемый {i["contactcompany"]}!\n'
+            bot.send_message(332749197, f'Уважаемый {i["contactcompany"]}!\n'
                                       f'Уведомляем Вас о том, что срок действия Вашего домена\n'
                                       f'{i["mydomainname"]}.uz истекает {date} года.\n'
                                       f'Просим Вас ознакомиться с тарифами https://hostmaster.uz/domains/uz/\n'
@@ -1095,7 +1095,7 @@ def schedule_checker():
 
 
 if __name__ == "__main__":
-    schedule.every().day.at("09:18").do(domen_60_days_schedule)
+    schedule.every().day.at("09:10").do(domen_60_days_schedule)
     schedule.every().day.at("12:12").do(domen_30_days_schedule)
     schedule.every().day.at("12:13").do(domen_1_days_schedule)
     schedule.every().day.at('12:14').do(vds_schedule)
