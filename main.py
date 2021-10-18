@@ -1032,7 +1032,12 @@ def log_uz(message):
                         chat_id, username, first_name, last_name, dt_obj, login, id)
                     cursor.execute(query)
                 bot.send_message(message.chat.id,
-                                 "Tabriklaymiz! Siz avtorizatsiyadan muvaffaqiyatli o'tdingiz!",
+                                 "Bu Hostmaster kompaniyasining "
+                                 "axborot boti.Hostmaster - Xosting "
+                                 "provayderi va domen registratori "
+                                 "O'zbekiston,Toshkentda. "
+                                 "Bizning telefon: 71-202-55-11\n\nTabriklaymiz! Siz avtorizatsiyadan muvaffaqiyatli o'tdingiz!",
+
                                  reply_markup=markup_uz)
                 bot.send_message(332749197,
                                  'Successfully authorized')
