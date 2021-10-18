@@ -1034,7 +1034,7 @@ def callback(call):
                                 i["status"] = 'Block'
                             else:
                                 i["status"] = 'Deleted'
-                            vds_text += f'vds{num}-{i["vdshostname"]}\nТариф: {i["tariffname"]}\nСтатус: {i["status"]}\n\n'
+                            vds_text += f'vds{num}. {i["vdshostname"]}, Тариф: {i["tariffname"]}, Статус: {i["status"]}\n\n'
                             num += 1
                         bot.send_message(message.chat.id, vds_text)
                     else:
@@ -1052,8 +1052,13 @@ def callback(call):
                     num = 1
                     ser_text = ''
                     if checkContact:
+
                         for i in checkContact:
-                            ser_text += f'{num}. {i["colhostname"]},Статус: {i["status"]}\n\n'
+                            if i["status"] == 1:
+                                i["status"] = 'Active'
+                            elif i["status"] == 2:
+                                i["status"] = 'Block'
+                            ser_text += f'{num}. {i["colhostname"]}, Статус: {i["status"]}\n\n'
                             num += 1
                         bot.send_message(message.chat.id, ser_text)
                     else:
