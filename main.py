@@ -224,7 +224,7 @@ def func(message):
         markup_uz.add(lg1, lg2, lg3, lg4, lg5)
         bot.send_message(message.chat.id,
                          "Bu <b>Hostmaster</b> kompaniyasining "
-                         "axborot boti.Hostmaster - Xosting "
+                         "axborot boti. Hostmaster - Xosting "
                          "provayderi va domen registratori "
                          "O'zbekiston,Toshkentda. "
                          "Bizning telefon: <b>71-202-55-11</b>",
@@ -1038,7 +1038,7 @@ def log_uz(message):
                     cursor.execute(query)
                 bot.send_message(message.chat.id,
                                  "Bu <b>Hostmaster</b> kompaniyasining "
-                                 "axborot boti.Hostmaster - Xosting "
+                                 "axborot boti. Hostmaster - Xosting "
                                  "provayderi va domen registratori "
                                  "O'zbekiston,Toshkentda. "
                                  "Bizning telefon: <b>71-202-55-11</b>\n\n"
@@ -1058,7 +1058,7 @@ def log_uz(message):
                 markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
                 bot.send_message(message.chat.id,
                                  "Bu <b>Hostmaster</b> kompaniyasining "
-                                 "axborot boti.Hostmaster - Xosting "
+                                 "axborot boti. Hostmaster - Xosting "
                                  "provayderi va domen registratori "
                                  "O'zbekiston,Toshkentda. "
                                  "Bizning telefon: <b>71-202-55-11</b>",
@@ -1086,7 +1086,7 @@ def log_uz(message):
         markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
         bot.send_message(message.chat.id,
                          "Bu <b>Hostmaster</b> kompaniyasining "
-                         "axborot boti.Hostmaster - Xosting "
+                         "axborot boti. Hostmaster - Xosting "
                          "provayderi va domen registratori "
                          "O'zbekiston,Toshkentda. "
                          "Bizning telefon: <b>71-202-55-11</b>",
@@ -1126,7 +1126,7 @@ def log_uz(message):
             markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
             bot.send_message(message.chat.id,
                              "Bu <b>Hostmaster</b> kompaniyasining "
-                             "axborot boti.Hostmaster - Xosting "
+                             "axborot boti. Hostmaster - Xosting "
                              "provayderi va domen registratori "
                              "O'zbekiston,Toshkentda. "
                              "Bizning telefon: <b>71-202-55-11</b>",
@@ -1157,7 +1157,7 @@ def language(message):
         markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
         bot.send_message(message.chat.id,
                          "Bu <b>Hostmaster</b> kompaniyasining "
-                         "axborot boti.Hostmaster - Xosting "
+                         "axborot boti. Hostmaster - Xosting "
                          "provayderi va domen registratori "
                          "O'zbekiston,Toshkentda. "
                          "Bizning telefon: <b>71-202-55-11</b>",
@@ -1557,7 +1557,7 @@ def callback(call):
                 markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
                 bot.send_message(message.chat.id,
                                  "Bu <b>Hostmaster</b> kompaniyasining "
-                                 "axborot boti.Hostmaster - Xosting "
+                                 "axborot boti. Hostmaster - Xosting "
                                  "provayderi va domen registratori "
                                  "O'zbekiston,Toshkentda. "
                                  "Bizning telefon: <b>71-202-55-11</b>",
