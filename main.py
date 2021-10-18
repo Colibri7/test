@@ -984,7 +984,7 @@ def callback(call):
                                 i["status"] = 'Active'
                             host_text += f'{num}. {i["hostcontractdomain"]}, Тариф: <b>{i["hostingname"]}</b>, Статус: <b>{i["status"]}</b>\n'
                             num += 1
-                        bot.send_message(message.chat.id, host_text)
+                        bot.send_message(message.chat.id, host_text,parse_mode='html')
                     else:
                         bot.send_message(message.chat.id, "У вас нет хостингов")
 
@@ -1036,7 +1036,7 @@ def callback(call):
                                 i["status"] = 'Deleted'
                             vds_text += f'{num}. {i["vdshostname"]}, Тариф: <b>{i["tariffname"]}</b>, Статус: <b>{i["status"]}</b>\n\n'
                             num += 1
-                        bot.send_message(message.chat.id, vds_text)
+                        bot.send_message(message.chat.id, vds_text,parse_mode='html')
                     else:
                         bot.send_message(message.chat.id, 'У вас нет VDS')
 
@@ -1060,7 +1060,7 @@ def callback(call):
                                 i["status"] = 'Block'
                             ser_text += f'{num}. <b>{i["colhostname"]}</b>, Статус: <b>{i["status"]}</b>\n\n'
                             num += 1
-                        bot.send_message(message.chat.id, ser_text)
+                        bot.send_message(message.chat.id, ser_text,parse_mode='html')
                     else:
                         bot.send_message(message.chat.id, 'У вас нет сервера')
 
