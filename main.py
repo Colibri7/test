@@ -484,7 +484,7 @@ def log(message):
                         else:
                             text += f'{num}. {i["contactcompany"]}, Баланс: <b>{i["balance"]} sum</b>\n\n'
                         num += 1
-                    bot.send_message(message.chat.id, text)
+                    bot.send_message(message.chat.id, text,parse_mode='html')
                 bot.register_next_step_handler(message, after_login)
             elif message.text == 'Мои услуги':
                 markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
@@ -928,7 +928,7 @@ def log_uz(message):
                         else:
                             text += f'{num}. {i["contactcompany"]}, Баланс: <b>{i["balance"]} sum</b>\n\n'
                         num += 1
-                    bot.send_message(message.chat.id, text)
+                    bot.send_message(message.chat.id, text,parse_mode='html')
                 bot.register_next_step_handler(message, after_login_uz)
             elif message.text == 'Мои услуги':
                 markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
@@ -1232,7 +1232,7 @@ def callback(call):
                 text += f'{num}. {i["contactcompany"]}, Баланс: <b>{i["balance"]} sum</b>\n\n'
             num += 1
         bot.send_message(call.message.chat.id, 'Контакты')
-        bot.send_message(call.message.chat.id, text)
+        bot.send_message(call.message.chat.id, text,parse_mode='html')
     elif call.data == 'my_services':
         bot_con = pymysql.connect(host='62.209.143.131',
                                   user='hostmasteruz_pbot',
@@ -1598,7 +1598,7 @@ def callback(call):
                 text += f'{num}. {i["contactcompany"]}, Balans: <b>{i["balance"]} sum</b>\n\n'
             num += 1
         bot.send_message(call.message.chat.id, 'Kontaktlar')
-        bot.send_message(call.message.chat.id, text)
+        bot.send_message(call.message.chat.id, text,parse_mode='html')
     elif call.data == 'sozlamalar':
         mark = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
         lg1 = types.KeyboardButton('🇷🇺Russian🇷🇺')
