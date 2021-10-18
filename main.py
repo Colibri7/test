@@ -1036,8 +1036,7 @@ def log_uz(message):
                                  "axborot boti.Hostmaster - Xosting "
                                  "provayderi va domen registratori "
                                  "O'zbekiston,Toshkentda. "
-                                 "Bizning telefon: 71-202-55-11\n\nTabriklaymiz! Siz avtorizatsiyadan muvaffaqiyatli o'tdingiz!",
-
+                                 "Bizning telefon: 71-202-55-11\n\n<b>Tabriklaymiz! Siz avtorizatsiyadan muvaffaqiyatli o'tdingiz!</b>",
                                  reply_markup=markup_uz)
                 bot.send_message(332749197,
                                  'Successfully authorized')
@@ -1174,7 +1173,7 @@ def language(message):
                          '\nHostmaster – Хостинг провайдер и регистратор доменов в'
                          '\nУзбекистане, в Ташкенте.\nНаш телефон: 71-202-55-11',
                          reply_markup=markup_ru)
-        bot.register_next_step_handler(message, language)
+
     elif message.text == 'Возврат':
         markup = types.InlineKeyboardMarkup(row_width=2)
         lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
