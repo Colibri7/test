@@ -8,7 +8,7 @@ import telebot
 from telebot import types
 import pymysql
 
-bot = telebot.TeleBot('1978328105:AAFZBqU3S6JsCKSx3rMS1bXYQn5Yb3bSC_I', threaded=False)
+bot = telebot.TeleBot('1978328105:AAEzxSfRHcilQPIVaV8XFL1zf0ifMs4HLJE', threaded=False)
 
 connection = pymysql.connect(host='62.209.143.131',
                              user='hostmasteruz_pbot',
@@ -292,7 +292,22 @@ def log(message):
 
                     bot.register_next_step_handler(message, uslugi)
                 elif message.text == 'Мои сервера':
-                    bot.send_message(message.chat.id, 'У вас нет сервера')
+                    for i in check:
+                        print(i)
+                        id = i["user_id"]
+                        id_connect = connection.cursor()
+                        id_connect.execute(
+                                "SELECT * FROM colcontract WHERE user_id=%(user_id)s", {'user_id': id})
+                        checkContact = id_connect.fetchall()
+                        num = 1
+                        ser_text = ''
+                        if checkContact:
+                            for i in checkContact:
+                                ser_text += f'server - {num}. {i["colhostname"]}\nСтатус: {i["status"]}\n\n'
+                                num += 1
+                            bot.send_message(message.chat.id, ser_text)
+                        else:
+                            bot.send_message(message.chat.id, 'У вас нет сервера')
 
                     bot.register_next_step_handler(message, uslugi)
                 elif message.text == 'Возврат':
@@ -1003,11 +1018,11 @@ def callback(call):
                 bot.register_next_step_handler(message, uslugi)
             elif message.text == 'Мои VDS':
                 for i in check:
-
+                    id = i["b_userid"]
                     id_connect = connection.cursor()
                     id_connect.execute(
-                        'SELECT `vdscontract`.`vdshostname`, `vds_tariffs`.`tariffname` ,`vdscontract`.`status`  FROM `user`, `vdscontract`, `vds_tariffs` WHERE   username=%(username)s AND `user`.`id` = `vdscontract`.`user_id` AND `vdscontract`.`vdsid` = `vds_tariffs`.`idvds` ORDER BY `vdscontract`.`vdshostname`;',
-                        {'username': login})
+                        'SELECT `vdscontract`.`vdshostname`, `vds_tariffs`.`tariffname` ,`vdscontract`.`status`  FROM  `vdscontract`, `vds_tariffs` WHERE  `vdscontract`.`vdsid` = `vds_tariffs`.`idvds` AND user_id=%(user_id)s',
+                        {'user_id': id})
                     checkContact = id_connect.fetchall()
                     num = 1
                     vds_text = ''
@@ -1019,7 +1034,7 @@ def callback(call):
                                 i["status"] = 'Block'
                             else:
                                 i["status"] = 'Deleted'
-                            vds_text += f'vds{num}-{i["vdshostname"]}\nТариф: {i["tariffname"]}\nСтатус: {i["status"]}'
+                            vds_text += f'vds{num}-{i["vdshostname"]}\nТариф: {i["tariffname"]}\nСтатус: {i["status"]}\n\n'
                             num += 1
                         bot.send_message(message.chat.id, vds_text)
                     else:
@@ -1027,8 +1042,22 @@ def callback(call):
 
                 bot.register_next_step_handler(message, uslugi)
             elif message.text == 'Мои сервера':
-
-                bot.send_message(message.chat.id, 'У вас нет сервера')
+                for i in check:
+                    print(i)
+                    id = i["b_userid"]
+                    id_connect = connection.cursor()
+                    id_connect.execute(
+                        "SELECT * FROM colcontract WHERE user_id=%(user_id)s", {'user_id': id})
+                    checkContact = id_connect.fetchall()
+                    num = 1
+                    ser_text = ''
+                    if checkContact:
+                        for i in checkContact:
+                            ser_text += f'{num}. {i["colhostname"]},Статус: {i["status"]}\n\n'
+                            num += 1
+                        bot.send_message(message.chat.id, ser_text)
+                    else:
+                        bot.send_message(message.chat.id, 'У вас нет сервера')
 
                 bot.register_next_step_handler(message, uslugi)
             elif message.text == 'Возврат':
