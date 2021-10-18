@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="MySQL - hostmasteruz_base@62.209.143.131" uuid="cd936302-8726-4816-bfe8-818a0422cefc">
+    <data-source source="LOCAL" name="bil_base" uuid="badec5ee-acac-4808-966c-b954f2fc58af">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://62.209.143.131:3306/hostmasteruz_base</jdbc-url>
+      <jdbc-url>jdbc:mysql:// 62.209.143.131:3306/hostmasteruz_base</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+    <data-source source="LOCAL" name="tg_base" uuid="5de0cb82-d646-4383-b89c-2708bc7d2313">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://62.209.143.131:3306/hostmasteruz_bot</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
