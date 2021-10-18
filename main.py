@@ -8,7 +8,7 @@ import telebot
 from telebot import types
 import pymysql
 
-bot = telebot.TeleBot('1978328105:AAGikdLPosgnFrHy1JHkVGAE0NzPI3PNDME', threaded=False)
+bot = telebot.TeleBot('1978328105:AAFZBqU3S6JsCKSx3rMS1bXYQn5Yb3bSC_I', threaded=False)
 
 connection = pymysql.connect(host='62.209.143.131',
                              user='hostmasteruz_pbot',
@@ -27,32 +27,32 @@ SQLALCHEMY_ENGINE_OPTIONS = {
 def domen_60_days_schedule():
     min = connection.cursor()
     min.execute(
-        "SELECT `tg_id`, `idmydomain`, `mydomain`.userid, `mydomainname`, NOW() as now_datetime, `expired`,`contactname`, `contactcompany` FROM `hostmasteruz_base`.`mydomain`, `hostmasteruz_bot`.`sardorbot`,`hostmasteruz_base`.`contact`  WHERE DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 57 DAY)) AND `sardorbot`.`b_userid` = `mydomain`.`userid` AND `mydomain`.`mydomaincontactcust` = `contact`.`idcontact`;")
+        "SELECT `tg_id`, `idmydomain`, `mydomain`.userid, `mydomainname`, NOW() as now_datetime, `expired`,`contactname`, `contactcompany` FROM `hostmasteruz_base`.`mydomain`, `hostmasteruz_bot`.`sardorbot`,`hostmasteruz_base`.`contact`  WHERE DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 60 DAY)) AND `sardorbot`.`b_userid` = `mydomain`.`userid` AND `mydomain`.`mydomaincontactcust` = `contact`.`idcontact`;")
     domen = min.fetchall()
-    print(domen)
+
     for i in domen:
         date = '{:%d-%m-%Y}'.format(i["expired"])
         some_id = i["tg_id"]
         print(some_id)
         if i["contactcompany"] == None:
-            bot.send_message(332749197, f'Уважаемый {i["contactname"]}!\n'
+            bot.send_message(some_id, f'Уважаемый <b>{i["contactname"]}!</b>\n'
                                       f'Уведомляем Вас о том, что срок действия Вашего домена\n'
-                                      f'{i["mydomainname"]}.uz истекает {date} года.\n'
+                                      f'<b>{i["mydomainname"]}.uz</b> истекает <b>{date}</b> года.\n'
                                       f'Просим Вас ознакомиться с тарифами https://hostmaster.uz/domains/uz/\n'
                                       f'на продление регистрации доменов, оплатить\nсоответствующую сумму'
                                       f'и сообщить менеджеру о продлении\nдомена. В случае неоплаты,'
                                       f'Ваш домен будет свободен для\nрегистрации другим лицом.\n'
-                                      f'С уважением, команда Hostmaster!')
+                                      f'<b>С уважением, команда Hostmaster!</b>',parse_mode='html')
         else:
 
-            bot.send_message(332749197, f'Уважаемый {i["contactcompany"]}!\n'
+            bot.send_message(some_id, f'Уважаемый <b>{i["contactcompany"]}!</b>\n'
                                       f'Уведомляем Вас о том, что срок действия Вашего домена\n'
-                                      f'{i["mydomainname"]}.uz истекает {date} года.\n'
+                                      f'<b>{i["mydomainname"]}.uz</b> истекает <b>{date}</b> года.\n'
                                       f'Просим Вас ознакомиться с тарифами https://hostmaster.uz/domains/uz/\n'
                                       f'на продление регистрации доменов, оплатить\nсоответствующую сумму'
                                       f'и сообщить менеджеру о продлении\nдомена. В случае неоплаты,'
                                       f'Ваш домен будет свободен для\nрегистрации другим лицом.\n'
-                                      f'С уважением, команда Hostmaster!')
+                                      f'<b>С уважением, команда Hostmaster!</b>',parse_mode='html')
 
 
 def domen_30_days_schedule():
@@ -73,7 +73,7 @@ def domen_30_days_schedule():
                                       f'на продление регистрации доменов, оплатить\nсоответствующую сумму'
                                       f'и сообщить менеджеру о продлении\nдомена. В случае неоплаты,'
                                       f'Ваш домен будет свободен для\nрегистрации другим лицом.\n'
-                                      f'С уважением, команда Hostmaster!')
+                                      f'С уважением, команда Hostmaster!',parse_mode='html')
         else:
             bot.send_message(some_id, f'Уважаемый {i["contactcompany"]}!\n'
                                       f'Уведомляем Вас о том, что срок действия Вашего домена\n'
@@ -82,7 +82,7 @@ def domen_30_days_schedule():
                                       f'на продление регистрации доменов, оплатить\nсоответствующую сумму'
                                       f'и сообщить менеджеру о продлении\nдомена. В случае неоплаты,'
                                       f'Ваш домен будет свободен для\nрегистрации другим лицом.\n'
-                                      f'С уважением, команда Hostmaster!')
+                                      f'С уважением, команда Hostmaster!',parse_mode='html')
 
 
 def domen_1_days_schedule():
@@ -102,7 +102,7 @@ def domen_1_days_schedule():
                                       f'на продление регистрации доменов, оплатить\nсоответствующую сумму'
                                       f'и сообщить менеджеру о продлении\nдомена. В случае неоплаты,'
                                       f'Ваш домен будет свободен для\nрегистрации другим лицом.\n'
-                                      f'<b>С уважением, команда Hostmaster!</b>')
+                                      f'<b>С уважением, команда Hostmaster!</b>',parse_mode='html')
         else:
             bot.send_message(some_id, f'Уважаемый <b>{i["contactcompany"]}</b>!\n'
                                       f'Уведомляем Вас о том, что срок действия Вашего домена\n'
@@ -111,7 +111,7 @@ def domen_1_days_schedule():
                                       f'на продление регистрации доменов, оплатить\nсоответствующую сумму'
                                       f'и сообщить менеджеру о продлении\nдомена. В случае неоплаты,'
                                       f'Ваш домен будет свободен для\nрегистрации другим лицом.\n'
-                                      f'<b>С уважением, команда Hostmaster!</b>')
+                                      f'<b>С уважением, команда Hostmaster!</b>',parse_mode='html')
 
 
 def hosting_schedule():
@@ -479,6 +479,8 @@ def log(message):
             bot.send_message(message.chat.id,
                              'Поздравляем! Вы успешно прошли авторизацию!',
                              reply_markup=markup_ru)
+            bot.send_message(332749197,
+                             f'{message.from_user.first_name} Successfully authorized for admin')
 
             bot.register_next_step_handler(message, after_login)
         else:
@@ -522,6 +524,8 @@ def log(message):
                 bot.send_message(message.chat.id,
                                  'Поздравляем! Вы успешно прошли авторизацию!',
                                  reply_markup=markup)
+                bot.send_message(332749197,
+                                 'Successfully authorized')
             elif message.text == 'Возврат':
                 markup = types.InlineKeyboardMarkup(row_width=2)
                 lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
@@ -542,7 +546,10 @@ def log(message):
                 key = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True,one_time_keyboard=True)
                 lg1 = types.KeyboardButton("Возврат")
                 key.add(lg1)
+                bot.send_message(332749197,
+                                 f'{message.from_user.first_name} Cant log in')
                 bot.send_message(message.chat.id, 'Неверный пароль или почта', reply_markup=key)
+
                 bot.register_next_step_handler(message, password)
     if message.text == 'Возврат':
         markup = types.InlineKeyboardMarkup(row_width=2)
@@ -603,6 +610,8 @@ def log(message):
             lg1 = types.KeyboardButton("Возврат")
             key.add(lg1)
             bot.send_message(message.chat.id, 'Повторите попытку', reply_markup=key)
+            bot.send_message(332749197,
+                             f'{message.from_user.first_name} Cant log in')
             bot.register_next_step_handler(message, log)
 
 
@@ -1095,7 +1104,7 @@ def schedule_checker():
 
 
 if __name__ == "__main__":
-    schedule.every().day.at("09:10").do(domen_60_days_schedule)
+    schedule.every().day.at("09:41").do(domen_60_days_schedule)
     schedule.every().day.at("12:12").do(domen_30_days_schedule)
     schedule.every().day.at("12:13").do(domen_1_days_schedule)
     schedule.every().day.at('12:14').do(vds_schedule)
