@@ -67,14 +67,16 @@ def domen_30_days_schedule():
         if i["contactcompany"] == None:
 
             bot.send_message(332749197, f'Уважаемый <b>{i["contactname"]}!</b> Уведомляем Вас о том, '
-                                        f'что срок действия домена <b>{i["mydomainname"]}.uz</b> истекает <b>{date}</b> '
+                                        f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
+                                        f'истекает <b>{date}</b> '
                                         f'года . Для продления регистрации домена Вам необходимо оплатить '
                                         f'сумму согласно действующим тарифам через личный кабинет на нашем сайте. '
                                         f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
                                         f'лицом.\n<b>С уважением, команда Hostmaster!</b>', parse_mode='html')
         else:
             bot.send_message(332749197, f'Уважаемый <b>{i["contactcompany"]}!</b> Уведомляем Вас о том, '
-                                        f'что срок действия домена <b>{i["mydomainname"]}.uz</b> истекает <b>{date}</b> '
+                                        f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
+                                        f'истекает <b>{date}</b> '
                                         f'года . Для продления регистрации домена Вам необходимо оплатить '
                                         f'сумму согласно действующим тарифам через личный кабинет на нашем сайте. '
                                         f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
@@ -94,14 +96,16 @@ def domen_10_days_schedule():
         if i["contactcompany"] == None:
 
             bot.send_message(332749197, f'Уважаемый <b>{i["contactname"]}!</b> Уведомляем Вас о том, '
-                                        f'что срок действия домена <b>{i["mydomainname"]}.uz</b> истекает <b>{date}</b> '
+                                        f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
+                                        f'истекает <b>{date}</b> '
                                         f'года . Для продления регистрации домена Вам необходимо оплатить '
                                         f'сумму согласно действующим тарифам через личный кабинет на нашем сайте. '
                                         f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
                                         f'лицом.\n<b>С уважением, команда Hostmaster!</b>', parse_mode='html')
         else:
             bot.send_message(332749197, f'Уважаемый <b>{i["contactcompany"]}!</b> Уведомляем Вас о том, '
-                                        f'что срок действия домена <b>{i["mydomainname"]}.uz</b> истекает <b>{date}</b> '
+                                        f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
+                                        f'истекает <b>{date}</b> '
                                         f'года . Для продления регистрации домена Вам необходимо оплатить '
                                         f'сумму согласно действующим тарифам через личный кабинет на нашем сайте. '
                                         f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
@@ -152,7 +156,8 @@ def hosting_schedule():
                                       f'Уведомляем Вас о необходимости оплаты услуг за использование услуги'
                                       f' Хостинга на будущий месяц до <b>{date}</b>  в соответствии с выбранным'
                                       f'тарифом <b>{i["hostingname"]}</b> в размере <b>{i["abon_month"]}</b> сум. '
-                                      f'В случае неоплаты, услуга будет отключена !\n<b>\nС уважением, команда Hostmaster!</b>',
+                                      f'В случае неоплаты, услуга будет отключена !\n'
+                                      f'<b>\nС уважением, команда Hostmaster!</b>',
                              parse_mode='html')
         else:
             bot.send_message(some_id, f'Уважаемый <b>{i["contactcompany"]}</b> !\n'
@@ -177,14 +182,16 @@ def vds_schedule():
                                         f'Уведомляем Вас о необходимости оплаты услуг за использование услуги '
                                         f'VDS на будущий месяц до <b>{date}</b>  в соответствии с выбранным '
                                         f'тарифом <b>{i["tariffname"]}</b> в размере <b>{i["abon_month"]}</b> сум. '
-                                        f'В случае неоплаты, услуга будет отключена ! <b>\nС уважением, команда Hostmaster!</b>',
+                                        f'В случае неоплаты, услуга будет отключена ! '
+                                        f'<b>\nС уважением, команда Hostmaster!</b>',
                              parse_mode='html')
         else:
             bot.send_message(332749197, f'Уважаемый <b>{i["contactcompany"]}</b> !\n'
                                         f'Уведомляем Вас о необходимости оплаты услуг за использование услуги '
                                         f'VDS на будущий месяц до <b>{date}</b>  в соответствии с выбранным '
                                         f'тарифом <b>{i["tariffname"]}</b> в размере <b>{i["abon_month"]}</b> сум. '
-                                        f'В случае неоплаты, услуга будет отключена ! <b>\nС уважением, команда Hostmaster!</b>',
+                                        f'В случае неоплаты, услуга будет отключена ! '
+                                        f'<b>\nС уважением, команда Hostmaster!</b>',
                              parse_mode='html')
 
 
@@ -214,14 +221,20 @@ def func(message):
         lg5 = types.InlineKeyboardButton('Sozlamalar', callback_data='Sozlamalar')
         markup_uz.add(lg1, lg2, lg3, lg4, lg5)
         bot.send_message(message.chat.id,
-                         """Bu Hostmaster kompaniyasining axborot boti. Hostmaster - Xosting provayderi va domen registratori" O'zbekiston,Toshkentda. Bizning telefon: 71-202-55-11""",
+                         "Bu Hostmaster kompaniyasining "
+                         "axborot boti.Hostmaster - Xosting "
+                         "provayderi va domen registratori "
+                         "O'zbekiston,Toshkentda. "
+                         "Bizning telefon: 71-202-55-11",
                          reply_markup=markup_uz)
 
 
 # Start bot
 @bot.message_handler(commands=['start', 'menu'])
 def send_welcome(message):
-    text = f'Bot in action:\nname: <b>{message.from_user.first_name}</b>\nchat_id: <b>{message.chat.id}</b>\nusername: <b>@{message.from_user.username}</b>'
+    text = f'Bot in action:\nname: <b>{message.from_user.first_name}</b>\n ' \
+           f'chat_id: <b>{message.chat.id}</b>\n ' \
+           f'username: <b>@{message.from_user.username}</b>'
     markup = types.InlineKeyboardMarkup(row_width=2)
     lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
     lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
@@ -1009,7 +1022,11 @@ def log_uz(message):
                 lg6 = types.InlineKeyboardButton('Sozlamalar', callback_data='sozlamalar')
                 markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
                 bot.send_message(message.chat.id,
-                                 """Bu Hostmaster kompaniyasining axborot boti. Hostmaster - Xosting provayderi va domen registratori" O'zbekiston,Toshkentda. Bizning telefon: 71-202-55-11""",
+                                 "Bu Hostmaster kompaniyasining "
+                                 "axborot boti.Hostmaster - Xosting "
+                                 "provayderi va domen registratori "
+                                 "O'zbekiston,Toshkentda. "
+                                 "Bizning telefon: 71-202-55-11",
                                  reply_markup=markup_uz)
                 bot.register_next_step_handler(message, language)
             else:
@@ -1033,7 +1050,11 @@ def log_uz(message):
         lg6 = types.InlineKeyboardButton('Sozlamalar', callback_data='sozlamalar')
         markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
         bot.send_message(message.chat.id,
-                         """Bu Hostmaster kompaniyasining axborot boti. Hostmaster - Xosting provayderi va domen registratori" O'zbekiston,Toshkentda. Bizning telefon: 71-202-55-11""",
+                         "Bu Hostmaster kompaniyasining "
+                         "axborot boti.Hostmaster - Xosting "
+                         "provayderi va domen registratori "
+                         "O'zbekiston,Toshkentda. "
+                         "Bizning telefon: 71-202-55-11",
                          reply_markup=markup_uz)
         bot.register_next_step_handler(message, language)
     else:
@@ -1069,7 +1090,11 @@ def log_uz(message):
             lg6 = types.InlineKeyboardButton('Sozlamalar', callback_data='sozlamalar')
             markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
             bot.send_message(message.chat.id,
-                             """Bu Hostmaster kompaniyasining axborot boti. Hostmaster - Xosting provayderi va domen registratori" O'zbekiston,Toshkentda. Bizning telefon: 71-202-55-11""",
+                             "Bu Hostmaster kompaniyasining "
+                             "axborot boti.Hostmaster - Xosting "
+                             "provayderi va domen registratori "
+                             "O'zbekiston,Toshkentda. "
+                             "Bizning telefon: 71-202-55-11",
                              reply_markup=markup_uz)
             bot.register_next_step_handler(message, language)
 
@@ -1096,7 +1121,11 @@ def language(message):
         lg6 = types.InlineKeyboardButton('Sozlamalar', callback_data='sozlamalar')
         markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
         bot.send_message(message.chat.id,
-                         """Bu Hostmaster kompaniyasining axborot boti. Hostmaster - Xosting provayderi va domen registratori" O'zbekiston,Toshkentda. Bizning telefon: 71-202-55-11""",
+                         "Bu Hostmaster kompaniyasining "
+                         "axborot boti.Hostmaster - Xosting "
+                         "provayderi va domen registratori "
+                         "O'zbekiston,Toshkentda. "
+                         "Bizning telefon: 71-202-55-11",
                          reply_markup=markup_uz)
 
     elif message.text == '🇷🇺Russian🇷🇺':
@@ -1458,7 +1487,11 @@ def callback(call):
                 lg6 = types.InlineKeyboardButton('Sozlamalar', callback_data='sozlamalar')
                 markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
                 bot.send_message(message.chat.id,
-                                 """Bu Hostmaster kompaniyasining axborot boti. Hostmaster - Xosting provayderi va domen registratori" O'zbekiston,Toshkentda. Bizning telefon: 71-202-55-11""",
+                                 "Bu Hostmaster kompaniyasining "
+                                 "axborot boti.Hostmaster - Xosting "
+                                 "provayderi va domen registratori "
+                                 "O'zbekiston,Toshkentda. "
+                                 "Bizning telefon: 71-202-55-11",
                                  reply_markup=markup_uz)
                 bot.register_next_step_handler(message, language)
 
@@ -1492,7 +1525,7 @@ def callback(call):
         text = ''
         num = 1
         for i in check:
-            if i["contactcompany"] == None:
+            if i["contactcompany"] is None:
                 text += f'{num}. {i["contactname"]}, Balans: {i["balance"]} sum\n\n'
             else:
                 text += f'{num}. {i["contactcompany"]}, Balans: {i["balance"]} sum\n\n'
