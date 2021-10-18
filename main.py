@@ -586,7 +586,7 @@ def log(message):
                                  'Поздравляем! Вы успешно прошли авторизацию!',
                                  reply_markup=markup)
                 bot.send_message(332749197,
-                                 'Successfully authorized')
+                                 f'{message.from_user.first_name} Successfully authorized')
             elif message.text == 'Возврат':
                 markup = types.InlineKeyboardMarkup(row_width=2)
                 lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
@@ -1037,9 +1037,9 @@ def log_uz(message):
                                  "provayderi va domen registratori "
                                  "O'zbekiston,Toshkentda. "
                                  "Bizning telefon: 71-202-55-11\n\n<b>Tabriklaymiz! Siz avtorizatsiyadan muvaffaqiyatli o'tdingiz!</b>",
-                                 reply_markup=markup_uz)
+                                 reply_markup=markup_uz,parse_mode='html')
                 bot.send_message(332749197,
-                                 'Successfully authorized')
+                                 f'{message.from_user.first_name} Successfully authorized')
             elif message.text == 'Qaytish':
                 markup_uz = types.InlineKeyboardMarkup(row_width=2)
                 lg1 = types.InlineKeyboardButton('Mening xizmatlarim', callback_data='xizmatlarim')
