@@ -724,7 +724,9 @@ def log_uz(message):
                                 elif i["status"] == 3:
                                     i["status"] = 'W_RED'
 
-                                domen_text += f'{num}.{i["mydomainname"]}.uz, Статус: {(i["status"])}, Дата окончания:{i["expired"].strftime("%d/%m/%Y")}'
+                                domen_text += f'{num}.{i["mydomainname"]}.uz, ' \
+                                              f'Статус: {(i["status"])}, ' \
+                                              f'Дата окончания:{i["expired"].strftime("%d/%m/%Y")}'
                                 num += 1
                             bot.send_message(message.chat.id, domen_text)
                         else:
@@ -736,7 +738,13 @@ def log_uz(message):
                         id = i["id"]
                         id_connect = connection.cursor()
                         id_connect.execute(
-                            'SELECT `vdscontract`.`vdshostname`, `vds_tariffs`.`tariffname` ,`vdscontract`.`status`  FROM `user`, `vdscontract`, `vds_tariffs` WHERE   username=%(username)s AND `user`.`id` = `vdscontract`.`user_id` AND `vdscontract`.`vdsid` = `vds_tariffs`.`idvds` ORDER BY `vdscontract`.`vdshostname`;',
+                            'SELECT `vdscontract`.`vdshostname`, '
+                            '`vds_tariffs`.`tariffname` ,'
+                            '`vdscontract`.`status`  FROM '
+                            '`user`, `vdscontract`, `vds_tariffs` WHERE '
+                            ' username=%(username)s AND `user`.`id` = `vdscontract`.`user_id`'
+                            ' AND `vdscontract`.`vdsid` = `vds_tariffs`.`idvds` '
+                            'ORDER BY `vdscontract`.`vdshostname`;',
                             {'username': login})
                         checkContact = id_connect.fetchall()
                         num = 1
@@ -749,7 +757,9 @@ def log_uz(message):
                                     i["status"] = 'Block'
                                 else:
                                     i["status"] = 'Deleted'
-                                vds_text += f'<b>vds №{num}</b>. {i["vdshostname"]}\nТариф: {i["tariffname"]}\nСтатус: {i["status"]}\n\n'
+                                vds_text += f'<b>vds №{num}</b>. {i["vdshostname"]}\n' \
+                                            f'Тариф: {i["tariffname"]}\n' \
+                                            f'Статус: {i["status"]}\n\n'
                                 num += 1
                             bot.send_message(message.chat.id, vds_text, parse_mode='html')
                         else:
@@ -793,7 +803,10 @@ def log_uz(message):
                     if message.text == '60 дней':
                         min = connection.cursor()
                         min.execute(
-                            "SELECT `idmydomain`, `userid`, `mydomainname`, NOW() as now_datetime, `expired` FROM `mydomain` WHERE DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 60 DAY))")
+                            "SELECT `idmydomain`, `userid`,"
+                            " `mydomainname`, NOW() as"
+                            " now_datetime, `expired` FROM "
+                            "`mydomain` WHERE DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 60 DAY))")
                         domendays_60 = min.fetchall()
                         days_60 = ''
                         n = 1
@@ -806,7 +819,10 @@ def log_uz(message):
                     elif message.text == '30 дней':
                         min = connection.cursor()
                         min.execute(
-                            "SELECT `idmydomain`, `userid`, `mydomainname`, NOW() as now_datetime, `expired` FROM `mydomain` WHERE DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 30 DAY))")
+                            "SELECT `idmydomain`, `userid`,"
+                            " `mydomainname`, NOW() as now_datetime,"
+                            " `expired` FROM `mydomain` "
+                            "WHERE DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 30 DAY))")
                         domendays_30 = min.fetchall()
                         days_30 = ''
                         n = 1
@@ -845,7 +861,9 @@ def log_uz(message):
                     elif message.text == 'Redemption':
                         min = connection.cursor()
                         min.execute(
-                            "SELECT `idmydomain`, `userid`, `mydomainname`, NOW() as now_datetime, `expired` FROM `mydomain` WHERE status=3")
+                            "SELECT `idmydomain`, `userid`,"
+                            " `mydomainname`, NOW() "
+                            "as now_datetime, `expired` FROM `mydomain` WHERE status=3")
                         redemption = min.fetchall()
                         red = ''
                         n = 1
@@ -1002,8 +1020,13 @@ def log_uz(message):
                     id = i["id"]
 
                     cursor = bot_con.cursor()
-                    query = "INSERT INTO `sardorbot` (`tg_id`, `tg_username`, `tg_first_name`, `tg_last_name`, `updated`,`b_username`,`b_userid`) " \
-                            "VALUES ({0},'{1}','{2}','{3}','{4}','{5}','{6}') ON DUPLICATE KEY UPDATE `tg_username` = '{1}', `tg_first_name` = '{2}', `tg_last_name` = '{3}', `updated` = '{4}',`b_username`='{5}',`b_userid`='{6}'".format(
+                    query = "INSERT INTO `sardorbot` (`tg_id`, `tg_username`, `tg_first_name`," \
+                            " `tg_last_name`, `updated`,`b_username`,`b_userid`) " \
+                            "VALUES ({0},'{1}','{2}','{3}','{4}','{5}','{6}')" \
+                            " ON DUPLICATE KEY UPDATE " \
+                            "`tg_username` = '{1}', `tg_first_name` = '{2}', " \
+                            "`tg_last_name` = '{3}', `updated` = '{4}'," \
+                            "`b_username`='{5}',`b_userid`='{6}'".format(
                         chat_id, username, first_name, last_name, dt_obj, login, id)
                     cursor.execute(query)
                 bot.send_message(message.chat.id,
@@ -1185,7 +1208,12 @@ def callback(call):
         tg_id = call.message.chat.id
 
         min.execute(
-            'SELECT `hostmasteruz_base`.`contact`.*, `hostmasteruz_bot`.`sardorbot`.`b_userid` FROM `hostmasteruz_base`.`contact`, `hostmasteruz_bot`.`sardorbot` WHERE `hostmasteruz_bot`.`sardorbot`.`tg_id` = %(tg_id)s AND `hostmasteruz_base`.`contact`.`userid` = `hostmasteruz_bot`.`sardorbot`.`b_userid`;',
+            'SELECT `hostmasteruz_base`.`contact`.*, '
+            '`hostmasteruz_bot`.`sardorbot`.`b_userid`'
+            ' FROM `hostmasteruz_base`.`contact`, '
+            '`hostmasteruz_bot`.`sardorbot` WHERE '
+            '`hostmasteruz_bot`.`sardorbot`.`tg_id` = %(tg_id)s AND'
+            ' `hostmasteruz_base`.`contact`.`userid` = `hostmasteruz_bot`.`sardorbot`.`b_userid`;',
             {'tg_id': tg_id})
         check = min.fetchall()
 
@@ -1211,7 +1239,9 @@ def callback(call):
         tg_id = call.message.chat.id
         print(tg_id)
         min.execute(
-            'SELECT `sardorbot`.`b_userid` FROM `hostmasteruz_bot`.`sardorbot` WHERE `hostmasteruz_bot`.`sardorbot`.`tg_id` = %(tg_id)s',
+            'SELECT `sardorbot`.`b_userid` FROM '
+            '`hostmasteruz_bot`.`sardorbot` WHERE '
+            '`hostmasteruz_bot`.`sardorbot`.`tg_id` = %(tg_id)s',
             {'tg_id': tg_id})
         check = min.fetchall()
         for i in check:
@@ -1223,7 +1253,11 @@ def callback(call):
                     id = i["b_userid"]
                     id_connect = connection.cursor()
                     id_connect.execute(
-                        'SELECT `hostcontract`.*, `hosting`.`hostingname` FROM `hostcontract`, `hosting` WHERE `hostcontract`.`status` IN (0,1) and `hostcontract`.`user_id` = %(user_id)s AND `hosting`.`idhosting` = `hostcontract`.`hostingid`',
+                        'SELECT `hostcontract`.*, `hosting`.`hostingname`'
+                        ' FROM `hostcontract`, `hosting` WHERE '
+                        '`hostcontract`.`status` IN (0,1) and'
+                        ' `hostcontract`.`user_id` = %(user_id)s'
+                        ' AND `hosting`.`idhosting` = `hostcontract`.`hostingid`',
                         {'user_id': id})
                     checkContact = id_connect.fetchall()
                     num = 1
@@ -1232,7 +1266,9 @@ def callback(call):
                         for i in checkContact:
                             if i["status"] == 1:
                                 i["status"] = 'Active'
-                            host_text += f'{num}. {i["hostcontractdomain"]}, Тариф: <b>{i["hostingname"]}</b>, Статус: <b>{i["status"]}</b>\n'
+                            host_text += f'{num}. {i["hostcontractdomain"]}, ' \
+                                         f'Тариф: <b>{i["hostingname"]}</b>, ' \
+                                         f'Статус: <b>{i["status"]}</b>\n'
                             num += 1
                         bot.send_message(message.chat.id, host_text, parse_mode='html')
                     else:
@@ -1259,7 +1295,8 @@ def callback(call):
                             elif i["status"] == 3:
                                 i["status"] = 'W_RED'
 
-                            domen_text += f'{num}. {i["mydomainname"]}.uz, Активен до <b>{i["expired"].strftime("%d/%m/%Y")}</b>\n'
+                            domen_text += f'{num}. {i["mydomainname"]}.uz, ' \
+                                          f'Активен до <b>{i["expired"].strftime("%d/%m/%Y")}</b>\n'
                             num += 1
                         bot.send_message(message.chat.id, domen_text, parse_mode='html')
                     else:
@@ -1271,7 +1308,11 @@ def callback(call):
                     id = i["b_userid"]
                     id_connect = connection.cursor()
                     id_connect.execute(
-                        'SELECT `vdscontract`.`vdshostname`, `vds_tariffs`.`tariffname` ,`vdscontract`.`status`  FROM  `vdscontract`, `vds_tariffs` WHERE  `vdscontract`.`vdsid` = `vds_tariffs`.`idvds` AND user_id=%(user_id)s',
+                        'SELECT `vdscontract`.`vdshostname`,'
+                        ' `vds_tariffs`.`tariffname` ,'
+                        '`vdscontract`.`status`  FROM  '
+                        '`vdscontract`, `vds_tariffs` WHERE '
+                        ' `vdscontract`.`vdsid` = `vds_tariffs`.`idvds` AND user_id=%(user_id)s',
                         {'user_id': id})
                     checkContact = id_connect.fetchall()
                     num = 1
@@ -1284,7 +1325,9 @@ def callback(call):
                                 i["status"] = 'Block'
                             else:
                                 i["status"] = 'Deleted'
-                            vds_text += f'{num}. {i["vdshostname"]}, Тариф: <b>{i["tariffname"]}</b>, Статус: <b>{i["status"]}</b>\n\n'
+                            vds_text += f'{num}. {i["vdshostname"]}, ' \
+                                        f'Тариф: <b>{i["tariffname"]}</b>, ' \
+                                        f'Статус: <b>{i["status"]}</b>\n\n'
                             num += 1
                         bot.send_message(message.chat.id, vds_text, parse_mode='html')
                     else:
@@ -1372,7 +1415,9 @@ def callback(call):
         tg_id = call.message.chat.id
         print(tg_id)
         min.execute(
-            'SELECT `sardorbot`.`b_userid` FROM `hostmasteruz_bot`.`sardorbot` WHERE `hostmasteruz_bot`.`sardorbot`.`tg_id` = %(tg_id)s',
+            'SELECT `sardorbot`.`b_userid` FROM '
+            '`hostmasteruz_bot`.`sardorbot` WHERE '
+            '`hostmasteruz_bot`.`sardorbot`.`tg_id` = %(tg_id)s',
             {'tg_id': tg_id})
         check = min.fetchall()
         for i in check:
@@ -1384,7 +1429,11 @@ def callback(call):
                     id = i["b_userid"]
                     id_connect = connection.cursor()
                     id_connect.execute(
-                        'SELECT `hostcontract`.*, `hosting`.`hostingname` FROM `hostcontract`, `hosting` WHERE `hostcontract`.`status` IN (0,1) and `hostcontract`.`user_id` = %(user_id)s AND `hosting`.`idhosting` = `hostcontract`.`hostingid`',
+                        'SELECT `hostcontract`.*, `hosting`.`hostingname`'
+                        ' FROM `hostcontract`, `hosting` WHERE'
+                        ' `hostcontract`.`status` IN (0,1) and'
+                        ' `hostcontract`.`user_id` = %(user_id)s '
+                        'AND `hosting`.`idhosting` = `hostcontract`.`hostingid`',
                         {'user_id': id})
                     checkContact = id_connect.fetchall()
                     num = 1
@@ -1393,7 +1442,9 @@ def callback(call):
                         for i in checkContact:
                             if i["status"] == 1:
                                 i["status"] = 'Active'
-                            host_text += f'{num}. {i["hostcontractdomain"]}, Tarif: <b>{i["hostingname"]}</b>, Holat: <b>{i["status"]}</b>\n'
+                            host_text += f'{num}. {i["hostcontractdomain"]}, ' \
+                                         f'Tarif: <b>{i["hostingname"]}</b>, ' \
+                                         f'Holat: <b>{i["status"]}</b>\n'
                             num += 1
                         bot.send_message(message.chat.id, host_text, parse_mode='html')
                     else:
@@ -1420,7 +1471,8 @@ def callback(call):
                             elif i["status"] == 3:
                                 i["status"] = 'W_RED'
 
-                            domen_text += f'{num}. {i["mydomainname"]}.uz, <b>{i["expired"].strftime("%d/%m/%Y")}</b> gacha faol\n'
+                            domen_text += f'{num}. {i["mydomainname"]}.uz, ' \
+                                          f'<b>{i["expired"].strftime("%d/%m/%Y")}</b> gacha faol\n'
                             num += 1
                         bot.send_message(message.chat.id, domen_text, parse_mode='html')
                     else:
@@ -1432,7 +1484,11 @@ def callback(call):
                     id = i["b_userid"]
                     id_connect = connection.cursor()
                     id_connect.execute(
-                        'SELECT `vdscontract`.`vdshostname`, `vds_tariffs`.`tariffname` ,`vdscontract`.`status`  FROM  `vdscontract`, `vds_tariffs` WHERE  `vdscontract`.`vdsid` = `vds_tariffs`.`idvds` AND user_id=%(user_id)s',
+                        'SELECT `vdscontract`.`vdshostname`, '
+                        '`vds_tariffs`.`tariffname` ,'
+                        '`vdscontract`.`status`  FROM  '
+                        '`vdscontract`, `vds_tariffs` WHERE '
+                        ' `vdscontract`.`vdsid` = `vds_tariffs`.`idvds` AND user_id=%(user_id)s',
                         {'user_id': id})
                     checkContact = id_connect.fetchall()
                     num = 1
@@ -1445,7 +1501,9 @@ def callback(call):
                                 i["status"] = 'Block'
                             else:
                                 i["status"] = 'Deleted'
-                            vds_text += f'{num}. {i["vdshostname"]}, Tarif: <b>{i["tariffname"]}</b>, Holat: <b>{i["status"]}</b>\n\n'
+                            vds_text += f'{num}. {i["vdshostname"]}, ' \
+                                        f'Tarif: <b>{i["tariffname"]}</b>, ' \
+                                        f'Holat: <b>{i["status"]}</b>\n\n'
                             num += 1
                         bot.send_message(message.chat.id, vds_text, parse_mode='html')
                     else:
@@ -1454,7 +1512,7 @@ def callback(call):
                 bot.register_next_step_handler(message, uslugi_uz)
             elif message.text == 'Mening serverlarim':
                 for i in check:
-                    print(i)
+
                     id = i["b_userid"]
                     id_connect = connection.cursor()
                     id_connect.execute(
@@ -1463,7 +1521,6 @@ def callback(call):
                     num = 1
                     ser_text = ''
                     if checkContact:
-
                         for i in checkContact:
                             if i["status"] == 1:
                                 i["status"] = 'Active'
@@ -1478,13 +1535,13 @@ def callback(call):
                 bot.register_next_step_handler(message, uslugi_uz)
             elif message.text == 'Qaytish':
                 markup_uz = types.InlineKeyboardMarkup(row_width=2)
-                lg1 = types.InlineKeyboardButton('Mening xizmatlarim', callback_data='xizmatlarim')
-                lg2 = types.InlineKeyboardButton('Mening kontaktlarim', callback_data='kontaktlarim')
+                lg1 = types.InlineKeyboardButton("Mening xizmatlarim", callback_data='xizmatlarim')
+                lg2 = types.InlineKeyboardButton("Mening kontaktlarim", callback_data='kontaktlarim')
                 lg3 = types.InlineKeyboardButton("Ro'yxatdan o'tish", callback_data="ro'yxatdan_o'tish")
                 lg4 = types.InlineKeyboardButton("Menejer bilan aloqa", callback_data="connect_admin",
                                                  url='https://t.me/hostmaster_support')
                 lg5 = types.InlineKeyboardButton("Saytga o'tish", callback_data="site", url='https://hostmaster.uz/')
-                lg6 = types.InlineKeyboardButton('Sozlamalar', callback_data='sozlamalar')
+                lg6 = types.InlineKeyboardButton("Sozlamalar", callback_data='sozlamalar')
                 markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
                 bot.send_message(message.chat.id,
                                  "Bu Hostmaster kompaniyasining "
@@ -1514,11 +1571,15 @@ def callback(call):
                                   cursorclass=pymysql.cursors.DictCursor
                                   )
         min = bot_con.cursor()
-
         tg_id = call.message.chat.id
-
         min.execute(
-            'SELECT `hostmasteruz_base`.`contact`.*, `hostmasteruz_bot`.`sardorbot`.`b_userid` FROM `hostmasteruz_base`.`contact`, `hostmasteruz_bot`.`sardorbot` WHERE `hostmasteruz_bot`.`sardorbot`.`tg_id` = %(tg_id)s AND `hostmasteruz_base`.`contact`.`userid` = `hostmasteruz_bot`.`sardorbot`.`b_userid`;',
+            'SELECT `hostmasteruz_base`.`contact`.*,'
+            '`hostmasteruz_bot`.`sardorbot`.`b_userid` '
+            'FROM `hostmasteruz_base`.`contact`, '
+            '`hostmasteruz_bot`.`sardorbot` WHERE'
+            ' `hostmasteruz_bot`.`sardorbot`.`tg_id` = %(tg_id)s '
+            'AND `hostmasteruz_base`.`contact`.`userid` '
+            '= `hostmasteruz_bot`.`sardorbot`.`b_userid`;',
             {'tg_id': tg_id})
         check = min.fetchall()
 
