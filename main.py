@@ -1173,7 +1173,7 @@ def language(message):
                          '\nHostmaster – Хостинг провайдер и регистратор доменов в'
                          '\nУзбекистане, в Ташкенте.\nНаш телефон: 71-202-55-11',
                          reply_markup=markup_ru)
-
+        bot.register_next_step_handler(message, language)
     elif message.text == 'Возврат':
         markup = types.InlineKeyboardMarkup(row_width=2)
         lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
