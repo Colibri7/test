@@ -8,7 +8,7 @@ import telebot
 from telebot import types
 import pymysql
 
-bot = telebot.TeleBot('1978328105:AAEzxSfRHcilQPIVaV8XFL1zf0ifMs4HLJE', threaded=False)
+bot = telebot.TeleBot('1978328105:AAFQm-5czupIV0qGPtJ-rUjb-O0L-nqCVas', threaded=False)
 
 connection = pymysql.connect(host='62.209.143.131',
                              user='hostmasteruz_pbot',
@@ -33,26 +33,25 @@ def domen_60_days_schedule():
     for i in domen:
         date = '{:%d-%m-%Y}'.format(i["expired"])
         some_id = i["tg_id"]
-        print(some_id)
+        print('id ', some_id)
         if i["contactcompany"] == None:
-            bot.send_message(some_id, f'Уважаемый <b>{i["contactname"]}!</b>\n'
-                                      f'Уведомляем Вас о том, что срок действия Вашего домена\n'
-                                      f'<b>{i["mydomainname"]}.uz</b> истекает <b>{date}</b> года.\n'
-                                      f'Просим Вас ознакомиться с тарифами https://hostmaster.uz/domains/uz/\n'
-                                      f'на продление регистрации доменов, оплатить\nсоответствующую сумму'
-                                      f'и сообщить менеджеру о продлении\nдомена. В случае неоплаты,'
-                                      f'Ваш домен будет свободен для\nрегистрации другим лицом.\n'
-                                      f'<b>С уважением, команда Hostmaster!</b>', parse_mode='html')
+            bot.send_message(332749197,
+                             f'Уважаемый <b>{i["contactname"]}!</b> Уведомляем Вас о том, '
+                             f'что срок действия домена <b>{i["mydomainname"]}.uz</b> истекает <b>{date}</b> '
+                             f'года . Для продления регистрации домена Вам необходимо оплатить '
+                             f'сумму согласно действующим тарифам через личный кабинет на нашем сайте. '
+                             f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
+                             f'лицом.\n<b>С уважением, команда Hostmaster!</b>',
+                             parse_mode='html')
         else:
-
-            bot.send_message(some_id, f'Уважаемый <b>{i["contactcompany"]}!</b>\n'
-                                      f'Уведомляем Вас о том, что срок действия Вашего домена\n'
-                                      f'<b>{i["mydomainname"]}.uz</b> истекает <b>{date}</b> года.\n'
-                                      f'Просим Вас ознакомиться с тарифами https://hostmaster.uz/domains/uz/\n'
-                                      f'на продление регистрации доменов, оплатить\nсоответствующую сумму'
-                                      f'и сообщить менеджеру о продлении\nдомена. В случае неоплаты,'
-                                      f'Ваш домен будет свободен для\nрегистрации другим лицом.\n'
-                                      f'<b>С уважением, команда Hostmaster!</b>', parse_mode='html')
+            bot.send_message(332749197,
+                             f'Уважаемый <b>{i["contactcompany"]}!</b> Уведомляем Вас о том, '
+                             f'что срок действия домена <b>{i["mydomainname"]}.uz</b> истекает <b>{date}</b> '
+                             f'года . Для продления регистрации домена Вам необходимо оплатить '
+                             f'сумму согласно действующим тарифам через личный кабинет на нашем сайте. '
+                             f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
+                             f'лицом.\n<b>С уважением, команда Hostmaster!</b>',
+                             parse_mode='html')
 
 
 def domen_30_days_schedule():
@@ -60,29 +59,53 @@ def domen_30_days_schedule():
     min.execute(
         "SELECT `tg_id`, `idmydomain`, `mydomain`.userid, `mydomainname`, NOW() as now_datetime, `expired`,`contactname`, `contactcompany` FROM `hostmasteruz_base`.`mydomain`, `hostmasteruz_bot`.`sardorbot`,`hostmasteruz_base`.`contact`  WHERE DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 30 DAY)) AND `sardorbot`.`b_userid` = `mydomain`.`userid` AND `mydomain`.`mydomaincontactcust` = `contact`.`idcontact`;")
     domen_30 = min.fetchall()
-    print(domen_30)
+
     for i in domen_30:
         date = '{:%d-%m-%Y}'.format(i["expired"])
         some_id = i["tg_id"]
+        print('id ', some_id)
         if i["contactcompany"] == None:
 
-            bot.send_message(some_id, f'Уважаемый {i["contactname"]}!\n'
-                                      f'Уведомляем Вас о том, что срок действия Вашего домена\n'
-                                      f'{i["mydomainname"]}.uz истекает {date} года.\n'
-                                      f'Просим Вас ознакомиться с тарифами https://hostmaster.uz/domains/uz/\n'
-                                      f'на продление регистрации доменов, оплатить\nсоответствующую сумму'
-                                      f'и сообщить менеджеру о продлении\nдомена. В случае неоплаты,'
-                                      f'Ваш домен будет свободен для\nрегистрации другим лицом.\n'
-                                      f'С уважением, команда Hostmaster!', parse_mode='html')
+            bot.send_message(332749197, f'Уважаемый <b>{i["contactname"]}!</b> Уведомляем Вас о том, '
+                                        f'что срок действия домена <b>{i["mydomainname"]}.uz</b> истекает <b>{date}</b> '
+                                        f'года . Для продления регистрации домена Вам необходимо оплатить '
+                                        f'сумму согласно действующим тарифам через личный кабинет на нашем сайте. '
+                                        f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
+                                        f'лицом.\n<b>С уважением, команда Hostmaster!</b>', parse_mode='html')
         else:
-            bot.send_message(some_id, f'Уважаемый {i["contactcompany"]}!\n'
-                                      f'Уведомляем Вас о том, что срок действия Вашего домена\n'
-                                      f'{i["mydomainname"]}.uz истекает {date} года.\n'
-                                      f'Просим Вас ознакомиться с тарифами https://hostmaster.uz/domains/uz/\n'
-                                      f'на продление регистрации доменов, оплатить\nсоответствующую сумму'
-                                      f'и сообщить менеджеру о продлении\nдомена. В случае неоплаты,'
-                                      f'Ваш домен будет свободен для\nрегистрации другим лицом.\n'
-                                      f'С уважением, команда Hostmaster!', parse_mode='html')
+            bot.send_message(332749197, f'Уважаемый <b>{i["contactcompany"]}!</b> Уведомляем Вас о том, '
+                                        f'что срок действия домена <b>{i["mydomainname"]}.uz</b> истекает <b>{date}</b> '
+                                        f'года . Для продления регистрации домена Вам необходимо оплатить '
+                                        f'сумму согласно действующим тарифам через личный кабинет на нашем сайте. '
+                                        f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
+                                        f'лицом.\n<b>С уважением, команда Hostmaster!</b>', parse_mode='html')
+
+
+def domen_10_days_schedule():
+    min = connection.cursor()
+    min.execute(
+        "SELECT `tg_id`, `idmydomain`, `mydomain`.userid, `mydomainname`, NOW() as now_datetime, `expired`,`contactname`, `contactcompany` FROM `hostmasteruz_base`.`mydomain`, `hostmasteruz_bot`.`sardorbot`,`hostmasteruz_base`.`contact`  WHERE DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 10 DAY)) AND `sardorbot`.`b_userid` = `mydomain`.`userid` AND `mydomain`.`mydomaincontactcust` = `contact`.`idcontact`;")
+    domen_30 = min.fetchall()
+
+    for i in domen_30:
+        date = '{:%d-%m-%Y}'.format(i["expired"])
+        some_id = i["tg_id"]
+        print('id ', some_id)
+        if i["contactcompany"] == None:
+
+            bot.send_message(332749197, f'Уважаемый <b>{i["contactname"]}!</b> Уведомляем Вас о том, '
+                                        f'что срок действия домена <b>{i["mydomainname"]}.uz</b> истекает <b>{date}</b> '
+                                        f'года . Для продления регистрации домена Вам необходимо оплатить '
+                                        f'сумму согласно действующим тарифам через личный кабинет на нашем сайте. '
+                                        f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
+                                        f'лицом.\n<b>С уважением, команда Hostmaster!</b>', parse_mode='html')
+        else:
+            bot.send_message(332749197, f'Уважаемый <b>{i["contactcompany"]}!</b> Уведомляем Вас о том, '
+                                        f'что срок действия домена <b>{i["mydomainname"]}.uz</b> истекает <b>{date}</b> '
+                                        f'года . Для продления регистрации домена Вам необходимо оплатить '
+                                        f'сумму согласно действующим тарифам через личный кабинет на нашем сайте. '
+                                        f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
+                                        f'лицом.\n<b>С уважением, команда Hostmaster!</b>', parse_mode='html')
 
 
 def domen_1_days_schedule():
@@ -90,28 +113,29 @@ def domen_1_days_schedule():
     min.execute(
         "SELECT `tg_id`, `idmydomain`, `mydomain`.userid, `mydomainname`, NOW() as now_datetime, `expired`,`contactname`, `contactcompany` FROM `hostmasteruz_base`.`mydomain`, `hostmasteruz_bot`.`sardorbot`,`hostmasteruz_base`.`contact`  WHERE DATE(expired) = DATE(NOW()) AND `sardorbot`.`b_userid` = `mydomain`.`userid` AND `mydomain`.`mydomaincontactcust` = `contact`.`idcontact`;")
     domen_1 = min.fetchall()
-    print(domen_1)
+
     for i in domen_1:
         date = '{:%d-%m-%Y}'.format(i["expired"])
         some_id = i["tg_id"]
+        print('id ', some_id)
         if i["contactcompany"] == None:
-            bot.send_message(some_id, f'Уважаемый <b>{i["contactname"]}</b>!\n'
-                                      f'Уведомляем Вас о том, что срок действия Вашего домена\n'
-                                      f'<b>{i["mydomainname"]}.uz</b> истекает сегодня в <b>{date}</b> .\n'
-                                      f'Просим Вас ознакомиться с тарифами (ссылка на страницу сайта)\n'
-                                      f'на продление регистрации доменов, оплатить\nсоответствующую сумму'
-                                      f'и сообщить менеджеру о продлении\nдомена. В случае неоплаты,'
-                                      f'Ваш домен будет свободен для\nрегистрации другим лицом.\n'
-                                      f'<b>С уважением, команда Hostmaster!</b>', parse_mode='html')
+            bot.send_message(332749197, f'Уважаемый <b>{i["contactname"]}!</b> Уведомляем Вас о том, '
+                                        f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
+                                        f'истек сегодня, <b>{date}</b> года. Для продления регистрации '
+                                        f'домена Вам необходимо оплатить сумму согласно действующим '
+                                        f'тарифам через личный кабинет на нашем сайте. '
+                                        f'В случае неоплаты, ваш домен будет свободен для '
+                                        f'регистрации другим лицом.\n<b>С уважением, команда Hostmaster!</b>',
+                             parse_mode='html')
         else:
-            bot.send_message(some_id, f'Уважаемый <b>{i["contactcompany"]}</b>!\n'
-                                      f'Уведомляем Вас о том, что срок действия Вашего домена\n'
-                                      f'<b>{i["mydomainname"]}.uz</b> истекает сегодня в <b>{date}</b> .\n'
-                                      f'Просим Вас ознакомиться с тарифами (ссылка на страницу сайта)\n'
-                                      f'на продление регистрации доменов, оплатить\nсоответствующую сумму'
-                                      f'и сообщить менеджеру о продлении\nдомена. В случае неоплаты,'
-                                      f'Ваш домен будет свободен для\nрегистрации другим лицом.\n'
-                                      f'<b>С уважением, команда Hostmaster!</b>', parse_mode='html')
+            bot.send_message(332749197, f'Уважаемый <b>{i["contactcompany"]}!</b> Уведомляем Вас о том, '
+                                        f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
+                                        f'истек сегодня, <b>{date}</b> года. Для продления регистрации '
+                                        f'домена Вам необходимо оплатить сумму согласно действующим '
+                                        f'тарифам через личный кабинет на нашем сайте. '
+                                        f'В случае неоплаты, ваш домен будет свободен для '
+                                        f'регистрации другим лицом.\n<b>С уважением, команда Hostmaster!</b>',
+                             parse_mode='html')
 
 
 def hosting_schedule():
@@ -147,6 +171,7 @@ def vds_schedule():
     for i in vds:
         date = '{:%d-%m-%Y}'.format(i["LAST_DAY(NOW())"])
         some_id = i["tg_id"]
+        print(some_id)
         if i["contactcompany"] == None:
             bot.send_message(332749197, f'Уважаемый <b>{i["contactname"]}</b>!\n'
                                         f'Уведомляем Вас о необходимости оплаты услуг за использование услуги '
@@ -1065,10 +1090,11 @@ def language(message):
         lg1 = types.InlineKeyboardButton('Mening xizmatlarim', callback_data='xizmatlarim')
         lg2 = types.InlineKeyboardButton('Mening kontaktlarim', callback_data='kontaktlarim')
         lg3 = types.InlineKeyboardButton("Ro'yxatdan o'tish", callback_data="ro'yxatdan_o'tish")
-        lg4 = types.InlineKeyboardButton("Menejer bilan aloqa", callback_data="connect_admin",url='https://t.me/hostmaster_support')
-        lg5 = types.InlineKeyboardButton("Saytga o'tish", callback_data="site",url='https://hostmaster.uz/')
+        lg4 = types.InlineKeyboardButton("Menejer bilan aloqa", callback_data="connect_admin",
+                                         url='https://t.me/hostmaster_support')
+        lg5 = types.InlineKeyboardButton("Saytga o'tish", callback_data="site", url='https://hostmaster.uz/')
         lg6 = types.InlineKeyboardButton('Sozlamalar', callback_data='sozlamalar')
-        markup_uz.add(lg1, lg2, lg3, lg4, lg5,lg6)
+        markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
         bot.send_message(message.chat.id,
                          """Bu Hostmaster kompaniyasining axborot boti. Hostmaster - Xosting provayderi va domen registratori" O'zbekiston,Toshkentda. Bizning telefon: 71-202-55-11""",
                          reply_markup=markup_uz)
@@ -1499,14 +1525,13 @@ def schedule_checker():
 
 
 if __name__ == "__main__":
-    schedule.every().day.at("09:41").do(domen_60_days_schedule)
-    schedule.every().day.at("12:12").do(domen_30_days_schedule)
-    schedule.every().day.at("12:13").do(domen_1_days_schedule)
+    schedule.every().day.at("15:17").do(domen_60_days_schedule)
+    schedule.every().day.at("15:17").do(domen_30_days_schedule)
+    schedule.every().day.at("15:17").do(domen_10_days_schedule)
+    schedule.every().day.at("15:17").do(domen_1_days_schedule)
     schedule.every().day.at('12:14').do(vds_schedule)
     schedule.every().day.at("12:15").do(hosting_schedule)
-
     Thread(target=schedule_checker).start()
-
 while True:
     try:
         bot.polling(none_stop=True)
