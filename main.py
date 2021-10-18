@@ -421,7 +421,9 @@ def log(message):
                     markup_ru.add(lg1, lg2, lg3,lg4)
 
                     bot.send_message(message.chat.id,
-                                     'Возврат',
+                                     'Это информационный бот компании Hostmaster.'
+                                     '\nHostmaster – Хостинг провайдер и регистратор доменов в'
+                                     '\nУзбекистане, в Ташкенте.\nНаш телефон: 71-202-55-11',
                                      reply_markup=markup_ru)
                 bot.register_next_step_handler(message, after_login)
             if message.text == 'Мои контакты':
