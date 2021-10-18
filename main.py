@@ -323,7 +323,9 @@ def log(message):
                                     i["status"] = 'Block'
                                 else:
                                     i["status"] = 'Deleted'
-                                vds_text += f'<b>vds №{num}</b>. {i["vdshostname"]}\nТариф: {i["tariffname"]}\nСтатус: {i["status"]}\n\n'
+                                vds_text += f'<b>vds №{num}</b>. {i["vdshostname"]}\n' \
+                                            f'Тариф: {i["tariffname"]}\n' \
+                                            f'Статус: {i["status"]}\n'
                                 num += 1
                             bot.send_message(message.chat.id, vds_text, parse_mode='html')
                         else:
@@ -342,7 +344,7 @@ def log(message):
                         ser_text = ''
                         if checkContact:
                             for i in checkContact:
-                                ser_text += f'server - {num}. {i["colhostname"]}\nСтатус: {i["status"]}\n\n'
+                                ser_text += f'server - {num}. {i["colhostname"]}\nСтатус: {i["status"]}\n'
                                 num += 1
                             bot.send_message(message.chat.id, ser_text)
                         else:
@@ -759,7 +761,7 @@ def log_uz(message):
                                     i["status"] = 'Deleted'
                                 vds_text += f'<b>vds №{num}</b>. {i["vdshostname"]}\n' \
                                             f'Тариф: {i["tariffname"]}\n' \
-                                            f'Статус: {i["status"]}\n\n'
+                                            f'Статус: {i["status"]}\n'
                                 num += 1
                             bot.send_message(message.chat.id, vds_text, parse_mode='html')
                         else:
@@ -778,7 +780,7 @@ def log_uz(message):
                         ser_text = ''
                         if checkContact:
                             for i in checkContact:
-                                ser_text += f'server - {num}. {i["colhostname"]}\nСтатус: {i["status"]}\n\n'
+                                ser_text += f'server - {num}. {i["colhostname"]}\nСтатус: {i["status"]}\n'
                                 num += 1
                             bot.send_message(message.chat.id, ser_text)
                         else:
@@ -1327,7 +1329,7 @@ def callback(call):
                                 i["status"] = 'Deleted'
                             vds_text += f'{num}. {i["vdshostname"]}, ' \
                                         f'Тариф: <b>{i["tariffname"]}</b>, ' \
-                                        f'Статус: <b>{i["status"]}</b>\n\n'
+                                        f'Статус: <b>{i["status"]}</b>\n'
                             num += 1
                         bot.send_message(message.chat.id, vds_text, parse_mode='html')
                     else:
@@ -1351,7 +1353,7 @@ def callback(call):
                                 i["status"] = 'Active'
                             elif i["status"] == 2:
                                 i["status"] = 'Block'
-                            ser_text += f'{num}. <b>{i["colhostname"]}</b>, Статус: <b>{i["status"]}</b>\n\n'
+                            ser_text += f'{num}. <b>{i["colhostname"]}</b>, Статус: <b>{i["status"]}</b>\n'
                             num += 1
                         bot.send_message(message.chat.id, ser_text, parse_mode='html')
                     else:
