@@ -7,6 +7,7 @@ from datetime import datetime
 import telebot
 from telebot import types
 import pymysql
+from django.db import close_old_connections
 
 bot = telebot.TeleBot('1978328105:AAHB4mv6pfCcUm4B-qSy3nSOXCntSoNm9KU', threaded=False)
 
@@ -597,42 +598,44 @@ def log(message):
                                  reply_markup=markup, parse_mode='html')
 
         if message.text == 'sardor':
-            min = connection.cursor()
-            min.execute(
-                'SELECT id,password_hash FROM user WHERE username=%(username)s', {'username': login})
-
-            check = min.fetchall()
-            markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
-            lg1 = types.KeyboardButton('Мои услуги')
-            lg2 = types.KeyboardButton('Мои контакты')
-            lg3 = types.KeyboardButton('Уведомления')
-            lg4 = types.KeyboardButton('Возврат')
-            markup_ru.add(lg1, lg2, lg3, lg4)
-            bot.send_message(message.chat.id,
-                             "Вы вошли под админом",
-                             reply_markup=markup_ru, parse_mode='html')
-            bot.send_message(332749197,
-                             f'{message.from_user.first_name} Successfully authorized for admin')
-            bot.register_next_step_handler(message, after_login)
-        else:
-            out = crypt.crypt(message.text, checkUsername["password_hash"])
-
-            if checkUsername["password_hash"] == out:
+            with connection:
                 min = connection.cursor()
                 min.execute(
                     'SELECT id,password_hash FROM user WHERE username=%(username)s', {'username': login})
 
                 check = min.fetchall()
-                markup = types.InlineKeyboardMarkup(row_width=2)
-                lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
-                lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
-                lg3 = types.InlineKeyboardButton('Авторизация', callback_data='cabinet')
-                lg4 = types.InlineKeyboardButton('Связь с менеджером', callback_data='connect_admin',
-                                                 url='https://t.me/hostmaster_support')
-                lg5 = types.InlineKeyboardButton('Перейти на сайт', callback_data='site', url='https://hostmaster.uz/')
-                lg6 = types.InlineKeyboardButton('Настройки', callback_data='settings')
+                markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
+                lg1 = types.KeyboardButton('Мои услуги')
+                lg2 = types.KeyboardButton('Мои контакты')
+                lg3 = types.KeyboardButton('Уведомления')
+                lg4 = types.KeyboardButton('Возврат')
+                markup_ru.add(lg1, lg2, lg3, lg4)
+                bot.send_message(message.chat.id,
+                                 "Вы вошли под админом",
+                                 reply_markup=markup_ru, parse_mode='html')
+                bot.send_message(332749197,
+                                 f'{message.from_user.first_name} Successfully authorized for admin')
+                bot.register_next_step_handler(message, after_login)
+        else:
+            out = crypt.crypt(message.text, checkUsername["password_hash"])
 
-                markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
+            if checkUsername["password_hash"] == out:
+                with connection:
+                    min = connection.cursor()
+                    min.execute(
+                        'SELECT id,password_hash FROM user WHERE username=%(username)s', {'username': login})
+
+                    check = min.fetchall()
+                    markup = types.InlineKeyboardMarkup(row_width=2)
+                    lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
+                    lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
+                    lg3 = types.InlineKeyboardButton('Авторизация', callback_data='cabinet')
+                    lg4 = types.InlineKeyboardButton('Связь с менеджером', callback_data='connect_admin',
+                                                     url='https://t.me/hostmaster_support')
+                    lg5 = types.InlineKeyboardButton('Перейти на сайт', callback_data='site', url='https://hostmaster.uz/')
+                    lg6 = types.InlineKeyboardButton('Настройки', callback_data='settings')
+
+                    markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
                 bot_con = pymysql.connect(host='62.209.143.131',
                                           user='hostmasteruz_pbot',
                                           password='bcaxoZyAXDGc',
@@ -640,30 +643,31 @@ def log(message):
                                           charset='utf8mb4',
                                           cursorclass=pymysql.cursors.DictCursor
                                           )
-                min = connection.cursor()
-                min.execute(
-                    'SELECT `user`.`id`  FROM `user` WHERE username=%(username)s', {'username': login})
-                check = min.fetchall()
-                for i in check:
-                    id = i["id"]
+                with connection:
+                    min = connection.cursor()
+                    min.execute(
+                        'SELECT `user`.`id`  FROM `user` WHERE username=%(username)s', {'username': login})
+                    check = min.fetchall()
+                    for i in check:
+                        id = i["id"]
 
-                    cursor = bot_con.cursor()
-                    query = "INSERT INTO `sardorbot` (`tg_id`, `tg_username`, `tg_first_name`," \
-                            " `tg_last_name`, `updated`,`b_username`,`b_userid`) " \
-                            "VALUES ({0},'{1}','{2}','{3}','{4}','{5}','{6}') " \
-                            "ON DUPLICATE KEY UPDATE `tg_username` = '{1}'," \
-                            " `tg_first_name` = '{2}', `tg_last_name` = '{3}', " \
-                            "`updated` = '{4}',`b_username`='{5}',`b_userid`='{6}'".format(
-                        chat_id, username, first_name, last_name, dt_obj, login, id)
-                    cursor.execute(query)
-                bot.send_message(message.chat.id,
-                                 "Это информационный бот компании <b>Hostmaster.</b> "
-                                 "Hostmaster – Хостинг провайдер и регистратор доменов в "
-                                 "Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>\n"
-                                 "Поздравляем! Вы успешно прошли авторизацию!",
-                                 reply_markup=markup, parse_mode='html')
-                bot.send_message(332749197,
-                                 f'{message.from_user.first_name} Successfully authorized')
+                        cursor = bot_con.cursor()
+                        query = "INSERT INTO `sardorbot` (`tg_id`, `tg_username`, `tg_first_name`," \
+                                " `tg_last_name`, `updated`,`b_username`,`b_userid`) " \
+                                "VALUES ({0},'{1}','{2}','{3}','{4}','{5}','{6}') " \
+                                "ON DUPLICATE KEY UPDATE `tg_username` = '{1}'," \
+                                " `tg_first_name` = '{2}', `tg_last_name` = '{3}', " \
+                                "`updated` = '{4}',`b_username`='{5}',`b_userid`='{6}'".format(
+                            chat_id, username, first_name, last_name, dt_obj, login, id)
+                        cursor.execute(query)
+                    bot.send_message(message.chat.id,
+                                     "Это информационный бот компании <b>Hostmaster.</b> "
+                                     "Hostmaster – Хостинг провайдер и регистратор доменов в "
+                                     "Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>\n"
+                                     "Поздравляем! Вы успешно прошли авторизацию!",
+                                     reply_markup=markup, parse_mode='html')
+                    bot.send_message(332749197,
+                                     f'{message.from_user.first_name} Successfully authorized')
             elif message.text == 'Возврат':
                 markup = types.InlineKeyboardMarkup(row_width=2)
                 lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
@@ -718,46 +722,46 @@ def log(message):
         dt_obj = datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d %H:%M:%S')
 
         print(dt_obj)
+        with connection:
+            cursor = connection.cursor()
+            cursor.execute('SELECT username FROM user')
+            checkUsername = cursor.fetchall()
+            list = []
+            for i in checkUsername:
+                list.append(i["username"])
 
-        cursor = connection.cursor()
-        cursor.execute('SELECT username FROM user')
-        checkUsername = cursor.fetchall()
-        list = []
-        for i in checkUsername:
-            list.append(i["username"])
+            if message.text.lower() in list:
+                cursor.execute('SELECT password_hash FROM user WHERE username=%(username)s', {'username': login})
+                checkUsername = cursor.fetchone()
+                bot.send_message(message.chat.id, 'Введите пароль:')
+                bot.register_next_step_handler(message, password)
 
-        if message.text.lower() in list:
-            cursor.execute('SELECT password_hash FROM user WHERE username=%(username)s', {'username': login})
-            checkUsername = cursor.fetchone()
-            bot.send_message(message.chat.id, 'Введите пароль:')
-            bot.register_next_step_handler(message, password)
+            elif message.text == 'Возврат':
+                markup_ru = types.InlineKeyboardMarkup(row_width=2)
+                lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
+                lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
+                lg3 = types.InlineKeyboardButton('Авторизация', callback_data='cabinet')
+                lg4 = types.InlineKeyboardButton('Связь с менеджером', callback_data='connect_admin',
+                                                 url='https://t.me/hostmaster_support')
+                lg5 = types.InlineKeyboardButton('Перейти на сайт', callback_data='site', url='https://hostmaster.uz/')
+                lg6 = types.InlineKeyboardButton('Настройки', callback_data='settings')
 
-        elif message.text == 'Возврат':
-            markup_ru = types.InlineKeyboardMarkup(row_width=2)
-            lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
-            lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
-            lg3 = types.InlineKeyboardButton('Авторизация', callback_data='cabinet')
-            lg4 = types.InlineKeyboardButton('Связь с менеджером', callback_data='connect_admin',
-                                             url='https://t.me/hostmaster_support')
-            lg5 = types.InlineKeyboardButton('Перейти на сайт', callback_data='site', url='https://hostmaster.uz/')
-            lg6 = types.InlineKeyboardButton('Настройки', callback_data='settings')
-
-            markup_ru.add(lg1, lg2, lg3, lg4, lg5, lg6)
-            bot.send_message(message.chat.id,
-                             "Это информационный бот компании <b>Hostmaster.</b> "
-                             "Hostmaster – Хостинг провайдер и регистратор доменов в "
-                             "Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>",
-                             reply_markup=markup_ru, parse_mode='html')
+                markup_ru.add(lg1, lg2, lg3, lg4, lg5, lg6)
+                bot.send_message(message.chat.id,
+                                 "Это информационный бот компании <b>Hostmaster.</b> "
+                                 "Hostmaster – Хостинг провайдер и регистратор доменов в "
+                                 "Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>",
+                                 reply_markup=markup_ru, parse_mode='html')
 
 
-        else:
-            key = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
-            lg1 = types.KeyboardButton("Возврат")
-            key.add(lg1)
-            bot.send_message(message.chat.id, 'Повторите попытку', reply_markup=key)
-            bot.send_message(332749197,
-                             f'{message.from_user.first_name} Cant log in')
-            bot.register_next_step_handler(message, log)
+            else:
+                key = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
+                lg1 = types.KeyboardButton("Возврат")
+                key.add(lg1)
+                bot.send_message(message.chat.id, 'Повторите попытку', reply_markup=key)
+                bot.send_message(332749197,
+                                 f'{message.from_user.first_name} Cant log in')
+                bot.register_next_step_handler(message, log)
 
 
 @bot.message_handler(content_types=['text'])
