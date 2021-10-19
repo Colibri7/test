@@ -201,8 +201,7 @@ def func(message):
         lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
         lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
         lg3 = types.InlineKeyboardButton('Авторизация', callback_data='cabinet')
-        lg4 = types.InlineKeyboardButton('Связь с менеджером', callback_data='connect_admin',
-                                         url='https://t.me/hostmaster_support')
+        lg4 = types.InlineKeyboardButton('Связь с менеджером', callback_data='connect_admin',url='https://t.me/hostmaster_support')
         lg5 = types.InlineKeyboardButton('Перейти на сайт', callback_data='site', url='https://hostmaster.uz/')
         lg6 = types.InlineKeyboardButton('Настройки', callback_data='settings')
 
@@ -216,12 +215,14 @@ def func(message):
 
     elif message.text == 'Bosh sahifa':
         markup_uz = types.InlineKeyboardMarkup(row_width=2)
-        lg1 = types.InlineKeyboardButton('Mening xizmatlarim', callback_data='my_services')
-        lg2 = types.InlineKeyboardButton('Mening kontaktlarim', callback_data='my_contacts')
-        lg3 = types.InlineKeyboardButton("Ro'yxatdan o'tish", callback_data='cabinet')
-        lg4 = types.InlineKeyboardButton("To'lov", callback_data='pay_services')
-        lg5 = types.InlineKeyboardButton('Sozlamalar', callback_data='Sozlamalar')
-        markup_uz.add(lg1, lg2, lg3, lg4, lg5)
+        lg1 = types.InlineKeyboardButton('Mening xizmatlarim', callback_data='xizmatlarim')
+        lg2 = types.InlineKeyboardButton('Mening kontaktlarim', callback_data='kontaktlarim')
+        lg3 = types.InlineKeyboardButton("Ro'yxatdan o'tish", callback_data="ro'yxatdan_o'tish")
+        lg4 = types.InlineKeyboardButton("Menejer bilan aloqa", callback_data="connect_admin",
+                                         url='https://t.me/hostmaster_support')
+        lg5 = types.InlineKeyboardButton("Saytga o'tish", callback_data="site", url='https://hostmaster.uz/')
+        lg6 = types.InlineKeyboardButton('Sozlamalar', callback_data='sozlamalar')
+        markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
         bot.send_message(message.chat.id,
                          "Bu <b>Hostmaster</b> kompaniyasining "
                          "axborot boti. Hostmaster - Xosting "
@@ -234,15 +235,14 @@ def func(message):
 # Start bot
 @bot.message_handler(commands=['start', 'menu'])
 def send_welcome(message):
-    text = f'Bot in action:\nname: <b>{message.from_user.first_name}</b>\n ' \
-           f'chat_id: <b>{message.chat.id}</b>\n ' \
+    text = f'Bot in action:\nname: <b>{message.from_user.first_name}</b>\n' \
+           f'chat_id: <b>{message.chat.id}</b>\n' \
            f'username: <b>@{message.from_user.username}</b>'
     markup = types.InlineKeyboardMarkup(row_width=2)
     lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
     lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
     lg3 = types.InlineKeyboardButton('Авторизация', callback_data='cabinet')
-    lg4 = types.InlineKeyboardButton('Связь с менеджером', callback_data='connect_admin',
-                                     url='https://t.me/hostmaster_support')
+    lg4 = types.InlineKeyboardButton('Связь с менеджером', callback_data='connect_admin',url='https://t.me/hostmaster_support')
     lg5 = types.InlineKeyboardButton('Перейти на сайт', callback_data='site', url='https://hostmaster.uz/')
     lg6 = types.InlineKeyboardButton('Настройки', callback_data='settings')
 
