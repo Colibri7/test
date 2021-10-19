@@ -418,7 +418,7 @@ def log(message):
                     lg2 = types.KeyboardButton('Мои контакты')
                     lg3 = types.KeyboardButton('Уведомления')
                     lg4 = types.KeyboardButton('Возврат')
-                    markup_ru.add(lg1, lg2, lg3,lg4)
+                    markup_ru.add(lg1, lg2, lg3, lg4)
                     bot.send_message(message.chat.id,
                                      "Это информационный бот компании <b>Hostmaster.</b> "
                                      "Hostmaster – Хостинг провайдер и регистратор доменов в "
@@ -542,6 +542,7 @@ def log(message):
 
                                      reply_markup=markup_ru, parse_mode='html')
                 bot.register_next_step_handler(message, after_login)
+
             if message.text == 'Мои контакты':
                 for i in check:
                     id = i["id"]
@@ -1385,7 +1386,7 @@ def callback(call):
                                 i["status"] = 'W_RED'
 
                             domen_text += f'{num}. {i["mydomainname"]}.uz, ' \
-                                          f'Активен до <b>{i["expired"].strftime("%d/%m/%Y")}</b>\n'
+                                          f'Активен до <b>{i["expired"].strftime("%d/%m/%Y")}</b> года\n'
                             num += 1
                         bot.send_message(message.chat.id, domen_text, parse_mode='html')
                     else:
