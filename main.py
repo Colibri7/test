@@ -353,7 +353,6 @@ def log(message):
                             bot.send_message(message.chat.id, domen_text)
                         else:
                             bot.send_message(message.chat.id, 'У вас нет доменов')
-
                     bot.register_next_step_handler(message, uslugi)
                 elif message.text == 'Мои VDS':
                     for i in check:
