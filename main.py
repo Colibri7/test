@@ -18,8 +18,6 @@ connection = pymysql.connect(host='62.209.143.131',
                              cursorclass=pymysql.cursors.DictCursor
                              )
 
-
-
 SQLALCHEMY_ENGINE_OPTIONS = {
     "pool_pre_ping": True,
     "pool_recycle": 300,
@@ -592,7 +590,6 @@ def log(message):
                                  "Hostmaster – Хостинг провайдер и регистратор доменов в "
                                  "Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>",
                                  reply_markup=markup, parse_mode='html')
-                bot.register_next_step_handler(message, language)
 
         if message.text == 'sardor':
             min = connection.cursor()
@@ -684,7 +681,7 @@ def log(message):
                                  "Hostmaster – Хостинг провайдер и регистратор доменов в "
                                  "Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>",
                                  reply_markup=markup, parse_mode='html')
-                bot.register_next_step_handler(message, language)
+
             else:
                 key = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
                 lg1 = types.KeyboardButton("Возврат")
@@ -711,7 +708,7 @@ def log(message):
                          "Hostmaster – Хостинг провайдер и регистратор доменов в "
                          "Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>",
                          reply_markup=markup, parse_mode='html')
-        bot.register_next_step_handler(message, language)
+
     else:
         login = message.text
         chat_id = message.chat.id
@@ -752,7 +749,7 @@ def log(message):
                              "Hostmaster – Хостинг провайдер и регистратор доменов в "
                              "Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>",
                              reply_markup=markup_ru, parse_mode='html')
-            bot.register_next_step_handler(message, language)
+
 
         else:
             key = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
@@ -1054,7 +1051,6 @@ def log_uz(message):
                                  "Hostmaster – Хостинг провайдер и регистратор доменов в "
                                  "Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>",
                                  reply_markup=markup, parse_mode='html')
-                bot.register_next_step_handler(message, language)
 
         if message.text == 'sardor':
             min = connection.cursor()
@@ -1282,7 +1278,6 @@ def language(message):
                          reply_markup=markup, parse_mode='html')
 
 
-
 @bot.callback_query_handler(func=lambda call: True)
 def callback(call):
     if call.data == 'cabinet':
@@ -1470,7 +1465,6 @@ def callback(call):
                                  "Hostmaster – Хостинг провайдер и регистратор доменов в "
                                  "Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>",
                                  reply_markup=markup, parse_mode='html')
-                bot.register_next_step_handler(message, language)
 
         markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
         lg1 = types.KeyboardButton('Мои хостинги')
@@ -1487,11 +1481,8 @@ def callback(call):
         lg1 = types.KeyboardButton('🇷🇺Russian🇷🇺')
         lg2 = types.KeyboardButton('🇺🇿Uzbek🇺🇿')
         lg3 = types.KeyboardButton('Возврат')
-
         mark.add(lg1, lg2, lg3)
-
         bot.send_message(call.message.chat.id, 'Смена языка', reply_markup=mark)
-
         bot.register_next_step_handler(call.message, language)
     elif call.data == "ro'yxatdan_o'tish":
         mark = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
@@ -1645,8 +1636,7 @@ def callback(call):
                                  "provayderi va domen registratori "
                                  "O'zbekiston,Toshkentda. "
                                  "Bizning telefon: <b>71-202-55-11</b>",
-                                 reply_markup=markup_uz,parse_mode='html')
-
+                                 reply_markup=markup_uz, parse_mode='html')
 
         markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
         lg1 = types.KeyboardButton('Mening xostinglarim')
