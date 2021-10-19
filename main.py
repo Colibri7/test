@@ -1280,7 +1280,7 @@ def language(message):
                          "Hostmaster – Хостинг провайдер и регистратор доменов в "
                          "Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>",
                          reply_markup=markup, parse_mode='html')
-        bot.register_next_step_handler(message, language)
+
 
 
 @bot.callback_query_handler(func=lambda call: True)
@@ -1490,7 +1490,7 @@ def callback(call):
 
         mark.add(lg1, lg2, lg3)
 
-        bot.send_message(call.message.chat.id, 'Change language', reply_markup=mark)
+        bot.send_message(call.message.chat.id, 'Смена языка', reply_markup=mark)
 
         bot.register_next_step_handler(call.message, language)
     elif call.data == "ro'yxatdan_o'tish":
