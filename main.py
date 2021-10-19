@@ -8,9 +8,10 @@ import telebot
 from sqlalchemy.engine import url
 from telebot import types
 import pymysql
+from sqlalchemy import create_engine
+
 
 bot = telebot.TeleBot('1978328105:AAHB4mv6pfCcUm4B-qSy3nSOXCntSoNm9KU', threaded=False)
-
 connection = pymysql.connect(host='62.209.143.131',
                              user='hostmasteruz_pbot',
                              password='bcaxoZyAXDGc',
@@ -18,8 +19,6 @@ connection = pymysql.connect(host='62.209.143.131',
                              charset='utf8mb4',
                              cursorclass=pymysql.cursors.DictCursor
                              )
-
-from sqlalchemy import create_engine
 
 create_engine(url, echo=False, encoding='utf8', pool_recycle=3600, pool_pre_ping=True)
 
