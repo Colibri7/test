@@ -1638,11 +1638,11 @@ if __name__ == "__main__":
     schedule.every().day.at('12:14').do(vds_schedule)
     schedule.every().day.at("12:15").do(hosting_schedule)
     Thread(target=schedule_checker).start()
-while True:
-    try:
-        bot.polling(none_stop=True)
+# while True:
+#     try:
+bot.polling(none_stop=True)
 
-    except Exception as e:
-        telebot.logger.error(e)  # или просто print(e) если у вас логгера нет,
-        # или import traceback; traceback.print_exc() для печати полной инфы
-        time.sleep(5)
+    # except Exception as e:
+    #     telebot.logger.error(e)  # или просто print(e) если у вас логгера нет,
+    #     # или import traceback; traceback.print_exc() для печати полной инфы
+    #     time.sleep(5)
