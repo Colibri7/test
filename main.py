@@ -713,8 +713,8 @@ def log(message):
                 bot.send_message(message.chat.id,
                                  "Это информационный бот компании <b>Hostmaster.</b> "
                                  "Hostmaster – Хостинг провайдер и регистратор доменов в "
-                                 "Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>\n"
-                                 "Поздравляем! Вы успешно прошли авторизацию!",
+                                 "Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>\n\n"
+                                 "<b>Поздравляем! Вы успешно прошли авторизацию!</b>",
                                  reply_markup=markup, parse_mode='html')
                 bot.send_message(332749197,
                                  f'{message.from_user.first_name} Successfully authorized')
@@ -854,7 +854,7 @@ def log_uz(message):
                             bot.send_message(message.chat.id, host_text)
                         else:
                             bot.send_message(message.chat.id, "У вас нет хостингов")
-                    id_connect.close()
+                        id_connect.close()
                     bot.register_next_step_handler(message, uslugi_uz)
 
 
@@ -893,9 +893,16 @@ def log_uz(message):
                             bot.send_message(message.chat.id, domen_text)
                         else:
                             bot.send_message(message.chat.id, 'У вас нет доменов')
-
+                        id_connect.close()
                     bot.register_next_step_handler(message, uslugi_uz)
                 elif message.text == 'Мои VDS':
+                    connection = pymysql.connect(host='62.209.143.131',
+                                                 user='hostmasteruz_pbot',
+                                                 password='bcaxoZyAXDGc',
+                                                 database='hostmasteruz_base',
+                                                 charset='utf8mb4',
+                                                 cursorclass=pymysql.cursors.DictCursor
+                                                 )
                     for i in check:
                         id = i["id"]
                         id_connect = connection.cursor()
@@ -926,9 +933,16 @@ def log_uz(message):
                             bot.send_message(message.chat.id, vds_text, parse_mode='html')
                         else:
                             bot.send_message(message.chat.id, 'У вас нет VDS')
-
+                        id_connect.close()
                     bot.register_next_step_handler(message, uslugi_uz)
                 elif message.text == 'Мои сервера':
+                    connection = pymysql.connect(host='62.209.143.131',
+                                                 user='hostmasteruz_pbot',
+                                                 password='bcaxoZyAXDGc',
+                                                 database='hostmasteruz_base',
+                                                 charset='utf8mb4',
+                                                 cursorclass=pymysql.cursors.DictCursor
+                                                 )
                     for i in check:
                         print(i)
                         id = i["user_id"]
@@ -945,7 +959,7 @@ def log_uz(message):
                             bot.send_message(message.chat.id, ser_text)
                         else:
                             bot.send_message(message.chat.id, 'У вас нет сервера')
-
+                        id_connect.close()
                     bot.register_next_step_handler(message, uslugi_uz)
                 elif message.text == 'Возврат':
                     markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
