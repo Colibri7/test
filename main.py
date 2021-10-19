@@ -820,7 +820,7 @@ def log(message):
                              f'{message.from_user.first_name} Cant log in')
             bot.register_next_step_handler(message, log)
 
-        cursor.close()
+
 
 
 @bot.message_handler(content_types=['text'])
