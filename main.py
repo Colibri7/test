@@ -5,6 +5,7 @@ from threading import Thread
 import schedule
 from datetime import datetime
 import telebot
+from sqlalchemy.engine import url
 from telebot import types
 import pymysql
 
@@ -18,10 +19,10 @@ connection = pymysql.connect(host='62.209.143.131',
                              cursorclass=pymysql.cursors.DictCursor
                              )
 
-SQLALCHEMY_ENGINE_OPTIONS = {
-    "pool_pre_ping": True,
-    "pool_recycle": 300,
-}
+
+from sqlalchemy import create_engine
+create_engine(url, echo=False, encoding='utf8', pool_recycle=3600, pool_pre_ping=True)
+
 
 
 def domen_60_days_schedule():
@@ -57,14 +58,21 @@ def domen_60_days_schedule():
 def domen_30_days_schedule():
     min = connection.cursor()
     min.execute(
-        "SELECT `tg_id`, `idmydomain`, `mydomain`.userid, `mydomainname`, NOW() as now_datetime, `expired`,`contactname`, `contactcompany` FROM `hostmasteruz_base`.`mydomain`, `hostmasteruz_bot`.`sardorbot`,`hostmasteruz_base`.`contact`  WHERE DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 30 DAY)) AND `sardorbot`.`b_userid` = `mydomain`.`userid` AND `mydomain`.`mydomaincontactcust` = `contact`.`idcontact`;")
+        "SELECT `tg_id`, `idmydomain`, `mydomain`.userid, "
+        "`mydomainname`, NOW() as now_datetime, `expired`,"
+        "`contactname`, `contactcompany` FROM "
+        "`hostmasteruz_base`.`mydomain`, `hostmasteruz_bot`.`sardorbot`,"
+        "`hostmasteruz_base`.`contact`  WHERE DATE(`expired`) ="
+        " DATE(DATE_ADD(NOW(),INTERVAL 30 DAY)) AND"
+        " `sardorbot`.`b_userid` = `mydomain`.`userid` "
+        "AND `mydomain`.`mydomaincontactcust` = `contact`.`idcontact`;")
     domen_30 = min.fetchall()
 
     for i in domen_30:
         date = '{:%d-%m-%Y}'.format(i["expired"])
         some_id = i["tg_id"]
         print('id ', some_id)
-        if i["contactcompany"] == None:
+        if i["contactcompany"] is None:
 
             bot.send_message(332749197, f'Уважаемый <b>{i["contactname"]}!</b> Уведомляем Вас о том, '
                                         f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
@@ -86,14 +94,22 @@ def domen_30_days_schedule():
 def domen_10_days_schedule():
     min = connection.cursor()
     min.execute(
-        "SELECT `tg_id`, `idmydomain`, `mydomain`.userid, `mydomainname`, NOW() as now_datetime, `expired`,`contactname`, `contactcompany` FROM `hostmasteruz_base`.`mydomain`, `hostmasteruz_bot`.`sardorbot`,`hostmasteruz_base`.`contact`  WHERE DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 10 DAY)) AND `sardorbot`.`b_userid` = `mydomain`.`userid` AND `mydomain`.`mydomaincontactcust` = `contact`.`idcontact`;")
+        "SELECT `tg_id`, `idmydomain`, `mydomain`.userid, "
+        "`mydomainname`, NOW() as now_datetime, `expired`,"
+        "`contactname`, `contactcompany` FROM"
+        " `hostmasteruz_base`.`mydomain`,"
+        " `hostmasteruz_bot`.`sardorbot`,"
+        "`hostmasteruz_base`.`contact`  "
+        "WHERE DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 10 DAY))"
+        " AND `sardorbot`.`b_userid` = `mydomain`.`userid`"
+        " AND `mydomain`.`mydomaincontactcust` = `contact`.`idcontact`;")
     domen_30 = min.fetchall()
 
     for i in domen_30:
         date = '{:%d-%m-%Y}'.format(i["expired"])
         some_id = i["tg_id"]
         print('id ', some_id)
-        if i["contactcompany"] == None:
+        if i["contactcompany"] is None:
 
             bot.send_message(332749197, f'Уважаемый <b>{i["contactname"]}!</b> Уведомляем Вас о том, '
                                         f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
@@ -115,14 +131,21 @@ def domen_10_days_schedule():
 def domen_1_days_schedule():
     min = connection.cursor()
     min.execute(
-        "SELECT `tg_id`, `idmydomain`, `mydomain`.userid, `mydomainname`, NOW() as now_datetime, `expired`,`contactname`, `contactcompany` FROM `hostmasteruz_base`.`mydomain`, `hostmasteruz_bot`.`sardorbot`,`hostmasteruz_base`.`contact`  WHERE DATE(expired) = DATE(NOW()) AND `sardorbot`.`b_userid` = `mydomain`.`userid` AND `mydomain`.`mydomaincontactcust` = `contact`.`idcontact`;")
+        "SELECT `tg_id`, `idmydomain`, `mydomain`.userid,"
+        " `mydomainname`, NOW() as now_datetime, "
+        "`expired`,`contactname`, `contactcompany`"
+        " FROM `hostmasteruz_base`.`mydomain`, "
+        "`hostmasteruz_bot`.`sardorbot`,`hostmasteruz_base`.`contact` "
+        " WHERE DATE(expired) = DATE(NOW()) AND "
+        "`sardorbot`.`b_userid` = `mydomain`.`userid`"
+        " AND `mydomain`.`mydomaincontactcust` = `contact`.`idcontact`;")
     domen_1 = min.fetchall()
 
     for i in domen_1:
         date = '{:%d-%m-%Y}'.format(i["expired"])
         some_id = i["tg_id"]
         print('id ', some_id)
-        if i["contactcompany"] == None:
+        if i["contactcompany"] is None:
             bot.send_message(332749197, f'Уважаемый <b>{i["contactname"]}!</b> Уведомляем Вас о том, '
                                         f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
                                         f'истек сегодня, <b>{date}</b> года. Для продления регистрации '
@@ -145,13 +168,23 @@ def domen_1_days_schedule():
 def hosting_schedule():
     min = connection.cursor()
     min.execute(
-        "SELECT  LAST_DAY(NOW()),`tg_id`,`hostcontract`.`user_id`, `hostcontract`.`hostcontractdomain`, `hostcontract`.`hostcontractdate`, `hosting`.`hostingname`, ROUND(`hosting`.`hostingcost` / 12) as abon_month, `hosting`.`hostingcost` as abon_year, `contact`.`balance`,`contactname`, `contactcompany` FROM `hostcontract`, `hosting`, `contact` ,`hostmasteruz_bot`.`sardorbot` WHERE `hostcontract`.`status` = 1 AND `contact`.`balance` < `hosting`.`hostingcost` / 12 AND `hostcontract`.`hostingid` = `hosting`.`idhosting` AND `hostcontract`.`contactid` = `contact`.`idcontact` AND `sardorbot`.`b_userid` = `hostcontract`.`user_id`"
+        "SELECT  LAST_DAY(NOW()),`tg_id`,`hostcontract`.`user_id`,"
+        " `hostcontract`.`hostcontractdomain`, "
+        "`hostcontract`.`hostcontractdate`, `hosting`.`hostingname`,"
+        " ROUND(`hosting`.`hostingcost` / 12) as abon_month,"
+        " `hosting`.`hostingcost` as abon_year, `contact`.`balance`,"
+        "`contactname`, `contactcompany` FROM `hostcontract`, `hosting`, "
+        "`contact` ,`hostmasteruz_bot`.`sardorbot` WHERE"
+        " `hostcontract`.`status` = 1 AND `contact`.`balance` "
+        "< `hosting`.`hostingcost` / 12 AND `hostcontract`.`hostingid` = `hosting`.`idhosting`"
+        " AND `hostcontract`.`contactid` = `contact`.`idcontact` "
+        "AND `sardorbot`.`b_userid` = `hostcontract`.`user_id`"
     )
     hosting = min.fetchall()
     for i in hosting:
         date = '{:%d-%m-%Y}'.format(i["LAST_DAY(NOW())"])
         some_id = i["tg_id"]
-        if i["contactcompany"] == None:
+        if i["contactcompany"] is None:
             bot.send_message(some_id, f'Уважаемый <b>{i["contactname"]}</b> !\n'
                                       f'Уведомляем Вас о необходимости оплаты услуг за использование услуги'
                                       f' Хостинга на будущий месяц до <b>{date}</b>  в соответствии с выбранным'
@@ -164,20 +197,31 @@ def hosting_schedule():
                                       f'Уведомляем Вас о необходимости оплаты услуг за использование услуги'
                                       f' Хостинга на будущий месяц до <b>{date}</b>  в соответствии с выбранным'
                                       f'тарифом <b>{i["hostingname"]}</b> в размере <b>{i["abon_month"]}</b> сум. '
-                                      f'В случае неоплаты, услуга будет отключена !\n<b>\nС уважением, команда Hostmaster!</b>',
+                                      f'В случае неоплаты, услуга будет отключена !\n'
+                                      f'<b>\nС уважением, команда Hostmaster!</b>',
                              parse_mode='html')
 
 
 def vds_schedule():
     min = connection.cursor()
     min.execute(
-        "SELECT LAST_DAY(NOW()),`tg_id`,`vdscontract`.`user_id`, `contact`.`contactname`, `contact`.`contactcompany`,`vdscontract`.`vdshostname`, `vdscontract`.`vdscontractdate`, `vds_tariffs`.`tariffname`, ROUND(`vds_tariffs`.`vdscost` / 12) as abon_month, `vds_tariffs`.`vdscost` as abon_year, `contact`.`balance` FROM `vdscontract`, `vds_tariffs`, `contact`,`hostmasteruz_bot`.`sardorbot` WHERE `vdscontract`.`status` = 1 AND `contact`.`balance` < `vds_tariffs`.`vdscost` / 12 AND `vdscontract`.`vdsid` = `vds_tariffs`.`idvds` AND `vdscontract`.`contactid` = `contact`.`idcontact` AND `sardorbot`.`b_userid` = `vdscontract`.`user_id`")
+        "SELECT LAST_DAY(NOW()),`tg_id`,`vdscontract`.`user_id`,"
+        " `contact`.`contactname`, `contact`.`contactcompany`,"
+        "`vdscontract`.`vdshostname`, `vdscontract`.`vdscontractdate`,"
+        " `vds_tariffs`.`tariffname`, ROUND(`vds_tariffs`.`vdscost` / 12) "
+        "as abon_month, `vds_tariffs`.`vdscost` as abon_year, "
+        "`contact`.`balance` FROM `vdscontract`, `vds_tariffs`,"
+        " `contact`,`hostmasteruz_bot`.`sardorbot` WHERE "
+        "`vdscontract`.`status` = 1 AND `contact`.`balance` <"
+        " `vds_tariffs`.`vdscost` / 12 AND `vdscontract`.`vdsid` = `vds_tariffs`.`idvds` "
+        "AND `vdscontract`.`contactid` = `contact`.`idcontact` AND"
+        " `sardorbot`.`b_userid` = `vdscontract`.`user_id`")
     vds = min.fetchall()
     for i in vds:
         date = '{:%d-%m-%Y}'.format(i["LAST_DAY(NOW())"])
         some_id = i["tg_id"]
         print(some_id)
-        if i["contactcompany"] == None:
+        if i["contactcompany"] is None:
             bot.send_message(332749197, f'Уважаемый <b>{i["contactname"]}</b>!\n'
                                         f'Уведомляем Вас о необходимости оплаты услуг за использование услуги '
                                         f'VDS на будущий месяц до <b>{date}</b>  в соответствии с выбранным '
@@ -201,7 +245,8 @@ def func(message):
         lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
         lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
         lg3 = types.InlineKeyboardButton('Авторизация', callback_data='cabinet')
-        lg4 = types.InlineKeyboardButton('Связь с менеджером', callback_data='connect_admin',url='https://t.me/hostmaster_support')
+        lg4 = types.InlineKeyboardButton('Связь с менеджером',
+                                         callback_data='connect_admin', url='https://t.me/hostmaster_support')
         lg5 = types.InlineKeyboardButton('Перейти на сайт', callback_data='site', url='https://hostmaster.uz/')
         lg6 = types.InlineKeyboardButton('Настройки', callback_data='settings')
 
@@ -242,7 +287,8 @@ def send_welcome(message):
     lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
     lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
     lg3 = types.InlineKeyboardButton('Авторизация', callback_data='cabinet')
-    lg4 = types.InlineKeyboardButton('Связь с менеджером', callback_data='connect_admin',url='https://t.me/hostmaster_support')
+    lg4 = types.InlineKeyboardButton('Связь с менеджером',
+                                     callback_data='connect_admin', url='https://t.me/hostmaster_support')
     lg5 = types.InlineKeyboardButton('Перейти на сайт', callback_data='site', url='https://hostmaster.uz/')
     lg6 = types.InlineKeyboardButton('Настройки', callback_data='settings')
 
@@ -273,7 +319,8 @@ def log(message):
                             for i in checkContact:
                                 if i["status"] == 1:
                                     i["status"] = 'Active'
-                                host_text += f'{num}.{i["hostcontractdomain"]}, Тариф: {i["cptariff"]}, Статус: {i["status"]}\n'
+                                host_text += f'{num}.{i["hostcontractdomain"]}, ' \
+                                             f'Тариф: {i["cptariff"]}, Статус: {i["status"]}\n'
                                 num += 1
                             bot.send_message(message.chat.id, host_text)
                         else:
@@ -300,7 +347,9 @@ def log(message):
                                 elif i["status"] == 3:
                                     i["status"] = 'W_RED'
 
-                                domen_text += f'{num}.{i["mydomainname"]}.uz, Статус: {(i["status"])}, Дата окончания:{i["expired"].strftime("%d/%m/%Y")}'
+                                domen_text += f'{num}.{i["mydomainname"]}.uz, ' \
+                                              f'Статус: {(i["status"])}, ' \
+                                              f'Дата окончания:{i["expired"].strftime("%d/%m/%Y")}'
                                 num += 1
                             bot.send_message(message.chat.id, domen_text)
                         else:
@@ -312,7 +361,14 @@ def log(message):
                         id = i["id"]
                         id_connect = connection.cursor()
                         id_connect.execute(
-                            'SELECT `vdscontract`.`vdshostname`, `vds_tariffs`.`tariffname` ,`vdscontract`.`status`  FROM `user`, `vdscontract`, `vds_tariffs` WHERE   username=%(username)s AND `user`.`id` = `vdscontract`.`user_id` AND `vdscontract`.`vdsid` = `vds_tariffs`.`idvds` ORDER BY `vdscontract`.`vdshostname`;',
+                            'SELECT `vdscontract`.`vdshostname`,'
+                            ' `vds_tariffs`.`tariffname` ,'
+                            '`vdscontract`.`status`  FROM '
+                            '`user`, `vdscontract`, `vds_tariffs`'
+                            ' WHERE   username=%(username)s AND '
+                            '`user`.`id` = `vdscontract`.`user_id`'
+                            ' AND `vdscontract`.`vdsid` = `vds_tariffs`.`idvds`'
+                            ' ORDER BY `vdscontract`.`vdshostname`;',
                             {'username': login})
                         checkContact = id_connect.fetchall()
                         num = 1
@@ -384,7 +440,10 @@ def log(message):
                     elif message.text == '30 дней':
                         min = connection.cursor()
                         min.execute(
-                            "SELECT `idmydomain`, `userid`, `mydomainname`, NOW() as now_datetime, `expired` FROM `mydomain` WHERE DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 30 DAY))")
+                            "SELECT `idmydomain`, `userid`, `mydomainname`, "
+                            "NOW() as now_datetime, `expired` "
+                            "FROM `mydomain` WHERE "
+                            "DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 30 DAY))")
                         domendays_30 = min.fetchall()
                         days_30 = ''
                         n = 1
@@ -397,7 +456,10 @@ def log(message):
                     elif message.text == '10 дней':
                         min = connection.cursor()
                         min.execute(
-                            "SELECT `idmydomain`, `userid`, `mydomainname`, NOW() as now_datetime, `expired` FROM `mydomain` WHERE DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 10 DAY))")
+                            "SELECT `idmydomain`, `userid`, "
+                            "`mydomainname`, NOW() as now_datetime, "
+                            "`expired` FROM `mydomain` "
+                            "WHERE DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 10 DAY))")
                         domendays_10 = min.fetchall()
                         days_10 = ''
                         n = 1
@@ -410,7 +472,10 @@ def log(message):
                     elif message.text == 'Сегодня':
                         min = connection.cursor()
                         min.execute(
-                            "SELECT `idmydomain`, `userid`, `mydomainname`, NOW() as now_datetime, `expired` FROM `mydomain` WHERE DATE(`expired`) = DATE(NOW())")
+                            "SELECT `idmydomain`, `userid`,"
+                            " `mydomainname`, NOW() as now_datetime, "
+                            "`expired` FROM `mydomain` "
+                            "WHERE DATE(`expired`) = DATE(NOW())")
                         domendays_1 = min.fetchall()
                         days_1 = ''
                         n = 1
@@ -423,7 +488,9 @@ def log(message):
                     elif message.text == 'Redemption':
                         min = connection.cursor()
                         min.execute(
-                            "SELECT `idmydomain`, `userid`, `mydomainname`, NOW() as now_datetime, `expired` FROM `mydomain` WHERE status=3")
+                            "SELECT `idmydomain`, `userid`, "
+                            "`mydomainname`, NOW() as now_datetime,"
+                            " `expired` FROM `mydomain` WHERE status=3")
                         redemption = min.fetchall()
                         red = ''
                         n = 1
@@ -482,7 +549,7 @@ def log(message):
                     text = ''
                     num = 1
                     for i in checkContact:
-                        if i["contactcompany"] == None:
+                        if i["contactcompany"] is None:
                             text += f'{num}. {i["contactname"]}, Баланс: <b>{i["balance"]} sum</b>\n'
                         else:
                             text += f'{num}. {i["contactcompany"]}, Баланс: <b>{i["balance"]} sum</b>\n'
@@ -541,8 +608,11 @@ def log(message):
             markup_ru.add(lg1, lg2, lg3, lg4)
 
             bot.send_message(message.chat.id,
-                             'Поздравляем! Вы успешно прошли авторизацию!',
-                             reply_markup=markup_ru)
+                             "Это информационный бот компании <b>Hostmaster.</b> "
+                             "Hostmaster – Хостинг провайдер и регистратор доменов в "
+                             "Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>\n"
+                             "Поздравляем! Вы успешно прошли авторизацию!",
+                             reply_markup=markup_ru, parse_mode='html')
             bot.send_message(332749197,
                              f'{message.from_user.first_name} Successfully authorized for admin')
 
@@ -581,13 +651,20 @@ def log(message):
                     id = i["id"]
 
                     cursor = bot_con.cursor()
-                    query = "INSERT INTO `sardorbot` (`tg_id`, `tg_username`, `tg_first_name`, `tg_last_name`, `updated`,`b_username`,`b_userid`) " \
-                            "VALUES ({0},'{1}','{2}','{3}','{4}','{5}','{6}') ON DUPLICATE KEY UPDATE `tg_username` = '{1}', `tg_first_name` = '{2}', `tg_last_name` = '{3}', `updated` = '{4}',`b_username`='{5}',`b_userid`='{6}'".format(
+                    query = "INSERT INTO `sardorbot` (`tg_id`, `tg_username`, `tg_first_name`," \
+                            " `tg_last_name`, `updated`,`b_username`,`b_userid`) " \
+                            "VALUES ({0},'{1}','{2}','{3}','{4}','{5}','{6}') " \
+                            "ON DUPLICATE KEY UPDATE `tg_username` = '{1}'," \
+                            " `tg_first_name` = '{2}', `tg_last_name` = '{3}', " \
+                            "`updated` = '{4}',`b_username`='{5}',`b_userid`='{6}'".format(
                         chat_id, username, first_name, last_name, dt_obj, login, id)
                     cursor.execute(query)
                 bot.send_message(message.chat.id,
-                                 'Поздравляем! Вы успешно прошли авторизацию!',
-                                 reply_markup=markup)
+                                 "Это информационный бот компании <b>Hostmaster.</b> "
+                                 "Hostmaster – Хостинг провайдер и регистратор доменов в "
+                                 "Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>\n"
+                                 "Поздравляем! Вы успешно прошли авторизацию!",
+                                 reply_markup=markup, parse_mode='html')
                 bot.send_message(332749197,
                                  f'{message.from_user.first_name} Successfully authorized')
             elif message.text == 'Возврат':
@@ -704,7 +781,8 @@ def log_uz(message):
                             for i in checkContact:
                                 if i["status"] == 1:
                                     i["status"] = 'Active'
-                                host_text += f'{num}.{i["hostcontractdomain"]}, Тариф: {i["cptariff"]}, Статус: {i["status"]}\n'
+                                host_text += f'{num}.{i["hostcontractdomain"]},' \
+                                             f' Тариф: {i["cptariff"]}, Статус: {i["status"]}\n'
                                 num += 1
                             bot.send_message(message.chat.id, host_text)
                         else:
@@ -842,7 +920,10 @@ def log_uz(message):
                     elif message.text == '10 дней':
                         min = connection.cursor()
                         min.execute(
-                            "SELECT `idmydomain`, `userid`, `mydomainname`, NOW() as now_datetime, `expired` FROM `mydomain` WHERE DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 10 DAY))")
+                            "SELECT `idmydomain`, `userid`, "
+                            "`mydomainname`, NOW() as now_datetime,"
+                            " `expired` FROM `mydomain` "
+                            "WHERE DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 10 DAY))")
                         domendays_10 = min.fetchall()
                         days_10 = ''
                         n = 1
@@ -855,7 +936,9 @@ def log_uz(message):
                     elif message.text == 'Сегодня':
                         min = connection.cursor()
                         min.execute(
-                            "SELECT `idmydomain`, `userid`, `mydomainname`, NOW() as now_datetime, `expired` FROM `mydomain` WHERE DATE(`expired`) = DATE(NOW())")
+                            "SELECT `idmydomain`, `userid`,"
+                            " `mydomainname`, NOW() as now_datetime, "
+                            "`expired` FROM `mydomain` WHERE DATE(`expired`) = DATE(NOW())")
                         domendays_1 = min.fetchall()
                         days_1 = ''
                         n = 1
@@ -928,7 +1011,7 @@ def log_uz(message):
                     text = ''
                     num = 1
                     for i in checkContact:
-                        if i["contactcompany"] == None:
+                        if i["contactcompany"] is None:
                             text += f'{num}. {i["contactname"]}, Баланс: <b>{i["balance"]} sum</b>\n'
                         else:
                             text += f'{num}. {i["contactcompany"]}, Баланс: <b>{i["balance"]} sum</b>\n'
@@ -1195,7 +1278,7 @@ def language(message):
                          "Это информационный бот компании <b>Hostmaster.</b> "
                          "Hostmaster – Хостинг провайдер и регистратор доменов в "
                          "Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>",
-                         reply_markup=markup)
+                         reply_markup=markup, parse_mode='html')
         bot.register_next_step_handler(message, language)
 
 
@@ -1232,7 +1315,7 @@ def callback(call):
         text = ''
         num = 1
         for i in check:
-            if i["contactcompany"] == None:
+            if i["contactcompany"] is None:
                 text += f'{num}. {i["contactname"]}, Баланс: <b>{i["balance"]} sum</b>\n'
             else:
                 text += f'{num}. {i["contactcompany"]}, Баланс: <b>{i["balance"]} sum</b>\n'
@@ -1642,7 +1725,7 @@ if __name__ == "__main__":
 #     try:
 bot.polling(none_stop=True)
 
-    # except Exception as e:
-    #     telebot.logger.error(e)  # или просто print(e) если у вас логгера нет,
-    #     # или import traceback; traceback.print_exc() для печати полной инфы
-    #     time.sleep(5)
+# except Exception as e:
+#     telebot.logger.error(e)  # или просто print(e) если у вас логгера нет,
+#     # или import traceback; traceback.print_exc() для печати полной инфы
+#     time.sleep(5)
