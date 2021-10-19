@@ -257,7 +257,7 @@ def func(message):
                          "Hostmaster – Хостинг провайдер и регистратор доменов в "
                          "Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>",
                          reply_markup=markup, parse_mode='html')
-        bot.register_next_step_handler(message, language)
+
 
     elif message.text == 'Bosh sahifa':
         markup_uz = types.InlineKeyboardMarkup(row_width=2)
