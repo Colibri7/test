@@ -391,7 +391,7 @@ def log(message):
                 elif message.text == 'Мои сервера':
                     for i in check:
                         print(i)
-                        id = i["user_id"]
+                        id = i["b_userid"]
                         id_connect = connection.cursor()
                         id_connect.execute(
                             "SELECT * FROM colcontract WHERE user_id=%(user_id)s", {'user_id': id})
@@ -399,10 +399,15 @@ def log(message):
                         num = 1
                         ser_text = ''
                         if checkContact:
+
                             for i in checkContact:
-                                ser_text += f'server - {num}. {i["colhostname"]}\nСтатус: {i["status"]}\n'
+                                if i["status"] == 1:
+                                    i["status"] = 'Active'
+                                elif i["status"] == 2:
+                                    i["status"] = 'Block'
+                                ser_text += f'{num}. <b>{i["colhostname"]}</b>, Статус: <b>{i["status"]}</b>\n'
                                 num += 1
-                            bot.send_message(message.chat.id, ser_text)
+                            bot.send_message(message.chat.id, ser_text, parse_mode='html')
                         else:
                             bot.send_message(message.chat.id, 'У вас нет сервера')
 
