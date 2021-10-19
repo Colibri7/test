@@ -390,7 +390,7 @@ def log(message):
                     bot.register_next_step_handler(message, uslugi)
                 elif message.text == 'Мои сервера':
                     for i in check:
-                        id = i["userid"]
+                        id = i["user_id"]
                         id_connect = connection.cursor()
                         id_connect.execute(
                             "SELECT * FROM colcontract WHERE user_id=%(user_id)s", {'user_id': id})
