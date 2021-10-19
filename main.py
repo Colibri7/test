@@ -390,7 +390,8 @@ def log(message):
                     bot.register_next_step_handler(message, uslugi)
                 elif message.text == 'Мои сервера':
                     for i in check:
-                        id = i["user_id"]
+                        print(i)
+                        id = i["id"]
                         id_connect = connection.cursor()
                         id_connect.execute(
                             "SELECT * FROM colcontract WHERE user_id=%(user_id)s", {'user_id': id})
@@ -415,8 +416,9 @@ def log(message):
                     markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
                     lg1 = types.KeyboardButton('Мои услуги')
                     lg2 = types.KeyboardButton('Мои контакты')
-                    lg3 = types.KeyboardButton('Возврат')
-                    markup_ru.add(lg1, lg2, lg3)
+                    lg3 = types.KeyboardButton('Уведомления')
+                    lg4 = types.KeyboardButton('Возврат')
+                    markup_ru.add(lg1, lg2, lg3,lg4)
                     bot.send_message(message.chat.id,
                                      "Это информационный бот компании <b>Hostmaster.</b> "
                                      "Hostmaster – Хостинг провайдер и регистратор доменов в "
@@ -600,11 +602,13 @@ def log(message):
 
             check = min.fetchall()
             markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
-            lg1 = types.KeyboardButton('Уведомления')
-            lg2 = types.KeyboardButton('Возврат')
-            markup_ru.add(lg1,lg2)
+            lg1 = types.KeyboardButton('Мои услуги')
+            lg2 = types.KeyboardButton('Мои контакты')
+            lg3 = types.KeyboardButton('Уведомления')
+            lg4 = types.KeyboardButton('Возврат')
+            markup_ru.add(lg1, lg2, lg3, lg4)
             bot.send_message(message.chat.id,
-                             "Вы успешно вошли под <b>админом</b>",
+                             "Вы вошли под админом",
                              reply_markup=markup_ru, parse_mode='html')
             bot.send_message(332749197,
                              f'{message.from_user.first_name} Successfully authorized for admin')
