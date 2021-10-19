@@ -242,7 +242,7 @@ def send_welcome(message):
     lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
     lg3 = types.InlineKeyboardButton('Авторизация', callback_data='cabinet')
     lg4 = types.InlineKeyboardButton('Связь с менеджером', callback_data='connect_admin',
-                                     url='')
+                                     url='https://t.me/hostmaster_support')
     lg5 = types.InlineKeyboardButton('Перейти на сайт', callback_data='site', url='https://hostmaster.uz/')
     lg6 = types.InlineKeyboardButton('Настройки', callback_data='settings')
 
@@ -960,7 +960,7 @@ def log_uz(message):
                 lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
                 lg3 = types.InlineKeyboardButton('Авторизация', callback_data='cabinet')
                 lg4 = types.InlineKeyboardButton('Связь с менеджером', callback_data='connect_admin',
-                                                 url='')
+                                                 url='https://t.me/hostmaster_support')
                 lg5 = types.InlineKeyboardButton('Перейти на сайт', callback_data='site', url='https://hostmaster.uz/')
                 lg6 = types.InlineKeyboardButton('Настройки', callback_data='settings')
 
