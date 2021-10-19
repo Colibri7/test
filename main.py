@@ -10,13 +10,13 @@ import pymysql
 
 bot = telebot.TeleBot('1978328105:AAHdHFSAItaVV9Cv3bJTOIlVIL1TLoijWv4', threaded=False)
 
-connection = pymysql.connect(host='62.209.143.131',
-                             user='hostmasteruz_pbot',
-                             password='bcaxoZyAXDGc',
-                             database='hostmasteruz_base',
-                             charset='utf8mb4',
-                             cursorclass=pymysql.cursors.DictCursor
-                             )
+# connection = pymysql.connect(host='62.209.143.131',
+#                              user='hostmasteruz_pbot',
+#                              password='bcaxoZyAXDGc',
+#                              database='hostmasteruz_base',
+#                              charset='utf8mb4',
+#                              cursorclass=pymysql.cursors.DictCursor
+#                              )
 
 SQLALCHEMY_ENGINE_OPTIONS = {
     "pool_pre_ping": True,
@@ -25,6 +25,13 @@ SQLALCHEMY_ENGINE_OPTIONS = {
 
 
 def domen_60_days_schedule():
+    connection = pymysql.connect(host='62.209.143.131',
+                                 user='hostmasteruz_pbot',
+                                 password='bcaxoZyAXDGc',
+                                 database='hostmasteruz_base',
+                                 charset='utf8mb4',
+                                 cursorclass=pymysql.cursors.DictCursor
+                                 )
     min = connection.cursor()
     min.execute(
         "SELECT `tg_id`, `idmydomain`, `mydomain`.userid, `mydomainname`, NOW() as now_datetime, `expired`,`contactname`, `contactcompany` FROM `hostmasteruz_base`.`mydomain`, `hostmasteruz_bot`.`sardorbot`,`hostmasteruz_base`.`contact`  WHERE DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 59 DAY)) AND `sardorbot`.`b_userid` = `mydomain`.`userid` AND `mydomain`.`mydomaincontactcust` = `contact`.`idcontact`;")
@@ -53,8 +60,17 @@ def domen_60_days_schedule():
                              f'лицом.\n<b>С уважением, команда Hostmaster!</b>',
                              parse_mode='html')
 
+    min.close()
+
 
 def domen_30_days_schedule():
+    connection = pymysql.connect(host='62.209.143.131',
+                                 user='hostmasteruz_pbot',
+                                 password='bcaxoZyAXDGc',
+                                 database='hostmasteruz_base',
+                                 charset='utf8mb4',
+                                 cursorclass=pymysql.cursors.DictCursor
+                                 )
     min = connection.cursor()
     min.execute(
         "SELECT `tg_id`, `idmydomain`, `mydomain`.userid, "
@@ -88,9 +104,17 @@ def domen_30_days_schedule():
                                         f'сумму согласно действующим тарифам через личный кабинет на нашем сайте. '
                                         f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
                                         f'лицом.\n<b>С уважением, команда Hostmaster!</b>', parse_mode='html')
+    min.close()
 
 
 def domen_10_days_schedule():
+    connection = pymysql.connect(host='62.209.143.131',
+                                 user='hostmasteruz_pbot',
+                                 password='bcaxoZyAXDGc',
+                                 database='hostmasteruz_base',
+                                 charset='utf8mb4',
+                                 cursorclass=pymysql.cursors.DictCursor
+                                 )
     min = connection.cursor()
     min.execute(
         "SELECT `tg_id`, `idmydomain`, `mydomain`.userid, "
@@ -125,9 +149,17 @@ def domen_10_days_schedule():
                                         f'сумму согласно действующим тарифам через личный кабинет на нашем сайте. '
                                         f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
                                         f'лицом.\n<b>С уважением, команда Hostmaster!</b>', parse_mode='html')
+    min.close()
 
 
 def domen_1_days_schedule():
+    connection = pymysql.connect(host='62.209.143.131',
+                                 user='hostmasteruz_pbot',
+                                 password='bcaxoZyAXDGc',
+                                 database='hostmasteruz_base',
+                                 charset='utf8mb4',
+                                 cursorclass=pymysql.cursors.DictCursor
+                                 )
     min = connection.cursor()
     min.execute(
         "SELECT `tg_id`, `idmydomain`, `mydomain`.userid,"
@@ -162,9 +194,17 @@ def domen_1_days_schedule():
                                         f'В случае неоплаты, ваш домен будет свободен для '
                                         f'регистрации другим лицом.\n<b>С уважением, команда Hostmaster!</b>',
                              parse_mode='html')
+    min.close()
 
 
 def hosting_schedule():
+    connection = pymysql.connect(host='62.209.143.131',
+                                 user='hostmasteruz_pbot',
+                                 password='bcaxoZyAXDGc',
+                                 database='hostmasteruz_base',
+                                 charset='utf8mb4',
+                                 cursorclass=pymysql.cursors.DictCursor
+                                 )
     min = connection.cursor()
     min.execute(
         "SELECT  LAST_DAY(NOW()),`tg_id`,`hostcontract`.`user_id`,"
@@ -200,8 +240,17 @@ def hosting_schedule():
                                       f'<b>\nС уважением, команда Hostmaster!</b>',
                              parse_mode='html')
 
+    min.close()
+
 
 def vds_schedule():
+    connection = pymysql.connect(host='62.209.143.131',
+                                 user='hostmasteruz_pbot',
+                                 password='bcaxoZyAXDGc',
+                                 database='hostmasteruz_base',
+                                 charset='utf8mb4',
+                                 cursorclass=pymysql.cursors.DictCursor
+                                 )
     min = connection.cursor()
     min.execute(
         "SELECT LAST_DAY(NOW()),`tg_id`,`vdscontract`.`user_id`,"
@@ -236,6 +285,7 @@ def vds_schedule():
                                         f'В случае неоплаты, услуга будет отключена ! '
                                         f'<b>\nС уважением, команда Hostmaster!</b>',
                              parse_mode='html')
+    min.close()
 
 
 def func(message):
@@ -722,6 +772,13 @@ def log(message):
         dt_obj = datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d %H:%M:%S')
 
         print(dt_obj)
+        connection = pymysql.connect(host='62.209.143.131',
+                                     user='hostmasteruz_pbot',
+                                     password='bcaxoZyAXDGc',
+                                     database='hostmasteruz_base',
+                                     charset='utf8mb4',
+                                     cursorclass=pymysql.cursors.DictCursor
+                                     )
 
         cursor = connection.cursor()
         cursor.execute('SELECT username FROM user')
@@ -763,6 +820,8 @@ def log(message):
                              f'{message.from_user.first_name} Cant log in')
             bot.register_next_step_handler(message, log)
 
+        cursor.close()
+
 
 @bot.message_handler(content_types=['text'])
 def log_uz(message):
@@ -770,6 +829,13 @@ def log_uz(message):
         def after_login_uz(message):
             def uslugi_uz(message):
                 if message.text == 'Мои хостинги':
+                    connection = pymysql.connect(host='62.209.143.131',
+                                                 user='hostmasteruz_pbot',
+                                                 password='bcaxoZyAXDGc',
+                                                 database='hostmasteruz_base',
+                                                 charset='utf8mb4',
+                                                 cursorclass=pymysql.cursors.DictCursor
+                                                 )
                     for i in check:
                         id = i["id"]
                         id_connect = connection.cursor()
@@ -788,9 +854,18 @@ def log_uz(message):
                             bot.send_message(message.chat.id, host_text)
                         else:
                             bot.send_message(message.chat.id, "У вас нет хостингов")
-
+                    id_connect.close()
                     bot.register_next_step_handler(message, uslugi_uz)
+
+
                 elif message.text == 'Мои домены':
+                    connection = pymysql.connect(host='62.209.143.131',
+                                                 user='hostmasteruz_pbot',
+                                                 password='bcaxoZyAXDGc',
+                                                 database='hostmasteruz_base',
+                                                 charset='utf8mb4',
+                                                 cursorclass=pymysql.cursors.DictCursor
+                                                 )
                     for i in check:
                         id = i["id"]
                         id_connect = connection.cursor()
@@ -1184,7 +1259,13 @@ def log_uz(message):
         username = message.chat.username
         timestamp = message.date
         dt_obj = datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d %H:%M:%S')
-
+        connection = pymysql.connect(host='62.209.143.131',
+                                     user='hostmasteruz_pbot',
+                                     password='bcaxoZyAXDGc',
+                                     database='hostmasteruz_base',
+                                     charset='utf8mb4',
+                                     cursorclass=pymysql.cursors.DictCursor
+                                     )
         cursor = connection.cursor()
         cursor.execute('SELECT username FROM user')
         checkUsername = cursor.fetchall()
@@ -1226,7 +1307,7 @@ def log_uz(message):
                              f'{message.from_user.first_name} Cant log in')
             bot.register_next_step_handler(message, log)
 
-
+        cursor.close()
 @bot.message_handler(content_types=['text'])
 def language(message):
     if message.text == '🇺🇿Uzbek🇺🇿':
@@ -1284,6 +1365,13 @@ def language(message):
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback(call):
+    connection = pymysql.connect(host='62.209.143.131',
+                                 user='hostmasteruz_pbot',
+                                 password='bcaxoZyAXDGc',
+                                 database='hostmasteruz_base',
+                                 charset='utf8mb4',
+                                 cursorclass=pymysql.cursors.DictCursor
+                                 )
     if call.data == 'cabinet':
         mark = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
         menu = types.KeyboardButton('Возврат')
