@@ -1147,7 +1147,7 @@ def log_uz(message):
                                  "O'zbekiston,Toshkentda. "
                                  "Bizning telefon: <b>71-202-55-11</b>",
                                  reply_markup=markup_uz, parse_mode='html')
-                bot.register_next_step_handler(message, language)
+
             else:
                 key = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
                 lg1 = types.KeyboardButton("Qaytish")
@@ -1175,7 +1175,7 @@ def log_uz(message):
                          "O'zbekiston,Toshkentda. "
                          "Bizning telefon: <b>71-202-55-11</b>",
                          reply_markup=markup_uz, parse_mode='html')
-        bot.register_next_step_handler(message, language)
+
     else:
         login = message.text
         chat_id = message.chat.id
@@ -1215,7 +1215,7 @@ def log_uz(message):
                              "O'zbekiston,Toshkentda. "
                              "Bizning telefon: <b>71-202-55-11</b>",
                              reply_markup=markup_uz, parse_mode='html')
-            bot.register_next_step_handler(message, language)
+
 
         else:
             key = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
@@ -1246,7 +1246,7 @@ def language(message):
                          "O'zbekiston,Toshkentda. "
                          "Bizning telefon: <b>71-202-55-11</b>",
                          reply_markup=markup_uz, parse_mode='html')
-        bot.register_next_step_handler(message, language)
+
     elif message.text == '🇷🇺Russian🇷🇺':
         markup_ru = types.InlineKeyboardMarkup(row_width=2)
         lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
@@ -1263,7 +1263,7 @@ def language(message):
                          "Hostmaster – Хостинг провайдер и регистратор доменов в "
                          "Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>",
                          reply_markup=markup_ru, parse_mode='html')
-        bot.register_next_step_handler(message, language)
+
     elif message.text == 'Возврат':
         markup = types.InlineKeyboardMarkup(row_width=2)
         lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
@@ -1645,8 +1645,8 @@ def callback(call):
                                  "provayderi va domen registratori "
                                  "O'zbekiston,Toshkentda. "
                                  "Bizning telefon: <b>71-202-55-11</b>",
-                                 reply_markup=markup_uz)
-                bot.register_next_step_handler(message, language)
+                                 reply_markup=markup_uz,parse_mode='html')
+
 
         markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
         lg1 = types.KeyboardButton('Mening xostinglarim')
