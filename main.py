@@ -8,10 +8,9 @@ import telebot
 from sqlalchemy.engine import url
 from telebot import types
 import pymysql
-from sqlalchemy import create_engine
-
 
 bot = telebot.TeleBot('1978328105:AAHB4mv6pfCcUm4B-qSy3nSOXCntSoNm9KU', threaded=False)
+
 connection = pymysql.connect(host='62.209.143.131',
                              user='hostmasteruz_pbot',
                              password='bcaxoZyAXDGc',
@@ -20,7 +19,16 @@ connection = pymysql.connect(host='62.209.143.131',
                              cursorclass=pymysql.cursors.DictCursor
                              )
 
+
+from sqlalchemy import create_engine
 create_engine(url, echo=False, encoding='utf8', pool_recycle=3600, pool_pre_ping=True)
+
+
+
+SQLALCHEMY_ENGINE_OPTIONS = {
+    "pool_pre_ping": True,
+    "pool_recycle": 300,
+}
 
 
 def domen_60_days_schedule():
@@ -1244,7 +1252,6 @@ def language(message):
                          "Bizning telefon: <b>71-202-55-11</b>",
                          reply_markup=markup_uz, parse_mode='html')
         bot.register_next_step_handler(message, language)
-
     elif message.text == '🇷🇺Russian🇷🇺':
         markup_ru = types.InlineKeyboardMarkup(row_width=2)
         lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
