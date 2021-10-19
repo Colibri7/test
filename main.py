@@ -540,7 +540,6 @@ def log(message):
 
                                      reply_markup=markup_ru, parse_mode='html')
                 bot.register_next_step_handler(message, after_login)
-
             if message.text == 'Мои контакты':
                 for i in check:
                     id = i["id"]
@@ -601,22 +600,14 @@ def log(message):
 
             check = min.fetchall()
             markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
-            lg1 = types.KeyboardButton('Мои услуги')
-            lg2 = types.KeyboardButton('Мои контакты')
-            lg3 = types.KeyboardButton('Уведомления')
-            lg4 = types.KeyboardButton('Возврат')
-
-            markup_ru.add(lg1, lg2, lg3, lg4)
-
+            lg1 = types.KeyboardButton('Уведомления')
+            lg2 = types.KeyboardButton('Возврат')
+            markup_ru.add(lg1,lg2)
             bot.send_message(message.chat.id,
-                             "Это информационный бот компании <b>Hostmaster.</b> "
-                             "Hostmaster – Хостинг провайдер и регистратор доменов в "
-                             "Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>\n"
-                             "Поздравляем! Вы успешно прошли авторизацию!",
+                             "Вы успешно вошли под <b>админом</b>",
                              reply_markup=markup_ru, parse_mode='html')
             bot.send_message(332749197,
                              f'{message.from_user.first_name} Successfully authorized for admin')
-
             bot.register_next_step_handler(message, after_login)
         else:
             out = crypt.crypt(message.text, checkUsername["password_hash"])
