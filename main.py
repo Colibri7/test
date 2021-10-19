@@ -1813,7 +1813,7 @@ def schedule_checker():
 
 if __name__ == "__main__":
     schedule.every().day.at("20:16").do(domen_60_days_schedule)
-    schedule.every().day.at("19:00").do(domen_30_days_schedule)
+    schedule.every().day.at("20:16").do(domen_30_days_schedule)
     schedule.every().day.at("19:00").do(domen_10_days_schedule)
     schedule.every().day.at("19:00").do(domen_1_days_schedule)
     schedule.every().day.at('12:14').do(vds_schedule)
