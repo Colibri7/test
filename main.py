@@ -19,10 +19,9 @@ connection = pymysql.connect(host='62.209.143.131',
                              cursorclass=pymysql.cursors.DictCursor
                              )
 
-
 from sqlalchemy import create_engine
-create_engine(url, echo=False, encoding='utf8', pool_recycle=3600, pool_pre_ping=True)
 
+create_engine(url, echo=False, encoding='utf8', pool_recycle=3600, pool_pre_ping=True)
 
 
 def domen_60_days_schedule():
@@ -1245,6 +1244,7 @@ def language(message):
                          "O'zbekiston,Toshkentda. "
                          "Bizning telefon: <b>71-202-55-11</b>",
                          reply_markup=markup_uz, parse_mode='html')
+        bot.register_next_step_handler(message, language)
 
     elif message.text == '🇷🇺Russian🇷🇺':
         markup_ru = types.InlineKeyboardMarkup(row_width=2)
