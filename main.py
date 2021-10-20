@@ -479,6 +479,13 @@ def log(message):
             def doljniki(message):
                 def doljniki_domen(message):
                     if message.text == '60 дней':
+                        connection = pymysql.connect(host='62.209.143.131',
+                                                     user='hostmasteruz_pbot',
+                                                     password='bcaxoZyAXDGc',
+                                                     database='hostmasteruz_base',
+                                                     charset='utf8mb4',
+                                                     cursorclass=pymysql.cursors.DictCursor
+                                                     )
                         min = connection.cursor()
                         min.execute(
                             "SELECT `idmydomain`, `userid`, `mydomainname`, NOW() as now_datetime, `expired` FROM `mydomain` WHERE DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 60 DAY))")
@@ -490,8 +497,17 @@ def log(message):
                             n += 1
                         print(days_60)
                         bot.send_message(message.chat.id, days_60)
+                        min.close()
                         bot.register_next_step_handler(message, doljniki_domen)
+
                     elif message.text == '30 дней':
+                        connection = pymysql.connect(host='62.209.143.131',
+                                                     user='hostmasteruz_pbot',
+                                                     password='bcaxoZyAXDGc',
+                                                     database='hostmasteruz_base',
+                                                     charset='utf8mb4',
+                                                     cursorclass=pymysql.cursors.DictCursor
+                                                     )
                         min = connection.cursor()
                         min.execute(
                             "SELECT `idmydomain`, `userid`, `mydomainname`, "
@@ -506,8 +522,16 @@ def log(message):
                             n += 1
                         print(days_30)
                         bot.send_message(message.chat.id, days_30)
+                        min.close()
                         bot.register_next_step_handler(message, doljniki_domen)
                     elif message.text == '10 дней':
+                        connection = pymysql.connect(host='62.209.143.131',
+                                                     user='hostmasteruz_pbot',
+                                                     password='bcaxoZyAXDGc',
+                                                     database='hostmasteruz_base',
+                                                     charset='utf8mb4',
+                                                     cursorclass=pymysql.cursors.DictCursor
+                                                     )
                         min = connection.cursor()
                         min.execute(
                             "SELECT `idmydomain`, `userid`, "
@@ -522,8 +546,16 @@ def log(message):
                             n += 1
                         print(days_10)
                         bot.send_message(message.chat.id, days_10)
+                        min.close()
                         bot.register_next_step_handler(message, doljniki_domen)
                     elif message.text == 'Сегодня':
+                        connection = pymysql.connect(host='62.209.143.131',
+                                                     user='hostmasteruz_pbot',
+                                                     password='bcaxoZyAXDGc',
+                                                     database='hostmasteruz_base',
+                                                     charset='utf8mb4',
+                                                     cursorclass=pymysql.cursors.DictCursor
+                                                     )
                         min = connection.cursor()
                         min.execute(
                             "SELECT `idmydomain`, `userid`,"
@@ -538,8 +570,16 @@ def log(message):
                             n += 1
                         print(days_1)
                         bot.send_message(message.chat.id, days_1)
+                        min.close()
                         bot.register_next_step_handler(message, doljniki_domen)
                     elif message.text == 'Redemption':
+                        connection = pymysql.connect(host='62.209.143.131',
+                                                     user='hostmasteruz_pbot',
+                                                     password='bcaxoZyAXDGc',
+                                                     database='hostmasteruz_base',
+                                                     charset='utf8mb4',
+                                                     cursorclass=pymysql.cursors.DictCursor
+                                                     )
                         min = connection.cursor()
                         min.execute(
                             "SELECT `idmydomain`, `userid`, "
@@ -553,6 +593,7 @@ def log(message):
                             n += 1
                         print(red)
                         bot.send_message(message.chat.id, red)
+                        min.close()
                         bot.register_next_step_handler(message, doljniki_domen)
                     elif message.text == 'Назад':
                         markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
