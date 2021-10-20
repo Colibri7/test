@@ -1503,7 +1503,7 @@ def callback(call):
                     else:
                         bot.send_message(message.chat.id, "У вас нет хостингов")
 
-
+                bot.register_next_step_handler(message, uslugi)
             elif message.text == 'Мои домены':
                 for i in check:
                     id = i["b_userid"]
@@ -1532,7 +1532,7 @@ def callback(call):
                     else:
                         bot.send_message(message.chat.id, 'У вас нет доменов')
 
-
+                bot.register_next_step_handler(message, uslugi)
             elif message.text == 'Мои VDS':
                 for i in check:
                     id = i["b_userid"]
@@ -1563,7 +1563,7 @@ def callback(call):
                     else:
                         bot.send_message(message.chat.id, 'У вас нет VDS')
 
-
+                bot.register_next_step_handler(message, uslugi)
             elif message.text == 'Мои сервера':
                 for i in check:
                     print(i)
@@ -1587,7 +1587,7 @@ def callback(call):
                     else:
                         bot.send_message(message.chat.id, 'У вас нет сервера')
 
-
+                bot.register_next_step_handler(message, uslugi)
             elif message.text == 'Возврат':
                 markup = types.InlineKeyboardMarkup(row_width=2)
                 lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
