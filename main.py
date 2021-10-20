@@ -490,13 +490,16 @@ def log(message):
                         min.execute(
                             "SELECT `idmydomain`, `userid`, `mydomainname`, NOW() as now_datetime, `expired` FROM `mydomain` WHERE DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 60 DAY))")
                         domendays_60 = min.fetchall()
-                        days_60 = ''
-                        n = 1
-                        for i in domendays_60:
-                            days_60 += f'{n}. {i["mydomainname"]}.uz\n'
-                            n += 1
-                        print(days_60)
-                        bot.send_message(message.chat.id, days_60)
+                        if not domendays_60:
+                            bot.send_message(message.chat.id, 'Сегодня должников нет')
+                        else:
+                            days_60 = ''
+                            n = 1
+                            for i in domendays_60:
+                                days_60 += f'{n}. {i["mydomainname"]}.uz\n'
+                                n += 1
+                            print(days_60)
+                            bot.send_message(message.chat.id, days_60)
                         min.close()
                         bot.register_next_step_handler(message, doljniki_domen)
 
