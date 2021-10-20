@@ -502,7 +502,6 @@ def log(message):
                             bot.send_message(message.chat.id, days_60)
                         min.close()
                         bot.register_next_step_handler(message, doljniki_domen)
-
                     elif message.text == '30 дней':
                         connection = pymysql.connect(host='62.209.143.131',
                                                      user='hostmasteruz_pbot',
@@ -616,7 +615,6 @@ def log(message):
                         markup.add(lg1, lg4)
                         bot.send_message(message.chat.id, 'Уведомления', reply_markup=markup)
                         bot.register_next_step_handler(message, doljniki)
-
                 if message.text == 'Домен':
                     markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
                     lg1 = types.KeyboardButton('60 дней')
@@ -1044,74 +1042,123 @@ def log_uz(message):
             def doljniki(message):
                 def doljniki_domen(message):
                     if message.text == '60 дней':
+                        connection = pymysql.connect(host='62.209.143.131',
+                                                     user='hostmasteruz_pbot',
+                                                     password='bcaxoZyAXDGc',
+                                                     database='hostmasteruz_base',
+                                                     charset='utf8mb4',
+                                                     cursorclass=pymysql.cursors.DictCursor
+                                                     )
                         min = connection.cursor()
                         min.execute(
-                            "SELECT `idmydomain`, `userid`,"
-                            " `mydomainname`, NOW() as"
-                            " now_datetime, `expired` FROM "
-                            "`mydomain` WHERE DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 60 DAY))")
+                            "SELECT `idmydomain`, `userid`, `mydomainname`, NOW() as now_datetime, `expired` FROM `mydomain` WHERE DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 60 DAY))")
                         domendays_60 = min.fetchall()
-                        days_60 = ''
-                        n = 1
-                        for i in domendays_60:
-                            days_60 += f'{n}. {i["mydomainname"]}.uz\n'
-                            n += 1
-                        print(days_60)
-                        bot.send_message(message.chat.id, days_60)
+                        if not domendays_60:
+                            bot.send_message(message.chat.id, 'Сегодня должников нет')
+                        else:
+                            days_60 = ''
+                            n = 1
+                            for i in domendays_60:
+                                days_60 += f'{n}. {i["mydomainname"]}.uz\n'
+                                n += 1
+                            print(days_60)
+                            bot.send_message(message.chat.id, days_60)
+                        min.close()
                         bot.register_next_step_handler(message, doljniki_domen)
                     elif message.text == '30 дней':
+                        connection = pymysql.connect(host='62.209.143.131',
+                                                     user='hostmasteruz_pbot',
+                                                     password='bcaxoZyAXDGc',
+                                                     database='hostmasteruz_base',
+                                                     charset='utf8mb4',
+                                                     cursorclass=pymysql.cursors.DictCursor
+                                                     )
                         min = connection.cursor()
                         min.execute(
-                            "SELECT `idmydomain`, `userid`,"
-                            " `mydomainname`, NOW() as now_datetime,"
-                            " `expired` FROM `mydomain` "
-                            "WHERE DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 30 DAY))")
+                            "SELECT `idmydomain`, `userid`, `mydomainname`, "
+                            "NOW() as now_datetime, `expired` "
+                            "FROM `mydomain` WHERE "
+                            "DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 30 DAY))")
                         domendays_30 = min.fetchall()
-                        days_30 = ''
-                        n = 1
-                        for i in domendays_30:
-                            days_30 += f'{n}. {i["mydomainname"]}.uz\n'
-                            n += 1
-                        print(days_30)
-                        bot.send_message(message.chat.id, days_30)
+                        if not domendays_30:
+                            bot.send_message(message.chat.id, 'Сегодня должников нет')
+                        else:
+                            days_30 = ''
+                            n = 1
+                            for i in domendays_30:
+                                days_30 += f'{n}. {i["mydomainname"]}.uz\n'
+                                n += 1
+                            print(days_30)
+                            bot.send_message(message.chat.id, days_30)
+                        min.close()
                         bot.register_next_step_handler(message, doljniki_domen)
                     elif message.text == '10 дней':
+                        connection = pymysql.connect(host='62.209.143.131',
+                                                     user='hostmasteruz_pbot',
+                                                     password='bcaxoZyAXDGc',
+                                                     database='hostmasteruz_base',
+                                                     charset='utf8mb4',
+                                                     cursorclass=pymysql.cursors.DictCursor
+                                                     )
                         min = connection.cursor()
                         min.execute(
                             "SELECT `idmydomain`, `userid`, "
-                            "`mydomainname`, NOW() as now_datetime,"
-                            " `expired` FROM `mydomain` "
+                            "`mydomainname`, NOW() as now_datetime, "
+                            "`expired` FROM `mydomain` "
                             "WHERE DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 10 DAY))")
                         domendays_10 = min.fetchall()
-                        days_10 = ''
-                        n = 1
-                        for i in domendays_10:
-                            days_10 += f'{n}. {i["mydomainname"]}.uz\n'
-                            n += 1
-                        print(days_10)
-                        bot.send_message(message.chat.id, days_10)
+                        if not domendays_10:
+                            bot.send_message(message.chat.id, 'Сегодня должников нет')
+                        else:
+                            days_10 = ''
+                            n = 1
+                            for i in domendays_10:
+                                days_10 += f'{n}. {i["mydomainname"]}.uz\n'
+                                n += 1
+                            print(days_10)
+                            bot.send_message(message.chat.id, days_10)
+                        min.close()
                         bot.register_next_step_handler(message, doljniki_domen)
                     elif message.text == 'Сегодня':
+                        connection = pymysql.connect(host='62.209.143.131',
+                                                     user='hostmasteruz_pbot',
+                                                     password='bcaxoZyAXDGc',
+                                                     database='hostmasteruz_base',
+                                                     charset='utf8mb4',
+                                                     cursorclass=pymysql.cursors.DictCursor
+                                                     )
                         min = connection.cursor()
                         min.execute(
                             "SELECT `idmydomain`, `userid`,"
                             " `mydomainname`, NOW() as now_datetime, "
-                            "`expired` FROM `mydomain` WHERE DATE(`expired`) = DATE(NOW())")
+                            "`expired` FROM `mydomain` "
+                            "WHERE DATE(`expired`) = DATE(NOW())")
                         domendays_1 = min.fetchall()
-                        days_1 = ''
-                        n = 1
-                        for i in domendays_1:
-                            days_1 += f'{n}. {i["mydomainname"]}.uz\n'
-                            n += 1
-                        print(days_1)
-                        bot.send_message(message.chat.id, days_1)
+                        if not domendays_1:
+                            bot.send_message(message.chat.id, 'Сегодня должников нет')
+                        else:
+                            days_1 = ''
+                            n = 1
+                            for i in domendays_1:
+                                days_1 += f'{n}. {i["mydomainname"]}.uz\n'
+                                n += 1
+                            print(days_1)
+                            bot.send_message(message.chat.id, days_1)
+                        min.close()
                         bot.register_next_step_handler(message, doljniki_domen)
                     elif message.text == 'Redemption':
+                        connection = pymysql.connect(host='62.209.143.131',
+                                                     user='hostmasteruz_pbot',
+                                                     password='bcaxoZyAXDGc',
+                                                     database='hostmasteruz_base',
+                                                     charset='utf8mb4',
+                                                     cursorclass=pymysql.cursors.DictCursor
+                                                     )
                         min = connection.cursor()
                         min.execute(
-                            "SELECT `idmydomain`, `userid`,"
-                            " `mydomainname`, NOW() "
-                            "as now_datetime, `expired` FROM `mydomain` WHERE status=3")
+                            "SELECT `idmydomain`, `userid`, "
+                            "`mydomainname`, NOW() as now_datetime,"
+                            " `expired` FROM `mydomain` WHERE status=3")
                         redemption = min.fetchall()
                         red = ''
                         n = 1
@@ -1120,14 +1167,15 @@ def log_uz(message):
                             n += 1
                         print(red)
                         bot.send_message(message.chat.id, red)
+                        min.close()
                         bot.register_next_step_handler(message, doljniki_domen)
                     elif message.text == 'Назад':
                         markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
                         lg1 = types.KeyboardButton('Домен')
-                        lg2 = types.KeyboardButton('Хостинг')
-                        lg3 = types.KeyboardButton('VDS')
+                        # lg2 = types.KeyboardButton('Хостинг')
+                        # lg3 = types.KeyboardButton('VDS')
                         lg4 = types.KeyboardButton('Возврат')
-                        markup.add(lg1, lg2, lg3, lg4)
+                        markup.add(lg1, lg4)
                         bot.send_message(message.chat.id, 'Уведомления', reply_markup=markup)
                         bot.register_next_step_handler(message, doljniki)
 
