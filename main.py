@@ -598,10 +598,10 @@ def log(message):
                     elif message.text == 'Назад':
                         markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
                         lg1 = types.KeyboardButton('Домен')
-                        lg2 = types.KeyboardButton('Хостинг')
-                        lg3 = types.KeyboardButton('VDS')
+                        # lg2 = types.KeyboardButton('Хостинг')
+                        # lg3 = types.KeyboardButton('VDS')
                         lg4 = types.KeyboardButton('Возврат')
-                        markup.add(lg1, lg2, lg3, lg4)
+                        markup.add(lg1, lg4)
                         bot.send_message(message.chat.id, 'Уведомления', reply_markup=markup)
                         bot.register_next_step_handler(message, doljniki)
 
@@ -664,10 +664,10 @@ def log(message):
             elif message.text == 'Уведомления':
                 markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
                 lg1 = types.KeyboardButton('Домен')
-                lg2 = types.KeyboardButton('Хостинг')
-                lg3 = types.KeyboardButton('VDS')
+                # lg2 = types.KeyboardButton('Хостинг')
+                # lg3 = types.KeyboardButton('VDS')
                 lg4 = types.KeyboardButton('Назад')
-                markup.add(lg1, lg2, lg3, lg4)
+                markup.add(lg1, lg4)
                 bot.send_message(message.chat.id, 'Уведомления', reply_markup=markup)
                 bot.register_next_step_handler(message, doljniki)
             elif message.text == 'Возврат':
