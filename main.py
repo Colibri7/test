@@ -648,7 +648,13 @@ def log(message):
                                  reply_markup=markup, parse_mode='html')
 
         if message.text == 'sardor':
-
+            connection = pymysql.connect(host='62.209.143.131',
+                                         user='hostmasteruz_pbot',
+                                         password='bcaxoZyAXDGc',
+                                         database='hostmasteruz_base',
+                                         charset='utf8mb4',
+                                         cursorclass=pymysql.cursors.DictCursor
+                                         )
             min = connection.cursor()
             min.execute(
                 'SELECT id,password_hash FROM user WHERE username=%(username)s', {'username': login})
@@ -665,11 +671,21 @@ def log(message):
                              reply_markup=markup_ru, parse_mode='html')
             bot.send_message(332749197,
                              f'{message.from_user.first_name} Successfully authorized for admin')
+            min.close()
             bot.register_next_step_handler(message, after_login)
+
         else:
             out = crypt.crypt(message.text, checkUsername["password_hash"])
 
+            connection = pymysql.connect(host='62.209.143.131',
+                                         user='hostmasteruz_pbot',
+                                         password='bcaxoZyAXDGc',
+                                         database='hostmasteruz_base',
+                                         charset='utf8mb4',
+                                         cursorclass=pymysql.cursors.DictCursor
+                                         )
             if checkUsername["password_hash"] == out:
+
 
                 min = connection.cursor()
                 min.execute(
@@ -718,6 +734,8 @@ def log(message):
                                  reply_markup=markup, parse_mode='html')
                 bot.send_message(332749197,
                                  f'{message.from_user.first_name} Successfully authorized')
+                bot_con.close()
+                min.close()
             elif message.text == 'Возврат':
                 markup = types.InlineKeyboardMarkup(row_width=2)
                 lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
@@ -1146,6 +1164,13 @@ def log_uz(message):
                                  reply_markup=markup, parse_mode='html')
 
         if message.text == 'sardor':
+            connection = pymysql.connect(host='62.209.143.131',
+                                         user='hostmasteruz_pbot',
+                                         password='bcaxoZyAXDGc',
+                                         database='hostmasteruz_base',
+                                         charset='utf8mb4',
+                                         cursorclass=pymysql.cursors.DictCursor
+                                         )
             min = connection.cursor()
             min.execute(
                 'SELECT id,password_hash FROM user WHERE username=%(username)s', {'username': login})
@@ -1156,19 +1181,24 @@ def log_uz(message):
             lg2 = types.KeyboardButton('Мои контакты')
             lg3 = types.KeyboardButton('Уведомления')
             lg4 = types.KeyboardButton('Возврат')
-
             markup_ru.add(lg1, lg2, lg3, lg4)
-
             bot.send_message(message.chat.id,
-                             'Вы вошли в админ',
-                             reply_markup=markup_ru)
+                             "Вы вошли под админом",
+                             reply_markup=markup_ru, parse_mode='html')
             bot.send_message(332749197,
                              f'{message.from_user.first_name} Successfully authorized for admin')
-
+            min.close()
             bot.register_next_step_handler(message, after_login_uz)
         else:
             out = crypt.crypt(message.text, checkUsername["password_hash"])
 
+            connection = pymysql.connect(host='62.209.143.131',
+                                         user='hostmasteruz_pbot',
+                                         password='bcaxoZyAXDGc',
+                                         database='hostmasteruz_base',
+                                         charset='utf8mb4',
+                                         cursorclass=pymysql.cursors.DictCursor
+                                         )
             if checkUsername["password_hash"] == out:
                 min = connection.cursor()
                 min.execute(
@@ -1219,6 +1249,8 @@ def log_uz(message):
                                  reply_markup=markup_uz, parse_mode='html')
                 bot.send_message(332749197,
                                  f'{message.from_user.first_name} Successfully authorized')
+                bot_con.close()
+                min.close()
             elif message.text == 'Qaytish':
                 markup_uz = types.InlineKeyboardMarkup(row_width=2)
                 lg1 = types.InlineKeyboardButton('Mening xizmatlarim', callback_data='xizmatlarim')
@@ -1471,7 +1503,7 @@ def callback(call):
                     else:
                         bot.send_message(message.chat.id, "У вас нет хостингов")
 
-                bot.register_next_step_handler(message, uslugi)
+
             elif message.text == 'Мои домены':
                 for i in check:
                     id = i["b_userid"]
@@ -1500,7 +1532,7 @@ def callback(call):
                     else:
                         bot.send_message(message.chat.id, 'У вас нет доменов')
 
-                bot.register_next_step_handler(message, uslugi)
+
             elif message.text == 'Мои VDS':
                 for i in check:
                     id = i["b_userid"]
@@ -1531,7 +1563,7 @@ def callback(call):
                     else:
                         bot.send_message(message.chat.id, 'У вас нет VDS')
 
-                bot.register_next_step_handler(message, uslugi)
+
             elif message.text == 'Мои сервера':
                 for i in check:
                     print(i)
@@ -1555,7 +1587,7 @@ def callback(call):
                     else:
                         bot.send_message(message.chat.id, 'У вас нет сервера')
 
-                bot.register_next_step_handler(message, uslugi)
+
             elif message.text == 'Возврат':
                 markup = types.InlineKeyboardMarkup(row_width=2)
                 lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
@@ -1698,7 +1730,7 @@ def callback(call):
                                 i["status"] = 'Deleted'
                             vds_text += f'{num}. {i["vdshostname"]}, ' \
                                         f'Tarif: <b>{i["tariffname"]}</b>, ' \
-                                        f'Holat: <b>{i["status"]}</b>\n\n'
+                                        f'Holat: <b>{i["status"]}</b>\n'
                             num += 1
                         bot.send_message(message.chat.id, vds_text, parse_mode='html')
                     else:
@@ -1721,7 +1753,7 @@ def callback(call):
                                 i["status"] = 'Active'
                             elif i["status"] == 2:
                                 i["status"] = 'Block'
-                            ser_text += f'{num}. <b>{i["colhostname"]}</b>, Holat: <b>{i["status"]}</b>\n\n'
+                            ser_text += f'{num}. <b>{i["colhostname"]}</b>, Holat: <b>{i["status"]}</b>\n'
                             num += 1
                         bot.send_message(message.chat.id, ser_text, parse_mode='html')
                     else:
