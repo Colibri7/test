@@ -42,7 +42,7 @@ def domen_60_days_schedule():
         some_id = i["tg_id"]
         print('id ', some_id)
         if i["contactcompany"] == None:
-            bot.send_message(332749197,
+            bot.send_message(some_id,
                              f'Уважаемый <b>{i["contactname"]}!</b> Уведомляем Вас о том, '
                              f'что срок действия домена <b>{i["mydomainname"]}.uz</b> истекает <b>{date}</b> '
                              f'года . Для продления регистрации домена Вам необходимо оплатить '
@@ -50,8 +50,9 @@ def domen_60_days_schedule():
                              f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
                              f'лицом.\n<b>С уважением, команда Hostmaster!</b>',
                              parse_mode='html')
+            bot.send_message(332749197,f'60 дней: ')
         else:
-            bot.send_message(332749197,
+            bot.send_message(some_id,
                              f'Уважаемый <b>{i["contactcompany"]}!</b> Уведомляем Вас о том, '
                              f'что срок действия домена <b>{i["mydomainname"]}.uz</b> истекает <b>{date}</b> '
                              f'года . Для продления регистрации домена Вам необходимо оплатить '
@@ -89,7 +90,7 @@ def domen_30_days_schedule():
         print('id ', some_id)
         if i["contactcompany"] is None:
 
-            bot.send_message(332749197, f'Уважаемый <b>{i["contactname"]}!</b> Уведомляем Вас о том, '
+            bot.send_message(some_id, f'Уважаемый <b>{i["contactname"]}!</b> Уведомляем Вас о том, '
                                         f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
                                         f'истекает <b>{date}</b> '
                                         f'года . Для продления регистрации домена Вам необходимо оплатить '
@@ -97,7 +98,7 @@ def domen_30_days_schedule():
                                         f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
                                         f'лицом.\n<b>С уважением, команда Hostmaster!</b>', parse_mode='html')
         else:
-            bot.send_message(332749197, f'Уважаемый <b>{i["contactcompany"]}!</b> Уведомляем Вас о том, '
+            bot.send_message(some_id, f'Уважаемый <b>{i["contactcompany"]}!</b> Уведомляем Вас о том, '
                                         f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
                                         f'истекает <b>{date}</b> '
                                         f'года . Для продления регистрации домена Вам необходимо оплатить '
@@ -134,7 +135,7 @@ def domen_10_days_schedule():
         print('id ', some_id)
         if i["contactcompany"] is None:
 
-            bot.send_message(332749197, f'Уважаемый <b>{i["contactname"]}!</b> Уведомляем Вас о том, '
+            bot.send_message(some_id, f'Уважаемый <b>{i["contactname"]}!</b> Уведомляем Вас о том, '
                                         f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
                                         f'истекает <b>{date}</b> '
                                         f'года . Для продления регистрации домена Вам необходимо оплатить '
@@ -142,7 +143,7 @@ def domen_10_days_schedule():
                                         f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
                                         f'лицом.\n<b>С уважением, команда Hostmaster!</b>', parse_mode='html')
         else:
-            bot.send_message(332749197, f'Уважаемый <b>{i["contactcompany"]}!</b> Уведомляем Вас о том, '
+            bot.send_message(some_id, f'Уважаемый <b>{i["contactcompany"]}!</b> Уведомляем Вас о том, '
                                         f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
                                         f'истекает <b>{date}</b> '
                                         f'года . Для продления регистрации домена Вам необходимо оплатить '
@@ -177,7 +178,7 @@ def domen_1_days_schedule():
         some_id = i["tg_id"]
         print('id ', some_id)
         if i["contactcompany"] is None:
-            bot.send_message(332749197, f'Уважаемый <b>{i["contactname"]}!</b> Уведомляем Вас о том, '
+            bot.send_message(some_id, f'Уважаемый <b>{i["contactname"]}!</b> Уведомляем Вас о том, '
                                         f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
                                         f'истек сегодня, <b>{date}</b> года. Для продления регистрации '
                                         f'домена Вам необходимо оплатить сумму согласно действующим '
@@ -186,7 +187,7 @@ def domen_1_days_schedule():
                                         f'регистрации другим лицом.\n<b>С уважением, команда Hostmaster!</b>',
                              parse_mode='html')
         else:
-            bot.send_message(332749197, f'Уважаемый <b>{i["contactcompany"]}!</b> Уведомляем Вас о том, '
+            bot.send_message(some_id, f'Уважаемый <b>{i["contactcompany"]}!</b> Уведомляем Вас о том, '
                                         f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
                                         f'истек сегодня, <b>{date}</b> года. Для продления регистрации '
                                         f'домена Вам необходимо оплатить сумму согласно действующим '
@@ -197,95 +198,93 @@ def domen_1_days_schedule():
     min.close()
 
 
-def hosting_schedule():
-    connection = pymysql.connect(host='62.209.143.131',
-                                 user='hostmasteruz_pbot',
-                                 password='bcaxoZyAXDGc',
-                                 database='hostmasteruz_base',
-                                 charset='utf8mb4',
-                                 cursorclass=pymysql.cursors.DictCursor
-                                 )
-    min = connection.cursor()
-    min.execute(
-        "SELECT  LAST_DAY(NOW()),`tg_id`,`hostcontract`.`user_id`,"
-        " `hostcontract`.`hostcontractdomain`, "
-        "`hostcontract`.`hostcontractdate`, `hosting`.`hostingname`,"
-        " ROUND(`hosting`.`hostingcost` / 12) as abon_month,"
-        " `hosting`.`hostingcost` as abon_year, `contact`.`balance`,"
-        "`contactname`, `contactcompany` FROM `hostcontract`, `hosting`, "
-        "`contact` ,`hostmasteruz_bot`.`sardorbot` WHERE"
-        " `hostcontract`.`status` = 1 AND `contact`.`balance` "
-        "< `hosting`.`hostingcost` / 12 AND `hostcontract`.`hostingid` = `hosting`.`idhosting`"
-        " AND `hostcontract`.`contactid` = `contact`.`idcontact` "
-        "AND `sardorbot`.`b_userid` = `hostcontract`.`user_id`"
-    )
-    hosting = min.fetchall()
-    for i in hosting:
-        date = '{:%d-%m-%Y}'.format(i["LAST_DAY(NOW())"])
-        some_id = i["tg_id"]
-        if i["contactcompany"] is None:
-            bot.send_message(some_id, f'Уважаемый <b>{i["contactname"]}</b> !\n'
-                                      f'Уведомляем Вас о необходимости оплаты услуг за использование услуги'
-                                      f' Хостинга на будущий месяц до <b>{date}</b>  в соответствии с выбранным'
-                                      f'тарифом <b>{i["hostingname"]}</b> в размере <b>{i["abon_month"]}</b> сум. '
-                                      f'В случае неоплаты, услуга будет отключена !\n'
-                                      f'<b>\nС уважением, команда Hostmaster!</b>',
-                             parse_mode='html')
-        else:
-            bot.send_message(some_id, f'Уважаемый <b>{i["contactcompany"]}</b> !\n'
-                                      f'Уведомляем Вас о необходимости оплаты услуг за использование услуги'
-                                      f' Хостинга на будущий месяц до <b>{date}</b>  в соответствии с выбранным'
-                                      f'тарифом <b>{i["hostingname"]}</b> в размере <b>{i["abon_month"]}</b> сум. '
-                                      f'В случае неоплаты, услуга будет отключена !\n'
-                                      f'<b>\nС уважением, команда Hostmaster!</b>',
-                             parse_mode='html')
-
-    min.close()
-
-
-def vds_schedule():
-    connection = pymysql.connect(host='62.209.143.131',
-                                 user='hostmasteruz_pbot',
-                                 password='bcaxoZyAXDGc',
-                                 database='hostmasteruz_base',
-                                 charset='utf8mb4',
-                                 cursorclass=pymysql.cursors.DictCursor
-                                 )
-    min = connection.cursor()
-    min.execute(
-        "SELECT LAST_DAY(NOW()),`tg_id`,`vdscontract`.`user_id`,"
-        " `contact`.`contactname`, `contact`.`contactcompany`,"
-        "`vdscontract`.`vdshostname`, `vdscontract`.`vdscontractdate`,"
-        " `vds_tariffs`.`tariffname`, ROUND(`vds_tariffs`.`vdscost` / 12) "
-        "as abon_month, `vds_tariffs`.`vdscost` as abon_year, "
-        "`contact`.`balance` FROM `vdscontract`, `vds_tariffs`,"
-        " `contact`,`hostmasteruz_bot`.`sardorbot` WHERE "
-        "`vdscontract`.`status` = 1 AND `contact`.`balance` <"
-        " `vds_tariffs`.`vdscost` / 12 AND `vdscontract`.`vdsid` = `vds_tariffs`.`idvds` "
-        "AND `vdscontract`.`contactid` = `contact`.`idcontact` AND"
-        " `sardorbot`.`b_userid` = `vdscontract`.`user_id`")
-    vds = min.fetchall()
-    for i in vds:
-        date = '{:%d-%m-%Y}'.format(i["LAST_DAY(NOW())"])
-        some_id = i["tg_id"]
-        print(some_id)
-        if i["contactcompany"] is None:
-            bot.send_message(332749197, f'Уважаемый <b>{i["contactname"]}</b>!\n'
-                                        f'Уведомляем Вас о необходимости оплаты услуг за использование услуги '
-                                        f'VDS на будущий месяц до <b>{date}</b>  в соответствии с выбранным '
-                                        f'тарифом <b>{i["tariffname"]}</b> в размере <b>{i["abon_month"]}</b> сум. '
-                                        f'В случае неоплаты, услуга будет отключена ! '
-                                        f'<b>\nС уважением, команда Hostmaster!</b>',
-                             parse_mode='html')
-        else:
-            bot.send_message(332749197, f'Уважаемый <b>{i["contactcompany"]}</b> !\n'
-                                        f'Уведомляем Вас о необходимости оплаты услуг за использование услуги '
-                                        f'VDS на будущий месяц до <b>{date}</b>  в соответствии с выбранным '
-                                        f'тарифом <b>{i["tariffname"]}</b> в размере <b>{i["abon_month"]}</b> сум. '
-                                        f'В случае неоплаты, услуга будет отключена ! '
-                                        f'<b>\nС уважением, команда Hostmaster!</b>',
-                             parse_mode='html')
-    min.close()
+# def hosting_schedule():
+#     connection = pymysql.connect(host='62.209.143.131',
+#                                  user='hostmasteruz_pbot',
+#                                  password='bcaxoZyAXDGc',
+#                                  database='hostmasteruz_base',
+#                                  charset='utf8mb4',
+#                                  cursorclass=pymysql.cursors.DictCursor
+#                                  )
+#     min = connection.cursor()
+#     min.execute(
+#         "SELECT  LAST_DAY(NOW()),`tg_id`,`hostcontract`.`user_id`,"
+#         " `hostcontract`.`hostcontractdomain`, "
+#         "`hostcontract`.`hostcontractdate`, `hosting`.`hostingname`,"
+#         " ROUND(`hosting`.`hostingcost` / 12) as abon_month,"
+#         " `hosting`.`hostingcost` as abon_year, `contact`.`balance`,"
+#         "`contactname`, `contactcompany` FROM `hostcontract`, `hosting`, "
+#         "`contact` ,`hostmasteruz_bot`.`sardorbot` WHERE"
+#         " `hostcontract`.`status` = 1 AND `contact`.`balance` "
+#         "< `hosting`.`hostingcost` / 12 AND `hostcontract`.`hostingid` = `hosting`.`idhosting`"
+#         " AND `hostcontract`.`contactid` = `contact`.`idcontact` "
+#         "AND `sardorbot`.`b_userid` = `hostcontract`.`user_id`"
+#     )
+#     hosting = min.fetchall()
+#     for i in hosting:
+#         date = '{:%d-%m-%Y}'.format(i["LAST_DAY(NOW())"])
+#         some_id = i["tg_id"]
+#         if i["contactcompany"] is None:
+#             bot.send_message(some_id, f'Уважаемый <b>{i["contactname"]}</b> !\n'
+#                                       f'Уведомляем Вас о необходимости оплаты услуг за использование услуги'
+#                                       f' Хостинга на будущий месяц до <b>{date}</b>  в соответствии с выбранным'
+#                                       f'тарифом <b>{i["hostingname"]}</b> в размере <b>{i["abon_month"]}</b> сум. '
+#                                       f'В случае неоплаты, услуга будет отключена !\n'
+#                                       f'<b>\nС уважением, команда Hostmaster!</b>',
+#                              parse_mode='html')
+#         else:
+#             bot.send_message(some_id, f'Уважаемый <b>{i["contactcompany"]}</b> !\n'
+#                                       f'Уведомляем Вас о необходимости оплаты услуг за использование услуги'
+#                                       f' Хостинга на будущий месяц до <b>{date}</b>  в соответствии с выбранным'
+#                                       f'тарифом <b>{i["hostingname"]}</b> в размере <b>{i["abon_month"]}</b> сум. '
+#                                       f'В случае неоплаты, услуга будет отключена !\n'
+#                                       f'<b>\nС уважением, команда Hostmaster!</b>',
+#                              parse_mode='html')
+#
+#     min.close()
+# def vds_schedule():
+#     connection = pymysql.connect(host='62.209.143.131',
+#                                  user='hostmasteruz_pbot',
+#                                  password='bcaxoZyAXDGc',
+#                                  database='hostmasteruz_base',
+#                                  charset='utf8mb4',
+#                                  cursorclass=pymysql.cursors.DictCursor
+#                                  )
+#     min = connection.cursor()
+#     min.execute(
+#         "SELECT LAST_DAY(NOW()),`tg_id`,`vdscontract`.`user_id`,"
+#         " `contact`.`contactname`, `contact`.`contactcompany`,"
+#         "`vdscontract`.`vdshostname`, `vdscontract`.`vdscontractdate`,"
+#         " `vds_tariffs`.`tariffname`, ROUND(`vds_tariffs`.`vdscost` / 12) "
+#         "as abon_month, `vds_tariffs`.`vdscost` as abon_year, "
+#         "`contact`.`balance` FROM `vdscontract`, `vds_tariffs`,"
+#         " `contact`,`hostmasteruz_bot`.`sardorbot` WHERE "
+#         "`vdscontract`.`status` = 1 AND `contact`.`balance` <"
+#         " `vds_tariffs`.`vdscost` / 12 AND `vdscontract`.`vdsid` = `vds_tariffs`.`idvds` "
+#         "AND `vdscontract`.`contactid` = `contact`.`idcontact` AND"
+#         " `sardorbot`.`b_userid` = `vdscontract`.`user_id`")
+#     vds = min.fetchall()
+#     for i in vds:
+#         date = '{:%d-%m-%Y}'.format(i["LAST_DAY(NOW())"])
+#         some_id = i["tg_id"]
+#         print(some_id)
+#         if i["contactcompany"] is None:
+#             bot.send_message(332749197, f'Уважаемый <b>{i["contactname"]}</b>!\n'
+#                                         f'Уведомляем Вас о необходимости оплаты услуг за использование услуги '
+#                                         f'VDS на будущий месяц до <b>{date}</b>  в соответствии с выбранным '
+#                                         f'тарифом <b>{i["tariffname"]}</b> в размере <b>{i["abon_month"]}</b> сум. '
+#                                         f'В случае неоплаты, услуга будет отключена ! '
+#                                         f'<b>\nС уважением, команда Hostmaster!</b>',
+#                              parse_mode='html')
+#         else:
+#             bot.send_message(332749197, f'Уважаемый <b>{i["contactcompany"]}</b> !\n'
+#                                         f'Уведомляем Вас о необходимости оплаты услуг за использование услуги '
+#                                         f'VDS на будущий месяц до <b>{date}</b>  в соответствии с выбранным '
+#                                         f'тарифом <b>{i["tariffname"]}</b> в размере <b>{i["abon_month"]}</b> сум. '
+#                                         f'В случае неоплаты, услуга будет отключена ! '
+#                                         f'<b>\nС уважением, команда Hostmaster!</b>',
+#                              parse_mode='html')
+#     min.close()
 
 
 def func(message):
