@@ -401,7 +401,7 @@ def log(message):
                                 elif i["status"] == 3:
                                     i["status"] = 'W_RED'
 
-                                domen_text += f'{num}.{i["mydomainname"]}.uz, ' \
+                                domen_text += f'{num}. {i["mydomainname"]}.uz, ' \
                                               f'Статус: {(i["status"])}, ' \
                                               f'Дата окончания: {i["expired"]}\n'
                                 num += 1
@@ -961,7 +961,7 @@ def log_uz(message):
                                 elif i["status"] == 3:
                                     i["status"] = 'W_RED'
 
-                                domen_text += f'{num}.{i["mydomainname"]}.uz, ' \
+                                domen_text += f'{num}. {i["mydomainname"]}.uz, ' \
                                               f'Статус: {(i["status"])}, ' \
                                               f'Дата окончания:{i["expired"]}'
                                 num += 1
