@@ -8,7 +8,7 @@ import telebot
 from telebot import types
 import pymysql
 
-bot = telebot.TeleBot('1978328105:AAEGxyKSSnidArQ_S6QycOM3skqLjozAGzQ', threaded=False)
+bot = telebot.TeleBot('1978328105:AAGZoGKhrR5JTw9w-URXzBDVbnUe3AtBtcA', threaded=False)
 
 # connection = pymysql.connect(host='62.209.143.131',
 #                              user='hostmasteruz_pbot',
@@ -403,7 +403,7 @@ def log(message):
 
                                 domen_text += f'{num}.{i["mydomainname"]}.uz, ' \
                                               f'Статус: {(i["status"])}, ' \
-                                              f'Дата окончания:{i["expired"].strftime("%d/%m/%Y")}\n'
+                                              f'Дата окончания: {i["expired"]}\n'
                                 num += 1
                             bot.send_message(message.chat.id, domen_text,parse_mode='html')
                         else:
