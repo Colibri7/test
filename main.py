@@ -389,7 +389,7 @@ def log(message):
                             for i in checkContact:
                                 delta = i["now_datetime"] - i["expired"]
                                 if delta.days > 0:
-                                    i["expired"] = '{:%d-%m-%Y} , <b>Просроченный</b>'.format(i["expired"])
+                                    i["expired"] = '{:%d-%m-%Y} , <b>Просроченный ⚠️</b>'.format(i["expired"])
                                 else:
                                     i["expired"] = '{:%d-%m-%Y}'.format(i["expired"])
                                 # if i["status"] == -2:
@@ -948,7 +948,7 @@ def log_uz(message):
                             for i in checkContact:
                                 delta = i["now_datetime"] - i["expired"]
                                 if delta.days > 0:
-                                    i["expired"] = '{:%d-%m-%Y} , <b>Просроченный</b>'.format(i["expired"])
+                                    i["expired"] = '{:%d-%m-%Y} , <b>Просроченный ⚠️</b>'.format(i["expired"])
                                 else:
                                     i["expired"] = '{:%d-%m-%Y}'.format(i["expired"])
 
@@ -1617,7 +1617,7 @@ def callback(call):
                         for i in checkContact:
                             delta = i["now_datetime"] - i["expired"]
                             if delta.days > 0:
-                                i["expired"] = '{:%d-%m-%Y} , <b>Просроченный</b>'.format(i["expired"])
+                                i["expired"] = '{:%d-%m-%Y} , <b>Просроченный ⚠️</b>'.format(i["expired"])
                             else:
                                 i["expired"] = '{:%d-%m-%Y}'.format(i["expired"])
 
@@ -1788,7 +1788,7 @@ def callback(call):
                         for i in checkContact:
                             delta = i["now_datetime"] - i["expired"]
                             if delta.days > 0:
-                                i["expired"] = '{:%d-%m-%Y} , <b>Muddati tugadi</b>'.format(i["expired"])
+                                i["expired"] = '{:%d-%m-%Y} , <b>Muddati tugadi ⚠️</b>'.format(i["expired"])
                             else:
                                 i["expired"] = '{:%d-%m-%Y}'.format(i["expired"])
 
