@@ -392,18 +392,17 @@ def log(message):
                                     i["expired"] = '{:%d-%m-%Y} <b>Просроченный</b>'.format(i["expired"])
                                 else:
                                     i["expired"] = '{:%d-%m-%Y}'.format(i["expired"])
-                                if i["status"] == -2:
-                                    i["status"] = 'A_REG'
-                                elif i["status"] == 0:
-                                    i["status"] = 'R_REG'
-                                elif i["status"] == 1:
-                                    i["status"] = 'ACTIVE'
-                                elif i["status"] == 3:
-                                    i["status"] = 'W_RED'
+                                # if i["status"] == -2:
+                                #     i["status"] = 'A_REG'
+                                # elif i["status"] == 0:
+                                #     i["status"] = 'R_REG'
+                                # elif i["status"] == 1:
+                                #     i["status"] = 'ACTIVE'
+                                # elif i["status"] == 3:
+                                #     i["status"] = 'W_RED'
 
-                                domen_text += f'{num}. {i["mydomainname"]}.uz, ' \
-                                              f'Статус: {(i["status"])}, ' \
-                                              f'Дата окончания: {i["expired"]}\n'
+                                domen_text += f'{num}. {i["mydomainname"]}.uz, Дата окончания: {i["expired"]}\n '
+
                                 num += 1
                             bot.send_message(message.chat.id, domen_text,parse_mode='html')
                         else:
@@ -952,18 +951,9 @@ def log_uz(message):
                                     i["expired"] = '{:%d-%m-%Y} <b>Просроченный</b>'.format(i["expired"])
                                 else:
                                     i["expired"] = '{:%d-%m-%Y}'.format(i["expired"])
-                                if i["status"] == -2:
-                                    i["status"] = 'A_REG'
-                                elif i["status"] == 0:
-                                    i["status"] = 'R_REG'
-                                elif i["status"] == 1:
-                                    i["status"] = 'ACTIVE'
-                                elif i["status"] == 3:
-                                    i["status"] = 'W_RED'
 
-                                domen_text += f'{num}. {i["mydomainname"]}.uz, ' \
-                                              f'Статус: {(i["status"])}, ' \
-                                              f'Дата окончания:{i["expired"]}'
+                                domen_text += f'{num}. {i["mydomainname"]}.uz, Дата окончания:{i["expired"]}' \
+
                                 num += 1
                             bot.send_message(message.chat.id, domen_text)
                         else:
@@ -1630,14 +1620,7 @@ def callback(call):
                                 i["expired"] = '{:%d-%m-%Y} <b>Просроченный</b>'.format(i["expired"])
                             else:
                                 i["expired"] = '{:%d-%m-%Y}'.format(i["expired"])
-                            if i["status"] == -2:
-                                i["status"] = 'A_REG'
-                            elif i["status"] == 0:
-                                i["status"] = 'R_REG'
-                            elif i["status"] == 1:
-                                i["status"] = 'ACTIVE'
-                            elif i["status"] == 3:
-                                i["status"] = 'W_RED'
+
 
                             domen_text += f'{num}. {i["mydomainname"]}.uz, ' \
                                           f'Активен до <b>{i["expired"]}</b>\n'
@@ -1808,14 +1791,7 @@ def callback(call):
                                 i["expired"] = '{:%d-%m-%Y} <b>Muddati tugadi</b>'.format(i["expired"])
                             else:
                                 i["expired"] = '{:%d-%m-%Y}'.format(i["expired"])
-                            if i["status"] == -2:
-                                i["status"] = 'A_REG'
-                            elif i["status"] == 0:
-                                i["status"] = 'R_REG'
-                            elif i["status"] == 1:
-                                i["status"] = 'ACTIVE'
-                            elif i["status"] == 3:
-                                i["status"] = 'W_RED'
+
 
                             domen_text += f'{num}. {i["mydomainname"]}.uz, ' \
                                           f'<b>{i["expired"]}</b>\n'
