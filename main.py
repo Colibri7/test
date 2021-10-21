@@ -36,10 +36,8 @@ def domen_60_days_schedule():
     min.execute(
         "SELECT `tg_id`, `idmydomain`, `mydomain`.userid, `mydomainname`, NOW() as now_datetime, `expired`,`contactname`, `contactcompany` FROM `hostmasteruz_base`.`mydomain`, `hostmasteruz_bot`.`sardorbot`,`hostmasteruz_base`.`contact`  WHERE DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 60 DAY)) AND `sardorbot`.`b_userid` = `mydomain`.`userid` AND `mydomain`.`mydomaincontactcust` = `contact`.`idcontact`;")
     domen = min.fetchall()
-    days_60 = ''
+
     for i in domen:
-        days_60+=f'{i["mydomainname"]}\n'
-        bot.send_message(332749197, days_60)
         date = '{:%d-%m-%Y}'.format(i["expired"])
         some_id = i["tg_id"]
         print('id ', some_id)
@@ -62,8 +60,8 @@ def domen_60_days_schedule():
                              f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
                              f'лицом.\n<b>С уважением, команда Hostmaster!</b>',
                              parse_mode='html')
+        bot.send_message(332749197, f'60 дней: {i["mydomainname"]}\n')
 
-    bot.send_message(332749197, f'60 days: {days_60}')
     min.close()
 
 
@@ -86,10 +84,8 @@ def domen_30_days_schedule():
         " `sardorbot`.`b_userid` = `mydomain`.`userid` "
         "AND `mydomain`.`mydomaincontactcust` = `contact`.`idcontact`;")
     domen_30 = min.fetchall()
-    days_30 = ''
+
     for i in domen_30:
-        days_30 += f'{i["mydomainname"]}\n'
-        bot.send_message(332749197, days_30)
         date = '{:%d-%m-%Y}'.format(i["expired"])
         some_id = i["tg_id"]
         print('id ', some_id)
@@ -110,7 +106,7 @@ def domen_30_days_schedule():
                                       f'сумму согласно действующим тарифам через личный кабинет на нашем сайте. '
                                       f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
                                       f'лицом.\n<b>С уважением, команда Hostmaster!</b>', parse_mode='html')
-    bot.send_message(332749197, f'30 days: {days_30}')
+        bot.send_message(332749197, f'60 дней: {i["mydomainname"]}\n')
     min.close()
 
 
@@ -133,11 +129,9 @@ def domen_10_days_schedule():
         "WHERE DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 10 DAY))"
         " AND `sardorbot`.`b_userid` = `mydomain`.`userid`"
         " AND `mydomain`.`mydomaincontactcust` = `contact`.`idcontact`;")
-    domen_10 = min.fetchall()
-    days_10= ''
-    for i in domen_10:
-        days_10 += f'{i["mydomainname"]}\n'
+    domen_30 = min.fetchall()
 
+    for i in domen_30:
         date = '{:%d-%m-%Y}'.format(i["expired"])
         some_id = i["tg_id"]
         print('id ', some_id)
@@ -158,7 +152,6 @@ def domen_10_days_schedule():
                                       f'сумму согласно действующим тарифам через личный кабинет на нашем сайте. '
                                       f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
                                       f'лицом.\n<b>С уважением, команда Hostmaster!</b>', parse_mode='html')
-    bot.send_message(332749197, f'10 days: {days_10}')
     min.close()
 
 
@@ -181,9 +174,8 @@ def domen_1_days_schedule():
         "`sardorbot`.`b_userid` = `mydomain`.`userid`"
         " AND `mydomain`.`mydomaincontactcust` = `contact`.`idcontact`;")
     domen_1 = min.fetchall()
-    days_1=''
+
     for i in domen_1:
-        days_1 += f'{i["mydomainname"]}\n'
         date = '{:%d-%m-%Y}'.format(i["expired"])
         some_id = i["tg_id"]
         print('id ', some_id)
@@ -205,7 +197,6 @@ def domen_1_days_schedule():
                                       f'В случае неоплаты, ваш домен будет свободен для '
                                       f'регистрации другим лицом.\n<b>С уважением, команда Hostmaster!</b>',
                              parse_mode='html')
-    bot.send_message(332749197, f'today: {days_1}')
     min.close()
 
 
@@ -1950,10 +1941,10 @@ def schedule_checker():
 
 
 if __name__ == "__main__":
-    schedule.every().day.at("15:35").do(domen_60_days_schedule)
-    schedule.every().day.at("15:35").do(domen_30_days_schedule)
-    schedule.every().day.at("15:35").do(domen_10_days_schedule)
-    schedule.every().day.at("15:35").do(domen_1_days_schedule)
+    schedule.every().day.at("15:39").do(domen_60_days_schedule)
+    schedule.every().day.at("15:39").do(domen_30_days_schedule)
+    schedule.every().day.at("15:39").do(domen_10_days_schedule)
+    schedule.every().day.at("15:39").do(domen_1_days_schedule)
     # schedule.every().day.at('12:14').do(vds_schedule)
     # schedule.every().day.at("12:15").do(hosting_schedule)
     Thread(target=schedule_checker).start()
