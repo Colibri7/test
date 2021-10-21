@@ -34,7 +34,7 @@ def domen_60_days_schedule():
                                  )
     min = connection.cursor()
     min.execute(
-        "SELECT `tg_id`, `idmydomain`, `mydomain`.userid, `mydomainname`, NOW() as now_datetime, `expired`,`contactname`, `contactcompany` FROM `hostmasteruz_base`.`mydomain`, `hostmasteruz_bot`.`sardorbot`,`hostmasteruz_base`.`contact`  WHERE DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 58 DAY)) AND `sardorbot`.`b_userid` = `mydomain`.`userid` AND `mydomain`.`mydomaincontactcust` = `contact`.`idcontact`;")
+        "SELECT `tg_id`, `idmydomain`, `mydomain`.userid, `mydomainname`, NOW() as now_datetime, `expired`,`contactname`, `contactcompany` FROM `hostmasteruz_base`.`mydomain`, `hostmasteruz_bot`.`sardorbot`,`hostmasteruz_base`.`contact`  WHERE DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 60 DAY)) AND `sardorbot`.`b_userid` = `mydomain`.`userid` AND `mydomain`.`mydomaincontactcust` = `contact`.`idcontact`;")
     domen = min.fetchall()
 
     for i in domen:
@@ -1939,7 +1939,7 @@ def schedule_checker():
 
 
 if __name__ == "__main__":
-    schedule.every().day.at("15:03").do(domen_60_days_schedule)
+    schedule.every().day.at("15:14").do(domen_60_days_schedule)
     schedule.every().day.at("14:59").do(domen_30_days_schedule)
     schedule.every().day.at("14:59").do(domen_10_days_schedule)
     schedule.every().day.at("14:59").do(domen_1_days_schedule)
