@@ -60,7 +60,7 @@ def domen_60_days_schedule():
                              f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
                              f'лицом.\n<b>С уважением, команда Hostmaster!</b>',
                              parse_mode='html')
-        bot.send_message(332749197, f'60 дней: {i["mydomainname"]}\n')
+
 
     min.close()
 
@@ -106,7 +106,7 @@ def domen_30_days_schedule():
                                       f'сумму согласно действующим тарифам через личный кабинет на нашем сайте. '
                                       f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
                                       f'лицом.\n<b>С уважением, команда Hostmaster!</b>', parse_mode='html')
-        bot.send_message(332749197, f'60 дней: {i["mydomainname"]}\n')
+
     min.close()
 
 
@@ -1941,10 +1941,10 @@ def schedule_checker():
 
 
 if __name__ == "__main__":
-    schedule.every().day.at("15:39").do(domen_60_days_schedule)
-    schedule.every().day.at("15:39").do(domen_30_days_schedule)
-    schedule.every().day.at("15:39").do(domen_10_days_schedule)
-    schedule.every().day.at("15:39").do(domen_1_days_schedule)
+    schedule.every().day.at("15:41").do(domen_60_days_schedule)
+    schedule.every().day.at("15:41").do(domen_30_days_schedule)
+    schedule.every().day.at("15:41").do(domen_10_days_schedule)
+    schedule.every().day.at("15:41").do(domen_1_days_schedule)
     # schedule.every().day.at('12:14').do(vds_schedule)
     # schedule.every().day.at("12:15").do(hosting_schedule)
     Thread(target=schedule_checker).start()
