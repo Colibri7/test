@@ -380,13 +380,18 @@ def log(message):
                         id = i["id"]
                         id_connect = connection.cursor()
                         id_connect.execute(
-                            'SELECT * FROM mydomain WHERE status IN (-2,0,1,3) and userid=%(userid)s ORDER BY expired DESC',
+                            'SELECT * FROM mydomain WHERE status IN (-2,0,1,3) and userid=%(userid)s ORDER BY expired ASC',
                             {'userid': id})
                         checkContact = id_connect.fetchall()
                         num = 1
                         domen_text = ''
                         if checkContact:
                             for i in checkContact:
+                                delta = i["now_datetime"] - i["expired"]
+                                if delta.days > 0:
+                                    i["expired"] = '{:%d-%m-%Y} <b>Просроченный</b>'.format(i["expired"])
+                                else:
+                                    i["expired"] = '{:%d-%m-%Y}'.format(i["expired"])
                                 if i["status"] == -2:
                                     i["status"] = 'A_REG'
                                 elif i["status"] == 0:
@@ -398,9 +403,9 @@ def log(message):
 
                                 domen_text += f'{num}.{i["mydomainname"]}.uz, ' \
                                               f'Статус: {(i["status"])}, ' \
-                                              f'Дата окончания:{i["expired"].strftime("%d/%m/%Y")}'
+                                              f'Дата окончания:{i["expired"].strftime("%d/%m/%Y")}\n'
                                 num += 1
-                            bot.send_message(message.chat.id, domen_text)
+                            bot.send_message(message.chat.id, domen_text,parse_mode='html')
                         else:
                             bot.send_message(message.chat.id, 'У вас нет доменов')
                     bot.register_next_step_handler(message, uslugi)
@@ -935,7 +940,7 @@ def log_uz(message):
                         id = i["id"]
                         id_connect = connection.cursor()
                         id_connect.execute(
-                            'SELECT * FROM mydomain WHERE status IN (-2,0,1,3) and userid=%(userid)s ORDER BY expired DESC',
+                            'SELECT * FROM mydomain WHERE status IN (-2,0,1,3) and userid=%(userid)s ORDER BY expired ASC ',
                             {'userid': id})
                         checkContact = id_connect.fetchall()
                         num = 1
@@ -1781,7 +1786,7 @@ def callback(call):
                     id = i["b_userid"]
                     id_connect = connection.cursor()
                     id_connect.execute(
-                        'SELECT * FROM mydomain WHERE status IN (-2,0,1,3) and userid=%(userid)s ORDER BY expired DESC',
+                        'SELECT * FROM mydomain WHERE status IN (-2,0,1,3) and userid=%(userid)s ORDER BY expired ASC',
                         {'userid': id})
                     checkContact = id_connect.fetchall()
                     num = 1
