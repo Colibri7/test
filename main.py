@@ -1939,7 +1939,7 @@ def schedule_checker():
 
 
 if __name__ == "__main__":
-    schedule.every().day.at("14:59").do(domen_60_days_schedule)
+    schedule.every().day.at("15:03").do(domen_60_days_schedule)
     schedule.every().day.at("14:59").do(domen_30_days_schedule)
     schedule.every().day.at("14:59").do(domen_10_days_schedule)
     schedule.every().day.at("14:59").do(domen_1_days_schedule)
