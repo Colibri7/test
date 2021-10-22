@@ -8,7 +8,7 @@ import telebot
 from telebot import types
 import pymysql
 
-bot = telebot.TeleBot('1978328105:AAGZoGKhrR5JTw9w-URXzBDVbnUe3AtBtcA', threaded=False)
+bot = telebot.TeleBot('1978328105:AAH_68aoG-6VKuN18IQuV6pAdgzzvJ2KI_I', threaded=False)
 
 # connection = pymysql.connect(host='62.209.143.131',
 #                              user='hostmasteruz_pbot',
@@ -941,7 +941,7 @@ def log_uz(message):
                         id = i["id"]
                         id_connect = connection.cursor()
                         id_connect.execute(
-                            'SELECT * FROM mydomain WHERE status IN (-2,0,1,3) and userid=%(userid)s ORDER BY expired ASC ',
+                            'SELECT *, NOW() as now_datetime FROM mydomain WHERE status IN (-2,0,1,3) and userid=%(userid)s ORDER BY expired ASC ',
                             {'userid': id})
                         checkContact = id_connect.fetchall()
                         num = 1
@@ -954,10 +954,10 @@ def log_uz(message):
                                 else:
                                     i["expired"] = '{:%d-%m-%Y}'.format(i["expired"])
 
-                                domen_text += f'{num}. {i["mydomainname"]}.uz, Дата окончания:{i["expired"]}' \
-
+                                domen_text += f'{num}. {i["mydomainname"]}.uz, ' \
+                                              f'Активен до <b>{i["expired"]}</b>\n'
                                 num += 1
-                            bot.send_message(message.chat.id, domen_text)
+                            bot.send_message(message.chat.id, domen_text, parse_mode='html')
                         else:
                             bot.send_message(message.chat.id, 'У вас нет доменов')
                         id_connect.close()
@@ -1610,7 +1610,7 @@ def callback(call):
                     id = i["b_userid"]
                     id_connect = connection.cursor()
                     id_connect.execute(
-                        'SELECT * FROM mydomain WHERE status IN (-2,0,1,3) and userid=%(userid)s ORDER BY expired ASC ',
+                        'SELECT *, NOW() as now_datetime FROM mydomain WHERE status IN (-2,0,1,3) and userid=%(userid)s ORDER BY expired ASC ',
                         {'userid': id})
                     checkContact = id_connect.fetchall()
                     num = 1
