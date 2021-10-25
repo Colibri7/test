@@ -472,7 +472,7 @@ def log(message):
                                     i["status"] = 'Active'
                                 elif i["status"] == 2:
                                     i["status"] = 'Block'
-                                ser_text += f'{num}. <b>{i["colhostname"]}</b>, Статус: <b>{i["status"]}</b>\n'
+                                ser_text += f'{num}. <b>{i["colhostname"]}</b>, <b>{i["status"]}</b>\n'
                                 num += 1
                             bot.send_message(message.chat.id, ser_text, parse_mode='html')
                         else:
@@ -1021,7 +1021,7 @@ def log_uz(message):
                                     i["status"] = 'Active'
                                 elif i["status"] == 2:
                                     i["status"] = 'Block'
-                                ser_text += f'{num}. <b>{i["colhostname"]}</b>, Статус: <b>{i["status"]}</b>\n'
+                                ser_text += f'{num}. <b>{i["colhostname"]}</b>, <b>{i["status"]}</b>\n'
                                 num += 1
                             bot.send_message(message.chat.id, ser_text, parse_mode='html')
                         else:
@@ -1688,7 +1688,7 @@ def callback(call):
                                 i["status"] = 'Active'
                             elif i["status"] == 2:
                                 i["status"] = 'Block'
-                            ser_text += f'{num}. <b>{i["colhostname"]}</b>, Статус: <b>{i["status"]}</b>\n'
+                            ser_text += f'{num}. <b>{i["colhostname"]}</b>, <b>{i["status"]}</b>\n'
                             num += 1
                         bot.send_message(message.chat.id, ser_text, parse_mode='html')
                     else:
