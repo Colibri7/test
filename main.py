@@ -1580,7 +1580,6 @@ def callback(call):
                     id_connect.execute(
                         'SELECT `hostcontract`.*, `hosting`.`hostingname`'
                         ' FROM `hostcontract`, `hosting` WHERE '
-                        '`hostcontract`.`status` IN (0,1) and'
                         ' `hostcontract`.`user_id` = %(user_id)s'
                         ' AND `hosting`.`idhosting` = `hostcontract`.`hostingid`',
                         {'user_id': id})
