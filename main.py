@@ -373,7 +373,7 @@ def log(message):
                                 else:
                                     i["status"] = 'Deleted'
                                 host_text += f'{num}. {i["hostcontractdomain"]}, ' \
-                                             f'Тариф: {i["cptariff"]}, Статус: {i["status"]}\n'
+                                             f'Тариф: {i["cptariff"]}, {i["status"]}\n'
                                 num += 1
                             bot.send_message(message.chat.id, host_text)
                         else:
@@ -919,7 +919,7 @@ def log_uz(message):
                                 else:
                                     i["status"] = 'Deleted'
                                 host_text += f'{num}. {i["hostcontractdomain"]}, ' \
-                                             f'Тариф: {i["cptariff"]}, Статус: {i["status"]}\n'
+                                             f'Тариф: {i["cptariff"]}, {i["status"]}\n'
                                 num += 1
                             bot.send_message(message.chat.id, host_text)
                         else:
