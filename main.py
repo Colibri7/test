@@ -1607,7 +1607,7 @@ def callback(call):
                             if delta.days > 0:
                                 i["expired"] = '{:%d-%m-%-y} ⚠️'.format(i["expired"])
                             else:
-                                i["expired"] = '{:%d-%m-%Y}'.format(i["expired"])
+                                i["expired"] = '{:%d-%m-%-y}'.format(i["expired"])
                             if i["status"] == -2:
                                 i["status"] = 'A_REG'
                             elif i["status"] == 0:
