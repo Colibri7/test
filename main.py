@@ -377,9 +377,9 @@ def log(message):
                                                  f'{i["status"]}\n'
                                 else:
                                     host_text += f'{num}. {i["hostcontractdomain"]}, ' \
-                                                 f'Тариф: {i["cptariff"]}, {i["status"]}\n'
+                                                 f'Тариф: <b>{i["cptariff"]}</b>, {i["status"]}\n'
                                 num += 1
-                            bot.send_message(message.chat.id, host_text)
+                            bot.send_message(message.chat.id, host_text,parse_mode='html')
                         else:
                             bot.send_message(message.chat.id, "У вас нет услуги аренды хостингов")
 
@@ -446,9 +446,9 @@ def log(message):
                                     i["status"] = 'Block'
                                 else:
                                     i["status"] = 'Deleted'
-                                vds_text += f'vds <b>№{num}</b>. {i["vdshostname"]}\n' \
+                                vds_text += f'{num}. {i["vdshostname"]}\n' \
                                             f'Тариф: {i["tariffname"]}\n' \
-                                            f'Статус: {i["status"]}\n'
+                                            f'{i["status"]}\n'
                                 num += 1
                             bot.send_message(message.chat.id, vds_text, parse_mode='html')
                         else:
@@ -927,9 +927,9 @@ def log_uz(message):
                                                  f'{i["status"]}\n'
                                 else:
                                     host_text += f'{num}. {i["hostcontractdomain"]}, ' \
-                                                 f'Тариф: {i["cptariff"]}, {i["status"]}\n'
+                                                 f'Тариф: <b>{i["cptariff"]}</b>, {i["status"]}\n'
                                 num += 1
-                            bot.send_message(message.chat.id, host_text)
+                            bot.send_message(message.chat.id, host_text,parse_mode='html')
                         else:
                             bot.send_message(message.chat.id, "У вас нет услуги аренды хостингов")
                     bot.register_next_step_handler(message, uslugi_uz)
@@ -995,9 +995,9 @@ def log_uz(message):
                                     i["status"] = 'Block'
                                 else:
                                     i["status"] = 'Deleted'
-                                vds_text += f'vds <b>№{num}</b>. {i["vdshostname"]}\n' \
+                                vds_text += f'{num}. {i["vdshostname"]}\n' \
                                             f'Тариф: {i["tariffname"]}\n' \
-                                            f'Статус: {i["status"]}\n'
+                                            f'{i["status"]}\n'
                                 num += 1
                             bot.send_message(message.chat.id, vds_text, parse_mode='html')
                         else:
@@ -1591,11 +1591,18 @@ def callback(call):
                         for i in checkContact:
                             if i["status"] == 1:
                                 i["status"] = 'Active'
-                            host_text += f'{num}. {i["hostcontractdomain"]}, ' \
-                                         f'Тариф: <b>{i["hostingname"]}</b>, ' \
-                                         f'Статус: <b>{i["status"]}</b>\n'
+                            elif i["status"] == 0:
+                                i["status"] = 'Block'
+                            else:
+                                i["status"] = 'Deleted'
+                            if i["cptariff"] is None:
+                                host_text += f'{num}. {i["hostcontractdomain"]}, ' \
+                                             f'{i["status"]}\n'
+                            else:
+                                host_text += f'{num}. {i["hostcontractdomain"]}, ' \
+                                             f'Тариф: <b>{i["cptariff"]}</b>, {i["status"]}\n'
                             num += 1
-                        bot.send_message(message.chat.id, host_text, parse_mode='html')
+                        bot.send_message(message.chat.id, host_text,parse_mode='html')
                     else:
                         bot.send_message(message.chat.id, "У вас нет услуги аренды хостингов")
 
@@ -1657,7 +1664,7 @@ def callback(call):
                                 i["status"] = 'Deleted'
                             vds_text += f'{num}. {i["vdshostname"]}, ' \
                                         f'Тариф: <b>{i["tariffname"]}</b>, ' \
-                                        f'Статус: <b>{i["status"]}</b>\n'
+                                        f'<b>{i["status"]}</b>\n'
                             num += 1
                         bot.send_message(message.chat.id, vds_text, parse_mode='html')
                     else:
