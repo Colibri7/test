@@ -368,6 +368,8 @@ def log(message):
                             for i in checkContact:
                                 if i["status"] == 1:
                                     i["status"] = 'Active'
+                                elif i["status"] == 0:
+                                    i["status"] = 'Block'
                                 else:
                                     i["status"] = 'Deleted'
                                 host_text += f'{num}. {i["hostcontractdomain"]}, ' \
@@ -912,6 +914,8 @@ def log_uz(message):
                             for i in checkContact:
                                 if i["status"] == 1:
                                     i["status"] = 'Active'
+                                elif i["status"] == 0:
+                                    i["status"] = 'Block'
                                 else:
                                     i["status"] = 'Deleted'
                                 host_text += f'{num}. {i["hostcontractdomain"]}, ' \
