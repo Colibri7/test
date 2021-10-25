@@ -1511,13 +1511,7 @@ def language(message):
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback(call):
-    connection = pymysql.connect(host='62.209.143.131',
-                                 user='hostmasteruz_pbot',
-                                 password='bcaxoZyAXDGc',
-                                 database='hostmasteruz_base',
-                                 charset='utf8mb4',
-                                 cursorclass=pymysql.cursors.DictCursor
-                                 )
+
     if call.data == 'cabinet':
         mark = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
         menu = types.KeyboardButton('Возврат')
@@ -1921,6 +1915,7 @@ def callback(call):
         bot.register_next_step_handler(call.message, language)
     else:
         bot.send_message(call.message.chat.id, 'Неопознанная команда')
+
 
 
 def job2():
