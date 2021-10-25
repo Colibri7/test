@@ -1011,8 +1011,7 @@ def log_uz(message):
                                                  cursorclass=pymysql.cursors.DictCursor
                                                  )
                     for i in check:
-                        print(i)
-                        id = i["user_id"]
+                        id = i["id"]
                         id_connect = connection.cursor()
                         id_connect.execute(
                             "SELECT * FROM colcontract WHERE user_id=%(user_id)s", {'user_id': id})
