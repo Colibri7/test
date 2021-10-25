@@ -403,7 +403,7 @@ def log(message):
                                     i["status"] = 'W_RED'
 
                                 domen_text += f'{num}. {i["mydomainname"]}.uz, ' \
-                                              f'{i["status"]}, <b>{i["expired"]}</b>\n'
+                                              f'{i["status"]}, {i["expired"]}\n'
                                 num += 1
                             if len(domen_text) > 4096:
                                 for x in range(0, len(domen_text), 4096):
@@ -920,7 +920,6 @@ def log_uz(message):
                             bot.send_message(message.chat.id, host_text)
                         else:
                             bot.send_message(message.chat.id, "У вас нет хостингов")
-
                     bot.register_next_step_handler(message, uslugi_uz)
                 elif message.text == 'Мои домены':
                     for i in check:
@@ -949,7 +948,7 @@ def log_uz(message):
                                     i["status"] = 'W_RED'
 
                                 domen_text += f'{num}. {i["mydomainname"]}.uz, ' \
-                                              f'{i["status"]}, <b>{i["expired"]}</b>\n'
+                                              f'{i["status"]}, {i["expired"]}\n'
                                 num += 1
                             if len(domen_text) > 4096:
                                 for x in range(0, len(domen_text), 4096):
@@ -1619,7 +1618,7 @@ def callback(call):
                             elif i["status"] == 3:
                                 i["status"] = 'W_RED'
                             domen_text += f'{num}. {i["mydomainname"]}.uz, ' \
-                                          f'{i["status"]}, <b>{i["expired"]}</b>\n'
+                                          f'{i["status"]}, {i["expired"]}\n'
                             num += 1
                         bot.send_message(message.chat.id, domen_text, parse_mode='html')
                     else:
@@ -1799,7 +1798,7 @@ def callback(call):
                                 i["status"] = 'W_RED'
 
                             domen_text += f'{num}. {i["mydomainname"]}.uz, ' \
-                                          f'{i["status"]}, <b>{i["expired"]}</b>\n'
+                                          f'{i["status"]}, {i["expired"]}\n'
                             num += 1
                         bot.send_message(message.chat.id, domen_text, parse_mode='html')
                     else:
