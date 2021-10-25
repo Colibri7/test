@@ -405,7 +405,7 @@ def log(message):
                                 num += 1
                             if len(domen_text) > 4096:
                                 for x in range(0, len(domen_text), 4096):
-                                    bot.send_message(message.chat.id, '{}'.format(domen_text[x:x + 4090]))
+                                    bot.send_message(message.chat.id, '{}'.format(domen_text[x:x + 4106]))
                                     print(x)
                             bot.send_message(message.chat.id, domen_text, parse_mode='html')
                         else:
