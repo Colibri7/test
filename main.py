@@ -1701,7 +1701,8 @@ def callback(call):
                                  "Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>",
                                  reply_markup=markup, parse_mode='html')
             else:
-                bot.send_message(message.chat.id,'Команда неопоз')
+                bot.send_message(message.chat.id,'Неопознанная команда')
+                bot.register_next_step_handler(message,uslugi)
 
 
         markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
