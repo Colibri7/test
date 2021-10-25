@@ -1797,7 +1797,7 @@ def callback(call):
                                 i["status"] = 'W_RED'
 
                             domen_text += f'{num}. {i["mydomainname"]}.uz, ' \
-                                          f'<b>{i["expired"]}</b>\n'
+                                          f'{i["status"]}, <b>{i["expired"]}</b>\n'
                             num += 1
                         bot.send_message(message.chat.id, domen_text, parse_mode='html')
                     else:
