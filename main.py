@@ -292,7 +292,7 @@ def func(message):
     if message.text == 'Возврат':
         markup = types.InlineKeyboardMarkup(row_width=2)
         lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
-        lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
+        lg2 = types.InlineKeyboardButton('Мои контакты📋', callback_data='my_contacts')
         lg3 = types.InlineKeyboardButton('Авторизация🔐', callback_data='cabinet')
         lg4 = types.InlineKeyboardButton('Связь с менеджером',
                                          callback_data='connect_admin', url='https://t.me/hostmaster_support')
@@ -310,7 +310,7 @@ def func(message):
     elif message.text == 'Bosh sahifa':
         markup_uz = types.InlineKeyboardMarkup(row_width=2)
         lg1 = types.InlineKeyboardButton('Mening xizmatlarim', callback_data='xizmatlarim')
-        lg2 = types.InlineKeyboardButton('Mening kontaktlarim', callback_data='kontaktlarim')
+        lg2 = types.InlineKeyboardButton('Mening kontaktlarim📋', callback_data='kontaktlarim')
         lg3 = types.InlineKeyboardButton("Ro'yxatdan o'tish🔐", callback_data="ro'yxatdan_o'tish")
         lg4 = types.InlineKeyboardButton("Menejer bilan aloqa", callback_data="connect_admin",
                                          url='https://t.me/hostmaster_support')
@@ -334,7 +334,7 @@ def send_welcome(message):
            f'username: <b>@{message.from_user.username}</b>'
     markup = types.InlineKeyboardMarkup(row_width=2)
     lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
-    lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
+    lg2 = types.InlineKeyboardButton('Мои контакты📋', callback_data='my_contacts')
     lg3 = types.InlineKeyboardButton('Авторизация🔐', callback_data='cabinet')
     lg4 = types.InlineKeyboardButton('Связь с менеджером',
                                      callback_data='connect_admin', url='https://t.me/hostmaster_support')
@@ -481,7 +481,7 @@ def log(message):
                 elif message.text == 'Возврат':
                     markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
                     lg1 = types.KeyboardButton('Мои услуги')
-                    lg2 = types.KeyboardButton('Мои контакты')
+                    lg2 = types.KeyboardButton('Мои контакты📋')
                     lg3 = types.KeyboardButton('Уведомления')
                     lg4 = types.KeyboardButton('Возврат')
                     markup_ru.add(lg1, lg2, lg3, lg4)
@@ -643,14 +643,14 @@ def log(message):
                 elif message.text == 'Возврат':
                     markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
                     lg1 = types.KeyboardButton('Мои услуги')
-                    lg2 = types.KeyboardButton('Мои контакты')
+                    lg2 = types.KeyboardButton('Мои контакты📋')
                     lg3 = types.KeyboardButton('Уведомления')
                     lg4 = types.KeyboardButton('Возврат')
                     markup_ru.add(lg1, lg2, lg3, lg4)
                     bot.send_message(message.chat.id,'Возврат',reply_markup=markup_ru)
                 bot.register_next_step_handler(message, after_login)
 
-            if message.text == 'Мои контакты':
+            if message.text == 'Мои контакты📋':
                 for i in check:
                     id = i["id"]
                     id_connect = connection.cursor()
@@ -689,7 +689,7 @@ def log(message):
             elif message.text == 'Возврат':
                 markup = types.InlineKeyboardMarkup(row_width=2)
                 lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
-                lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
+                lg2 = types.InlineKeyboardButton('Мои контакты📋', callback_data='my_contacts')
                 lg3 = types.InlineKeyboardButton('Авторизация🔐', callback_data='cabinet')
                 lg4 = types.InlineKeyboardButton('Связь с менеджером', callback_data='connect_admin',
                                                  url='https://t.me/hostmaster_support')
@@ -718,7 +718,7 @@ def log(message):
             check = min.fetchall()
             markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
             lg1 = types.KeyboardButton('Мои услуги')
-            lg2 = types.KeyboardButton('Мои контакты')
+            lg2 = types.KeyboardButton('Мои контакты📋')
             lg3 = types.KeyboardButton('Уведомления')
             lg4 = types.KeyboardButton('Возврат')
             markup_ru.add(lg1, lg2, lg3, lg4)
@@ -748,7 +748,7 @@ def log(message):
                 check = min.fetchall()
                 markup = types.InlineKeyboardMarkup(row_width=2)
                 lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
-                lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
+                lg2 = types.InlineKeyboardButton('Мои контакты📋', callback_data='my_contacts')
                 lg3 = types.InlineKeyboardButton('Авторизация🔐', callback_data='cabinet')
                 lg4 = types.InlineKeyboardButton('Связь с менеджером', callback_data='connect_admin',
                                                  url='https://t.me/hostmaster_support')
@@ -793,7 +793,7 @@ def log(message):
             elif message.text == 'Возврат':
                 markup = types.InlineKeyboardMarkup(row_width=2)
                 lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
-                lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
+                lg2 = types.InlineKeyboardButton('Мои контакты📋', callback_data='my_contacts')
                 lg3 = types.InlineKeyboardButton('Авторизация🔐', callback_data='cabinet')
                 lg4 = types.InlineKeyboardButton('Связь с менеджером', callback_data='connect_admin',
                                                  url='https://t.me/hostmaster_support')
@@ -820,7 +820,7 @@ def log(message):
     if message.text == 'Возврат':
         markup = types.InlineKeyboardMarkup(row_width=2)
         lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
-        lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
+        lg2 = types.InlineKeyboardButton('Мои контакты📋', callback_data='my_contacts')
         lg3 = types.InlineKeyboardButton('Авторизация🔐', callback_data='cabinet')
         lg4 = types.InlineKeyboardButton('Связь с менеджером', callback_data='connect_admin',
                                          url='https://t.me/hostmaster_support')
@@ -868,7 +868,7 @@ def log(message):
         elif message.text == 'Возврат':
             markup_ru = types.InlineKeyboardMarkup(row_width=2)
             lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
-            lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
+            lg2 = types.InlineKeyboardButton('Мои контакты📋', callback_data='my_contacts')
             lg3 = types.InlineKeyboardButton('Авторизация🔐', callback_data='cabinet')
             lg4 = types.InlineKeyboardButton('Связь с менеджером', callback_data='connect_admin',
                                              url='https://t.me/hostmaster_support')
@@ -1030,7 +1030,7 @@ def log_uz(message):
                 elif message.text == 'Возврат':
                     markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
                     lg1 = types.KeyboardButton('Мои услуги')
-                    lg2 = types.KeyboardButton('Мои контакты')
+                    lg2 = types.KeyboardButton('Мои контакты📋')
                     lg3 = types.KeyboardButton('Уведомления')
                     lg4 = types.KeyboardButton('Возврат')
                     markup_ru.add(lg1, lg2, lg3, lg4)
@@ -1192,7 +1192,7 @@ def log_uz(message):
                 elif message.text == 'Возврат':
                     markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
                     lg1 = types.KeyboardButton('Мои услуги')
-                    lg2 = types.KeyboardButton('Мои контакты')
+                    lg2 = types.KeyboardButton('Мои контакты📋')
                     lg3 = types.KeyboardButton('Уведомления')
                     lg4 = types.KeyboardButton('Возврат')
 
@@ -1205,7 +1205,7 @@ def log_uz(message):
                                      reply_markup=markup_ru, parse_mode='html')
                 bot.register_next_step_handler(message, after_login_uz)
 
-            if message.text == 'Мои контакты':
+            if message.text == 'Мои контакты📋':
                 for i in check:
                     id = i["id"]
                     id_connect = connection.cursor()
@@ -1244,7 +1244,7 @@ def log_uz(message):
             elif message.text == 'Возврат':
                 markup = types.InlineKeyboardMarkup(row_width=2)
                 lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
-                lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
+                lg2 = types.InlineKeyboardButton('Мои контакты📋', callback_data='my_contacts')
                 lg3 = types.InlineKeyboardButton('Авторизация🔐', callback_data='cabinet')
                 lg4 = types.InlineKeyboardButton('Связь с менеджером', callback_data='connect_admin',
                                                  url='https://t.me/hostmaster_support')
@@ -1273,7 +1273,7 @@ def log_uz(message):
             check = min.fetchall()
             markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
             lg1 = types.KeyboardButton('Мои услуги')
-            lg2 = types.KeyboardButton('Мои контакты')
+            lg2 = types.KeyboardButton('Мои контакты📋')
             lg3 = types.KeyboardButton('Уведомления')
             lg4 = types.KeyboardButton('Возврат')
             markup_ru.add(lg1, lg2, lg3, lg4)
@@ -1302,7 +1302,7 @@ def log_uz(message):
                 check = min.fetchall()
                 markup_uz = types.InlineKeyboardMarkup(row_width=2)
                 lg1 = types.InlineKeyboardButton('Mening xizmatlarim', callback_data='xizmatlarim')
-                lg2 = types.InlineKeyboardButton('Mening kontaktlarim', callback_data='kontaktlarim')
+                lg2 = types.InlineKeyboardButton('Mening kontaktlarim📋', callback_data='kontaktlarim')
                 lg3 = types.InlineKeyboardButton("Ro'yxatdan o'tish🔐", callback_data="ro'yxatdan_o'tish")
                 lg4 = types.InlineKeyboardButton("Menejer bilan aloqa", callback_data="connect_admin",
                                                  url='https://t.me/hostmaster_support')
@@ -1348,7 +1348,7 @@ def log_uz(message):
             elif message.text == 'Qaytish':
                 markup_uz = types.InlineKeyboardMarkup(row_width=2)
                 lg1 = types.InlineKeyboardButton('Mening xizmatlarim', callback_data='xizmatlarim')
-                lg2 = types.InlineKeyboardButton('Mening kontaktlarim', callback_data='kontaktlarim')
+                lg2 = types.InlineKeyboardButton('Mening kontaktlarim📋', callback_data='kontaktlarim')
                 lg3 = types.InlineKeyboardButton("Ro'yxatdan o'tish🔐", callback_data="ro'yxatdan_o'tish")
                 lg4 = types.InlineKeyboardButton("Menejer bilan aloqa", callback_data="connect_admin",
                                                  url='https://t.me/hostmaster_support')
@@ -1376,7 +1376,7 @@ def log_uz(message):
     if message.text == 'Qaytish':
         markup_uz = types.InlineKeyboardMarkup(row_width=2)
         lg1 = types.InlineKeyboardButton('Mening xizmatlarim', callback_data='xizmatlarim')
-        lg2 = types.InlineKeyboardButton('Mening kontaktlarim', callback_data='kontaktlarim')
+        lg2 = types.InlineKeyboardButton('Mening kontaktlarim📋', callback_data='kontaktlarim')
         lg3 = types.InlineKeyboardButton("Ro'yxatdan o'tish🔐", callback_data="ro'yxatdan_o'tish")
         lg4 = types.InlineKeyboardButton("Menejer bilan aloqa", callback_data="connect_admin",
                                          url='https://t.me/hostmaster_support')
@@ -1422,7 +1422,7 @@ def log_uz(message):
         elif message.text == 'Qaytish':
             markup_uz = types.InlineKeyboardMarkup(row_width=2)
             lg1 = types.InlineKeyboardButton('Mening xizmatlarim', callback_data='xizmatlarim')
-            lg2 = types.InlineKeyboardButton('Mening kontaktlarim', callback_data='kontaktlarim')
+            lg2 = types.InlineKeyboardButton('Mening kontaktlarim📋', callback_data='kontaktlarim')
             lg3 = types.InlineKeyboardButton("Ro'yxatdan o'tish🔐", callback_data="ro'yxatdan_o'tish")
             lg4 = types.InlineKeyboardButton("Menejer bilan aloqa", callback_data="connect_admin",
                                              url='https://t.me/hostmaster_support')
@@ -1455,7 +1455,7 @@ def language(message):
     if message.text == '🇺🇿Uzbek🇺🇿':
         markup_uz = types.InlineKeyboardMarkup(row_width=2)
         lg1 = types.InlineKeyboardButton('Mening xizmatlarim', callback_data='xizmatlarim')
-        lg2 = types.InlineKeyboardButton('Mening kontaktlarim', callback_data='kontaktlarim')
+        lg2 = types.InlineKeyboardButton('Mening kontaktlarim📋', callback_data='kontaktlarim')
         lg3 = types.InlineKeyboardButton("Ro'yxatdan o'tish🔐", callback_data="ro'yxatdan_o'tish")
         lg4 = types.InlineKeyboardButton("Menejer bilan aloqa", callback_data="connect_admin",
                                          url='https://t.me/hostmaster_support')
@@ -1473,7 +1473,7 @@ def language(message):
     elif message.text == '🇷🇺Russian🇷🇺':
         markup_ru = types.InlineKeyboardMarkup(row_width=2)
         lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
-        lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
+        lg2 = types.InlineKeyboardButton('Мои контакты📋', callback_data='my_contacts')
         lg3 = types.InlineKeyboardButton('Авторизация🔐', callback_data='cabinet')
         lg4 = types.InlineKeyboardButton('Связь с менеджером', callback_data='connect_admin',
                                          url='https://t.me/hostmaster_support')
@@ -1696,7 +1696,7 @@ def callback(call):
             elif message.text == 'Возврат':
                 markup = types.InlineKeyboardMarkup(row_width=2)
                 lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
-                lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
+                lg2 = types.InlineKeyboardButton('Мои контакты📋', callback_data='my_contacts')
                 lg3 = types.InlineKeyboardButton('Авторизация🔐', callback_data='cabinet')
                 lg4 = types.InlineKeyboardButton('Связь с менеджером', callback_data='connect_admin',
                                                  url='https://t.me/hostmaster_support')
@@ -1882,7 +1882,7 @@ def callback(call):
             elif message.text == 'Qaytish':
                 markup_uz = types.InlineKeyboardMarkup(row_width=2)
                 lg1 = types.InlineKeyboardButton("Mening xizmatlarim", callback_data='xizmatlarim')
-                lg2 = types.InlineKeyboardButton("Mening kontaktlarim", callback_data='kontaktlarim')
+                lg2 = types.InlineKeyboardButton("Mening kontaktlarim📋", callback_data='kontaktlarim')
                 lg3 = types.InlineKeyboardButton("Ro'yxatdan o'tish🔐", callback_data="ro'yxatdan_o'tish")
                 lg4 = types.InlineKeyboardButton("Menejer bilan aloqa", callback_data="connect_admin",
                                                  url='https://t.me/hostmaster_support')
