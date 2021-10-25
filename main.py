@@ -360,7 +360,7 @@ def log(message):
                         id = i["id"]
                         id_connect = connection.cursor()
                         id_connect.execute(
-                            'SELECT * FROM hostcontract WHERE status=1 and user_id=%(user_id)s', {'user_id': id})
+                            'SELECT * FROM hostcontract WHERE status IN (0,1) and user_id=%(user_id)s', {'user_id': id})
                         checkContact = id_connect.fetchall()
                         num = 1
                         host_text = ''
@@ -902,7 +902,7 @@ def log_uz(message):
                         id = i["id"]
                         id_connect = connection.cursor()
                         id_connect.execute(
-                            'SELECT * FROM hostcontract WHERE status=1 and user_id=%(user_id)s', {'user_id': id})
+                            'SELECT * FROM hostcontract WHERE status IN (0,1) and user_id=%(user_id)s', {'user_id': id})
                         checkContact = id_connect.fetchall()
                         num = 1
                         host_text = ''
