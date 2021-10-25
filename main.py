@@ -1704,7 +1704,7 @@ def callback(call):
                                  "Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>",
                                  reply_markup=markup, parse_mode='html')
 
-        markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
+        markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
         lg1 = types.KeyboardButton('Мои хостинги')
         lg2 = types.KeyboardButton('Мои домены')
         lg3 = types.KeyboardButton('Мои VDS')
