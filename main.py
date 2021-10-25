@@ -402,7 +402,8 @@ def log(message):
                                 elif i["status"] == 3:
                                     i["status"] = 'W_RED'
 
-                                domen_text += f'{num}. {i["mydomainname"]}.uz, Дата окончания: {i["expired"]}\n '
+                                domen_text += f'{num}. {i["mydomainname"]}.uz, ' \
+                                              f'{i["status"]}, <b>{i["expired"]}</b>\n'
                                 num += 1
                             if len(domen_text) > 4096:
                                 for x in range(0, len(domen_text), 4096):
@@ -947,7 +948,8 @@ def log_uz(message):
                                 elif i["status"] == 3:
                                     i["status"] = 'W_RED'
 
-                                domen_text += f'{num}. {i["mydomainname"]}.uz, Дата окончания: {i["expired"]}\n '
+                                domen_text += f'{num}. {i["mydomainname"]}.uz, ' \
+                                              f'{i["status"]}, <b>{i["expired"]}</b>\n'
                                 num += 1
                             if len(domen_text) > 4096:
                                 for x in range(0, len(domen_text), 4096):
