@@ -1605,7 +1605,7 @@ def callback(call):
                         for i in checkContact:
                             delta = i["now_datetime"] - i["expired"]
                             if delta.days > 0:
-                                i["expired"] = '{:%d-%m-%y} ⚠️'.format(i["expired"])
+                                i["expired"] = '{:%d-%m-%-y} ⚠️'.format(i["expired"])
                             else:
                                 i["expired"] = '{:%d-%m-%Y}'.format(i["expired"])
                             if i["status"] == -2:
