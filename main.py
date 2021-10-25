@@ -920,8 +920,6 @@ def log_uz(message):
                             bot.send_message(message.chat.id, "У вас нет хостингов")
                         id_connect.close()
                     bot.register_next_step_handler(message, uslugi_uz)
-
-
                 elif message.text == 'Мои домены':
                     connection = pymysql.connect(host='62.209.143.131',
                                                  user='hostmasteruz_pbot',
@@ -955,6 +953,7 @@ def log_uz(message):
                                     bot.send_message(message.chat.id, '{}'.format(domen_text[x:x + 4096]))
                                     print(x)
                             bot.send_message(message.chat.id, domen_text, parse_mode='html')
+                            bot.register_next_step_handler(message, uslugi_uz)
                         else:
                             bot.send_message(message.chat.id, 'У вас нет доменов')
                         id_connect.close()
