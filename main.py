@@ -61,7 +61,6 @@ def domen_60_days_schedule():
                              f'лицом.\n<b>С уважением, команда Hostmaster!</b>',
                              parse_mode='html')
 
-
     min.close()
 
 
@@ -92,20 +91,20 @@ def domen_30_days_schedule():
         if i["contactcompany"] is None:
 
             bot.send_message(332749197, f'Уважаемый <b>{i["contactname"]}!</b> Уведомляем Вас о том, '
-                                      f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
-                                      f'истекает <b>{date}</b> '
-                                      f'года . Для продления регистрации домена Вам необходимо оплатить '
-                                      f'сумму согласно действующим тарифам через личный кабинет на нашем сайте. '
-                                      f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
-                                      f'лицом.\n<b>С уважением, команда Hostmaster!</b>', parse_mode='html')
+                                        f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
+                                        f'истекает <b>{date}</b> '
+                                        f'года . Для продления регистрации домена Вам необходимо оплатить '
+                                        f'сумму согласно действующим тарифам через личный кабинет на нашем сайте. '
+                                        f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
+                                        f'лицом.\n<b>С уважением, команда Hostmaster!</b>', parse_mode='html')
         else:
             bot.send_message(332749197, f'Уважаемый <b>{i["contactcompany"]}!</b> Уведомляем Вас о том, '
-                                      f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
-                                      f'истекает <b>{date}</b> '
-                                      f'года . Для продления регистрации домена Вам необходимо оплатить '
-                                      f'сумму согласно действующим тарифам через личный кабинет на нашем сайте. '
-                                      f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
-                                      f'лицом.\n<b>С уважением, команда Hostmaster!</b>', parse_mode='html')
+                                        f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
+                                        f'истекает <b>{date}</b> '
+                                        f'года . Для продления регистрации домена Вам необходимо оплатить '
+                                        f'сумму согласно действующим тарифам через личный кабинет на нашем сайте. '
+                                        f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
+                                        f'лицом.\n<b>С уважением, команда Hostmaster!</b>', parse_mode='html')
 
     min.close()
 
@@ -138,20 +137,20 @@ def domen_10_days_schedule():
         if i["contactcompany"] is None:
 
             bot.send_message(332749197, f'Уважаемый <b>{i["contactname"]}!</b> Уведомляем Вас о том, '
-                                      f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
-                                      f'истекает <b>{date}</b> '
-                                      f'года . Для продления регистрации домена Вам необходимо оплатить '
-                                      f'сумму согласно действующим тарифам через личный кабинет на нашем сайте. '
-                                      f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
-                                      f'лицом.\n<b>С уважением, команда Hostmaster!</b>', parse_mode='html')
+                                        f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
+                                        f'истекает <b>{date}</b> '
+                                        f'года . Для продления регистрации домена Вам необходимо оплатить '
+                                        f'сумму согласно действующим тарифам через личный кабинет на нашем сайте. '
+                                        f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
+                                        f'лицом.\n<b>С уважением, команда Hostmaster!</b>', parse_mode='html')
         else:
             bot.send_message(332749197, f'Уважаемый <b>{i["contactcompany"]}!</b> Уведомляем Вас о том, '
-                                      f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
-                                      f'истекает <b>{date}</b> '
-                                      f'года . Для продления регистрации домена Вам необходимо оплатить '
-                                      f'сумму согласно действующим тарифам через личный кабинет на нашем сайте. '
-                                      f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
-                                      f'лицом.\n<b>С уважением, команда Hostmaster!</b>', parse_mode='html')
+                                        f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
+                                        f'истекает <b>{date}</b> '
+                                        f'года . Для продления регистрации домена Вам необходимо оплатить '
+                                        f'сумму согласно действующим тарифам через личный кабинет на нашем сайте. '
+                                        f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
+                                        f'лицом.\n<b>С уважением, команда Hostmaster!</b>', parse_mode='html')
     min.close()
 
 
@@ -181,21 +180,21 @@ def domen_1_days_schedule():
         print('id ', some_id)
         if i["contactcompany"] is None:
             bot.send_message(332749197, f'Уважаемый <b>{i["contactname"]}!</b> Уведомляем Вас о том, '
-                                      f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
-                                      f'истек сегодня, <b>{date}</b> года. Для продления регистрации '
-                                      f'домена Вам необходимо оплатить сумму согласно действующим '
-                                      f'тарифам через личный кабинет на нашем сайте. '
-                                      f'В случае неоплаты, ваш домен будет свободен для '
-                                      f'регистрации другим лицом.\n<b>С уважением, команда Hostmaster!</b>',
+                                        f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
+                                        f'истек сегодня, <b>{date}</b> года. Для продления регистрации '
+                                        f'домена Вам необходимо оплатить сумму согласно действующим '
+                                        f'тарифам через личный кабинет на нашем сайте. '
+                                        f'В случае неоплаты, ваш домен будет свободен для '
+                                        f'регистрации другим лицом.\n<b>С уважением, команда Hostmaster!</b>',
                              parse_mode='html')
         else:
             bot.send_message(332749197, f'Уважаемый <b>{i["contactcompany"]}!</b> Уведомляем Вас о том, '
-                                      f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
-                                      f'истек сегодня, <b>{date}</b> года. Для продления регистрации '
-                                      f'домена Вам необходимо оплатить сумму согласно действующим '
-                                      f'тарифам через личный кабинет на нашем сайте. '
-                                      f'В случае неоплаты, ваш домен будет свободен для '
-                                      f'регистрации другим лицом.\n<b>С уважением, команда Hostmaster!</b>',
+                                        f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
+                                        f'истек сегодня, <b>{date}</b> года. Для продления регистрации '
+                                        f'домена Вам необходимо оплатить сумму согласно действующим '
+                                        f'тарифам через личный кабинет на нашем сайте. '
+                                        f'В случае неоплаты, ваш домен будет свободен для '
+                                        f'регистрации другим лицом.\n<b>С уважением, команда Hostmaster!</b>',
                              parse_mode='html')
     min.close()
 
@@ -391,7 +390,7 @@ def log(message):
                             for i in checkContact:
                                 delta = i["now_datetime"] - i["expired"]
                                 if delta.days > 0:
-                                    i["expired"] = '{:%d-%m-%Y} , <b>⚠️</b>'.format(i["expired"])
+                                    i["expired"] = '{:%d-%m-%Y} ⚠️'.format(i["expired"])
                                 else:
                                     i["expired"] = '{:%d-%m-%Y}'.format(i["expired"])
                                 # if i["status"] == -2:
@@ -404,7 +403,11 @@ def log(message):
                                 #     i["status"] = 'W_RED'
                                 domen_text += f'{num}. {i["mydomainname"]}.uz, Дата окончания: {i["expired"]}\n '
                                 num += 1
-                            bot.send_message(message.chat.id, domen_text,parse_mode='html')
+                            if len(domen_text) > 4096:
+                                for x in range(0, len(domen_text), 4096):
+                                    bot.send_message(message.chat.id, '{}'.format(domen_text[x:x + 4096]))
+                                    print(x)
+                            bot.send_message(message.chat.id, domen_text, parse_mode='html')
                         else:
                             bot.send_message(message.chat.id, 'У вас нет доменов')
                     bot.register_next_step_handler(message, uslugi)
@@ -619,6 +622,7 @@ def log(message):
                         markup.add(lg1, lg4)
                         bot.send_message(message.chat.id, 'Уведомления', reply_markup=markup)
                         bot.register_next_step_handler(message, doljniki)
+
                 if message.text == 'Домен':
                     markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
                     lg1 = types.KeyboardButton('60 дней')
@@ -948,7 +952,7 @@ def log_uz(message):
                             for i in checkContact:
                                 delta = i["now_datetime"] - i["expired"]
                                 if delta.days > 0:
-                                    i["expired"] = '{:%d-%m-%Y} , <b>⚠️</b>'.format(i["expired"])
+                                    i["expired"] = '{:%d-%m-%Y} ⚠️'.format(i["expired"])
                                 else:
                                     i["expired"] = '{:%d-%m-%Y}'.format(i["expired"])
 
@@ -1616,10 +1620,9 @@ def callback(call):
                         for i in checkContact:
                             delta = i["now_datetime"] - i["expired"]
                             if delta.days > 0:
-                                i["expired"] = '{:%d-%m-%Y} , <b>⚠️</b>'.format(i["expired"])
+                                i["expired"] = '{:%d-%m-%Y} ⚠️'.format(i["expired"])
                             else:
                                 i["expired"] = '{:%d-%m-%Y}'.format(i["expired"])
-
 
                             domen_text += f'{num}. {i["mydomainname"]}.uz, ' \
                                           f'Активен до <b>{i["expired"]}</b>\n'
@@ -1787,10 +1790,9 @@ def callback(call):
                         for i in checkContact:
                             delta = i["now_datetime"] - i["expired"]
                             if delta.days > 0:
-                                i["expired"] = '{:%d-%m-%Y} , <b>⚠️</b>'.format(i["expired"])
+                                i["expired"] = '{:%d-%m-%Y} ⚠️'.format(i["expired"])
                             else:
                                 i["expired"] = '{:%d-%m-%Y}'.format(i["expired"])
-
 
                             domen_text += f'{num}. {i["mydomainname"]}.uz, ' \
                                           f'<b>{i["expired"]}</b>\n'
