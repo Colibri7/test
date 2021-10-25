@@ -373,7 +373,7 @@ def log(message):
                                 num += 1
                             bot.send_message(message.chat.id, host_text)
                         else:
-                            bot.send_message(message.chat.id, "У вас нет хостингов")
+                            bot.send_message(message.chat.id, "У вас нет услуги аренды хостингов")
 
                     bot.register_next_step_handler(message, uslugi)
                 elif message.text == 'Мои домены':
@@ -444,7 +444,7 @@ def log(message):
                                 num += 1
                             bot.send_message(message.chat.id, vds_text, parse_mode='html')
                         else:
-                            bot.send_message(message.chat.id, 'У вас нет VDS')
+                            bot.send_message(message.chat.id, 'У вас нет услуги аренды VDS')
 
                     bot.register_next_step_handler(message, uslugi)
                 elif message.text == 'Мои сервера':
@@ -478,11 +478,7 @@ def log(message):
                     lg3 = types.KeyboardButton('Уведомления')
                     lg4 = types.KeyboardButton('Возврат')
                     markup_ru.add(lg1, lg2, lg3, lg4)
-                    bot.send_message(message.chat.id,
-                                     "Это информационный бот компании <b>Hostmaster.</b> "
-                                     "Hostmaster – Хостинг провайдер и регистратор доменов в "
-                                     "Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>",
-                                     reply_markup=markup_ru, parse_mode='html')
+                    bot.send_message(message.chat.id,'Возврат',reply_markup=markup_ru, parse_mode='html')
                     bot.register_next_step_handler(message, after_login)
 
             def doljniki(message):
@@ -919,7 +915,7 @@ def log_uz(message):
                                 num += 1
                             bot.send_message(message.chat.id, host_text)
                         else:
-                            bot.send_message(message.chat.id, "У вас нет хостингов")
+                            bot.send_message(message.chat.id, "У вас нет услуги аренды хостингов")
                     bot.register_next_step_handler(message, uslugi_uz)
                 elif message.text == 'Мои домены':
                     for i in check:
@@ -989,7 +985,7 @@ def log_uz(message):
                                 num += 1
                             bot.send_message(message.chat.id, vds_text, parse_mode='html')
                         else:
-                            bot.send_message(message.chat.id, 'У вас нет VDS')
+                            bot.send_message(message.chat.id, 'У вас нет услуги аренды VDS')
 
                     bot.register_next_step_handler(message, uslugi_uz)
                 elif message.text == 'Мои сервера':
@@ -1023,11 +1019,7 @@ def log_uz(message):
                     lg3 = types.KeyboardButton('Уведомления')
                     lg4 = types.KeyboardButton('Возврат')
                     markup_ru.add(lg1, lg2, lg3, lg4)
-                    bot.send_message(message.chat.id,
-                                     "Это информационный бот компании <b>Hostmaster.</b> "
-                                     "Hostmaster – Хостинг провайдер и регистратор доменов в "
-                                     "Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>",
-                                     reply_markup=markup_ru, parse_mode='html')
+                    bot.send_message(message.chat.id,'Возврат',reply_markup=markup_ru, parse_mode='html')
                     bot.register_next_step_handler(message, after_login_uz)
 
             def doljniki(message):
@@ -1589,7 +1581,7 @@ def callback(call):
                             num += 1
                         bot.send_message(message.chat.id, host_text, parse_mode='html')
                     else:
-                        bot.send_message(message.chat.id, "У вас нет хостингов")
+                        bot.send_message(message.chat.id, "У вас нет услуги аренды хостингов")
 
                 bot.register_next_step_handler(message, uslugi)
             elif message.text == 'Мои домены':
@@ -1653,7 +1645,7 @@ def callback(call):
                             num += 1
                         bot.send_message(message.chat.id, vds_text, parse_mode='html')
                     else:
-                        bot.send_message(message.chat.id, 'У вас нет VDS')
+                        bot.send_message(message.chat.id, 'У вас нет услуги аренды VDS')
 
                 bot.register_next_step_handler(message, uslugi)
             elif message.text == 'Мои сервера':
