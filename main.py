@@ -372,8 +372,12 @@ def log(message):
                                     i["status"] = 'Block'
                                 else:
                                     i["status"] = 'Deleted'
-                                host_text += f'{num}. {i["hostcontractdomain"]}, ' \
-                                             f'Тариф: {i["cptariff"]}, {i["status"]}\n'
+                                if i["cptariff"] is None:
+                                    host_text += f'{num}. {i["hostcontractdomain"]}, ' \
+                                                 f'{i["status"]}\n'
+                                else:
+                                    host_text += f'{num}. {i["hostcontractdomain"]}, ' \
+                                                 f'Тариф: {i["cptariff"]}, {i["status"]}\n'
                                 num += 1
                             bot.send_message(message.chat.id, host_text)
                         else:
@@ -918,8 +922,12 @@ def log_uz(message):
                                     i["status"] = 'Block'
                                 else:
                                     i["status"] = 'Deleted'
-                                host_text += f'{num}. {i["hostcontractdomain"]}, ' \
-                                             f'Тариф: {i["cptariff"]}, {i["status"]}\n'
+                                if i["cptariff"] is None:
+                                    host_text += f'{num}. {i["hostcontractdomain"]}, ' \
+                                                 f'{i["status"]}\n'
+                                else:
+                                    host_text += f'{num}. {i["hostcontractdomain"]}, ' \
+                                                 f'Тариф: {i["cptariff"]}, {i["status"]}\n'
                                 num += 1
                             bot.send_message(message.chat.id, host_text)
                         else:
