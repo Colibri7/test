@@ -466,7 +466,7 @@ def log(message):
                                 num += 1
                             bot.send_message(message.chat.id, ser_text, parse_mode='html')
                         else:
-                            bot.send_message(message.chat.id, 'У вас нет сервера')
+                            bot.send_message(message.chat.id, 'У вас нет услуги аренды сервера')
 
                     bot.register_next_step_handler(message, uslugi)
                 elif message.text == 'Возврат':
@@ -885,7 +885,7 @@ def log(message):
                              "Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>",
                              reply_markup=markup_ru, parse_mode='html')
 
-        if message.text.lower() not in list:
+        elif message.text.lower() not in list:
             key = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
             lg1 = types.KeyboardButton("Возврат")
             key.add(lg1)
@@ -1033,7 +1033,7 @@ def log_uz(message):
                                 num += 1
                             bot.send_message(message.chat.id, ser_text)
                         else:
-                            bot.send_message(message.chat.id, 'У вас нет сервера')
+                            bot.send_message(message.chat.id, 'У вас нет услуги аренды сервера')
                         id_connect.close()
                     bot.register_next_step_handler(message, uslugi_uz)
                 elif message.text == 'Возврат':
@@ -1689,7 +1689,7 @@ def callback(call):
                             num += 1
                         bot.send_message(message.chat.id, ser_text, parse_mode='html')
                     else:
-                        bot.send_message(message.chat.id, 'У вас нет сервера')
+                        bot.send_message(message.chat.id, 'У вас нет услуги аренды сервера')
 
                 bot.register_next_step_handler(message, uslugi)
             elif message.text == 'Возврат':
