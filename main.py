@@ -399,7 +399,7 @@ def log(message):
                             if len(domen_text) > 4096:
                                 for x in range(0, len(domen_text), 4096):
                                     bot.send_message(message.chat.id, '{}'.format(domen_text[x:x + 4096]))
-                                    print(x)
+                                bot.register_next_step_handler(message,uslugi)
                             bot.send_message(message.chat.id, domen_text, parse_mode='html')
                         else:
                             bot.send_message(message.chat.id, 'У вас нет доменов')
@@ -893,13 +893,6 @@ def log_uz(message):
         def after_login_uz(message):
             def uslugi_uz(message):
                 if message.text == 'Мои хостинги':
-                    connection = pymysql.connect(host='62.209.143.131',
-                                                 user='hostmasteruz_pbot',
-                                                 password='bcaxoZyAXDGc',
-                                                 database='hostmasteruz_base',
-                                                 charset='utf8mb4',
-                                                 cursorclass=pymysql.cursors.DictCursor
-                                                 )
                     for i in check:
                         id = i["id"]
                         id_connect = connection.cursor()
@@ -912,27 +905,20 @@ def log_uz(message):
                             for i in checkContact:
                                 if i["status"] == 1:
                                     i["status"] = 'Active'
-                                host_text += f'{num}.{i["hostcontractdomain"]},' \
-                                             f' Тариф: {i["cptariff"]}, Статус: {i["status"]}\n'
+                                host_text += f'{num}.{i["hostcontractdomain"]}, ' \
+                                             f'Тариф: {i["cptariff"]}, Статус: {i["status"]}\n'
                                 num += 1
                             bot.send_message(message.chat.id, host_text)
                         else:
                             bot.send_message(message.chat.id, "У вас нет хостингов")
-                        id_connect.close()
+
                     bot.register_next_step_handler(message, uslugi_uz)
                 elif message.text == 'Мои домены':
-                    connection = pymysql.connect(host='62.209.143.131',
-                                                 user='hostmasteruz_pbot',
-                                                 password='bcaxoZyAXDGc',
-                                                 database='hostmasteruz_base',
-                                                 charset='utf8mb4',
-                                                 cursorclass=pymysql.cursors.DictCursor
-                                                 )
                     for i in check:
                         id = i["id"]
                         id_connect = connection.cursor()
                         id_connect.execute(
-                            'SELECT *, NOW() as now_datetime FROM mydomain WHERE status IN (-2,0,1,3) and userid=%(userid)s ORDER BY expired ASC ',
+                            'SELECT * ,NOW() as now_datetime FROM mydomain WHERE status IN (-2,0,1,3) and userid=%(userid)s ORDER BY expired ASC',
                             {'userid': id})
                         checkContact = id_connect.fetchall()
                         num = 1
@@ -945,37 +931,29 @@ def log_uz(message):
                                 else:
                                     i["expired"] = '{:%d-%m-%Y}'.format(i["expired"])
 
-                                domen_text += f'{num}. {i["mydomainname"]}.uz, ' \
-                                              f'Активен до {i["expired"]}\n'
+                                domen_text += f'{num}. {i["mydomainname"]}.uz, Дата окончания: {i["expired"]}\n '
                                 num += 1
                             if len(domen_text) > 4096:
                                 for x in range(0, len(domen_text), 4096):
                                     bot.send_message(message.chat.id, '{}'.format(domen_text[x:x + 4096]))
-                                bot.register_next_step_handler(message, uslugi_uz)
-                            bot.send_message(message.chat.id, domen_text)
+                                bot.register_next_step_handler(message,uslugi_uz)
+                            bot.send_message(message.chat.id, domen_text, parse_mode='html')
                         else:
                             bot.send_message(message.chat.id, 'У вас нет доменов')
-                        id_connect.close()
                     bot.register_next_step_handler(message, uslugi_uz)
                 elif message.text == 'Мои VDS':
-                    connection = pymysql.connect(host='62.209.143.131',
-                                                 user='hostmasteruz_pbot',
-                                                 password='bcaxoZyAXDGc',
-                                                 database='hostmasteruz_base',
-                                                 charset='utf8mb4',
-                                                 cursorclass=pymysql.cursors.DictCursor
-                                                 )
                     for i in check:
                         id = i["id"]
                         id_connect = connection.cursor()
                         id_connect.execute(
-                            'SELECT `vdscontract`.`vdshostname`, '
-                            '`vds_tariffs`.`tariffname` ,'
+                            'SELECT `vdscontract`.`vdshostname`,'
+                            ' `vds_tariffs`.`tariffname` ,'
                             '`vdscontract`.`status`  FROM '
-                            '`user`, `vdscontract`, `vds_tariffs` WHERE '
-                            ' username=%(username)s AND `user`.`id` = `vdscontract`.`user_id`'
-                            ' AND `vdscontract`.`vdsid` = `vds_tariffs`.`idvds` '
-                            'ORDER BY `vdscontract`.`vdshostname`;',
+                            '`user`, `vdscontract`, `vds_tariffs`'
+                            ' WHERE   username=%(username)s AND '
+                            '`user`.`id` = `vdscontract`.`user_id`'
+                            ' AND `vdscontract`.`vdsid` = `vds_tariffs`.`idvds`'
+                            ' ORDER BY `vdscontract`.`vdshostname`;',
                             {'username': login})
                         checkContact = id_connect.fetchall()
                         num = 1
@@ -995,17 +973,11 @@ def log_uz(message):
                             bot.send_message(message.chat.id, vds_text, parse_mode='html')
                         else:
                             bot.send_message(message.chat.id, 'У вас нет VDS')
-                        id_connect.close()
-                    bot.register_next_step_handler(message, uslugi_uz)
+
+                    bot.register_next_step_handler(message, uslugi)
                 elif message.text == 'Мои сервера':
-                    connection = pymysql.connect(host='62.209.143.131',
-                                                 user='hostmasteruz_pbot',
-                                                 password='bcaxoZyAXDGc',
-                                                 database='hostmasteruz_base',
-                                                 charset='utf8mb4',
-                                                 cursorclass=pymysql.cursors.DictCursor
-                                                 )
                     for i in check:
+                        print(i)
                         id = i["id"]
                         id_connect = connection.cursor()
                         id_connect.execute(
@@ -1014,26 +986,32 @@ def log_uz(message):
                         num = 1
                         ser_text = ''
                         if checkContact:
+
                             for i in checkContact:
-                                ser_text += f'server - {num}. {i["colhostname"]}\nСтатус: {i["status"]}\n'
+                                if i["status"] == 1:
+                                    i["status"] = 'Active'
+                                elif i["status"] == 2:
+                                    i["status"] = 'Block'
+                                ser_text += f'{num}. <b>{i["colhostname"]}</b>, Статус: <b>{i["status"]}</b>\n'
                                 num += 1
-                            bot.send_message(message.chat.id, ser_text)
+                            bot.send_message(message.chat.id, ser_text, parse_mode='html')
                         else:
                             bot.send_message(message.chat.id, 'У вас нет услуги аренды сервера')
-                        id_connect.close()
-                    bot.register_next_step_handler(message, uslugi_uz)
+
+                    bot.register_next_step_handler(message, uslugi)
                 elif message.text == 'Возврат':
                     markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
                     lg1 = types.KeyboardButton('Мои услуги')
                     lg2 = types.KeyboardButton('Мои контакты')
-                    lg3 = types.KeyboardButton('Возврат')
-                    markup_ru.add(lg1, lg2, lg3)
+                    lg3 = types.KeyboardButton('Уведомления')
+                    lg4 = types.KeyboardButton('Возврат')
+                    markup_ru.add(lg1, lg2, lg3, lg4)
                     bot.send_message(message.chat.id,
                                      "Это информационный бот компании <b>Hostmaster.</b> "
                                      "Hostmaster – Хостинг провайдер и регистратор доменов в "
                                      "Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>",
                                      reply_markup=markup_ru, parse_mode='html')
-                    bot.register_next_step_handler(message, after_login_uz)
+                    bot.register_next_step_handler(message, after_login)
 
             def doljniki(message):
                 def doljniki_domen(message):
