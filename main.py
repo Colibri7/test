@@ -852,7 +852,7 @@ def log(message):
         for i in checkUsername:
             list.append(i["username"])
 
-        if message.text.lower() in list:
+        if message.text in list:
             cursor.execute('SELECT password_hash FROM user WHERE username=%(username)s', {'username': login})
             checkUsername = cursor.fetchone()
             bot.send_message(message.chat.id, 'Введите пароль:')
@@ -875,7 +875,7 @@ def log(message):
                              "Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>",
                              reply_markup=markup_ru, parse_mode='html')
 
-        elif message.text.lower() not in list:
+        elif message.text not in list:
             key = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
             lg1 = types.KeyboardButton("Возврат")
             key.add(lg1)
@@ -1398,7 +1398,7 @@ def log_uz(message):
         for i in checkUsername:
             list.append(i["username"])
 
-        if message.text.lower() in list:
+        if message.text in list:
             cursor.execute('SELECT password_hash FROM user WHERE username=%(username)s', {'username': login})
             checkUsername = cursor.fetchone()
             bot.send_message(message.chat.id, 'Parolni kiriting:')
