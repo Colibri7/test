@@ -1700,9 +1700,7 @@ def callback(call):
                                  "Hostmaster – Хостинг провайдер и регистратор доменов в "
                                  "Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>",
                                  reply_markup=markup, parse_mode='html')
-            else:
-                bot.send_message(message.chat.id,'Неопознанная команда')
-                bot.register_next_step_handler(message,uslugi)
+
 
 
         markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
@@ -1923,8 +1921,7 @@ def callback(call):
         bot.send_message(call.message.chat.id, 'Til ozgartirish', reply_markup=mark)
 
         bot.register_next_step_handler(call.message, language)
-    else:
-        bot.send_message(call.message.chat.id, 'Неопознанная команда')
+
 
 
 
