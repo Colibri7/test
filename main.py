@@ -405,7 +405,7 @@ def log(message):
                                 num += 1
                             if len(domen_text) > 4096:
                                 for x in range(0, len(domen_text), 4096):
-                                    bot.send_message(message.chat.id, '{}'.format(domen_text[x:x + 4106]))
+                                    bot.send_message(message.chat.id, '{}'.format(domen_text[x:x + 4096]))
                                     print(x)
                             bot.send_message(message.chat.id, domen_text, parse_mode='html')
                         else:
@@ -885,15 +885,21 @@ def log(message):
                              "Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>",
                              reply_markup=markup_ru, parse_mode='html')
 
-
-        else:
+        if message.text.lower() not in list:
             key = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
             lg1 = types.KeyboardButton("Возврат")
             key.add(lg1)
             bot.send_message(message.chat.id, 'Повторите попытку', reply_markup=key)
             bot.send_message(332749197,
                              f'{message.from_user.first_name} Cant log in')
-            bot.register_next_step_handler(message, log)
+        # else:
+        #     key = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
+        #     lg1 = types.KeyboardButton("Возврат")
+        #     key.add(lg1)
+        #     bot.send_message(message.chat.id, 'Повторите попытку', reply_markup=key)
+        #     bot.send_message(332749197,
+        #                      f'{message.from_user.first_name} Cant log in')
+        #     bot.register_next_step_handler(message, log)
 
 
 @bot.message_handler(content_types=['text'])
@@ -1577,7 +1583,6 @@ def callback(call):
         check = min.fetchall()
         for i in check:
             print(i["b_userid"])
-
         def uslugi(message):
             if message.text == 'Мои хостинги':
                 for i in check:
