@@ -1780,7 +1780,7 @@ def callback(call):
                     id = i["b_userid"]
                     id_connect = connection.cursor()
                     id_connect.execute(
-                        'SELECT * FROM mydomain WHERE status IN (-2,0,1,3) and userid=%(userid)s ORDER BY expired ASC',
+                        'SELECT *,NOW() as now_datetime FROM mydomain WHERE status IN (-2,0,1,3) and userid=%(userid)s ORDER BY expired ASC',
                         {'userid': id})
                     checkContact = id_connect.fetchall()
                     num = 1
