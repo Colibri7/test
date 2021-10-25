@@ -409,7 +409,6 @@ def log(message):
                                     i["status"] = 'Active'
                                 elif i["status"] == 3:
                                     i["status"] = 'W_RED'
-
                                 domen_text += f'{num}. {i["mydomainname"]}.uz, ' \
                                               f'{i["status"]}, {i["expired"]}\n'
                                 num += 1
@@ -1765,7 +1764,6 @@ def callback(call):
                     id_connect.execute(
                         'SELECT `hostcontract`.*, `hosting`.`hostingname`'
                         ' FROM `hostcontract`, `hosting` WHERE'
-                        ' `hostcontract`.`status` IN (0,1) and'
                         ' `hostcontract`.`user_id` = %(user_id)s '
                         'AND `hosting`.`idhosting` = `hostcontract`.`hostingid`',
                         {'user_id': id})
@@ -1776,9 +1774,16 @@ def callback(call):
                         for i in checkContact:
                             if i["status"] == 1:
                                 i["status"] = 'Active'
-                            host_text += f'{num}. {i["hostcontractdomain"]}, ' \
-                                         f'Tarif: <b>{i["hostingname"]}</b>, ' \
-                                         f'Holat: <b>{i["status"]}</b>\n'
+                            elif i["status"] == 0:
+                                i["status"] = 'Block'
+                            else:
+                                i["status"] = 'Deleted'
+                            if i["cptariff"] is None:
+                                host_text += f'{num}. {i["hostcontractdomain"]}, ' \
+                                             f'{i["status"]}\n'
+                            else:
+                                host_text += f'{num}. {i["hostcontractdomain"]}, ' \
+                                             f'Tarif: <b>{i["cptariff"]}</b>, {i["status"]}\n'
                             num += 1
                         bot.send_message(message.chat.id, host_text, parse_mode='html')
                     else:
@@ -1813,6 +1818,7 @@ def callback(call):
 
                             domen_text += f'{num}. {i["mydomainname"]}.uz, ' \
                                           f'{i["status"]}, {i["expired"]}\n'
+
                             num += 1
                         bot.send_message(message.chat.id, domen_text, parse_mode='html')
                     else:
@@ -1841,9 +1847,9 @@ def callback(call):
                                 i["status"] = 'Block'
                             else:
                                 i["status"] = 'Deleted'
-                            vds_text += f'{num}. {i["vdshostname"]}, ' \
-                                        f'Tarif: <b>{i["tariffname"]}</b>, ' \
-                                        f'Holat: <b>{i["status"]}</b>\n'
+                            vds_text += f'{num}. {i["vdshostname"]}\n' \
+                                        f'Тариф: {i["tariffname"]}\n' \
+                                        f'{i["status"]}\n'
                             num += 1
                         bot.send_message(message.chat.id, vds_text, parse_mode='html')
                     else:
@@ -1866,7 +1872,7 @@ def callback(call):
                                 i["status"] = 'Active'
                             elif i["status"] == 2:
                                 i["status"] = 'Block'
-                            ser_text += f'{num}. <b>{i["colhostname"]}</b>, Holat: <b>{i["status"]}</b>\n'
+                            ser_text += f'{num}. <b>{i["colhostname"]}</b>, <b>{i["status"]}</b>\n'
                             num += 1
                         bot.send_message(message.chat.id, ser_text, parse_mode='html')
                     else:
@@ -1940,9 +1946,6 @@ def callback(call):
 
         bot.register_next_step_handler(call.message, language)
 
-
-
-
 def job2():
     day_of_month = datetime.now().day
     print(day_of_month)
@@ -1967,8 +1970,3 @@ if __name__ == "__main__":
 # while True:
 #     try:
 bot.polling(none_stop=True)
-
-# except Exception as e:
-#     telebot.logger.error(e)  # или просто print(e) если у вас логгера нет,
-#     # или import traceback; traceback.print_exc() для печати полной инфы
-#     time.sleep(5)
