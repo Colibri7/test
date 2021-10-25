@@ -1792,7 +1792,7 @@ def callback(call):
                             elif i["status"] == 0:
                                 i["status"] = 'R_REG'
                             elif i["status"] == 1:
-                                i["status"] = 'Актив'
+                                i["status"] = 'Active'
                             elif i["status"] == 3:
                                 i["status"] = 'W_RED'
 
