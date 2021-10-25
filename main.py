@@ -951,9 +951,8 @@ def log_uz(message):
                             if len(domen_text) > 4096:
                                 for x in range(0, len(domen_text), 4096):
                                     bot.send_message(message.chat.id, '{}'.format(domen_text[x:x + 4096]))
-                                    print(x)
-                            bot.send_message(message.chat.id, domen_text, parse_mode='html')
-                            bot.register_next_step_handler(message, uslugi_uz)
+                                bot.register_next_step_handler(message, uslugi_uz)
+                            bot.send_message(message.chat.id, domen_text)
                         else:
                             bot.send_message(message.chat.id, 'У вас нет доменов')
                         id_connect.close()
