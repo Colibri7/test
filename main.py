@@ -814,9 +814,9 @@ def log(message):
                 key = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
                 lg1 = types.KeyboardButton("Возврат")
                 key.add(lg1)
-                bot.send_message(332749197,
-                                 f'{message.from_user.first_name} Cant log in')
                 bot.send_message(message.chat.id, 'Неверный пароль или почта', reply_markup=key)
+                bot.send_message(332749197,
+                                 f'{message.from_user.first_name} Неверный пароль')
 
                 bot.register_next_step_handler(message, password)
 
