@@ -644,12 +644,7 @@ def log(message):
 
                     markup_ru.add(lg1, lg2, lg3, lg4)
 
-                    bot.send_message(message.chat.id,
-                                     "Это информационный бот компании <b>Hostmaster.</b> "
-                                     "Hostmaster – Хостинг провайдер и регистратор доменов в "
-                                     "Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>",
-
-                                     reply_markup=markup_ru, parse_mode='html')
+                    bot.send_message(message.chat.id,'Возврат',reply_markup=markup_ru)
 
                 bot.register_next_step_handler(message, after_login)
 
@@ -700,7 +695,11 @@ def log(message):
                 lg6 = types.InlineKeyboardButton('Настройки', callback_data='settings')
 
                 markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
-                bot.send_message(message.chat.id,'Возврат',reply_markup=markup, parse_mode='html')
+                bot.send_message(message.chat.id,
+                                 "Это информационный бот компании <b>Hostmaster.</b> "
+                                 "Hostmaster – Хостинг провайдер и регистратор доменов в "
+                                 "Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>",
+                                 reply_markup=markup, parse_mode='html')
 
         if message.text == 'sardor':
             connection = pymysql.connect(host='62.209.143.131',
