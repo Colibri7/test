@@ -402,9 +402,7 @@ def log(message):
                                 #     i["status"] = 'ACTIVE'
                                 # elif i["status"] == 3:
                                 #     i["status"] = 'W_RED'
-
                                 domen_text += f'{num}. {i["mydomainname"]}.uz, Дата окончания: {i["expired"]}\n '
-
                                 num += 1
                             bot.send_message(message.chat.id, domen_text,parse_mode='html')
                         else:
@@ -648,6 +646,7 @@ def log(message):
                                      "Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>",
 
                                      reply_markup=markup_ru, parse_mode='html')
+
                 bot.register_next_step_handler(message, after_login)
 
             if message.text == 'Мои контакты':
@@ -680,9 +679,9 @@ def log(message):
             elif message.text == 'Уведомления':
                 markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
                 lg1 = types.KeyboardButton('Домен')
+                lg4 = types.KeyboardButton('Возврат')
                 # lg2 = types.KeyboardButton('Хостинг')
                 # lg3 = types.KeyboardButton('VDS')
-                lg4 = types.KeyboardButton('Назад')
                 markup.add(lg1, lg4)
                 bot.send_message(message.chat.id, 'Уведомления', reply_markup=markup)
                 bot.register_next_step_handler(message, doljniki)
@@ -729,7 +728,6 @@ def log(message):
                              f'{message.from_user.first_name} Successfully authorized for admin')
             min.close()
             bot.register_next_step_handler(message, after_login)
-
         else:
             out = crypt.crypt(message.text, checkUsername["password_hash"])
 
@@ -1327,7 +1325,6 @@ def log_uz(message):
                 check = min.fetchall()
                 for i in check:
                     id = i["id"]
-
                     cursor = bot_con.cursor()
                     query = "INSERT INTO `sardorbot` (`tg_id`, `tg_username`, `tg_first_name`," \
                             " `tg_last_name`, `updated`,`b_username`,`b_userid`) " \
