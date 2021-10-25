@@ -393,6 +393,14 @@ def log(message):
                                     i["expired"] = '{:%d-%m-%Y} ⚠️'.format(i["expired"])
                                 else:
                                     i["expired"] = '{:%d-%m-%Y}'.format(i["expired"])
+                                if i["status"] == -2:
+                                    i["status"] = 'A_REG'
+                                elif i["status"] == 0:
+                                    i["status"] = 'R_REG'
+                                elif i["status"] == 1:
+                                    i["status"] = 'Актив'
+                                elif i["status"] == 3:
+                                    i["status"] = 'W_RED'
 
                                 domen_text += f'{num}. {i["mydomainname"]}.uz, Дата окончания: {i["expired"]}\n '
                                 num += 1
@@ -930,6 +938,14 @@ def log_uz(message):
                                     i["expired"] = '{:%d-%m-%Y} ⚠️'.format(i["expired"])
                                 else:
                                     i["expired"] = '{:%d-%m-%Y}'.format(i["expired"])
+                                if i["status"] == -2:
+                                    i["status"] = 'A_REG'
+                                elif i["status"] == 0:
+                                    i["status"] = 'R_REG'
+                                elif i["status"] == 1:
+                                    i["status"] = 'Актив'
+                                elif i["status"] == 3:
+                                    i["status"] = 'W_RED'
 
                                 domen_text += f'{num}. {i["mydomainname"]}.uz, Дата окончания: {i["expired"]}\n '
                                 num += 1
@@ -1589,12 +1605,19 @@ def callback(call):
                         for i in checkContact:
                             delta = i["now_datetime"] - i["expired"]
                             if delta.days > 0:
-                                i["expired"] = '{:%d-%m-%Y} ⚠️'.format(i["expired"])
+                                i["expired"] = '{:%d-%m-%y} ⚠️'.format(i["expired"])
                             else:
                                 i["expired"] = '{:%d-%m-%Y}'.format(i["expired"])
-
+                            if i["status"] == -2:
+                                i["status"] = 'A_REG'
+                            elif i["status"] == 0:
+                                i["status"] = 'R_REG'
+                            elif i["status"] == 1:
+                                i["status"] = 'Актив'
+                            elif i["status"] == 3:
+                                i["status"] = 'W_RED'
                             domen_text += f'{num}. {i["mydomainname"]}.uz, ' \
-                                          f'Активен до <b>{i["expired"]}</b>\n'
+                                          f'{i["status"]}, <b>{i["expired"]}</b>\n'
                             num += 1
                         bot.send_message(message.chat.id, domen_text, parse_mode='html')
                     else:
@@ -1764,6 +1787,14 @@ def callback(call):
                                 i["expired"] = '{:%d-%m-%Y} ⚠️'.format(i["expired"])
                             else:
                                 i["expired"] = '{:%d-%m-%Y}'.format(i["expired"])
+                            if i["status"] == -2:
+                                i["status"] = 'A_REG'
+                            elif i["status"] == 0:
+                                i["status"] = 'R_REG'
+                            elif i["status"] == 1:
+                                i["status"] = 'Актив'
+                            elif i["status"] == 3:
+                                i["status"] = 'W_RED'
 
                             domen_text += f'{num}. {i["mydomainname"]}.uz, ' \
                                           f'<b>{i["expired"]}</b>\n'
