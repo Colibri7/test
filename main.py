@@ -333,15 +333,14 @@ def send_welcome(message):
            f'chat_id: <b>{message.chat.id}</b>\n' \
            f'username: <b>@{message.from_user.username}</b>'
     markup = types.InlineKeyboardMarkup(row_width=2)
-    lg1 = types.InlineKeyboardButton('Мои услуги', callback_data='my_services')
-    lg2 = types.InlineKeyboardButton('Мои контакты', callback_data='my_contacts')
+
     lg3 = types.InlineKeyboardButton('Авторизация', callback_data='cabinet')
     lg4 = types.InlineKeyboardButton('Связь с менеджером',
                                      callback_data='connect_admin', url='https://t.me/hostmaster_support')
     lg5 = types.InlineKeyboardButton('Перейти на сайт', callback_data='site', url='https://hostmaster.uz/')
     lg6 = types.InlineKeyboardButton('Настройки', callback_data='settings')
 
-    markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
+    markup.add(lg3, lg4, lg5, lg6)
     bot.send_message(332749197, text, parse_mode='html')
     bot.send_message(message.chat.id,
                      "Это информационный бот компании <b>Hostmaster.</b> "
@@ -641,11 +640,8 @@ def log(message):
                     lg2 = types.KeyboardButton('Мои контакты')
                     lg3 = types.KeyboardButton('Уведомления')
                     lg4 = types.KeyboardButton('Возврат')
-
                     markup_ru.add(lg1, lg2, lg3, lg4)
-
                     bot.send_message(message.chat.id,'Возврат',reply_markup=markup_ru)
-
                 bot.register_next_step_handler(message, after_login)
 
             if message.text == 'Мои контакты':
