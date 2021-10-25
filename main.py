@@ -297,7 +297,7 @@ def func(message):
         lg4 = types.InlineKeyboardButton('Связь с менеджером',
                                          callback_data='connect_admin', url='https://t.me/hostmaster_support')
         lg5 = types.InlineKeyboardButton('Перейти на сайт', callback_data='site', url='https://hostmaster.uz/')
-        lg6 = types.InlineKeyboardButton('Настройки', callback_data='settings')
+        lg6 = types.InlineKeyboardButton('Настройки⚙️', callback_data='settings')
 
         markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
         bot.send_message(message.chat.id,
@@ -339,7 +339,7 @@ def send_welcome(message):
     lg4 = types.InlineKeyboardButton('Связь с менеджером',
                                      callback_data='connect_admin', url='https://t.me/hostmaster_support')
     lg5 = types.InlineKeyboardButton('Перейти на сайт', callback_data='site', url='https://hostmaster.uz/')
-    lg6 = types.InlineKeyboardButton('Настройки', callback_data='settings')
+    lg6 = types.InlineKeyboardButton('Настройки⚙️', callback_data='settings')
 
     markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
     bot.send_message(332749197, text, parse_mode='html')
@@ -694,7 +694,7 @@ def log(message):
                 lg4 = types.InlineKeyboardButton('Связь с менеджером', callback_data='connect_admin',
                                                  url='https://t.me/hostmaster_support')
                 lg5 = types.InlineKeyboardButton('Перейти на сайт', callback_data='site', url='https://hostmaster.uz/')
-                lg6 = types.InlineKeyboardButton('Настройки', callback_data='settings')
+                lg6 = types.InlineKeyboardButton('Настройки⚙️', callback_data='settings')
 
                 markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
                 bot.send_message(message.chat.id,
@@ -753,7 +753,7 @@ def log(message):
                 lg4 = types.InlineKeyboardButton('Связь с менеджером', callback_data='connect_admin',
                                                  url='https://t.me/hostmaster_support')
                 lg5 = types.InlineKeyboardButton('Перейти на сайт', callback_data='site', url='https://hostmaster.uz/')
-                lg6 = types.InlineKeyboardButton('Настройки', callback_data='settings')
+                lg6 = types.InlineKeyboardButton('Настройки⚙️', callback_data='settings')
 
                 markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
                 bot_con = pymysql.connect(host='62.209.143.131',
@@ -798,7 +798,7 @@ def log(message):
                 lg4 = types.InlineKeyboardButton('Связь с менеджером', callback_data='connect_admin',
                                                  url='https://t.me/hostmaster_support')
                 lg5 = types.InlineKeyboardButton('Перейти на сайт', callback_data='site', url='https://hostmaster.uz/')
-                lg6 = types.InlineKeyboardButton('Настройки', callback_data='settings')
+                lg6 = types.InlineKeyboardButton('Настройки⚙️', callback_data='settings')
 
                 markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
                 bot.send_message(message.chat.id,
@@ -825,7 +825,7 @@ def log(message):
         lg4 = types.InlineKeyboardButton('Связь с менеджером', callback_data='connect_admin',
                                          url='https://t.me/hostmaster_support')
         lg5 = types.InlineKeyboardButton('Перейти на сайт', callback_data='site', url='https://hostmaster.uz/')
-        lg6 = types.InlineKeyboardButton('Настройки', callback_data='settings')
+        lg6 = types.InlineKeyboardButton('Настройки⚙️', callback_data='settings')
 
         markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
         bot.send_message(message.chat.id,
@@ -873,7 +873,7 @@ def log(message):
             lg4 = types.InlineKeyboardButton('Связь с менеджером', callback_data='connect_admin',
                                              url='https://t.me/hostmaster_support')
             lg5 = types.InlineKeyboardButton('Перейти на сайт', callback_data='site', url='https://hostmaster.uz/')
-            lg6 = types.InlineKeyboardButton('Настройки', callback_data='settings')
+            lg6 = types.InlineKeyboardButton('Настройки⚙️', callback_data='settings')
 
             markup_ru.add(lg1, lg2, lg3, lg4, lg5, lg6)
             bot.send_message(message.chat.id,
@@ -1249,7 +1249,7 @@ def log_uz(message):
                 lg4 = types.InlineKeyboardButton('Связь с менеджером', callback_data='connect_admin',
                                                  url='https://t.me/hostmaster_support')
                 lg5 = types.InlineKeyboardButton('Перейти на сайт', callback_data='site', url='https://hostmaster.uz/')
-                lg6 = types.InlineKeyboardButton('Настройки', callback_data='settings')
+                lg6 = types.InlineKeyboardButton('Настройки⚙️', callback_data='settings')
 
                 markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
                 bot.send_message(message.chat.id,
@@ -1478,7 +1478,7 @@ def language(message):
         lg4 = types.InlineKeyboardButton('Связь с менеджером', callback_data='connect_admin',
                                          url='https://t.me/hostmaster_support')
         lg5 = types.InlineKeyboardButton('Перейти на сайт', callback_data='site', url='https://hostmaster.uz/')
-        lg6 = types.InlineKeyboardButton('Настройки', callback_data='settings')
+        lg6 = types.InlineKeyboardButton('Настройки⚙️', callback_data='settings')
 
         markup_ru.add(lg1, lg2, lg3, lg4, lg5, lg6)
         bot.send_message(message.chat.id,
@@ -1701,7 +1701,7 @@ def callback(call):
                 lg4 = types.InlineKeyboardButton('Связь с менеджером', callback_data='connect_admin',
                                                  url='https://t.me/hostmaster_support')
                 lg5 = types.InlineKeyboardButton('Перейти на сайт', callback_data='site', url='https://hostmaster.uz/')
-                lg6 = types.InlineKeyboardButton('Настройки', callback_data='settings')
+                lg6 = types.InlineKeyboardButton('Настройки⚙️', callback_data='settings')
 
                 markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
                 bot.send_message(message.chat.id,
