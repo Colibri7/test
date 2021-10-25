@@ -436,7 +436,7 @@ def log(message):
                                     i["status"] = 'Block'
                                 else:
                                     i["status"] = 'Deleted'
-                                vds_text += f'<b>vds №{num}</b>. {i["vdshostname"]}\n' \
+                                vds_text += f'vds <b>№{num}</b>. {i["vdshostname"]}\n' \
                                             f'Тариф: {i["tariffname"]}\n' \
                                             f'Статус: {i["status"]}\n'
                                 num += 1
@@ -993,7 +993,7 @@ def log_uz(message):
                                     i["status"] = 'Block'
                                 else:
                                     i["status"] = 'Deleted'
-                                vds_text += f'<b>vds №{num}</b>. {i["vdshostname"]}\n' \
+                                vds_text += f'vds <b>№{num}</b>. {i["vdshostname"]}\n' \
                                             f'Тариф: {i["tariffname"]}\n' \
                                             f'Статус: {i["status"]}\n'
                                 num += 1
