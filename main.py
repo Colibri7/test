@@ -974,7 +974,7 @@ def log_uz(message):
                         else:
                             bot.send_message(message.chat.id, 'У вас нет VDS')
 
-                    bot.register_next_step_handler(message, uslugi)
+                    bot.register_next_step_handler(message, uslugi_uz)
                 elif message.text == 'Мои сервера':
                     for i in check:
                         print(i)
@@ -998,7 +998,7 @@ def log_uz(message):
                         else:
                             bot.send_message(message.chat.id, 'У вас нет услуги аренды сервера')
 
-                    bot.register_next_step_handler(message, uslugi)
+                    bot.register_next_step_handler(message, uslugi_uz)
                 elif message.text == 'Возврат':
                     markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
                     lg1 = types.KeyboardButton('Мои услуги')
@@ -1011,7 +1011,7 @@ def log_uz(message):
                                      "Hostmaster – Хостинг провайдер и регистратор доменов в "
                                      "Узбекистане, в Ташкенте.\nНаш телефон: <b>71-202-55-11</b>",
                                      reply_markup=markup_ru, parse_mode='html')
-                    bot.register_next_step_handler(message, after_login)
+                    bot.register_next_step_handler(message, after_login_uz)
 
             def doljniki(message):
                 def doljniki_domen(message):
