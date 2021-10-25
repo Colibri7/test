@@ -367,11 +367,11 @@ def log(message):
                         if checkContact:
                             for i in checkContact:
                                 if i["status"] == 1:
-                                    i["status"] = 'Active'
+                                    i["status"] = 'Active✅'
                                 elif i["status"] == 0:
-                                    i["status"] = 'Block'
+                                    i["status"] = 'Block🚫'
                                 else:
-                                    i["status"] = 'Deleted'
+                                    i["status"] = 'Deleted❌'
                                 if i["cptariff"] is None:
                                     host_text += f'{num}. {i["hostcontractdomain"]}, ' \
                                                  f'{i["status"]}\n'
@@ -406,7 +406,7 @@ def log(message):
                                 elif i["status"] == 0:
                                     i["status"] = 'R_REG'
                                 elif i["status"] == 1:
-                                    i["status"] = 'Active'
+                                    i["status"] = 'Active✅'
                                 elif i["status"] == 3:
                                     i["status"] = 'W_RED'
                                 domen_text += f'{num}. {i["mydomainname"]}.uz, ' \
@@ -440,11 +440,11 @@ def log(message):
                         if checkContact:
                             for i in checkContact:
                                 if i["status"] == 1:
-                                    i["status"] = 'Active'
+                                    i["status"] = 'Active✅'
                                 elif i["status"] == 0:
-                                    i["status"] = 'Block'
+                                    i["status"] = 'Block🚫'
                                 else:
-                                    i["status"] = 'Deleted'
+                                    i["status"] = 'Deleted❌'
                                 vds_text += f'{num}. {i["vdshostname"]}\n' \
                                             f'Тариф: <b>{i["tariffname"]}</b>\n' \
                                             f'{i["status"]}\n'
@@ -468,9 +468,9 @@ def log(message):
 
                             for i in checkContact:
                                 if i["status"] == 1:
-                                    i["status"] = 'Active'
+                                    i["status"] = 'Active✅'
                                 elif i["status"] == 2:
-                                    i["status"] = 'Block'
+                                    i["status"] = 'Block🚫'
                                 ser_text += f'{num}. <b>{i["colhostname"]}</b>, <b>{i["status"]}</b>\n'
                                 num += 1
                             bot.send_message(message.chat.id, ser_text, parse_mode='html')
@@ -916,11 +916,11 @@ def log_uz(message):
                         if checkContact:
                             for i in checkContact:
                                 if i["status"] == 1:
-                                    i["status"] = 'Active'
+                                    i["status"] = 'Active✅'
                                 elif i["status"] == 0:
-                                    i["status"] = 'Block'
+                                    i["status"] = 'Block🚫'
                                 else:
-                                    i["status"] = 'Deleted'
+                                    i["status"] = 'Deleted❌'
                                 if i["cptariff"] is None:
                                     host_text += f'{num}. {i["hostcontractdomain"]}, ' \
                                                  f'{i["status"]}\n'
@@ -954,7 +954,7 @@ def log_uz(message):
                                 elif i["status"] == 0:
                                     i["status"] = 'R_REG'
                                 elif i["status"] == 1:
-                                    i["status"] = 'Active'
+                                    i["status"] = 'Active✅'
                                 elif i["status"] == 3:
                                     i["status"] = 'W_RED'
 
@@ -989,11 +989,11 @@ def log_uz(message):
                         if checkContact:
                             for i in checkContact:
                                 if i["status"] == 1:
-                                    i["status"] = 'Active'
+                                    i["status"] = 'Active✅'
                                 elif i["status"] == 0:
-                                    i["status"] = 'Block'
+                                    i["status"] = 'Block🚫'
                                 else:
-                                    i["status"] = 'Deleted'
+                                    i["status"] = 'Deleted❌'
                                 vds_text += f'{num}. {i["vdshostname"]}\n' \
                                             f'Тариф: <b>{i["tariffname"]}</b>\n' \
                                             f'{i["status"]}\n'
@@ -1017,9 +1017,9 @@ def log_uz(message):
 
                             for i in checkContact:
                                 if i["status"] == 1:
-                                    i["status"] = 'Active'
+                                    i["status"] = 'Active✅'
                                 elif i["status"] == 2:
-                                    i["status"] = 'Block'
+                                    i["status"] = 'Block🚫'
                                 ser_text += f'{num}. <b>{i["colhostname"]}</b>, <b>{i["status"]}</b>\n'
                                 num += 1
                             bot.send_message(message.chat.id, ser_text, parse_mode='html')
@@ -1588,11 +1588,11 @@ def callback(call):
                     if checkContact:
                         for i in checkContact:
                             if i["status"] == 1:
-                                i["status"] = 'Active'
+                                i["status"] = 'Active✅'
                             elif i["status"] == 0:
-                                i["status"] = 'Block'
+                                i["status"] = 'Block🚫'
                             else:
-                                i["status"] = 'Deleted'
+                                i["status"] = 'Deleted❌'
                             if i["cptariff"] is None:
                                 host_text += f'{num}. {i["hostcontractdomain"]}, ' \
                                              f'{i["status"]}\n'
@@ -1627,7 +1627,7 @@ def callback(call):
                             elif i["status"] == 0:
                                 i["status"] = 'R_REG'
                             elif i["status"] == 1:
-                                i["status"] = 'Active'
+                                i["status"] = 'Active✅'
                             elif i["status"] == 3:
                                 i["status"] = 'W_RED'
                             domen_text += f'{num}. {i["mydomainname"]}.uz, ' \
@@ -1655,11 +1655,11 @@ def callback(call):
                     if checkContact:
                         for i in checkContact:
                             if i["status"] == 1:
-                                i["status"] = 'Active'
+                                i["status"] = 'Active✅'
                             elif i["status"] == 0:
-                                i["status"] = 'Block'
+                                i["status"] = 'Block🚫'
                             else:
-                                i["status"] = 'Deleted'
+                                i["status"] = 'Deleted❌'
                             vds_text += f'{num}. {i["vdshostname"]}, ' \
                                         f'Тариф: <b>{i["tariffname"]}</b>, ' \
                                         f'{i["status"]}\n'
@@ -1683,9 +1683,9 @@ def callback(call):
 
                         for i in checkContact:
                             if i["status"] == 1:
-                                i["status"] = 'Active'
+                                i["status"] = 'Active✅'
                             elif i["status"] == 2:
-                                i["status"] = 'Block'
+                                i["status"] = 'Block🚫'
                             ser_text += f'{num}. <b>{i["colhostname"]}</b>, <b>{i["status"]}</b>\n'
                             num += 1
                         bot.send_message(message.chat.id, ser_text, parse_mode='html')
@@ -1773,11 +1773,11 @@ def callback(call):
                     if checkContact:
                         for i in checkContact:
                             if i["status"] == 1:
-                                i["status"] = 'Active'
+                                i["status"] = 'Active✅'
                             elif i["status"] == 0:
-                                i["status"] = 'Block'
+                                i["status"] = 'Block🚫'
                             else:
-                                i["status"] = 'Deleted'
+                                i["status"] = 'Deleted❌'
                             if i["cptariff"] is None:
                                 host_text += f'{num}. {i["hostcontractdomain"]}, ' \
                                              f'{i["status"]}\n'
@@ -1812,7 +1812,7 @@ def callback(call):
                             elif i["status"] == 0:
                                 i["status"] = 'R_REG'
                             elif i["status"] == 1:
-                                i["status"] = 'Active'
+                                i["status"] = 'Active✅'
                             elif i["status"] == 3:
                                 i["status"] = 'W_RED'
 
@@ -1842,11 +1842,11 @@ def callback(call):
                     if checkContact:
                         for i in checkContact:
                             if i["status"] == 1:
-                                i["status"] = 'Active'
+                                i["status"] = 'Active✅'
                             elif i["status"] == 0:
-                                i["status"] = 'Block'
+                                i["status"] = 'Block🚫'
                             else:
-                                i["status"] = 'Deleted'
+                                i["status"] = 'Deleted❌'
                             vds_text += f'{num}. {i["vdshostname"]}\n' \
                                         f'Тариф: <b>{i["tariffname"]}</b>\n' \
                                         f'{i["status"]}\n'
@@ -1869,9 +1869,9 @@ def callback(call):
                     if checkContact:
                         for i in checkContact:
                             if i["status"] == 1:
-                                i["status"] = 'Active'
+                                i["status"] = 'Active✅'
                             elif i["status"] == 2:
-                                i["status"] = 'Block'
+                                i["status"] = 'Block🚫'
                             ser_text += f'{num}. <b>{i["colhostname"]}</b>, <b>{i["status"]}</b>\n'
                             num += 1
                         bot.send_message(message.chat.id, ser_text, parse_mode='html')
