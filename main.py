@@ -798,30 +798,30 @@ def log(message):
                 lg6 = types.InlineKeyboardButton('Настройки ⚙️', callback_data='settings')
 
                 markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
-                # bot_con = pymysql.connect(host='62.209.143.131',
-                #                           user='hostmasteruz_pbot',
-                #                           password='bcaxoZyAXDGc',
-                #                           database='hostmasteruz_bot',
-                #                           charset='utf8mb4',
-                #                           cursorclass=pymysql.cursors.DictCursor
-                #                           )
-                #
-                # min = connection.cursor()
-                # min.execute(
-                #     'SELECT `user`.`id`  FROM `user` WHERE username=%(username)s', {'username': login})
-                # check = min.fetchall()
-                # for i in check:
-                #     id = i["id"]
-                #
-                #     cursor = bot_con.cursor()
-                #     query = "INSERT INTO `sardorbot` (`tg_id`, `tg_username`, `tg_first_name`," \
-                #             " `tg_last_name`, `updated`,`b_username`,`b_userid`) " \
-                #             "VALUES ({0},'{1}','{2}','{3}','{4}','{5}','{6}') " \
-                #             "ON DUPLICATE KEY UPDATE `tg_username` = '{1}'," \
-                #             " `tg_first_name` = '{2}', `tg_last_name` = '{3}', " \
-                #             "`updated` = '{4}',`b_username`='{5}',`b_userid`='{6}'".format(
-                #         chat_id, username, first_name, last_name, dt_obj, login, id)
-                #     cursor.execute(query)
+                bot_con = pymysql.connect(host='62.209.143.131',
+                                          user='hostmasteruz_pbot',
+                                          password='bcaxoZyAXDGc',
+                                          database='hostmasteruz_bot',
+                                          charset='utf8mb4',
+                                          cursorclass=pymysql.cursors.DictCursor
+                                          )
+
+                min = connection.cursor()
+                min.execute(
+                    'SELECT `user`.`id`  FROM `user` WHERE username=%(username)s', {'username': login})
+                check = min.fetchall()
+                for i in check:
+                    id = i["id"]
+
+                    cursor = bot_con.cursor()
+                    query = "INSERT INTO `sardorbot` (`tg_id`, `tg_username`, `tg_first_name`," \
+                            " `tg_last_name`, `updated`,`b_username`,`b_userid`) " \
+                            "VALUES ({0},'{1}','{2}','{3}','{4}','{5}','{6}') " \
+                            "ON DUPLICATE KEY UPDATE `tg_username` = '{1}'," \
+                            " `tg_first_name` = '{2}', `tg_last_name` = '{3}', " \
+                            "`updated` = '{4}',`b_username`='{5}',`b_userid`='{6}'".format(
+                        chat_id, username, first_name, last_name, dt_obj, login, id)
+                    cursor.execute(query)
                 bot.send_message(message.chat.id,
                                  "Это информационный бот компании <b>Hostmaster.</b> "
                                  "Hostmaster – Хостинг провайдер и регистратор доменов в "
@@ -830,7 +830,7 @@ def log(message):
                                  reply_markup=markup, parse_mode='html')
                 bot.send_message(332749197,
                                  f'{message.from_user.first_name} Successfully authorized')
-                # bot_con.close()
+                bot_con.close()
                 min.close()
             elif message.text == 'Возврат 🔙':
                 markup = types.InlineKeyboardMarkup(row_width=2)
