@@ -1931,7 +1931,7 @@ def callback(call):
                 text += f'{num}. {i["contactname"]}\nBalans: <b>{i["balance"]} sum </b>\n'
             else:
                 text += f'{num}. {i["contactcompany"]}\nBalans: <b>{i["balance"]} sum</b>\n'
-        num += 1
+            num += 1
         bot.send_message(call.message.chat.id, 'Kontaktlar')
         bot.send_message(call.message.chat.id, text, parse_mode='html')
     elif call.data == 'sozlamalar':
