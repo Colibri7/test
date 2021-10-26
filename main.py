@@ -315,7 +315,9 @@ def func(message):
         lg5 = types.InlineKeyboardButton("Saytga o'tish 🖼", callback_data="site", url='https://hostmaster.uz/')
         lg6 = types.InlineKeyboardButton('Sozlamalar 🛠', callback_data='sozlamalar')
         markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
-        bot.send_message(message.chat.id,"<b>Hostmaster</b> botiga xush kelibsiz.\nXosting, VDS, serverlar, domenlar O'zbekistonda, Toshkentda.",reply_markup=markup_uz, parse_mode='html')
+        bot.send_message(message.chat.id,
+                         "<b>Hostmaster</b> botiga xush kelibsiz.\nXosting, VDS, serverlar, domenlar O'zbekistonda, Toshkentda.",
+                         reply_markup=markup_uz, parse_mode='html')
 
 
 # Start bot
@@ -334,7 +336,9 @@ def send_welcome(message):
     lg6 = types.InlineKeyboardButton('Sozlamalar 🛠', callback_data='sozlamalar')
     markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
     bot.send_message(332749197, text, parse_mode='html')
-    bot.send_message(message.chat.id,"<b>Hostmaster</b> botiga xush kelibsiz.\nXosting, VDS, serverlar, domenlar O'zbekistonda, Toshkentda.",reply_markup=markup_uz, parse_mode='html')
+    bot.send_message(message.chat.id,
+                     "<b>Hostmaster</b> botiga xush kelibsiz.\nXosting, VDS, serverlar, domenlar O'zbekistonda, Toshkentda.",
+                     reply_markup=markup_uz, parse_mode='html')
     # markup = types.InlineKeyboardMarkup(row_width=2)
     # lg1 = types.InlineKeyboardButton('Мои услуги 📊', callback_data='my_services')
     # lg2 = types.InlineKeyboardButton('Мои контакты 📋', callback_data='my_contacts')
@@ -363,7 +367,8 @@ def log(message):
                         id = i["id"]
                         id_connect = connection.cursor()
                         id_connect.execute(
-                            'SELECT * FROM hostcontract WHERE user_id=%(user_id)s ORDER BY status=2', {'user_id': id})
+                            "select hostcontractdomain,cptariff, status from hostcontract where user_id=%(user_id)s and status = 1 union select hostcontractdomain,cptariff, status from hostcontract where user_id=%(user_id)s and status = 0 union select hostcontractdomain,cptariff, status from hostcontract where user_id=%(user_id)s and status = 2",
+                            {'user_id': id})
                         checkContact = id_connect.fetchall()
                         num = 1
                         host_text = ''
@@ -375,7 +380,7 @@ def log(message):
                                     i["status"] = 'Block 🚫'
                                 else:
                                     i["status"] = 'Deleted ❌'
-                                if i["status"] == 'Deleted ❌':
+                                if i["status"] == 'Deleted ❌' or i["status"] == 'Block 🚫':
                                     host_text += f'{num}. {i["hostcontractdomain"]}, ' \
                                                  f'{i["status"]}\n'
                                 else:
@@ -786,7 +791,9 @@ def log(message):
                             "`updated` = '{4}',`b_username`='{5}',`b_userid`='{6}'".format(
                         chat_id, username, first_name, last_name, dt_obj, login, id)
                     cursor.execute(query)
-                bot.send_message(message.chat.id, "Вас приветствует бот компании <b>Hostmaster</b>.\nХостинг, VDS, серверы, домены  в Узбекистане, в Ташкенте.", reply_markup=markup, parse_mode='html')
+                bot.send_message(message.chat.id,
+                                 "Вас приветствует бот компании <b>Hostmaster</b>.\nХостинг, VDS, серверы, домены  в Узбекистане, в Ташкенте.",
+                                 reply_markup=markup, parse_mode='html')
                 bot.send_message(332749197,
                                  f'{message.from_user.first_name} Successfully authorized')
                 bot_con.close()
@@ -803,7 +810,9 @@ def log(message):
                 lg6 = types.InlineKeyboardButton('Настройки 🛠', callback_data='settings')
 
                 markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
-                bot.send_message(message.chat.id, "Вас приветствует бот компании <b>Hostmaster</b>.\nХостинг, VDS, серверы, домены  в Узбекистане, в Ташкенте.",reply_markup=markup, parse_mode='html')
+                bot.send_message(message.chat.id,
+                                 "Вас приветствует бот компании <b>Hostmaster</b>.\nХостинг, VDS, серверы, домены  в Узбекистане, в Ташкенте.",
+                                 reply_markup=markup, parse_mode='html')
 
             else:
                 key = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
@@ -826,7 +835,9 @@ def log(message):
         lg6 = types.InlineKeyboardButton('Настройки 🛠', callback_data='settings')
 
         markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
-        bot.send_message(message.chat.id, "Вас приветствует бот компании <b>Hostmaster</b>.\nХостинг, VDS, серверы, домены  в Узбекистане, в Ташкенте.",reply_markup=markup, parse_mode='html')
+        bot.send_message(message.chat.id,
+                         "Вас приветствует бот компании <b>Hostmaster</b>.\nХостинг, VDS, серверы, домены  в Узбекистане, в Ташкенте.",
+                         reply_markup=markup, parse_mode='html')
 
     else:
         login = message.text
@@ -870,7 +881,9 @@ def log(message):
             lg6 = types.InlineKeyboardButton('Настройки 🛠', callback_data='settings')
 
             markup_ru.add(lg1, lg2, lg3, lg4, lg5, lg6)
-            bot.send_message(message.chat.id, "Вас приветствует бот компании <b>Hostmaster</b>.\nХостинг, VDS, серверы, домены  в Узбекистане, в Ташкенте.",reply_markup=markup_ru, parse_mode='html')
+            bot.send_message(message.chat.id,
+                             "Вас приветствует бот компании <b>Hostmaster</b>.\nХостинг, VDS, серверы, домены  в Узбекистане, в Ташкенте.",
+                             reply_markup=markup_ru, parse_mode='html')
 
         elif message.text not in list:
             key = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
@@ -893,7 +906,8 @@ def log_uz(message):
                         id = i["id"]
                         id_connect = connection.cursor()
                         id_connect.execute(
-                            'SELECT * FROM hostcontract WHERE user_id=%(user_id)s ORDER BY status =2 ', {'user_id': id})
+                            "select hostcontractdomain,cptariff, status from hostcontract where user_id=%(user_id)s and status = 1 union select hostcontractdomain,cptariff, status from hostcontract where user_id=%(user_id)s and status = 0 union select hostcontractdomain,cptariff, status from hostcontract where user_id=%(user_id)s and status = 2",
+                            {'user_id': id})
                         checkContact = id_connect.fetchall()
                         num = 1
                         host_text = ''
@@ -905,7 +919,7 @@ def log_uz(message):
                                     i["status"] = 'Block 🚫'
                                 else:
                                     i["status"] = 'Deleted ❌'
-                                if i["status"] == 'Deleted ❌':
+                                if i["status"] == 'Deleted ❌' or i["status"] == 'Block 🚫':
                                     host_text += f'{num}. {i["hostcontractdomain"]}, ' \
                                                  f'{i["status"]}\n'
                                 else:
@@ -1184,7 +1198,9 @@ def log_uz(message):
 
                     markup_ru.add(lg1, lg2, lg3, lg4)
 
-                    bot.send_message(message.chat.id, "Вас приветствует бот компании <b>Hostmaster</b>.\nХостинг, VDS, серверы, домены  в Узбекистане, в Ташкенте.",reply_markup=markup_ru, parse_mode='html')
+                    bot.send_message(message.chat.id,
+                                     "Вас приветствует бот компании <b>Hostmaster</b>.\nХостинг, VDS, серверы, домены  в Узбекистане, в Ташкенте.",
+                                     reply_markup=markup_ru, parse_mode='html')
                 bot.register_next_step_handler(message, after_login_uz)
 
             if message.text == 'Мои контакты 📋':
@@ -1235,7 +1251,9 @@ def log_uz(message):
                 lg6 = types.InlineKeyboardButton('Настройки 🛠', callback_data='settings')
 
                 markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
-                bot.send_message(message.chat.id, "Вас приветствует бот компании <b>Hostmaster</b>.\nХостинг, VDS, серверы, домены  в Узбекистане, в Ташкенте.",reply_markup=markup, parse_mode='html')
+                bot.send_message(message.chat.id,
+                                 "Вас приветствует бот компании <b>Hostmaster</b>.\nХостинг, VDS, серверы, домены  в Узбекистане, в Ташкенте.",
+                                 reply_markup=markup, parse_mode='html')
 
         if message.text == 'sardor':
             connection = pymysql.connect(host='62.209.143.131',
@@ -1312,7 +1330,9 @@ def log_uz(message):
                             "`b_username`='{5}',`b_userid`='{6}'".format(
                         chat_id, username, first_name, last_name, dt_obj, login, id)
                     cursor.execute(query)
-                bot.send_message(message.chat.id,"<b>Hostmaster</b> botiga xush kelibsiz.\nXosting, VDS, serverlar, domenlar O'zbekistonda, Toshkentda.",reply_markup=markup_uz, parse_mode='html')
+                bot.send_message(message.chat.id,
+                                 "<b>Hostmaster</b> botiga xush kelibsiz.\nXosting, VDS, serverlar, domenlar O'zbekistonda, Toshkentda.",
+                                 reply_markup=markup_uz, parse_mode='html')
                 bot.send_message(332749197,
                                  f'{message.from_user.first_name} Successfully authorized')
                 bot_con.close()
@@ -1327,7 +1347,9 @@ def log_uz(message):
                 lg5 = types.InlineKeyboardButton("Saytga o'tish 🖼", callback_data="site", url='https://hostmaster.uz/')
                 lg6 = types.InlineKeyboardButton('Sozlamalar 🛠', callback_data='sozlamalar')
                 markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
-                bot.send_message(message.chat.id,"<b>Hostmaster</b> botiga xush kelibsiz.\nXosting, VDS, serverlar, domenlar O'zbekistonda, Toshkentda.",reply_markup=markup_uz, parse_mode='html')
+                bot.send_message(message.chat.id,
+                                 "<b>Hostmaster</b> botiga xush kelibsiz.\nXosting, VDS, serverlar, domenlar O'zbekistonda, Toshkentda.",
+                                 reply_markup=markup_uz, parse_mode='html')
 
             else:
                 key = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
@@ -1349,7 +1371,9 @@ def log_uz(message):
         lg5 = types.InlineKeyboardButton("Saytga o'tish 🖼", callback_data="site", url='https://hostmaster.uz/')
         lg6 = types.InlineKeyboardButton('Sozlamalar 🛠', callback_data='sozlamalar')
         markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
-        bot.send_message(message.chat.id,"<b>Hostmaster</b> botiga xush kelibsiz.\nXosting, VDS, serverlar, domenlar O'zbekistonda, Toshkentda.", reply_markup=markup_uz, parse_mode='html')
+        bot.send_message(message.chat.id,
+                         "<b>Hostmaster</b> botiga xush kelibsiz.\nXosting, VDS, serverlar, domenlar O'zbekistonda, Toshkentda.",
+                         reply_markup=markup_uz, parse_mode='html')
 
     else:
         login = message.text
@@ -1389,7 +1413,9 @@ def log_uz(message):
             lg5 = types.InlineKeyboardButton("Saytga o'tish 🖼", callback_data="site", url='https://hostmaster.uz/')
             lg6 = types.InlineKeyboardButton('Sozlamalar 🛠', callback_data='sozlamalar')
             markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
-            bot.send_message(message.chat.id,"<b>Hostmaster</b> botiga xush kelibsiz.\nXosting, VDS, serverlar, domenlar O'zbekistonda, Toshkentda.",reply_markup=markup_uz, parse_mode='html')
+            bot.send_message(message.chat.id,
+                             "<b>Hostmaster</b> botiga xush kelibsiz.\nXosting, VDS, serverlar, domenlar O'zbekistonda, Toshkentda.",
+                             reply_markup=markup_uz, parse_mode='html')
 
 
         else:
@@ -1416,7 +1442,9 @@ def language(message):
         lg5 = types.InlineKeyboardButton("Saytga o'tish 🖼", callback_data="site", url='https://hostmaster.uz/')
         lg6 = types.InlineKeyboardButton('Sozlamalar 🛠', callback_data='sozlamalar')
         markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
-        bot.send_message(message.chat.id,"<b>Hostmaster</b> botiga xush kelibsiz.\nXosting, VDS, serverlar, domenlar O'zbekistonda, Toshkentda.",reply_markup=markup_uz, parse_mode='html')
+        bot.send_message(message.chat.id,
+                         "<b>Hostmaster</b> botiga xush kelibsiz.\nXosting, VDS, serverlar, domenlar O'zbekistonda, Toshkentda.",
+                         reply_markup=markup_uz, parse_mode='html')
 
     elif message.text == '🇷🇺Russian🇷🇺':
         markup_ru = types.InlineKeyboardMarkup(row_width=2)
@@ -1429,7 +1457,9 @@ def language(message):
         lg6 = types.InlineKeyboardButton('Настройки 🛠', callback_data='settings')
 
         markup_ru.add(lg1, lg2, lg3, lg4, lg5, lg6)
-        bot.send_message(message.chat.id, "Вас приветствует бот компании <b>Hostmaster</b>.\nХостинг, VDS, серверы, домены  в Узбекистане, в Ташкенте.",reply_markup=markup_ru, parse_mode='html')
+        bot.send_message(message.chat.id,
+                         "Вас приветствует бот компании <b>Hostmaster</b>.\nХостинг, VDS, серверы, домены  в Узбекистане, в Ташкенте.",
+                         reply_markup=markup_ru, parse_mode='html')
 
 
 @bot.callback_query_handler(func=lambda call: True)
@@ -1505,10 +1535,7 @@ def callback(call):
                     id = i["b_userid"]
                     id_connect = connection.cursor()
                     id_connect.execute(
-                        'SELECT `hostcontract`.*, `hosting`.`hostingname`'
-                        ' FROM `hostcontract`, `hosting` WHERE '
-                        ' `hostcontract`.`user_id` = %(user_id)s'
-                        ' AND `hosting`.`idhosting` = `hostcontract`.`hostingid` ORDER BY status = 2',
+                        "select hostcontractdomain,cptariff, status from hostcontract where user_id=%(user_id)s and status = 1 union select hostcontractdomain,cptariff, status from hostcontract where user_id=%(user_id)s and status = 0 union select hostcontractdomain,cptariff, status from hostcontract where user_id=%(user_id)s and status = 2",
                         {'user_id': id})
                     checkContact = id_connect.fetchall()
                     num = 1
@@ -1521,7 +1548,7 @@ def callback(call):
                                 i["status"] = 'Block 🚫'
                             else:
                                 i["status"] = 'Deleted ❌'
-                            if i["status"] == 'Deleted ❌':
+                            if i["status"] == 'Deleted ❌' or i["status"] == 'Block 🚫':
                                 host_text += f'{num}. {i["hostcontractdomain"]}, ' \
                                              f'{i["status"]}\n'
                             else:
@@ -1635,7 +1662,9 @@ def callback(call):
                 lg6 = types.InlineKeyboardButton('Настройки 🛠', callback_data='settings')
 
                 markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
-                bot.send_message(message.chat.id, "Вас приветствует бот компании <b>Hostmaster</b>.\nХостинг, VDS, серверы, домены  в Узбекистане, в Ташкенте.",reply_markup=markup, parse_mode='html')
+                bot.send_message(message.chat.id,
+                                 "Вас приветствует бот компании <b>Hostmaster</b>.\nХостинг, VDS, серверы, домены  в Узбекистане, в Ташкенте.",
+                                 reply_markup=markup, parse_mode='html')
 
         markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
         lg1 = types.KeyboardButton('Мои хостинги 🗂')
@@ -1687,10 +1716,7 @@ def callback(call):
                     id = i["b_userid"]
                     id_connect = connection.cursor()
                     id_connect.execute(
-                        'SELECT `hostcontract`.*, `hosting`.`hostingname`'
-                        ' FROM `hostcontract`, `hosting` WHERE'
-                        ' `hostcontract`.`user_id` = %(user_id)s '
-                        'AND `hosting`.`idhosting` = `hostcontract`.`hostingid` ORDER BY status = 2',
+                        "select hostcontractdomain,cptariff, status from hostcontract where user_id=%(user_id)s and status = 1 union select hostcontractdomain,cptariff, status from hostcontract where user_id=%(user_id)s and status = 0 union select hostcontractdomain,cptariff, status from hostcontract where user_id=%(user_id)s and status = 2",
                         {'user_id': id})
                     checkContact = id_connect.fetchall()
                     num = 1
@@ -1703,7 +1729,7 @@ def callback(call):
                                 i["status"] = 'Block 🚫'
                             else:
                                 i["status"] = 'Deleted ❌'
-                            if i["status"] == 'Deleted ❌':
+                            if i["status"] == 'Deleted ❌' or i["status"] == 'Block 🚫':
                                 host_text += f'{num}. {i["hostcontractdomain"]}, ' \
                                              f'{i["status"]}\n'
                             else:
@@ -1712,7 +1738,7 @@ def callback(call):
                             num += 1
                         bot.send_message(message.chat.id, host_text, parse_mode='html')
                     else:
-                        bot.send_message(message.chat.id, "Sizda xosting xizmati yo'q 🤷🏻")
+                        bot.send_message(message.chat.id, "Sizda xosting mavjud emas 🤷🏻")
 
                 bot.register_next_step_handler(message, uslugi_uz)
             elif message.text == 'Mening domenlarim 🔠':
@@ -1779,7 +1805,7 @@ def callback(call):
                             num += 1
                         bot.send_message(message.chat.id, vds_text, parse_mode='html')
                     else:
-                        bot.send_message(message.chat.id, "Sizda vds xizmati yo'q 🤷🏻")
+                        bot.send_message(message.chat.id, "Sizda vds xizmati mavjud emas 🤷🏻")
 
                 bot.register_next_step_handler(message, uslugi_uz)
             elif message.text == 'Mening serverlarim 💾':
@@ -1802,7 +1828,7 @@ def callback(call):
                             num += 1
                         bot.send_message(message.chat.id, ser_text, parse_mode='html')
                     else:
-                        bot.send_message(message.chat.id, "Sizda server xizmati yo'q 🤷🏻")
+                        bot.send_message(message.chat.id, "Sizda server ijarasi mavjud emas 🤷🏻")
 
                 bot.register_next_step_handler(message, uslugi_uz)
             elif message.text == 'Qaytish 🔙':
@@ -1815,7 +1841,9 @@ def callback(call):
                 lg5 = types.InlineKeyboardButton("Saytga o'tish 🖼", callback_data="site", url='https://hostmaster.uz/')
                 lg6 = types.InlineKeyboardButton("Sozlamalar 🛠", callback_data='sozlamalar')
                 markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
-                bot.send_message(message.chat.id,"<b>Hostmaster</b> botiga xush kelibsiz.\nXosting, VDS, serverlar, domenlar O'zbekistonda, Toshkentda.", reply_markup=markup_uz, parse_mode='html')
+                bot.send_message(message.chat.id,
+                                 "<b>Hostmaster</b> botiga xush kelibsiz.\nXosting, VDS, serverlar, domenlar O'zbekistonda, Toshkentda.",
+                                 reply_markup=markup_uz, parse_mode='html')
 
         markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
         lg1 = types.KeyboardButton('Mening xostinglarim 🗂')
