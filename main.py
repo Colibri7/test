@@ -309,7 +309,7 @@ def func(message):
 
     elif message.text == 'Bosh sahifa':
         markup_uz = types.InlineKeyboardMarkup(row_width=2)
-        lg1 = types.InlineKeyboardButton('Mening xizmatlarim', callback_data='xizmatlarim')
+        lg1 = types.InlineKeyboardButton('Mening xizmatlarim 📊', callback_data='xizmatlarim')
         lg2 = types.InlineKeyboardButton('Mening kontaktlarim 📋', callback_data='kontaktlarim')
         lg3 = types.InlineKeyboardButton("Ro'yxatdan o'tish 🔐", callback_data="ro'yxatdan_o'tish")
         lg4 = types.InlineKeyboardButton("Menejer bilan aloqa 👨🏻‍💻", callback_data="connect_admin",
@@ -333,7 +333,7 @@ def send_welcome(message):
            f'chat_id: <b>{message.chat.id}</b>\n' \
            f'username: <b>@{message.from_user.username}</b>'
     markup_uz = types.InlineKeyboardMarkup(row_width=2)
-    lg1 = types.InlineKeyboardButton('Mening xizmatlarim', callback_data='xizmatlarim')
+    lg1 = types.InlineKeyboardButton('Mening xizmatlarim 📊', callback_data='xizmatlarim')
     lg2 = types.InlineKeyboardButton('Mening kontaktlarim 📋', callback_data='kontaktlarim')
     lg3 = types.InlineKeyboardButton("Ro'yxatdan o'tish 🔐", callback_data="ro'yxatdan_o'tish")
     lg4 = types.InlineKeyboardButton("Menejer bilan aloqa 👨🏻‍💻", callback_data="connect_admin",
@@ -1314,7 +1314,7 @@ def log_uz(message):
 
                 check = min.fetchall()
                 markup_uz = types.InlineKeyboardMarkup(row_width=2)
-                lg1 = types.InlineKeyboardButton('Mening xizmatlarim', callback_data='xizmatlarim')
+                lg1 = types.InlineKeyboardButton('Mening xizmatlarim 📊', callback_data='xizmatlarim')
                 lg2 = types.InlineKeyboardButton('Mening kontaktlarim 📋', callback_data='kontaktlarim')
                 lg3 = types.InlineKeyboardButton("Ro'yxatdan o'tish 🔐", callback_data="ro'yxatdan_o'tish")
                 lg4 = types.InlineKeyboardButton("Menejer bilan aloqa 👨🏻‍💻", callback_data="connect_admin",
@@ -1360,7 +1360,7 @@ def log_uz(message):
                 min.close()
             elif message.text == 'Qaytish 🔙':
                 markup_uz = types.InlineKeyboardMarkup(row_width=2)
-                lg1 = types.InlineKeyboardButton('Mening xizmatlarim', callback_data='xizmatlarim')
+                lg1 = types.InlineKeyboardButton('Mening xizmatlarim 📊', callback_data='xizmatlarim')
                 lg2 = types.InlineKeyboardButton('Mening kontaktlarim 📋', callback_data='kontaktlarim')
                 lg3 = types.InlineKeyboardButton("Ro'yxatdan o'tish 🔐", callback_data="ro'yxatdan_o'tish")
                 lg4 = types.InlineKeyboardButton("Menejer bilan aloqa 👨🏻‍💻", callback_data="connect_admin",
@@ -1388,7 +1388,7 @@ def log_uz(message):
 
     if message.text == 'Qaytish 🔙':
         markup_uz = types.InlineKeyboardMarkup(row_width=2)
-        lg1 = types.InlineKeyboardButton('Mening xizmatlarim', callback_data='xizmatlarim')
+        lg1 = types.InlineKeyboardButton('Mening xizmatlarim 📊', callback_data='xizmatlarim')
         lg2 = types.InlineKeyboardButton('Mening kontaktlarim 📋', callback_data='kontaktlarim')
         lg3 = types.InlineKeyboardButton("Ro'yxatdan o'tish 🔐", callback_data="ro'yxatdan_o'tish")
         lg4 = types.InlineKeyboardButton("Menejer bilan aloqa 👨🏻‍💻", callback_data="connect_admin",
@@ -1434,7 +1434,7 @@ def log_uz(message):
 
         elif message.text == 'Qaytish 🔙':
             markup_uz = types.InlineKeyboardMarkup(row_width=2)
-            lg1 = types.InlineKeyboardButton('Mening xizmatlarim', callback_data='xizmatlarim')
+            lg1 = types.InlineKeyboardButton('Mening xizmatlarim 📊', callback_data='xizmatlarim')
             lg2 = types.InlineKeyboardButton('Mening kontaktlarim 📋', callback_data='kontaktlarim')
             lg3 = types.InlineKeyboardButton("Ro'yxatdan o'tish 🔐", callback_data="ro'yxatdan_o'tish")
             lg4 = types.InlineKeyboardButton("Menejer bilan aloqa 👨🏻‍💻", callback_data="connect_admin",
@@ -1467,7 +1467,7 @@ def log_uz(message):
 def language(message):
     if message.text == '🇺🇿Uzbek🇺🇿':
         markup_uz = types.InlineKeyboardMarkup(row_width=2)
-        lg1 = types.InlineKeyboardButton('Mening xizmatlarim', callback_data='xizmatlarim')
+        lg1 = types.InlineKeyboardButton('Mening xizmatlarim 📊', callback_data='xizmatlarim')
         lg2 = types.InlineKeyboardButton('Mening kontaktlarim 📋', callback_data='kontaktlarim')
         lg3 = types.InlineKeyboardButton("Ro'yxatdan o'tish 🔐", callback_data="ro'yxatdan_o'tish")
         lg4 = types.InlineKeyboardButton("Menejer bilan aloqa 👨🏻‍💻", callback_data="connect_admin",
@@ -1877,7 +1877,7 @@ def callback(call):
                 bot.register_next_step_handler(message, uslugi_uz)
             elif message.text == 'Qaytish 🔙':
                 markup_uz = types.InlineKeyboardMarkup(row_width=2)
-                lg1 = types.InlineKeyboardButton("Mening xizmatlarim", callback_data='xizmatlarim')
+                lg1 = types.InlineKeyboardButton("Mening xizmatlarim 📊", callback_data='xizmatlarim')
                 lg2 = types.InlineKeyboardButton("Mening kontaktlarim 📋", callback_data='kontaktlarim')
                 lg3 = types.InlineKeyboardButton("Ro'yxatdan o'tish 🔐", callback_data="ro'yxatdan_o'tish")
                 lg4 = types.InlineKeyboardButton("Menejer bilan aloqa 👨🏻‍💻", callback_data="connect_admin",
@@ -1901,7 +1901,7 @@ def callback(call):
 
         lg5 = types.KeyboardButton('Qaytish 🔙')
         markup.add(lg1, lg2, lg3, lg4, lg5)
-        bot.send_message(call.message.chat.id, 'Mening xizmatlarim', reply_markup=markup)
+        bot.send_message(call.message.chat.id, 'Mening xizmatlarim 📊', reply_markup=markup)
         bot.register_next_step_handler(call.message, uslugi_uz)
     elif call.data == 'kontaktlarim':
         bot_con = pymysql.connect(host='62.209.143.131',
