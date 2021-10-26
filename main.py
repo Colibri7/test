@@ -8,7 +8,7 @@ import telebot
 from telebot import types
 import pymysql
 
-bot = telebot.TeleBot('1978328105:AAELPuRD4gBaMV3FU_5ng4zItuTvV5xgGZo', threaded=False)
+bot = telebot.TeleBot('1241604248:AAH8khnkopYJPhlvplSPOriYHNStmWHzBuc', threaded=False)
 
 # connection = pymysql.connect(host='62.209.143.131',
 #                              user='hostmasteruz_pbot',
