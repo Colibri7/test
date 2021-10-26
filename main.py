@@ -398,7 +398,7 @@ def log(message):
                                 num += 1
                             bot.send_message(message.chat.id, host_text, parse_mode='html')
                         else:
-                            bot.send_message(message.chat.id, "У вас нет услуги аренды хостингов")
+                            bot.send_message(message.chat.id, "У вас нет услуги аренды хостингов 🤷🏻")
 
                     bot.register_next_step_handler(message, uslugi)
                 elif message.text == 'Мои домены':
@@ -435,7 +435,7 @@ def log(message):
                                 bot.register_next_step_handler(message, uslugi)
                             bot.send_message(message.chat.id, domen_text, parse_mode='html')
                         else:
-                            bot.send_message(message.chat.id, 'У вас нет доменов')
+                            bot.send_message(message.chat.id, 'У вас нет доменов 🤷🏻')
                     bot.register_next_step_handler(message, uslugi)
                 elif message.text == 'Мои VDS':
                     for i in check:
@@ -468,7 +468,7 @@ def log(message):
                                 num += 1
                             bot.send_message(message.chat.id, vds_text, parse_mode='html')
                         else:
-                            bot.send_message(message.chat.id, 'У вас нет услуги аренды VDS')
+                            bot.send_message(message.chat.id, 'У вас нет услуги аренды VDS 🤷🏻')
 
                     bot.register_next_step_handler(message, uslugi)
                 elif message.text == 'Мои сервера':
@@ -492,7 +492,7 @@ def log(message):
                                 num += 1
                             bot.send_message(message.chat.id, ser_text, parse_mode='html')
                         else:
-                            bot.send_message(message.chat.id, 'У вас нет услуги аренды сервера')
+                            bot.send_message(message.chat.id, 'У вас нет услуги аренды сервера 🤷🏻')
 
                     bot.register_next_step_handler(message, uslugi)
                 elif message.text == 'Возврат 🔙':
@@ -942,7 +942,7 @@ def log_uz(message):
                                 num += 1
                             bot.send_message(message.chat.id, host_text, parse_mode='html')
                         else:
-                            bot.send_message(message.chat.id, "У вас нет услуги аренды хостингов")
+                            bot.send_message(message.chat.id, "У вас нет услуги аренды хостингов 🤷🏻")
                     bot.register_next_step_handler(message, uslugi_uz)
                 elif message.text == 'Мои домены':
                     for i in check:
@@ -979,7 +979,7 @@ def log_uz(message):
                                 bot.register_next_step_handler(message, uslugi_uz)
                             bot.send_message(message.chat.id, domen_text, parse_mode='html')
                         else:
-                            bot.send_message(message.chat.id, 'У вас нет доменов')
+                            bot.send_message(message.chat.id, 'У вас нет доменов 🤷🏻')
                     bot.register_next_step_handler(message, uslugi_uz)
                 elif message.text == 'Мои VDS':
                     for i in check:
@@ -1012,7 +1012,7 @@ def log_uz(message):
                                 num += 1
                             bot.send_message(message.chat.id, vds_text, parse_mode='html')
                         else:
-                            bot.send_message(message.chat.id, 'У вас нет услуги аренды VDS')
+                            bot.send_message(message.chat.id, 'У вас нет услуги аренды VDS 🤷🏻')
 
                     bot.register_next_step_handler(message, uslugi_uz)
                 elif message.text == 'Мои сервера':
@@ -1036,7 +1036,7 @@ def log_uz(message):
                                 num += 1
                             bot.send_message(message.chat.id, ser_text, parse_mode='html')
                         else:
-                            bot.send_message(message.chat.id, 'У вас нет услуги аренды сервера')
+                            bot.send_message(message.chat.id, 'У вас нет услуги аренды сервера 🤷🏻')
 
                     bot.register_next_step_handler(message, uslugi_uz)
                 elif message.text == 'Возврат 🔙':
@@ -1599,7 +1599,7 @@ def callback(call):
                             num += 1
                         bot.send_message(message.chat.id, host_text, parse_mode='html')
                     else:
-                        bot.send_message(message.chat.id, "У вас нет услуги аренды хостингов")
+                        bot.send_message(message.chat.id, "У вас нет услуги аренды хостингов 🤷🏻")
 
                 bot.register_next_step_handler(message, uslugi)
             elif message.text == 'Мои домены':
@@ -1632,7 +1632,7 @@ def callback(call):
                             num += 1
                         bot.send_message(message.chat.id, domen_text, parse_mode='html')
                     else:
-                        bot.send_message(message.chat.id, 'У вас нет доменов')
+                        bot.send_message(message.chat.id, 'У вас нет доменов 🤷🏻')
 
                 bot.register_next_step_handler(message, uslugi)
             elif message.text == 'Мои VDS':
@@ -1663,7 +1663,7 @@ def callback(call):
                             num += 1
                         bot.send_message(message.chat.id, vds_text, parse_mode='html')
                     else:
-                        bot.send_message(message.chat.id, 'У вас нет услуги аренды VDS')
+                        bot.send_message(message.chat.id, 'У вас нет услуги аренды VDS 🤷🏻')
 
                 bot.register_next_step_handler(message, uslugi)
             elif message.text == 'Мои сервера':
@@ -1687,7 +1687,7 @@ def callback(call):
                             num += 1
                         bot.send_message(message.chat.id, ser_text, parse_mode='html')
                     else:
-                        bot.send_message(message.chat.id, 'У вас нет услуги аренды сервера')
+                        bot.send_message(message.chat.id, 'У вас нет услуги аренды сервера 🤷🏻')
 
                 bot.register_next_step_handler(message, uslugi)
             elif message.text == 'Возврат 🔙':
@@ -1783,7 +1783,7 @@ def callback(call):
                             num += 1
                         bot.send_message(message.chat.id, host_text, parse_mode='html')
                     else:
-                        bot.send_message(message.chat.id, "Sizda xosting xizmati yo'q")
+                        bot.send_message(message.chat.id, "Sizda xosting xizmati yo'q 🤷🏻")
 
                 bot.register_next_step_handler(message, uslugi_uz)
             elif message.text == 'Mening domenlarim':
@@ -1818,7 +1818,7 @@ def callback(call):
                             num += 1
                         bot.send_message(message.chat.id, domen_text, parse_mode='html')
                     else:
-                        bot.send_message(message.chat.id, "Sizda domen yo'q")
+                        bot.send_message(message.chat.id, "Sizda domen yo'q 🤷🏻")
 
                 bot.register_next_step_handler(message, uslugi_uz)
             elif message.text == "Mening VDS'larim":
@@ -1849,7 +1849,7 @@ def callback(call):
                             num += 1
                         bot.send_message(message.chat.id, vds_text, parse_mode='html')
                     else:
-                        bot.send_message(message.chat.id, "Sizda vds xizmati yo'q")
+                        bot.send_message(message.chat.id, "Sizda vds xizmati yo'q 🤷🏻")
 
                 bot.register_next_step_handler(message, uslugi_uz)
             elif message.text == 'Mening serverlarim':
@@ -1872,7 +1872,7 @@ def callback(call):
                             num += 1
                         bot.send_message(message.chat.id, ser_text, parse_mode='html')
                     else:
-                        bot.send_message(message.chat.id, "Sizda server xizmati yo'q")
+                        bot.send_message(message.chat.id, "Sizda server xizmati yo'q 🤷🏻")
 
                 bot.register_next_step_handler(message, uslugi_uz)
             elif message.text == 'Qaytish 🔙':
