@@ -377,7 +377,7 @@ def log(message):
                         id = i["id"]
                         id_connect = connection.cursor()
                         id_connect.execute(
-                            'SELECT * FROM hostcontract WHERE user_id=%(user_id)s', {'user_id': id})
+                            'SELECT * FROM hostcontract WHERE user_id=%(user_id)s ORDER BY status=2', {'user_id': id})
                         checkContact = id_connect.fetchall()
                         num = 1
                         host_text = ''
@@ -415,7 +415,7 @@ def log(message):
                             for i in checkContact:
                                 delta = i["now_datetime"] - i["expired"]
                                 if delta.days > 0:
-                                    i["expired"] = '{:%d-%m-%-y} ⚠️'.format(i["expired"])
+                                    i["expired"] = '{:%d-%m-%-y}'.format(i["expired"])
                                 else:
                                     i["expired"] = '{:%d-%m-%-y}'.format(i["expired"])
                                 if i["status"] == -2:
@@ -425,7 +425,7 @@ def log(message):
                                 elif i["status"] == 1:
                                     i["status"] = 'Active ✅'
                                 elif i["status"] == 3:
-                                    i["status"] = 'W_RED'
+                                    i["status"] = 'W_RED ⚠️'
                                 domen_text += f'{num}. {i["mydomainname"]}.uz, ' \
                                               f'{i["status"]}, {i["expired"]}\n'
                                 num += 1
@@ -925,7 +925,7 @@ def log_uz(message):
                         id = i["id"]
                         id_connect = connection.cursor()
                         id_connect.execute(
-                            'SELECT * FROM hostcontract WHERE user_id=%(user_id)s', {'user_id': id})
+                            'SELECT * FROM hostcontract WHERE user_id=%(user_id)s ORDER BY status =2 ', {'user_id': id})
                         checkContact = id_connect.fetchall()
                         num = 1
                         host_text = ''
@@ -1620,7 +1620,7 @@ def callback(call):
                         for i in checkContact:
                             delta = i["now_datetime"] - i["expired"]
                             if delta.days > 0:
-                                i["expired"] = '{:%d-%m-%-y} ⚠️'.format(i["expired"])
+                                i["expired"] = '{:%d-%m-%-y}'.format(i["expired"])
                             else:
                                 i["expired"] = '{:%d-%m-%-y}'.format(i["expired"])
                             if i["status"] == -2:
@@ -1630,7 +1630,7 @@ def callback(call):
                             elif i["status"] == 1:
                                 i["status"] = 'Active ✅'
                             elif i["status"] == 3:
-                                i["status"] = 'W_RED'
+                                i["status"] = 'W_RED ⚠️'
                             domen_text += f'{num}. {i["mydomainname"]}.uz, ' \
                                           f'{i["status"]}, {i["expired"]}\n'
                             num += 1
@@ -1765,7 +1765,7 @@ def callback(call):
                         'SELECT `hostcontract`.*, `hosting`.`hostingname`'
                         ' FROM `hostcontract`, `hosting` WHERE'
                         ' `hostcontract`.`user_id` = %(user_id)s '
-                        'AND `hosting`.`idhosting` = `hostcontract`.`hostingid`',
+                        'AND `hosting`.`idhosting` = `hostcontract`.`hostingid` ORDER BY status = 2',
                         {'user_id': id})
                     checkContact = id_connect.fetchall()
                     num = 1
@@ -1804,7 +1804,7 @@ def callback(call):
                         for i in checkContact:
                             delta = i["now_datetime"] - i["expired"]
                             if delta.days > 0:
-                                i["expired"] = '{:%d-%m-%-y} ⚠️'.format(i["expired"])
+                                i["expired"] = '{:%d-%m-%-y}'.format(i["expired"])
                             else:
                                 i["expired"] = '{:%d-%m-%-y}'.format(i["expired"])
                             if i["status"] == -2:
@@ -1814,7 +1814,7 @@ def callback(call):
                             elif i["status"] == 1:
                                 i["status"] = 'Active ✅'
                             elif i["status"] == 3:
-                                i["status"] = 'W_RED'
+                                i["status"] = 'W_RED ⚠️'
 
                             domen_text += f'{num}. {i["mydomainname"]}.uz, ' \
                                           f'{i["status"]}, {i["expired"]}\n'
@@ -1848,7 +1848,7 @@ def callback(call):
                             else:
                                 i["status"] = 'Deleted ❌'
                             vds_text += f'{num}. {i["vdshostname"]}\n' \
-                                        f'Тариф: <b>{i["tariffname"]}</b>\n' \
+                                        f'Tarif: <b>{i["tariffname"]}</b>\n' \
                                         f'{i["status"]}\n'
                             num += 1
                         bot.send_message(message.chat.id, vds_text, parse_mode='html')
