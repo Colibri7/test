@@ -380,7 +380,7 @@ def log(message):
                                                  f'{i["status"]}\n'
                                 else:
                                     host_text += f'{num}. {i["hostcontractdomain"]}, ' \
-                                                 f'{i["status"]}, Тариф: <b>{i["cptariff"]}</b>\n'
+                                                 f'{i["status"]}, <b>{i["cptariff"]}</b>\n'
                                 num += 1
                             bot.send_message(message.chat.id, host_text, parse_mode='html')
                         else:
@@ -910,7 +910,7 @@ def log_uz(message):
                                                  f'{i["status"]}\n'
                                 else:
                                     host_text += f'{num}. {i["hostcontractdomain"]}, ' \
-                                                 f'{i["status"]}, Тариф: <b>{i["cptariff"]}</b>\n'
+                                                 f'{i["status"]}, <b>{i["cptariff"]}</b>\n'
                                 num += 1
                             bot.send_message(message.chat.id, host_text, parse_mode='html')
                         else:
@@ -1526,7 +1526,7 @@ def callback(call):
                                              f'{i["status"]}\n'
                             else:
                                 host_text += f'{num}. {i["hostcontractdomain"]}, ' \
-                                             f'{i["status"]}, Тариф: <b>{i["cptariff"]}</b>\n'
+                                             f'{i["status"]}, <b>{i["cptariff"]}</b>\n'
                             num += 1
                         bot.send_message(message.chat.id, host_text, parse_mode='html')
                     else:
