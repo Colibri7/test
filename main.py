@@ -90,7 +90,7 @@ def domen_30_days_schedule():
         print('id ', some_id)
         if i["contactcompany"] is None:
 
-            bot.send_message(332749197, f'Уважаемый <b>{i["contactname"]}!</b> Уведомляем Вас о том, '
+            bot.send_message(some_id, f'Уважаемый <b>{i["contactname"]}!</b> Уведомляем Вас о том, '
                                         f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
                                         f'истекает <b>{date}</b> '
                                         f'года . Для продления регистрации домена Вам необходимо оплатить '
@@ -98,7 +98,7 @@ def domen_30_days_schedule():
                                         f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
                                         f'лицом.\n<b>С уважением, команда Hostmaster!</b>', parse_mode='html')
         else:
-            bot.send_message(332749197, f'Уважаемый <b>{i["contactcompany"]}!</b> Уведомляем Вас о том, '
+            bot.send_message(some_id, f'Уважаемый <b>{i["contactcompany"]}!</b> Уведомляем Вас о том, '
                                         f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
                                         f'истекает <b>{date}</b> '
                                         f'года . Для продления регистрации домена Вам необходимо оплатить '
@@ -1909,8 +1909,8 @@ def schedule_checker():
 
 
 if __name__ == "__main__":
-    schedule.every().day.at("16:45").do(domen_60_days_schedule)
-    schedule.every().day.at("15:41").do(domen_30_days_schedule)
+    schedule.every().day.at("16:57").do(domen_60_days_schedule)
+    schedule.every().day.at("16:57").do(domen_30_days_schedule)
     schedule.every().day.at("15:41").do(domen_10_days_schedule)
     schedule.every().day.at("15:41").do(domen_1_days_schedule)
     # schedule.every().day.at('12:14').do(vds_schedule)
