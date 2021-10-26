@@ -435,7 +435,7 @@ def log(message):
                             ' WHERE   username=%(username)s AND '
                             '`user`.`id` = `vdscontract`.`user_id`'
                             ' AND `vdscontract`.`vdsid` = `vds_tariffs`.`idvds`'
-                            ' ORDER BY `vdscontract`.`vdshostname`;',
+                            ' ORDER BY vdscontract.status = 1 DESC;',
                             {'username': login})
                         checkContact = id_connect.fetchall()
                         num = 1
@@ -448,9 +448,11 @@ def log(message):
                                     i["status"] = 'Block 🚫'
                                 else:
                                     i["status"] = 'Deleted ❌'
-                                vds_text += f'{num}. {i["vdshostname"]}\n' \
-                                            f'Тариф: <b>{i["tariffname"]}</b>\n' \
-                                            f'{i["status"]}\n'
+                                if i["status"] == 'Deleted ❌' or i["status"] == 'Block 🚫':
+                                    vds_text += f'{num}. {i["vdshostname"]}' \
+                                                f'Статус: {i["status"]}\n'
+                                else:
+                                    vds_text += f'{num}. {i["vdshostname"]}, Тариф: {i["tariffname"]}, Статус: {i["status"]}\n'
                                 num += 1
                             bot.send_message(message.chat.id, vds_text, parse_mode='html')
                         else:
@@ -964,7 +966,7 @@ def log_uz(message):
                             ' WHERE   username=%(username)s AND '
                             '`user`.`id` = `vdscontract`.`user_id`'
                             ' AND `vdscontract`.`vdsid` = `vds_tariffs`.`idvds`'
-                            ' ORDER BY `vdscontract`.`vdshostname`;',
+                            ' ORDER BY vdscontract.status = 1 DESC;',
                             {'username': login})
                         checkContact = id_connect.fetchall()
                         num = 1
@@ -977,9 +979,11 @@ def log_uz(message):
                                     i["status"] = 'Block 🚫'
                                 else:
                                     i["status"] = 'Deleted ❌'
-                                vds_text += f'{num}. {i["vdshostname"]}\n' \
-                                            f'Тариф: <b>{i["tariffname"]}</b>\n' \
-                                            f'{i["status"]}\n'
+                                if i["status"] == 'Deleted ❌' or i["status"] == 'Block 🚫':
+                                    vds_text += f'{num}. {i["vdshostname"]}' \
+                                                f'Статус: {i["status"]}\n'
+                                else:
+                                    vds_text += f'{num}. {i["vdshostname"]}, Тариф: {i["tariffname"]}, Статус: {i["status"]}\n'
                                 num += 1
                             bot.send_message(message.chat.id, vds_text, parse_mode='html')
                         else:
@@ -1572,7 +1576,7 @@ def callback(call):
                         ' `vds_tariffs`.`tariffname` ,'
                         '`vdscontract`.`status`  FROM  '
                         '`vdscontract`, `vds_tariffs` WHERE '
-                        ' `vdscontract`.`vdsid` = `vds_tariffs`.`idvds` AND user_id=%(user_id)s',
+                        ' `vdscontract`.`vdsid` = `vds_tariffs`.`idvds` AND user_id=%(user_id)s ORDER BY vdscontract.status = 1 DESC;',
                         {'user_id': id})
                     checkContact = id_connect.fetchall()
                     num = 1
@@ -1585,9 +1589,11 @@ def callback(call):
                                 i["status"] = 'Block 🚫'
                             else:
                                 i["status"] = 'Deleted ❌'
-                            vds_text += f'{num}. {i["vdshostname"]}, ' \
-                                        f'Тариф: <b>{i["tariffname"]}</b>, ' \
-                                        f'{i["status"]}\n'
+                            if i["status"] == 'Deleted ❌' or i["status"] == 'Block 🚫':
+                                vds_text += f'{num}. {i["vdshostname"]}' \
+                                            f'Статус: {i["status"]}\n'
+                            else:
+                                vds_text += f'{num}. {i["vdshostname"]}, Тариф: {i["tariffname"]}, Статус: {i["status"]}\n'
                             num += 1
                         bot.send_message(message.chat.id, vds_text, parse_mode='html')
                     else:
@@ -1754,7 +1760,7 @@ def callback(call):
                         '`vds_tariffs`.`tariffname` ,'
                         '`vdscontract`.`status`  FROM  '
                         '`vdscontract`, `vds_tariffs` WHERE '
-                        ' `vdscontract`.`vdsid` = `vds_tariffs`.`idvds` AND user_id=%(user_id)s',
+                        ' `vdscontract`.`vdsid` = `vds_tariffs`.`idvds` AND user_id=%(user_id)s ORDER BY vdscontract.status = 1 DESC;',
                         {'user_id': id})
                     checkContact = id_connect.fetchall()
                     num = 1
@@ -1767,9 +1773,11 @@ def callback(call):
                                 i["status"] = 'Block 🚫'
                             else:
                                 i["status"] = 'Deleted ❌'
-                            vds_text += f'{num}. {i["vdshostname"]}\n' \
-                                        f'Tarif: <b>{i["tariffname"]}</b>\n' \
-                                        f'{i["status"]}\n'
+                            if i["status"] == 'Deleted ❌' or i["status"] == 'Block 🚫':
+                                vds_text += f'{num}. {i["vdshostname"]}' \
+                                            f'Статус: {i["status"]}\n'
+                            else:
+                                vds_text += f'{num}. {i["vdshostname"]}, Tarif: {i["tariffname"]}, {i["status"]}\n'
                             num += 1
                         bot.send_message(message.chat.id, vds_text, parse_mode='html')
                     else:
