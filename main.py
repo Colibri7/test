@@ -389,7 +389,7 @@ def log(message):
                                     i["status"] = 'Block 🚫'
                                 else:
                                     i["status"] = 'Deleted ❌'
-                                if i["cptariff"] is None:
+                                if i["status"] == 'Deleted ❌':
                                     host_text += f'{num}. {i["hostcontractdomain"]}, ' \
                                                  f'{i["status"]}\n'
                                 else:
@@ -937,7 +937,7 @@ def log_uz(message):
                                     i["status"] = 'Block 🚫'
                                 else:
                                     i["status"] = 'Deleted ❌'
-                                if i["cptariff"] is None:
+                                if i["status"] == 'Deleted ❌':
                                     host_text += f'{num}. {i["hostcontractdomain"]}, ' \
                                                  f'{i["status"]}\n'
                                 else:
@@ -1594,7 +1594,7 @@ def callback(call):
                                 i["status"] = 'Block 🚫'
                             else:
                                 i["status"] = 'Deleted ❌'
-                            if i["cptariff"] is None:
+                            if i["status"] == 'Deleted ❌':
                                 host_text += f'{num}. {i["hostcontractdomain"]}, ' \
                                              f'{i["status"]}\n'
                             else:
@@ -1778,7 +1778,7 @@ def callback(call):
                                 i["status"] = 'Block 🚫'
                             else:
                                 i["status"] = 'Deleted ❌'
-                            if i["cptariff"] is None:
+                            if i["status"] == 'Deleted ❌':
                                 host_text += f'{num}. {i["hostcontractdomain"]}, ' \
                                              f'{i["status"]}\n'
                             else:
