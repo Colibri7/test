@@ -372,7 +372,7 @@ def log(message):
     def password(message):
         def after_login(message):
             def uslugi(message):
-                if message.text == 'Мои хостинги':
+                if message.text == 'Мои хостинги 🗂':
                     for i in check:
                         id = i["id"]
                         id_connect = connection.cursor()
@@ -401,7 +401,7 @@ def log(message):
                             bot.send_message(message.chat.id, "У вас нет услуги аренды хостингов 🤷🏻")
 
                     bot.register_next_step_handler(message, uslugi)
-                elif message.text == 'Мои домены':
+                elif message.text == 'Мои домены 🔠':
                     for i in check:
                         id = i["id"]
                         id_connect = connection.cursor()
@@ -427,7 +427,7 @@ def log(message):
                                 elif i["status"] == 3:
                                     i["status"] = 'W_RED'
                                 domen_text += f'{num}. {i["mydomainname"]}.uz, ' \
-                                              f'{i["status"]}, {i["expired"]}\n'
+                                              f'{i["status"]}, {i["expired"]} 📆\n'
                                 num += 1
                             if len(domen_text) > 4096:
                                 for x in range(0, len(domen_text), 4096):
@@ -437,7 +437,7 @@ def log(message):
                         else:
                             bot.send_message(message.chat.id, 'У вас нет доменов 🤷🏻')
                     bot.register_next_step_handler(message, uslugi)
-                elif message.text == 'Мои VDS':
+                elif message.text == 'Мои VDS 🗄':
                     for i in check:
                         id = i["id"]
                         id_connect = connection.cursor()
@@ -471,7 +471,7 @@ def log(message):
                             bot.send_message(message.chat.id, 'У вас нет услуги аренды VDS 🤷🏻')
 
                     bot.register_next_step_handler(message, uslugi)
-                elif message.text == 'Мои сервера':
+                elif message.text == 'Мои сервера 💾':
                     for i in check:
                         print(i)
                         id = i["id"]
@@ -678,18 +678,18 @@ def log(message):
                     num = 1
                     for i in checkContact:
                         if i["contactcompany"] is None:
-                            text += f'{num}. {i["contactname"]}\nБаланс: <b>{i["balance"]} sum</b>\n'
+                            text += f'{num}. {i["contactname"]}\nБаланс: <b>{i["balance"]} сум 💰</b>\n'
                         else:
-                            text += f'{num}. {i["contactcompany"]}\nБаланс: <b>{i["balance"]} sum</b>\n'
+                            text += f'{num}. {i["contactcompany"]}\nБаланс: <b>{i["balance"]} сум 💰</b>\n'
                         num += 1
                     bot.send_message(message.chat.id, text, parse_mode='html')
                 bot.register_next_step_handler(message, after_login)
             elif message.text == 'Мои услуги 📊':
                 markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
-                lg1 = types.KeyboardButton('Мои хостинги')
-                lg2 = types.KeyboardButton('Мои домены')
-                lg3 = types.KeyboardButton('Мои VDS')
-                lg4 = types.KeyboardButton('Мои сервера')
+                lg1 = types.KeyboardButton('Мои хостинги 🗂')
+                lg2 = types.KeyboardButton('Мои домены 🔠')
+                lg3 = types.KeyboardButton('Мои VDS 🗄')
+                lg4 = types.KeyboardButton('Мои сервера 💾')
                 lg5 = types.KeyboardButton('Возврат 🔙')
                 markup.add(lg1, lg2, lg3, lg4, lg5)
                 bot.send_message(message.chat.id, 'Мои услуги 📊', reply_markup=markup)
@@ -920,7 +920,7 @@ def log_uz(message):
     def password_uz(message):
         def after_login_uz(message):
             def uslugi_uz(message):
-                if message.text == 'Мои хостинги':
+                if message.text == 'Мои хостинги 🗂':
                     for i in check:
                         id = i["id"]
                         id_connect = connection.cursor()
@@ -948,7 +948,7 @@ def log_uz(message):
                         else:
                             bot.send_message(message.chat.id, "У вас нет услуги аренды хостингов 🤷🏻")
                     bot.register_next_step_handler(message, uslugi_uz)
-                elif message.text == 'Мои домены':
+                elif message.text == 'Мои домены 🔠':
                     for i in check:
                         id = i["id"]
                         id_connect = connection.cursor()
@@ -975,7 +975,7 @@ def log_uz(message):
                                     i["status"] = 'W_RED'
 
                                 domen_text += f'{num}. {i["mydomainname"]}.uz, ' \
-                                              f'{i["status"]}, {i["expired"]}\n'
+                                              f'{i["status"]}, {i["expired"]} 📆\n'
                                 num += 1
                             if len(domen_text) > 4096:
                                 for x in range(0, len(domen_text), 4096):
@@ -985,7 +985,7 @@ def log_uz(message):
                         else:
                             bot.send_message(message.chat.id, 'У вас нет доменов 🤷🏻')
                     bot.register_next_step_handler(message, uslugi_uz)
-                elif message.text == 'Мои VDS':
+                elif message.text == 'Мои VDS 🗄':
                     for i in check:
                         id = i["id"]
                         id_connect = connection.cursor()
@@ -1019,7 +1019,7 @@ def log_uz(message):
                             bot.send_message(message.chat.id, 'У вас нет услуги аренды VDS 🤷🏻')
 
                     bot.register_next_step_handler(message, uslugi_uz)
-                elif message.text == 'Мои сервера':
+                elif message.text == 'Мои сервера 💾':
                     for i in check:
                         print(i)
                         id = i["id"]
@@ -1232,18 +1232,18 @@ def log_uz(message):
                     num = 1
                     for i in checkContact:
                         if i["contactcompany"] is None:
-                            text += f'{num}. {i["contactname"]}\nБаланс: <b>{i["balance"]} sum</b>\n'
+                            text += f'{num}. {i["contactname"]}\nБаланс: <b>{i["balance"]} сум 💰</b>\n'
                         else:
-                            text += f'{num}. {i["contactcompany"]}\nБаланс: <b>{i["balance"]} sum</b>\n'
+                            text += f'{num}. {i["contactcompany"]}\nБаланс: <b>{i["balance"]} сум 💰</b>\n'
                         num += 1
                     bot.send_message(message.chat.id, text, parse_mode='html')
                 bot.register_next_step_handler(message, after_login_uz)
             elif message.text == 'Мои услуги 📊':
                 markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
-                lg1 = types.KeyboardButton('Мои хостинги')
-                lg2 = types.KeyboardButton('Мои домены')
-                lg3 = types.KeyboardButton('Мои VDS')
-                lg4 = types.KeyboardButton('Мои сервера')
+                lg1 = types.KeyboardButton('Мои хостинги 🗂')
+                lg2 = types.KeyboardButton('Мои домены 🔠')
+                lg3 = types.KeyboardButton('Мои VDS 🗄')
+                lg4 = types.KeyboardButton('Мои сервера 💾')
                 lg5 = types.KeyboardButton('Возврат 🔙')
                 markup.add(lg1, lg2, lg3, lg4, lg5)
                 bot.send_message(message.chat.id, 'Мои услуги 📊', reply_markup=markup)
@@ -1546,9 +1546,9 @@ def callback(call):
         num = 1
         for i in check:
             if i["contactcompany"] is None:
-                text += f'{num}. {i["contactname"]}\nБаланс: <b>{i["balance"]} sum</b>\n'
+                text += f'{num}. {i["contactname"]}\nБаланс: <b>{i["balance"]} сум 💰</b>\n'
             else:
-                text += f'{num}. {i["contactcompany"]}\nБаланс: <b>{i["balance"]} sum</b>\n'
+                text += f'{num}. {i["contactcompany"]}\nБаланс: <b>{i["balance"]} сум 💰</b>\n'
             num += 1
         bot.send_message(call.message.chat.id, 'Контакты')
         bot.send_message(call.message.chat.id, text, parse_mode='html')
@@ -1573,7 +1573,7 @@ def callback(call):
             print(i["b_userid"])
 
         def uslugi(message):
-            if message.text == 'Мои хостинги':
+            if message.text == 'Мои хостинги 🗂':
                 for i in check:
                     id = i["b_userid"]
                     id_connect = connection.cursor()
@@ -1606,7 +1606,7 @@ def callback(call):
                         bot.send_message(message.chat.id, "У вас нет услуги аренды хостингов 🤷🏻")
 
                 bot.register_next_step_handler(message, uslugi)
-            elif message.text == 'Мои домены':
+            elif message.text == 'Мои домены 🔠':
                 for i in check:
                     id = i["b_userid"]
                     id_connect = connection.cursor()
@@ -1632,14 +1632,14 @@ def callback(call):
                             elif i["status"] == 3:
                                 i["status"] = 'W_RED'
                             domen_text += f'{num}. {i["mydomainname"]}.uz, ' \
-                                          f'{i["status"]}, {i["expired"]}\n'
+                                          f'{i["status"]}, {i["expired"]} 📆\n'
                             num += 1
                         bot.send_message(message.chat.id, domen_text, parse_mode='html')
                     else:
                         bot.send_message(message.chat.id, 'У вас нет доменов 🤷🏻')
 
                 bot.register_next_step_handler(message, uslugi)
-            elif message.text == 'Мои VDS':
+            elif message.text == 'Мои VDS 🗄':
                 for i in check:
                     id = i["b_userid"]
                     id_connect = connection.cursor()
@@ -1670,7 +1670,7 @@ def callback(call):
                         bot.send_message(message.chat.id, 'У вас нет услуги аренды VDS 🤷🏻')
 
                 bot.register_next_step_handler(message, uslugi)
-            elif message.text == 'Мои сервера':
+            elif message.text == 'Мои сервера 💾':
                 for i in check:
                     print(i)
                     id = i["b_userid"]
@@ -1713,10 +1713,10 @@ def callback(call):
                                  reply_markup=markup, parse_mode='html')
 
         markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
-        lg1 = types.KeyboardButton('Мои хостинги')
-        lg2 = types.KeyboardButton('Мои домены')
-        lg3 = types.KeyboardButton('Мои VDS')
-        lg4 = types.KeyboardButton('Мои сервера')
+        lg1 = types.KeyboardButton('Мои хостинги 🗂')
+        lg2 = types.KeyboardButton('Мои домены 🔠')
+        lg3 = types.KeyboardButton('Мои VDS 🗄')
+        lg4 = types.KeyboardButton('Мои сервера 💾')
 
         lg5 = types.KeyboardButton('Возврат 🔙')
         markup.add(lg1, lg2, lg3, lg4, lg5)
@@ -1757,7 +1757,7 @@ def callback(call):
             print(i["b_userid"])
 
         def uslugi_uz(message):
-            if message.text == 'Mening xostinglarim':
+            if message.text == 'Mening xostinglarim 🗂':
                 for i in check:
                     id = i["b_userid"]
                     id_connect = connection.cursor()
@@ -1790,7 +1790,7 @@ def callback(call):
                         bot.send_message(message.chat.id, "Sizda xosting xizmati yo'q 🤷🏻")
 
                 bot.register_next_step_handler(message, uslugi_uz)
-            elif message.text == 'Mening domenlarim':
+            elif message.text == 'Mening domenlarim 🔠':
                 for i in check:
                     id = i["b_userid"]
                     id_connect = connection.cursor()
@@ -1817,7 +1817,7 @@ def callback(call):
                                 i["status"] = 'W_RED'
 
                             domen_text += f'{num}. {i["mydomainname"]}.uz, ' \
-                                          f'{i["status"]}, {i["expired"]}\n'
+                                          f'{i["status"]}, {i["expired"]} 📆\n'
 
                             num += 1
                         bot.send_message(message.chat.id, domen_text, parse_mode='html')
@@ -1825,7 +1825,7 @@ def callback(call):
                         bot.send_message(message.chat.id, "Sizda domen yo'q 🤷🏻")
 
                 bot.register_next_step_handler(message, uslugi_uz)
-            elif message.text == "Mening VDS'larim":
+            elif message.text == "Mening VDS'larim 🗄":
                 for i in check:
                     id = i["b_userid"]
                     id_connect = connection.cursor()
@@ -1856,7 +1856,7 @@ def callback(call):
                         bot.send_message(message.chat.id, "Sizda vds xizmati yo'q 🤷🏻")
 
                 bot.register_next_step_handler(message, uslugi_uz)
-            elif message.text == 'Mening serverlarim':
+            elif message.text == 'Mening serverlarim 💾':
                 for i in check:
 
                     id = i["b_userid"]
@@ -1898,10 +1898,10 @@ def callback(call):
                                  reply_markup=markup_uz, parse_mode='html')
 
         markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
-        lg1 = types.KeyboardButton('Mening xostinglarim')
-        lg2 = types.KeyboardButton('Mening domenlarim')
-        lg3 = types.KeyboardButton("Mening VDS'larim")
-        lg4 = types.KeyboardButton('Mening serverlarim')
+        lg1 = types.KeyboardButton('Mening xostinglarim 🗂')
+        lg2 = types.KeyboardButton('Mening domenlarim 🔠')
+        lg3 = types.KeyboardButton("Mening VDS'larim 🗄")
+        lg4 = types.KeyboardButton('Mening serverlarim 💾')
 
         lg5 = types.KeyboardButton('Qaytish 🔙')
         markup.add(lg1, lg2, lg3, lg4, lg5)
@@ -1930,11 +1930,10 @@ def callback(call):
         text = ''
         num = 1
         for i in check:
-
             if i["contactcompany"] is None:
-                text += f'{num}. {i["contactname"]}\nBalans: <b>{i["balance"]} sum </b>\n'
+                text += f'{num}. {i["contactname"]}\nBalans: <b>{i["balance"]} sum 💰</b>\n'
             else:
-                text += f'{num}. {i["contactcompany"]}\nBalans: <b>{i["balance"]} sum</b>\n'
+                text += f'{num}. {i["contactcompany"]}\nBalans: <b>{i["balance"]} sum 💰</b>\n'
             num += 1
         bot.send_message(call.message.chat.id, 'Kontaktlar')
         bot.send_message(call.message.chat.id, text, parse_mode='html')
