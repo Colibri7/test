@@ -449,10 +449,9 @@ def log(message):
                                 else:
                                     i["status"] = 'Deleted ❌'
                                 if i["status"] == 'Deleted ❌' or i["status"] == 'Block 🚫':
-                                    vds_text += f'{num}. {i["vdshostname"]}' \
-                                                f'Статус: {i["status"]}\n'
+                                    vds_text += f'{num}. {i["vdshostname"]}, {i["status"]}\n'
                                 else:
-                                    vds_text += f'{num}. {i["vdshostname"]}, Тариф: {i["tariffname"]}, Статус: {i["status"]}\n'
+                                    vds_text += f'{num}. {i["vdshostname"]}, {i["tariffname"]}, {i["status"]}\n'
                                 num += 1
                             bot.send_message(message.chat.id, vds_text, parse_mode='html')
                         else:
@@ -980,10 +979,10 @@ def log_uz(message):
                                 else:
                                     i["status"] = 'Deleted ❌'
                                 if i["status"] == 'Deleted ❌' or i["status"] == 'Block 🚫':
-                                    vds_text += f'{num}. {i["vdshostname"]}' \
-                                                f'Статус: {i["status"]}\n'
+                                    vds_text += f'{num}. {i["vdshostname"]}, {i["status"]}\n'
+
                                 else:
-                                    vds_text += f'{num}. {i["vdshostname"]}, Тариф: {i["tariffname"]}, Статус: {i["status"]}\n'
+                                    vds_text += f'{num}. {i["vdshostname"]}, {i["tariffname"]}, {i["status"]}\n'
                                 num += 1
                             bot.send_message(message.chat.id, vds_text, parse_mode='html')
                         else:
@@ -1590,10 +1589,10 @@ def callback(call):
                             else:
                                 i["status"] = 'Deleted ❌'
                             if i["status"] == 'Deleted ❌' or i["status"] == 'Block 🚫':
-                                vds_text += f'{num}. {i["vdshostname"]}' \
-                                            f'Статус: {i["status"]}\n'
+                                vds_text += f'{num}. {i["vdshostname"]}, {i["status"]}\n'
+
                             else:
-                                vds_text += f'{num}. {i["vdshostname"]}, Тариф: {i["tariffname"]}, Статус: {i["status"]}\n'
+                                vds_text += f'{num}. {i["vdshostname"]}, {i["tariffname"]}, {i["status"]}\n'
                             num += 1
                         bot.send_message(message.chat.id, vds_text, parse_mode='html')
                     else:
@@ -1709,7 +1708,7 @@ def callback(call):
                                              f'{i["status"]}\n'
                             else:
                                 host_text += f'{num}. {i["hostcontractdomain"]}, ' \
-                                             f'{i["status"]}, Tarif: <b>{i["cptariff"]}</b>\n'
+                                             f'{i["status"]}, <b>{i["cptariff"]}</b>\n'
                             num += 1
                         bot.send_message(message.chat.id, host_text, parse_mode='html')
                     else:
@@ -1774,10 +1773,9 @@ def callback(call):
                             else:
                                 i["status"] = 'Deleted ❌'
                             if i["status"] == 'Deleted ❌' or i["status"] == 'Block 🚫':
-                                vds_text += f'{num}. {i["vdshostname"]}' \
-                                            f'Статус: {i["status"]}\n'
+                                vds_text += f'{num}. {i["vdshostname"]}, {i["status"]}\n'
                             else:
-                                vds_text += f'{num}. {i["vdshostname"]}, Tarif: {i["tariffname"]}, {i["status"]}\n'
+                                vds_text += f'{num}. {i["vdshostname"]}, {i["tariffname"]}, {i["status"]}\n'
                             num += 1
                         bot.send_message(message.chat.id, vds_text, parse_mode='html')
                     else:
