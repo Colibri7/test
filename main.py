@@ -678,9 +678,9 @@ def log(message):
                     num = 1
                     for i in checkContact:
                         if i["contactcompany"] is None:
-                            text += f'{num}. {i["contactname"]}, Баланс: <b>{i["balance"]} sum</b>\n'
+                            text += f'{num}. {i["contactname"]}\nБаланс: <b>{i["balance"]} sum</b>\n'
                         else:
-                            text += f'{num}. {i["contactcompany"]}, Баланс: <b>{i["balance"]} sum</b>\n'
+                            text += f'{num}. {i["contactcompany"]}\nБаланс: <b>{i["balance"]} sum</b>\n'
                         num += 1
                     bot.send_message(message.chat.id, text, parse_mode='html')
                 bot.register_next_step_handler(message, after_login)
@@ -1225,9 +1225,9 @@ def log_uz(message):
                     num = 1
                     for i in checkContact:
                         if i["contactcompany"] is None:
-                            text += f'{num}. {i["contactname"]}, Баланс: <b>{i["balance"]} sum</b>\n'
+                            text += f'{num}. {i["contactname"]}\nБаланс: <b>{i["balance"]} sum</b>\n'
                         else:
-                            text += f'{num}. {i["contactcompany"]}, Баланс: <b>{i["balance"]} sum</b>\n'
+                            text += f'{num}. {i["contactcompany"]}\nБаланс: <b>{i["balance"]} sum</b>\n'
                         num += 1
                     bot.send_message(message.chat.id, text, parse_mode='html')
                 bot.register_next_step_handler(message, after_login_uz)
@@ -1538,9 +1538,9 @@ def callback(call):
         num = 1
         for i in check:
             if i["contactcompany"] is None:
-                text += f'{num}. {i["contactname"]}, Баланс: <b>{i["balance"]} sum</b>\n'
+                text += f'{num}. {i["contactname"]}\nБаланс: <b>{i["balance"]} sum</b>\n'
             else:
-                text += f'{num}. {i["contactcompany"]}, Баланс: <b>{i["balance"]} sum</b>\n'
+                text += f'{num}. {i["contactcompany"]}\nБаланс: <b>{i["balance"]} sum</b>\n'
             num += 1
         bot.send_message(call.message.chat.id, 'Контакты')
         bot.send_message(call.message.chat.id, text, parse_mode='html')
@@ -1779,7 +1779,7 @@ def callback(call):
                             num += 1
                         bot.send_message(message.chat.id, host_text, parse_mode='html')
                     else:
-                        bot.send_message(message.chat.id, "Sizda xosting yo'q")
+                        bot.send_message(message.chat.id, "Sizda xosting xizmati yo'q")
 
                 bot.register_next_step_handler(message, uslugi_uz)
             elif message.text == 'Mening domenlarim':
@@ -1845,7 +1845,7 @@ def callback(call):
                             num += 1
                         bot.send_message(message.chat.id, vds_text, parse_mode='html')
                     else:
-                        bot.send_message(message.chat.id, "Sizda vds yo'q")
+                        bot.send_message(message.chat.id, "Sizda vds xizmati yo'q")
 
                 bot.register_next_step_handler(message, uslugi_uz)
             elif message.text == 'Mening serverlarim':
@@ -1868,7 +1868,7 @@ def callback(call):
                             num += 1
                         bot.send_message(message.chat.id, ser_text, parse_mode='html')
                     else:
-                        bot.send_message(message.chat.id, "Sizda server yo'q")
+                        bot.send_message(message.chat.id, "Sizda server xizmati yo'q")
 
                 bot.register_next_step_handler(message, uslugi_uz)
             elif message.text == 'Qaytish 🔙':
@@ -1923,9 +1923,9 @@ def callback(call):
         num = 1
         for i in check:
             if i["contactcompany"] is None:
-                text += f'{num}. {i["contactname"]}, Balans: <b>{i["balance"]} sum</b>\n'
+                text += f'{num}. {i["contactname"]}\nBalans: <b>{i["balance"]} sum</b>\n'
             else:
-                text += f'{num}. {i["contactcompany"]}, Balans: <b>{i["balance"]} sum</b>\n'
+                text += f'{num}. {i["contactcompany"]}\nBalans: <b>{i["balance"]} sum</b>\n'
             num += 1
         bot.send_message(call.message.chat.id, 'Kontaktlar')
         bot.send_message(call.message.chat.id, text, parse_mode='html')
