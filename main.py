@@ -504,6 +504,7 @@ def log(message):
                     markup_ru.add(lg1, lg2, lg3, lg4)
                     bot.send_message(message.chat.id, 'Возврат 🔙', reply_markup=markup_ru, parse_mode='html')
                     bot.register_next_step_handler(message, after_login)
+
             def doljniki(message):
                 def doljniki_domen(message):
                     if message.text == '60 дней':
@@ -665,6 +666,7 @@ def log(message):
                     markup_ru.add(lg1, lg2, lg3, lg4)
                     bot.send_message(message.chat.id, 'Возврат 🔙', reply_markup=markup_ru)
                 bot.register_next_step_handler(message, after_login)
+
             if message.text == 'Мои контакты 📋':
                 for i in check:
                     id = i["id"]
@@ -909,6 +911,8 @@ def log(message):
             bot.send_message(message.chat.id, 'Повторите попытку', reply_markup=key)
             bot.send_message(332749197,
                              f'{message.from_user.first_name} Cant log in')
+
+        cursor.close()
 
 
 @bot.message_handler(content_types=['text'])
