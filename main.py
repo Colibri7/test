@@ -230,19 +230,22 @@ def send_welcome(message):
     text = f'Bot in action:\nname: <b>{message.from_user.first_name}</b>\n' \
            f'chat_id: <b>{message.chat.id}</b>\n' \
            f'username: <b>@{message.from_user.username}</b>'
-    markup_uz = types.InlineKeyboardMarkup(row_width=2)
-    lg1 = types.InlineKeyboardButton('Mening xizmatlarim 📊', callback_data='xizmatlarim')
-    lg2 = types.InlineKeyboardButton('Mening kontaktlarim 📋', callback_data='kontaktlarim')
-    lg3 = types.InlineKeyboardButton("Ro'yxatdan o'tish 🔐", callback_data="ro'yxatdan_o'tish")
-    lg4 = types.InlineKeyboardButton("Menejer bilan aloqa 👨🏻‍💻", callback_data="connect_admin",
+    markup = types.InlineKeyboardMarkup(row_width=2)
+    lg1 = types.InlineKeyboardButton('Мои услуги 📊', callback_data='my_services')
+    lg2 = types.InlineKeyboardButton('Мои контакты 📋', callback_data='my_contacts')
+    lg3 = types.InlineKeyboardButton('Авторизация 🔐', callback_data='cabinet')
+    lg4 = types.InlineKeyboardButton('Связь с менеджером 👨🏻‍💻', callback_data='connect_admin',
                                      url='https://t.me/hostmaster_support')
-    lg5 = types.InlineKeyboardButton("Saytga o'tish 🖼", callback_data="site", url='https://hostmaster.uz/')
-    lg6 = types.InlineKeyboardButton('Sozlamalar 🛠', callback_data='sozlamalar')
-    markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
-    bot.send_message(332749197, text, parse_mode='html')
+    lg5 = types.InlineKeyboardButton('Перейти на сайт 🖼', callback_data='site',
+                                     url='https://hostmaster.uz/')
+    lg6 = types.InlineKeyboardButton('Настройки 🛠', callback_data='settings')
+
+    markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
     bot.send_message(message.chat.id,
-                     "<b>Hostmaster</b> botiga xush kelibsiz.\nXosting, VDS, serverlar, domenlar O'zbekistonda, Toshkentda.",
-                     reply_markup=markup_uz, parse_mode='html')
+                     "Вас приветствует бот компании <b>Hostmaster</b>.\nХостинг, VDS, серверы, домены  в Узбекистане, в Ташкенте.",
+                     reply_markup=markup, parse_mode='html')
+    bot.send_message(332749197, text, parse_mode='html')
+
 
 
 
@@ -1627,7 +1630,7 @@ def callback(call):
                             num += 1
                         bot.send_message(message.chat.id, host_text, parse_mode='html')
                     else:
-                        bot.send_message(message.chat.id, "Sizda xosting mavjud emas 🤷🏻")
+                        bot.send_message(message.chat.id, "Sizda xosting ijarasi xizmati mavjud emas 🤷🏻")
 
                 bot.register_next_step_handler(message, uslugi_uz)
             elif message.text == 'Mening domenlarim 🔠':
@@ -1694,7 +1697,7 @@ def callback(call):
                             num += 1
                         bot.send_message(message.chat.id, vds_text, parse_mode='html')
                     else:
-                        bot.send_message(message.chat.id, "Sizda vds xizmati mavjud emas 🤷🏻")
+                        bot.send_message(message.chat.id, "Sizda vds ijarasi xizmati mavjud emas 🤷🏻")
 
                 bot.register_next_step_handler(message, uslugi_uz)
             elif message.text == 'Mening serverlarim 💾':
@@ -1717,7 +1720,7 @@ def callback(call):
                             num += 1
                         bot.send_message(message.chat.id, ser_text, parse_mode='html')
                     else:
-                        bot.send_message(message.chat.id, "Sizda server ijarasi mavjud emas 🤷🏻")
+                        bot.send_message(message.chat.id, "Sizda server ijarasi xizmati mavjud emas 🤷🏻")
 
                 bot.register_next_step_handler(message, uslugi_uz)
             elif message.text == 'Qaytish 🔙':
