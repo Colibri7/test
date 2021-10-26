@@ -756,6 +756,7 @@ def log(message):
                         "`updated` = '{4}',`b_username`='{5}',`b_userid`='{6}'".format(
                     chat_id, username, first_name, last_name, dt_obj, login, id)
                 cursor.execute(query)
+            bot_con.close()
             markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
             lg1 = types.KeyboardButton('Мои услуги 📊')
             lg2 = types.KeyboardButton('Мои контакты 📋')
@@ -767,7 +768,7 @@ def log(message):
                              reply_markup=markup_ru, parse_mode='html')
             bot.send_message(332749197,
                              f'{message.from_user.first_name} Successfully authorized for admin')
-            bot_con.close()
+
             min.close()
             bot.register_next_step_handler(message, after_login)
         else:
