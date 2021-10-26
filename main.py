@@ -1783,7 +1783,7 @@ def callback(call):
                                              f'{i["status"]}\n'
                             else:
                                 host_text += f'{num}. {i["hostcontractdomain"]}, ' \
-                                             f'Tarif: <b>{i["cptariff"]}</b>, {i["status"]}\n'
+                                             f'{i["status"]}, Tarif: <b>{i["cptariff"]}</b>\n'
                             num += 1
                         bot.send_message(message.chat.id, host_text, parse_mode='html')
                     else:
