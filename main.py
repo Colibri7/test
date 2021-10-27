@@ -1618,19 +1618,20 @@ def callback(call):
             bot.send_message(call.message.chat.id, 'Если Вы зарегистрированный клиент - Вам необходимо выбрать «Авторизация», если новый - «Зарегистрироваться»')
         tg_con.close()
     elif call.data =='ru':
-        markup_uz = types.InlineKeyboardMarkup(row_width=2)
-        lg1 = types.InlineKeyboardButton('Mening xizmatlarim 📊', callback_data='xizmatlarim')
-        lg2 = types.InlineKeyboardButton('Mening kontaktlarim 📋', callback_data='kontaktlarim')
-        lg3 = types.InlineKeyboardButton("Kirish 🔐", callback_data="ro'yxatdan_o'tish")
-        lg4 = types.InlineKeyboardButton("Menejer bilan aloqa 👨🏻‍💻", callback_data="connect_admin",
+        markup_ru = types.InlineKeyboardMarkup(row_width=2)
+        lg1 = types.InlineKeyboardButton('Мои услуги 📊', callback_data='my_services')
+        lg2 = types.InlineKeyboardButton('Мои контакты 📋', callback_data='my_contacts')
+        lg3 = types.InlineKeyboardButton('Авторизация 🔐', callback_data='cabinet')
+        lg4 = types.InlineKeyboardButton('Связь с менеджером 👨🏻‍💻', callback_data='connect_admin',
                                          url='https://t.me/hostmaster_support')
-        lg5 = types.InlineKeyboardButton("Roʻyxatdan o'tish 📝", callback_data="site",
+        lg5 = types.InlineKeyboardButton('Зарегистрироваться 📝', callback_data='site',
                                          url='https://hostmaster.uz/site/signup')
-        lg6 = types.InlineKeyboardButton('Rus 🇷🇺', callback_data='ru')
-        markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
+        lg6 = types.InlineKeyboardButton("O'zb 🇺🇿", callback_data='uz')
+
+        markup_ru.add(lg1, lg2, lg3, lg4, lg5, lg6)
         bot.send_message(call.message.chat.id,
-                         "<b>Hostmaster</b> botiga xush kelibsiz.\nXosting, VDS, serverlar, domenlar O'zbekistonda, Toshkentda.\n\n",
-                         reply_markup=markup_uz, parse_mode='html')
+                         "Вас приветствует бот компании <b>Hostmaster</b>.\nХостинг, VDS, серверы, домены  в Узбекистане, в Ташкенте.\n\n",
+                         reply_markup=markup_ru, parse_mode='html')
     elif call.data=='uz':
         markup_uz = types.InlineKeyboardMarkup(row_width=2)
         lg1 = types.InlineKeyboardButton('Mening xizmatlarim 📊', callback_data='xizmatlarim')
