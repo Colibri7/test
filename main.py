@@ -1603,7 +1603,7 @@ def callback(call):
             print(i["b_userid"])
 
         def uslugi_uz(message):
-            if message.text == 'Mening xostinglarim 🗂':
+            if message.text == 'Xostinglarim 🗂':
                 for i in check:
                     id = i["b_userid"]
                     id_connect = connection.cursor()
@@ -1633,7 +1633,7 @@ def callback(call):
                         bot.send_message(message.chat.id, "Sizda xosting ijarasi xizmati mavjud emas 🤷🏻")
 
                 bot.register_next_step_handler(message, uslugi_uz)
-            elif message.text == 'Mening domenlarim 🔠':
+            elif message.text == 'Domenlarim 🔠':
                 for i in check:
                     id = i["b_userid"]
                     id_connect = connection.cursor()
@@ -1668,7 +1668,7 @@ def callback(call):
                         bot.send_message(message.chat.id, "Sizda domen yo'q 🤷🏻")
 
                 bot.register_next_step_handler(message, uslugi_uz)
-            elif message.text == "Mening VDS'larim 🗄":
+            elif message.text == "VDS'larim 🗄":
                 for i in check:
                     id = i["b_userid"]
                     id_connect = connection.cursor()
@@ -1700,7 +1700,7 @@ def callback(call):
                         bot.send_message(message.chat.id, "Sizda vds ijarasi xizmati mavjud emas 🤷🏻")
 
                 bot.register_next_step_handler(message, uslugi_uz)
-            elif message.text == 'Mening serverlarim 💾':
+            elif message.text == 'Serverlarim 💾':
                 for i in check:
 
                     id = i["b_userid"]
@@ -1738,10 +1738,10 @@ def callback(call):
                                  reply_markup=markup_uz, parse_mode='html')
 
         markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
-        lg1 = types.KeyboardButton('Mening xostinglarim 🗂')
-        lg2 = types.KeyboardButton('Mening domenlarim 🔠')
-        lg3 = types.KeyboardButton("Mening VDS'larim 🗄")
-        lg4 = types.KeyboardButton('Mening serverlarim 💾')
+        lg1 = types.KeyboardButton('Xostinglarim 🗂')
+        lg2 = types.KeyboardButton('Domenlarim 🔠')
+        lg3 = types.KeyboardButton("VDS'larim 🗄")
+        lg4 = types.KeyboardButton('Serverlarim 💾')
 
         lg5 = types.KeyboardButton('Qaytish 🔙')
         markup.add(lg1, lg2, lg3, lg4, lg5)
