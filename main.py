@@ -103,48 +103,52 @@ def domen_30_days_schedule():
 
 
 def domen_10_days_schedule():
-    connection = pymysql.connect(host='62.209.143.131',
-                                 user='hostmasteruz_pbot',
-                                 password='bcaxoZyAXDGc',
-                                 database='hostmasteruz_base',
-                                 charset='utf8mb4',
-                                 cursorclass=pymysql.cursors.DictCursor
-                                 )
-    min = connection.cursor()
-    min.execute(
-        "SELECT `tg_id`, `idmydomain`, `mydomain`.userid, "
-        "`mydomainname`, NOW() as now_datetime, `expired`,"
-        "`contactname`, `contactcompany` FROM"
-        " `hostmasteruz_base`.`mydomain`,"
-        " `hostmasteruz_bot`.`sardorbot`,"
-        "`hostmasteruz_base`.`contact`  "
-        "WHERE DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 10 DAY))"
-        " AND `sardorbot`.`b_userid` = `mydomain`.`userid`"
-        " AND `mydomain`.`mydomaincontactcust` = `contact`.`idcontact`;")
-    domen_30 = min.fetchall()
+    day_of_month = datetime.now().day
+    print(day_of_month)
+    if day_of_month == 27:
 
-    for i in domen_30:
-        date = '{:%d-%m-%Y}'.format(i["expired"])
-        some_id = i["tg_id"]
-        print('id ', some_id)
-        if i["contactcompany"] is None:
+        connection = pymysql.connect(host='62.209.143.131',
+                                     user='hostmasteruz_pbot',
+                                     password='bcaxoZyAXDGc',
+                                     database='hostmasteruz_base',
+                                     charset='utf8mb4',
+                                     cursorclass=pymysql.cursors.DictCursor
+                                     )
+        min = connection.cursor()
+        min.execute(
+            "SELECT `tg_id`, `idmydomain`, `mydomain`.userid, "
+            "`mydomainname`, NOW() as now_datetime, `expired`,"
+            "`contactname`, `contactcompany` FROM"
+            " `hostmasteruz_base`.`mydomain`,"
+            " `hostmasteruz_bot`.`sardorbot`,"
+            "`hostmasteruz_base`.`contact`  "
+            "WHERE DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 10 DAY))"
+            " AND `sardorbot`.`b_userid` = `mydomain`.`userid`"
+            " AND `mydomain`.`mydomaincontactcust` = `contact`.`idcontact`;")
+        domen_30 = min.fetchall()
 
-            bot.send_message(some_id, f'Уважаемый <b>{i["contactname"]}!</b> Уведомляем Вас о том, '
-                                        f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
-                                        f'истекает <b>{date}</b> '
-                                        f'года . Для продления регистрации домена Вам необходимо оплатить '
-                                        f'сумму согласно действующим тарифам на нашем сайте. '
-                                        f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
-                                        f'лицом.\n<b>С уважением, команда Hostmaster!</b>', parse_mode='html')
-        else:
-            bot.send_message(some_id, f'Уважаемый <b>{i["contactcompany"]}!</b> Уведомляем Вас о том, '
-                                        f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
-                                        f'истекает <b>{date}</b> '
-                                        f'года . Для продления регистрации домена Вам необходимо оплатить '
-                                        f'сумму согласно действующим тарифам на нашем сайте. '
-                                        f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
-                                        f'лицом.\n<b>С уважением, команда Hostmaster!</b>', parse_mode='html')
-    min.close()
+        for i in domen_30:
+            date = '{:%d-%m-%Y}'.format(i["expired"])
+            some_id = i["tg_id"]
+            print('id ', some_id)
+            if i["contactcompany"] is None:
+
+                bot.send_message(some_id, f'Уважаемый <b>{i["contactname"]}!</b> Уведомляем Вас о том, '
+                                            f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
+                                            f'истекает <b>{date}</b> '
+                                            f'года . Для продления регистрации домена Вам необходимо оплатить '
+                                            f'сумму согласно действующим тарифам на нашем сайте. '
+                                            f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
+                                            f'лицом.\n<b>С уважением, команда Hostmaster!</b>', parse_mode='html')
+            else:
+                bot.send_message(some_id, f'Уважаемый <b>{i["contactcompany"]}!</b> Уведомляем Вас о том, '
+                                            f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
+                                            f'истекает <b>{date}</b> '
+                                            f'года . Для продления регистрации домена Вам необходимо оплатить '
+                                            f'сумму согласно действующим тарифам на нашем сайте. '
+                                            f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
+                                            f'лицом.\n<b>С уважением, команда Hostmaster!</b>', parse_mode='html')
+        min.close()
 
 
 def domen_1_days_schedule():
@@ -1789,7 +1793,7 @@ def callback(call):
 def job2():
     day_of_month = datetime.now().day
     print(day_of_month)
-    if day_of_month == 13:
+    if day_of_month == 27:
         bot.send_message(332749197, 'hello')
 
 
@@ -1802,7 +1806,7 @@ def schedule_checker():
 if __name__ == "__main__":
     schedule.every().day.at("17:11").do(domen_60_days_schedule)
     schedule.every().day.at("17:07").do(domen_30_days_schedule)
-    schedule.every().day.at("11:38").do(domen_10_days_schedule)
+    schedule.every().day.at("11:43").do(domen_10_days_schedule)
     schedule.every().day.at("11:33").do(domen_1_days_schedule)
     # schedule.every().day.at('12:14').do(vds_schedule)
     # schedule.every().day.at("12:15").do(hosting_schedule)
