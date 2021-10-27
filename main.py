@@ -9,7 +9,7 @@ from telebot import types
 import pymysql
 
 bot = telebot.TeleBot('1241604248:AAH8khnkopYJPhlvplSPOriYHNStmWHzBuc', threaded=False)
-
+bot.delete_webhook()
 
 SQLALCHEMY_ENGINE_OPTIONS = {
     "pool_pre_ping": True,
