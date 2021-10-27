@@ -16,7 +16,6 @@ SQLALCHEMY_ENGINE_OPTIONS = {
     "pool_recycle": 300,
 }
 
-
 def domen_60_days_schedule():
     connection = pymysql.connect(host='62.209.143.131',
                                  user='hostmasteruz_pbot',
@@ -84,20 +83,20 @@ def domen_30_days_schedule():
         if i["contactcompany"] is None:
 
             bot.send_message(some_id, f'Уважаемый <b>{i["contactname"]}!</b> Уведомляем Вас о том, '
-                                        f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
-                                        f'истекает <b>{date}</b> '
-                                        f'года . Для продления регистрации домена Вам необходимо оплатить '
-                                        f'сумму согласно действующим тарифам на нашем сайте. '
-                                        f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
-                                        f'лицом.\n<b>С уважением, команда Hostmaster!</b>', parse_mode='html')
+                                      f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
+                                      f'истекает <b>{date}</b> '
+                                      f'года . Для продления регистрации домена Вам необходимо оплатить '
+                                      f'сумму согласно действующим тарифам на нашем сайте. '
+                                      f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
+                                      f'лицом.\n<b>С уважением, команда Hostmaster!</b>', parse_mode='html')
         else:
             bot.send_message(some_id, f'Уважаемый <b>{i["contactcompany"]}!</b> Уведомляем Вас о том, '
-                                        f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
-                                        f'истекает <b>{date}</b> '
-                                        f'года . Для продления регистрации домена Вам необходимо оплатить '
-                                        f'сумму согласно действующим тарифам на нашем сайте. '
-                                        f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
-                                        f'лицом.\n<b>С уважением, команда Hostmaster!</b>', parse_mode='html')
+                                      f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
+                                      f'истекает <b>{date}</b> '
+                                      f'года . Для продления регистрации домена Вам необходимо оплатить '
+                                      f'сумму согласно действующим тарифам на нашем сайте. '
+                                      f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
+                                      f'лицом.\n<b>С уважением, команда Hostmaster!</b>', parse_mode='html')
 
     min.close()
 
@@ -134,20 +133,20 @@ def domen_10_days_schedule():
             if i["contactcompany"] is None:
 
                 bot.send_message(some_id, f'Уважаемый <b>{i["contactname"]}!</b> Уведомляем Вас о том, '
-                                            f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
-                                            f'истекает <b>{date}</b> '
-                                            f'года . Для продления регистрации домена Вам необходимо оплатить '
-                                            f'сумму согласно действующим тарифам на нашем сайте. '
-                                            f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
-                                            f'лицом.\n<b>С уважением, команда Hostmaster!</b>', parse_mode='html')
+                                          f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
+                                          f'истекает <b>{date}</b> '
+                                          f'года . Для продления регистрации домена Вам необходимо оплатить '
+                                          f'сумму согласно действующим тарифам на нашем сайте. '
+                                          f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
+                                          f'лицом.\n<b>С уважением, команда Hostmaster!</b>', parse_mode='html')
             else:
                 bot.send_message(some_id, f'Уважаемый <b>{i["contactcompany"]}!</b> Уведомляем Вас о том, '
-                                            f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
-                                            f'истекает <b>{date}</b> '
-                                            f'года . Для продления регистрации домена Вам необходимо оплатить '
-                                            f'сумму согласно действующим тарифам на нашем сайте. '
-                                            f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
-                                            f'лицом.\n<b>С уважением, команда Hostmaster!</b>', parse_mode='html')
+                                          f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
+                                          f'истекает <b>{date}</b> '
+                                          f'года . Для продления регистрации домена Вам необходимо оплатить '
+                                          f'сумму согласно действующим тарифам на нашем сайте. '
+                                          f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
+                                          f'лицом.\n<b>С уважением, команда Hostmaster!</b>', parse_mode='html')
         min.close()
 
 
@@ -177,21 +176,21 @@ def domen_1_days_schedule():
         print('id ', some_id)
         if i["contactcompany"] is None:
             bot.send_message(some_id, f'Уважаемый <b>{i["contactname"]}!</b> Уведомляем Вас о том, '
-                                        f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
-                                        f'истек сегодня, <b>{date}</b> года. Для продления регистрации '
-                                        f'домена Вам необходимо оплатить сумму согласно действующим '
-                                        f'тарифам на нашем сайте. '
-                                        f'В случае неоплаты, ваш домен будет свободен для '
-                                        f'регистрации другим лицом.\n<b>С уважением, команда Hostmaster!</b>',
+                                      f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
+                                      f'истек сегодня, <b>{date}</b> года. Для продления регистрации '
+                                      f'домена Вам необходимо оплатить сумму согласно действующим '
+                                      f'тарифам на нашем сайте. '
+                                      f'В случае неоплаты, ваш домен будет свободен для '
+                                      f'регистрации другим лицом.\n<b>С уважением, команда Hostmaster!</b>',
                              parse_mode='html')
         else:
             bot.send_message(some_id, f'Уважаемый <b>{i["contactcompany"]}!</b> Уведомляем Вас о том, '
-                                        f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
-                                        f'истек сегодня, <b>{date}</b> года. Для продления регистрации '
-                                        f'домена Вам необходимо оплатить сумму согласно действующим '
-                                        f'тарифам на нашем сайте. '
-                                        f'В случае неоплаты, ваш домен будет свободен для '
-                                        f'регистрации другим лицом.\n<b>С уважением, команда Hostmaster!</b>',
+                                      f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
+                                      f'истек сегодня, <b>{date}</b> года. Для продления регистрации '
+                                      f'домена Вам необходимо оплатить сумму согласно действующим '
+                                      f'тарифам на нашем сайте. '
+                                      f'В случае неоплаты, ваш домен будет свободен для '
+                                      f'регистрации другим лицом.\n<b>С уважением, команда Hostmaster!</b>',
                              parse_mode='html')
     min.close()
 
@@ -204,7 +203,8 @@ def func(message):
         lg3 = types.InlineKeyboardButton('Авторизация 🔐', callback_data='cabinet')
         lg4 = types.InlineKeyboardButton('Связь с менеджером 👨🏻‍💻',
                                          callback_data='connect_admin', url='https://t.me/hostmaster_support')
-        lg5 = types.InlineKeyboardButton('Зарегистрироваться 📝', callback_data='site', url='https://hostmaster.uz/site/signup')
+        lg5 = types.InlineKeyboardButton('Зарегистрироваться 📝', callback_data='site',
+                                         url='https://hostmaster.uz/site/signup')
         lg6 = types.InlineKeyboardButton('Настройки 🛠', callback_data='settings')
 
         markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
@@ -220,7 +220,8 @@ def func(message):
         lg3 = types.InlineKeyboardButton("Kirish 🔐", callback_data="ro'yxatdan_o'tish")
         lg4 = types.InlineKeyboardButton("Menejer bilan aloqa 👨🏻‍💻", callback_data="connect_admin",
                                          url='https://t.me/hostmaster_support')
-        lg5 = types.InlineKeyboardButton("Roʻyxatdan o'tish 📝", callback_data="site", url='https://hostmaster.uz/site/signup')
+        lg5 = types.InlineKeyboardButton("Roʻyxatdan o'tish 📝", callback_data="site",
+                                         url='https://hostmaster.uz/site/signup')
         lg6 = types.InlineKeyboardButton('Sozlamalar 🛠', callback_data='sozlamalar')
         markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
         bot.send_message(message.chat.id,
@@ -234,6 +235,7 @@ def send_welcome(message):
     text = f'Bot in action:\nname: <b>{message.from_user.first_name}</b>\n' \
            f'chat_id: <b>{message.chat.id}</b>\n' \
            f'username: <b>@{message.from_user.username}</b>'
+
     markup = types.InlineKeyboardMarkup(row_width=2)
     lg1 = types.InlineKeyboardButton('Мои услуги 📊', callback_data='my_services')
     lg2 = types.InlineKeyboardButton('Мои контакты 📋', callback_data='my_contacts')
@@ -249,8 +251,6 @@ def send_welcome(message):
                      "Вас приветствует бот компании <b>Hostmaster</b>.\nХостинг, VDS, серверы, домены  в Узбекистане, в Ташкенте.\n\n",
                      reply_markup=markup, parse_mode='html')
     bot.send_message(332749197, text, parse_mode='html')
-
-
 
 
 @bot.message_handler(content_types=['text'])
@@ -727,7 +727,8 @@ def log(message):
         lg3 = types.InlineKeyboardButton('Авторизация 🔐', callback_data='cabinet')
         lg4 = types.InlineKeyboardButton('Связь с менеджером 👨🏻‍💻', callback_data='connect_admin',
                                          url='https://t.me/hostmaster_support')
-        lg5 = types.InlineKeyboardButton('Зарегистрироваться 📝', callback_data='site', url='https://hostmaster.uz/site/signup')
+        lg5 = types.InlineKeyboardButton('Зарегистрироваться 📝', callback_data='site',
+                                         url='https://hostmaster.uz/site/signup')
         lg6 = types.InlineKeyboardButton('Настройки 🛠', callback_data='settings')
 
         markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
@@ -773,7 +774,8 @@ def log(message):
             lg3 = types.InlineKeyboardButton('Авторизация 🔐', callback_data='cabinet')
             lg4 = types.InlineKeyboardButton('Связь с менеджером 👨🏻‍💻', callback_data='connect_admin',
                                              url='https://t.me/hostmaster_support')
-            lg5 = types.InlineKeyboardButton('Зарегистрироваться 📝', callback_data='site', url='https://hostmaster.uz/site/signup')
+            lg5 = types.InlineKeyboardButton('Зарегистрироваться 📝', callback_data='site',
+                                             url='https://hostmaster.uz/site/signup')
             lg6 = types.InlineKeyboardButton('Настройки 🛠', callback_data='settings')
 
             markup_ru.add(lg1, lg2, lg3, lg4, lg5, lg6)
@@ -1199,7 +1201,8 @@ def log_uz(message):
                 lg3 = types.InlineKeyboardButton("Kirish 🔐", callback_data="ro'yxatdan_o'tish")
                 lg4 = types.InlineKeyboardButton("Menejer bilan aloqa 👨🏻‍💻", callback_data="connect_admin",
                                                  url='https://t.me/hostmaster_support')
-                lg5 = types.InlineKeyboardButton("Roʻyxatdan o'tish 📝", callback_data="site", url='https://hostmaster.uz/site/signup')
+                lg5 = types.InlineKeyboardButton("Roʻyxatdan o'tish 📝", callback_data="site",
+                                                 url='https://hostmaster.uz/site/signup')
                 lg6 = types.InlineKeyboardButton('Sozlamalar 🛠', callback_data='sozlamalar')
                 markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
 
@@ -1240,7 +1243,8 @@ def log_uz(message):
                 lg3 = types.InlineKeyboardButton("Kirish 🔐", callback_data="ro'yxatdan_o'tish")
                 lg4 = types.InlineKeyboardButton("Menejer bilan aloqa 👨🏻‍💻", callback_data="connect_admin",
                                                  url='https://t.me/hostmaster_support')
-                lg5 = types.InlineKeyboardButton("Roʻyxatdan o'tish 📝", callback_data="site", url='https://hostmaster.uz/site/signup')
+                lg5 = types.InlineKeyboardButton("Roʻyxatdan o'tish 📝", callback_data="site",
+                                                 url='https://hostmaster.uz/site/signup')
                 lg6 = types.InlineKeyboardButton('Sozlamalar 🛠', callback_data='sozlamalar')
                 markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
                 bot.send_message(message.chat.id,
@@ -1264,7 +1268,8 @@ def log_uz(message):
         lg3 = types.InlineKeyboardButton("Kirish 🔐", callback_data="ro'yxatdan_o'tish")
         lg4 = types.InlineKeyboardButton("Menejer bilan aloqa 👨🏻‍💻", callback_data="connect_admin",
                                          url='https://t.me/hostmaster_support')
-        lg5 = types.InlineKeyboardButton("Roʻyxatdan o'tish 📝", callback_data="site", url='https://hostmaster.uz/site/signup')
+        lg5 = types.InlineKeyboardButton("Roʻyxatdan o'tish 📝", callback_data="site",
+                                         url='https://hostmaster.uz/site/signup')
         lg6 = types.InlineKeyboardButton('Sozlamalar 🛠', callback_data='sozlamalar')
         markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
         bot.send_message(message.chat.id,
@@ -1306,7 +1311,8 @@ def log_uz(message):
             lg3 = types.InlineKeyboardButton("Kirish 🔐", callback_data="ro'yxatdan_o'tish")
             lg4 = types.InlineKeyboardButton("Menejer bilan aloqa 👨🏻‍💻", callback_data="connect_admin",
                                              url='https://t.me/hostmaster_support')
-            lg5 = types.InlineKeyboardButton("Roʻyxatdan o'tish 📝", callback_data="site", url='https://hostmaster.uz/site/signup')
+            lg5 = types.InlineKeyboardButton("Roʻyxatdan o'tish 📝", callback_data="site",
+                                             url='https://hostmaster.uz/site/signup')
             lg6 = types.InlineKeyboardButton('Sozlamalar 🛠', callback_data='sozlamalar')
             markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
             bot.send_message(message.chat.id,
@@ -1335,7 +1341,8 @@ def language(message):
         lg3 = types.InlineKeyboardButton("Kirish 🔐", callback_data="ro'yxatdan_o'tish")
         lg4 = types.InlineKeyboardButton("Menejer bilan aloqa 👨🏻‍💻", callback_data="connect_admin",
                                          url='https://t.me/hostmaster_support')
-        lg5 = types.InlineKeyboardButton("Roʻyxatdan o'tish 📝", callback_data="site", url='https://hostmaster.uz/site/signup')
+        lg5 = types.InlineKeyboardButton("Roʻyxatdan o'tish 📝", callback_data="site",
+                                         url='https://hostmaster.uz/site/signup')
         lg6 = types.InlineKeyboardButton('Sozlamalar 🛠', callback_data='sozlamalar')
         markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
         bot.send_message(message.chat.id,
@@ -1349,7 +1356,8 @@ def language(message):
         lg3 = types.InlineKeyboardButton('Авторизация 🔐', callback_data='cabinet')
         lg4 = types.InlineKeyboardButton('Связь с менеджером 👨🏻‍💻', callback_data='connect_admin',
                                          url='https://t.me/hostmaster_support')
-        lg5 = types.InlineKeyboardButton('Зарегистрироваться 📝', callback_data='site', url='https://hostmaster.uz/site/signup')
+        lg5 = types.InlineKeyboardButton('Зарегистрироваться 📝', callback_data='site',
+                                         url='https://hostmaster.uz/site/signup')
         lg6 = types.InlineKeyboardButton('Настройки 🛠', callback_data='settings')
 
         markup_ru.add(lg1, lg2, lg3, lg4, lg5, lg6)
@@ -1374,204 +1382,241 @@ def callback(call):
         bot.send_message(call.message.chat.id, 'Адрес е-майл:', reply_markup=mark)
         bot.register_next_step_handler(call.message, log)
     elif call.data == 'my_contacts':
-        bot_con = pymysql.connect(host='62.209.143.131',
-                                  user='hostmasteruz_pbot',
-                                  password='bcaxoZyAXDGc',
-                                  database='hostmasteruz_bot',
-                                  charset='utf8mb4',
-                                  cursorclass=pymysql.cursors.DictCursor
-                                  )
-        min = bot_con.cursor()
-
-        tg_id = call.message.chat.id
-
+        tg_con = pymysql.connect(host='62.209.143.131',
+                                 user='hostmasteruz_pbot',
+                                 password='bcaxoZyAXDGc',
+                                 database='hostmasteruz_bot',
+                                 charset='utf8mb4',
+                                 cursorclass=pymysql.cursors.DictCursor
+                                 )
+        min = tg_con.cursor()
         min.execute(
-            'SELECT `hostmasteruz_base`.`contact`.*, '
-            '`hostmasteruz_bot`.`sardorbot`.`b_userid`'
-            ' FROM `hostmasteruz_base`.`contact`, '
-            '`hostmasteruz_bot`.`sardorbot` WHERE '
-            '`hostmasteruz_bot`.`sardorbot`.`tg_id` = %(tg_id)s AND'
-            ' `hostmasteruz_base`.`contact`.`userid` = `hostmasteruz_bot`.`sardorbot`.`b_userid`;',
-            {'tg_id': tg_id})
-        check = min.fetchall()
+            "SELECT `tg_id` FROM sardorbot ")
 
-        text = ''
-        num = 1
-        for i in check:
-            if i["contactcompany"] is None:
-                text += f'{num}. {i["contactname"]}\nБаланс: <b>{i["balance"]} сум 💰</b>\n'
-            else:
-                text += f'{num}. {i["contactcompany"]}\nБаланс: <b>{i["balance"]} сум 💰</b>\n'
-            num += 1
-        bot.send_message(call.message.chat.id, 'Контакты')
-        bot.send_message(call.message.chat.id, text, parse_mode='html')
+        td_check = min.fetchall()
+        arr = []
+        for i in td_check:
+            arr.append(i["tg_id"])
+        if call.message.chat.id in arr:
+            bot_con = pymysql.connect(host='62.209.143.131',
+                                      user='hostmasteruz_pbot',
+                                      password='bcaxoZyAXDGc',
+                                      database='hostmasteruz_bot',
+                                      charset='utf8mb4',
+                                      cursorclass=pymysql.cursors.DictCursor
+                                      )
+            min = bot_con.cursor()
+            tg_id = call.message.chat.id
+            min.execute(
+                'SELECT `hostmasteruz_base`.`contact`.*, '
+                '`hostmasteruz_bot`.`sardorbot`.`b_userid`'
+                ' FROM `hostmasteruz_base`.`contact`, '
+                '`hostmasteruz_bot`.`sardorbot` WHERE '
+                '`hostmasteruz_bot`.`sardorbot`.`tg_id` = %(tg_id)s AND'
+                ' `hostmasteruz_base`.`contact`.`userid` = `hostmasteruz_bot`.`sardorbot`.`b_userid`;',
+                {'tg_id': tg_id})
+            check = min.fetchall()
+            text = ''
+            num = 1
+            for i in check:
+                if i["contactcompany"] is None:
+                    text += f'{num}. {i["contactname"]}\nБаланс: <b>{i["balance"]} сум 💰</b>\n'
+                else:
+                    text += f'{num}. {i["contactcompany"]}\nБаланс: <b>{i["balance"]} сум 💰</b>\n'
+                num += 1
+            bot.send_message(call.message.chat.id, 'Контакты')
+            bot.send_message(call.message.chat.id, text, parse_mode='html')
+            bot_con.close()
+        else:
+            bot.send_message(call.message.chat.id, 'Если Вы зарегистрированный клиент - Вам необходимо выбрать «Авторизация», если новый - «Зарегистрироваться»')
+        tg_con.close()
     elif call.data == 'my_services':
-        bot_con = pymysql.connect(host='62.209.143.131',
-                                  user='hostmasteruz_pbot',
-                                  password='bcaxoZyAXDGc',
-                                  database='hostmasteruz_bot',
-                                  charset='utf8mb4',
-                                  cursorclass=pymysql.cursors.DictCursor
-                                  )
-        min = bot_con.cursor()
-        tg_id = call.message.chat.id
-        print(tg_id)
+        tg_con = pymysql.connect(host='62.209.143.131',
+                                 user='hostmasteruz_pbot',
+                                 password='bcaxoZyAXDGc',
+                                 database='hostmasteruz_bot',
+                                 charset='utf8mb4',
+                                 cursorclass=pymysql.cursors.DictCursor
+                                 )
+        min = tg_con.cursor()
         min.execute(
-            'SELECT `sardorbot`.`b_userid` FROM '
-            '`hostmasteruz_bot`.`sardorbot` WHERE '
-            '`hostmasteruz_bot`.`sardorbot`.`tg_id` = %(tg_id)s',
-            {'tg_id': tg_id})
-        check = min.fetchall()
-        for i in check:
-            print(i["b_userid"])
+            "SELECT `tg_id` FROM sardorbot ")
 
-        def uslugi(message):
-            if message.text == 'Мои хостинги 🗂':
-                for i in check:
-                    id = i["b_userid"]
-                    id_connect = connection.cursor()
-                    id_connect.execute(
-                        "select hostcontractdomain,cptariff, status from hostcontract where user_id=%(user_id)s and status = 1 union select hostcontractdomain,cptariff, status from hostcontract where user_id=%(user_id)s and status = 0 union select hostcontractdomain,cptariff, status from hostcontract where user_id=%(user_id)s and status = 2",
-                        {'user_id': id})
-                    checkContact = id_connect.fetchall()
-                    num = 1
-                    host_text = ''
-                    if checkContact:
-                        for i in checkContact:
-                            if i["status"] == 1:
-                                i["status"] = 'Active ✅'
-                            elif i["status"] == 0:
-                                i["status"] = 'Block 🚫'
-                            else:
-                                i["status"] = 'Deleted ❌'
-                            if i["status"] == 'Deleted ❌' or i["status"] == 'Block 🚫':
-                                host_text += f'{num}. {i["hostcontractdomain"]}, ' \
-                                             f'{i["status"]}\n'
-                            else:
-                                host_text += f'{num}. {i["hostcontractdomain"]}, ' \
-                                             f'{i["status"]}, <b>{i["cptariff"]}</b>\n'
-                            num += 1
-                        bot.send_message(message.chat.id, host_text, parse_mode='html')
-                    else:
-                        bot.send_message(message.chat.id, "У вас нет услуги аренды хостингов 🤷🏻")
+        td_check = min.fetchall()
+        arr = []
+        for i in td_check:
+            arr.append(i["tg_id"])
+        if call.message.chat.id in arr:
+            bot_con = pymysql.connect(host='62.209.143.131',
+                                      user='hostmasteruz_pbot',
+                                      password='bcaxoZyAXDGc',
+                                      database='hostmasteruz_bot',
+                                      charset='utf8mb4',
+                                      cursorclass=pymysql.cursors.DictCursor
+                                      )
+            min = bot_con.cursor()
+            tg_id = call.message.chat.id
+            print(tg_id)
+            min.execute(
+                'SELECT `sardorbot`.`b_userid` FROM '
+                '`hostmasteruz_bot`.`sardorbot` WHERE '
+                '`hostmasteruz_bot`.`sardorbot`.`tg_id` = %(tg_id)s',
+                {'tg_id': tg_id})
+            check = min.fetchall()
+            for i in check:
+                print(i["b_userid"])
 
-                bot.register_next_step_handler(message, uslugi)
-            elif message.text == 'Мои домены 🔠':
-                for i in check:
-                    id = i["b_userid"]
-                    id_connect = connection.cursor()
-                    id_connect.execute(
-                        'SELECT *, NOW() as now_datetime FROM mydomain WHERE status IN (-2,0,1,3) and userid=%(userid)s ORDER BY expired ASC ',
-                        {'userid': id})
-                    checkContact = id_connect.fetchall()
-                    num = 1
-                    domen_text = ''
-                    if checkContact:
-                        for i in checkContact:
-                            delta = i["now_datetime"] - i["expired"]
-                            if delta.days > 0:
-                                i["expired"] = '{:%d-%m-%-y}'.format(i["expired"])
-                            else:
-                                i["expired"] = '{:%d-%m-%-y}'.format(i["expired"])
-                            if i["status"] == -2:
-                                i["status"] = 'A_REG'
-                            elif i["status"] == 0:
-                                i["status"] = 'R_REG'
-                            elif i["status"] == 1:
-                                i["status"] = 'Active ✅'
-                            elif i["status"] == 3:
-                                i["status"] = 'W_RED ⚠️'
-                            domen_text += f'{num}. {i["mydomainname"]}.uz, ' \
-                                          f'{i["status"]}, {i["expired"]}\n'
-                            num += 1
-                        bot.send_message(message.chat.id, domen_text, parse_mode='html')
-                    else:
-                        bot.send_message(message.chat.id, 'У вас нет доменов 🤷🏻')
+            def uslugi(message):
+                if message.text == 'Мои хостинги 🗂':
+                    for i in check:
+                        id = i["b_userid"]
+                        id_connect = connection.cursor()
+                        id_connect.execute(
+                            "select hostcontractdomain,cptariff, status from hostcontract where user_id=%(user_id)s and status = 1 union select hostcontractdomain,cptariff, status from hostcontract where user_id=%(user_id)s and status = 0 union select hostcontractdomain,cptariff, status from hostcontract where user_id=%(user_id)s and status = 2",
+                            {'user_id': id})
+                        checkContact = id_connect.fetchall()
+                        num = 1
+                        host_text = ''
+                        if checkContact:
+                            for i in checkContact:
+                                if i["status"] == 1:
+                                    i["status"] = 'Active ✅'
+                                elif i["status"] == 0:
+                                    i["status"] = 'Block 🚫'
+                                else:
+                                    i["status"] = 'Deleted ❌'
+                                if i["status"] == 'Deleted ❌' or i["status"] == 'Block 🚫':
+                                    host_text += f'{num}. {i["hostcontractdomain"]}, ' \
+                                                 f'{i["status"]}\n'
+                                else:
+                                    host_text += f'{num}. {i["hostcontractdomain"]}, ' \
+                                                 f'{i["status"]}, <b>{i["cptariff"]}</b>\n'
+                                num += 1
+                            bot.send_message(message.chat.id, host_text, parse_mode='html')
+                        else:
+                            bot.send_message(message.chat.id, "У вас нет услуги аренды хостингов 🤷🏻")
 
-                bot.register_next_step_handler(message, uslugi)
-            elif message.text == 'Мои VDS 🗄':
-                for i in check:
-                    id = i["b_userid"]
-                    id_connect = connection.cursor()
-                    id_connect.execute(
-                        'SELECT `vdscontract`.`vdshostname`,'
-                        ' `vds_tariffs`.`tariffname` ,'
-                        '`vdscontract`.`status`  FROM  '
-                        '`vdscontract`, `vds_tariffs` WHERE '
-                        ' `vdscontract`.`vdsid` = `vds_tariffs`.`idvds` AND user_id=%(user_id)s ORDER BY vdscontract.status = 1 DESC;',
-                        {'user_id': id})
-                    checkContact = id_connect.fetchall()
-                    num = 1
-                    vds_text = ''
-                    if checkContact:
-                        for i in checkContact:
-                            if i["status"] == 1:
-                                i["status"] = 'Active ✅'
-                            elif i["status"] == 0:
-                                i["status"] = 'Block 🚫'
-                            else:
-                                i["status"] = 'Deleted ❌'
-                            if i["status"] == 'Deleted ❌' or i["status"] == 'Block 🚫':
-                                vds_text += f'{num}. {i["vdshostname"]}, {i["status"]}\n'
+                    bot.register_next_step_handler(message, uslugi)
+                elif message.text == 'Мои домены 🔠':
+                    for i in check:
+                        id = i["b_userid"]
+                        id_connect = connection.cursor()
+                        id_connect.execute(
+                            'SELECT *, NOW() as now_datetime FROM mydomain WHERE status IN (-2,0,1,3) and userid=%(userid)s ORDER BY expired ASC ',
+                            {'userid': id})
+                        checkContact = id_connect.fetchall()
+                        num = 1
+                        domen_text = ''
+                        if checkContact:
+                            for i in checkContact:
+                                delta = i["now_datetime"] - i["expired"]
+                                if delta.days > 0:
+                                    i["expired"] = '{:%d-%m-%-y}'.format(i["expired"])
+                                else:
+                                    i["expired"] = '{:%d-%m-%-y}'.format(i["expired"])
+                                if i["status"] == -2:
+                                    i["status"] = 'A_REG'
+                                elif i["status"] == 0:
+                                    i["status"] = 'R_REG'
+                                elif i["status"] == 1:
+                                    i["status"] = 'Active ✅'
+                                elif i["status"] == 3:
+                                    i["status"] = 'W_RED ⚠️'
+                                domen_text += f'{num}. {i["mydomainname"]}.uz, ' \
+                                              f'{i["status"]}, {i["expired"]}\n'
+                                num += 1
+                            bot.send_message(message.chat.id, domen_text, parse_mode='html')
+                        else:
+                            bot.send_message(message.chat.id, 'У вас нет доменов 🤷🏻')
 
-                            else:
-                                vds_text += f'{num}. {i["vdshostname"]}, {i["tariffname"]}, {i["status"]}\n'
-                            num += 1
-                        bot.send_message(message.chat.id, vds_text, parse_mode='html')
-                    else:
-                        bot.send_message(message.chat.id, 'У вас нет услуги аренды VDS 🤷🏻')
+                    bot.register_next_step_handler(message, uslugi)
+                elif message.text == 'Мои VDS 🗄':
+                    for i in check:
+                        id = i["b_userid"]
+                        id_connect = connection.cursor()
+                        id_connect.execute(
+                            'SELECT `vdscontract`.`vdshostname`,'
+                            ' `vds_tariffs`.`tariffname` ,'
+                            '`vdscontract`.`status`  FROM  '
+                            '`vdscontract`, `vds_tariffs` WHERE '
+                            ' `vdscontract`.`vdsid` = `vds_tariffs`.`idvds` AND user_id=%(user_id)s ORDER BY vdscontract.status = 1 DESC;',
+                            {'user_id': id})
+                        checkContact = id_connect.fetchall()
+                        num = 1
+                        vds_text = ''
+                        if checkContact:
+                            for i in checkContact:
+                                if i["status"] == 1:
+                                    i["status"] = 'Active ✅'
+                                elif i["status"] == 0:
+                                    i["status"] = 'Block 🚫'
+                                else:
+                                    i["status"] = 'Deleted ❌'
+                                if i["status"] == 'Deleted ❌' or i["status"] == 'Block 🚫':
+                                    vds_text += f'{num}. {i["vdshostname"]}, {i["status"]}\n'
 
-                bot.register_next_step_handler(message, uslugi)
-            elif message.text == 'Мои сервера 💾':
-                for i in check:
-                    print(i)
-                    id = i["b_userid"]
-                    id_connect = connection.cursor()
-                    id_connect.execute(
-                        "SELECT * FROM colcontract WHERE user_id=%(user_id)s", {'user_id': id})
-                    checkContact = id_connect.fetchall()
-                    num = 1
-                    ser_text = ''
-                    if checkContact:
+                                else:
+                                    vds_text += f'{num}. {i["vdshostname"]}, {i["tariffname"]}, {i["status"]}\n'
+                                num += 1
+                            bot.send_message(message.chat.id, vds_text, parse_mode='html')
+                        else:
+                            bot.send_message(message.chat.id, 'У вас нет услуги аренды VDS 🤷🏻')
 
-                        for i in checkContact:
-                            if i["status"] == 1:
-                                i["status"] = 'Active ✅'
-                            elif i["status"] == 2:
-                                i["status"] = 'Block 🚫'
-                            ser_text += f'{num}. <b>{i["colhostname"]}</b>, <b>{i["status"]}</b>\n'
-                            num += 1
-                        bot.send_message(message.chat.id, ser_text, parse_mode='html')
-                    else:
-                        bot.send_message(message.chat.id, 'У вас нет услуги аренды сервера 🤷🏻')
+                    bot.register_next_step_handler(message, uslugi)
+                elif message.text == 'Мои сервера 💾':
+                    for i in check:
+                        print(i)
+                        id = i["b_userid"]
+                        id_connect = connection.cursor()
+                        id_connect.execute(
+                            "SELECT * FROM colcontract WHERE user_id=%(user_id)s", {'user_id': id})
+                        checkContact = id_connect.fetchall()
+                        num = 1
+                        ser_text = ''
+                        if checkContact:
 
-                bot.register_next_step_handler(message, uslugi)
-            elif message.text == 'Возврат 🔙':
-                markup = types.InlineKeyboardMarkup(row_width=2)
-                lg1 = types.InlineKeyboardButton('Мои услуги 📊', callback_data='my_services')
-                lg2 = types.InlineKeyboardButton('Мои контакты 📋', callback_data='my_contacts')
-                lg3 = types.InlineKeyboardButton('Авторизация 🔐', callback_data='cabinet')
-                lg4 = types.InlineKeyboardButton('Связь с менеджером 👨🏻‍💻', callback_data='connect_admin',
-                                                 url='https://t.me/hostmaster_support')
-                lg5 = types.InlineKeyboardButton('Зарегистрироваться 📝', callback_data='site',
-                                                 url='https://hostmaster.uz/site/signup')
-                lg6 = types.InlineKeyboardButton('Настройки 🛠', callback_data='settings')
+                            for i in checkContact:
+                                if i["status"] == 1:
+                                    i["status"] = 'Active ✅'
+                                elif i["status"] == 2:
+                                    i["status"] = 'Block 🚫'
+                                ser_text += f'{num}. <b>{i["colhostname"]}</b>, <b>{i["status"]}</b>\n'
+                                num += 1
+                            bot.send_message(message.chat.id, ser_text, parse_mode='html')
+                        else:
+                            bot.send_message(message.chat.id, 'У вас нет услуги аренды сервера 🤷🏻')
 
-                markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
-                bot.send_message(message.chat.id,
-                                 "Вас приветствует бот компании <b>Hostmaster</b>.\nХостинг, VDS, серверы, домены  в Узбекистане, в Ташкенте.\n\n",
-                                 reply_markup=markup, parse_mode='html')
+                    bot.register_next_step_handler(message, uslugi)
+                elif message.text == 'Возврат 🔙':
+                    markup = types.InlineKeyboardMarkup(row_width=2)
+                    lg1 = types.InlineKeyboardButton('Мои услуги 📊', callback_data='my_services')
+                    lg2 = types.InlineKeyboardButton('Мои контакты 📋', callback_data='my_contacts')
+                    lg3 = types.InlineKeyboardButton('Авторизация 🔐', callback_data='cabinet')
+                    lg4 = types.InlineKeyboardButton('Связь с менеджером 👨🏻‍💻', callback_data='connect_admin',
+                                                     url='https://t.me/hostmaster_support')
+                    lg5 = types.InlineKeyboardButton('Зарегистрироваться 📝', callback_data='site',
+                                                     url='https://hostmaster.uz/site/signup')
+                    lg6 = types.InlineKeyboardButton('Настройки 🛠', callback_data='settings')
 
-        markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
-        lg1 = types.KeyboardButton('Мои хостинги 🗂')
-        lg2 = types.KeyboardButton('Мои домены 🔠')
-        lg3 = types.KeyboardButton('Мои VDS 🗄')
-        lg4 = types.KeyboardButton('Мои сервера 💾')
+                    markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
+                    bot.send_message(message.chat.id,
+                                     "Вас приветствует бот компании <b>Hostmaster</b>.\nХостинг, VDS, серверы, домены  в Узбекистане, в Ташкенте.\n\n",
+                                     reply_markup=markup, parse_mode='html')
 
-        lg5 = types.KeyboardButton('Возврат 🔙')
-        markup.add(lg1, lg2, lg3, lg4, lg5)
-        bot.send_message(call.message.chat.id, 'Мои услуги 📊', reply_markup=markup)
-        bot.register_next_step_handler(call.message, uslugi)
+            markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
+            lg1 = types.KeyboardButton('Мои хостинги 🗂')
+            lg2 = types.KeyboardButton('Мои домены 🔠')
+            lg3 = types.KeyboardButton('Мои VDS 🗄')
+            lg4 = types.KeyboardButton('Мои сервера 💾')
+
+            lg5 = types.KeyboardButton('Возврат 🔙')
+            markup.add(lg1, lg2, lg3, lg4, lg5)
+            bot.send_message(call.message.chat.id, 'Мои услуги 📊', reply_markup=markup)
+            bot.register_next_step_handler(call.message, uslugi)
+            bot_con.close()
+        else:
+            bot.send_message(call.message.chat.id, 'Если Вы зарегистрированный клиент - Вам необходимо выбрать «Авторизация», если новый - «Зарегистрироваться»')
+        tg_con.close()
     elif call.data == 'settings':
         mark = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
         lg1 = types.KeyboardButton('🇷🇺Russian🇷🇺')
@@ -1587,199 +1632,236 @@ def callback(call):
         bot.send_message(call.message.chat.id, 'Mail pochta manzili:', reply_markup=mark)
         bot.register_next_step_handler(call.message, log_uz)
     elif call.data == 'xizmatlarim':
-        bot_con = pymysql.connect(host='62.209.143.131',
-                                  user='hostmasteruz_pbot',
-                                  password='bcaxoZyAXDGc',
-                                  database='hostmasteruz_bot',
-                                  charset='utf8mb4',
-                                  cursorclass=pymysql.cursors.DictCursor
-                                  )
-        min = bot_con.cursor()
-        tg_id = call.message.chat.id
-        print(tg_id)
+        tg_con = pymysql.connect(host='62.209.143.131',
+                                 user='hostmasteruz_pbot',
+                                 password='bcaxoZyAXDGc',
+                                 database='hostmasteruz_bot',
+                                 charset='utf8mb4',
+                                 cursorclass=pymysql.cursors.DictCursor
+                                 )
+        min = tg_con.cursor()
         min.execute(
-            'SELECT `sardorbot`.`b_userid` FROM '
-            '`hostmasteruz_bot`.`sardorbot` WHERE '
-            '`hostmasteruz_bot`.`sardorbot`.`tg_id` = %(tg_id)s',
-            {'tg_id': tg_id})
-        check = min.fetchall()
-        for i in check:
-            print(i["b_userid"])
+            "SELECT `tg_id` FROM sardorbot ")
 
-        def uslugi_uz(message):
-            if message.text == 'Xostinglarim 🗂':
-                for i in check:
-                    id = i["b_userid"]
-                    id_connect = connection.cursor()
-                    id_connect.execute(
-                        "select hostcontractdomain,cptariff, status from hostcontract where user_id=%(user_id)s and status = 1 union select hostcontractdomain,cptariff, status from hostcontract where user_id=%(user_id)s and status = 0 union select hostcontractdomain,cptariff, status from hostcontract where user_id=%(user_id)s and status = 2",
-                        {'user_id': id})
-                    checkContact = id_connect.fetchall()
-                    num = 1
-                    host_text = ''
-                    if checkContact:
-                        for i in checkContact:
-                            if i["status"] == 1:
-                                i["status"] = 'Active ✅'
-                            elif i["status"] == 0:
-                                i["status"] = 'Block 🚫'
-                            else:
-                                i["status"] = 'Deleted ❌'
-                            if i["status"] == 'Deleted ❌' or i["status"] == 'Block 🚫':
-                                host_text += f'{num}. {i["hostcontractdomain"]}, ' \
-                                             f'{i["status"]}\n'
-                            else:
-                                host_text += f'{num}. {i["hostcontractdomain"]}, ' \
-                                             f'{i["status"]}, <b>{i["cptariff"]}</b>\n'
-                            num += 1
-                        bot.send_message(message.chat.id, host_text, parse_mode='html')
-                    else:
-                        bot.send_message(message.chat.id, "Sizda xosting ijarasi xizmati mavjud emas 🤷🏻")
+        td_check = min.fetchall()
+        arr = []
+        for i in td_check:
+            arr.append(i["tg_id"])
+        if call.message.chat.id in arr:
+            bot_con = pymysql.connect(host='62.209.143.131',
+                                      user='hostmasteruz_pbot',
+                                      password='bcaxoZyAXDGc',
+                                      database='hostmasteruz_bot',
+                                      charset='utf8mb4',
+                                      cursorclass=pymysql.cursors.DictCursor
+                                      )
+            min = bot_con.cursor()
+            tg_id = call.message.chat.id
+            print(tg_id)
+            min.execute(
+                'SELECT `sardorbot`.`b_userid` FROM '
+                '`hostmasteruz_bot`.`sardorbot` WHERE '
+                '`hostmasteruz_bot`.`sardorbot`.`tg_id` = %(tg_id)s',
+                {'tg_id': tg_id})
+            check = min.fetchall()
+            for i in check:
+                print(i["b_userid"])
 
-                bot.register_next_step_handler(message, uslugi_uz)
-            elif message.text == 'Domenlarim 🔠':
-                for i in check:
-                    id = i["b_userid"]
-                    id_connect = connection.cursor()
-                    id_connect.execute(
-                        'SELECT *,NOW() as now_datetime FROM mydomain WHERE status IN (-2,0,1,3) and userid=%(userid)s ORDER BY expired ASC',
-                        {'userid': id})
-                    checkContact = id_connect.fetchall()
-                    num = 1
-                    domen_text = ''
-                    if checkContact:
-                        for i in checkContact:
-                            delta = i["now_datetime"] - i["expired"]
-                            if delta.days > 0:
-                                i["expired"] = '{:%d-%m-%-y}'.format(i["expired"])
-                            else:
-                                i["expired"] = '{:%d-%m-%-y}'.format(i["expired"])
-                            if i["status"] == -2:
-                                i["status"] = 'A_REG'
-                            elif i["status"] == 0:
-                                i["status"] = 'R_REG'
-                            elif i["status"] == 1:
-                                i["status"] = 'Active ✅'
-                            elif i["status"] == 3:
-                                i["status"] = 'W_RED ⚠️'
+            def uslugi_uz(message):
+                if message.text == 'Xostinglarim 🗂':
+                    for i in check:
+                        id = i["b_userid"]
+                        id_connect = connection.cursor()
+                        id_connect.execute(
+                            "select hostcontractdomain,cptariff, status from hostcontract where user_id=%(user_id)s and status = 1 union select hostcontractdomain,cptariff, status from hostcontract where user_id=%(user_id)s and status = 0 union select hostcontractdomain,cptariff, status from hostcontract where user_id=%(user_id)s and status = 2",
+                            {'user_id': id})
+                        checkContact = id_connect.fetchall()
+                        num = 1
+                        host_text = ''
+                        if checkContact:
+                            for i in checkContact:
+                                if i["status"] == 1:
+                                    i["status"] = 'Active ✅'
+                                elif i["status"] == 0:
+                                    i["status"] = 'Block 🚫'
+                                else:
+                                    i["status"] = 'Deleted ❌'
+                                if i["status"] == 'Deleted ❌' or i["status"] == 'Block 🚫':
+                                    host_text += f'{num}. {i["hostcontractdomain"]}, ' \
+                                                 f'{i["status"]}\n'
+                                else:
+                                    host_text += f'{num}. {i["hostcontractdomain"]}, ' \
+                                                 f'{i["status"]}, <b>{i["cptariff"]}</b>\n'
+                                num += 1
+                            bot.send_message(message.chat.id, host_text, parse_mode='html')
+                        else:
+                            bot.send_message(message.chat.id, "Sizda xosting ijarasi xizmati mavjud emas 🤷🏻")
 
-                            domen_text += f'{num}. {i["mydomainname"]}.uz, ' \
-                                          f'{i["status"]}, {i["expired"]}\n'
+                    bot.register_next_step_handler(message, uslugi_uz)
+                elif message.text == 'Domenlarim 🔠':
+                    for i in check:
+                        id = i["b_userid"]
+                        id_connect = connection.cursor()
+                        id_connect.execute(
+                            'SELECT *,NOW() as now_datetime FROM mydomain WHERE status IN (-2,0,1,3) and userid=%(userid)s ORDER BY expired ASC',
+                            {'userid': id})
+                        checkContact = id_connect.fetchall()
+                        num = 1
+                        domen_text = ''
+                        if checkContact:
+                            for i in checkContact:
+                                delta = i["now_datetime"] - i["expired"]
+                                if delta.days > 0:
+                                    i["expired"] = '{:%d-%m-%-y}'.format(i["expired"])
+                                else:
+                                    i["expired"] = '{:%d-%m-%-y}'.format(i["expired"])
+                                if i["status"] == -2:
+                                    i["status"] = 'A_REG'
+                                elif i["status"] == 0:
+                                    i["status"] = 'R_REG'
+                                elif i["status"] == 1:
+                                    i["status"] = 'Active ✅'
+                                elif i["status"] == 3:
+                                    i["status"] = 'W_RED ⚠️'
 
-                            num += 1
-                        bot.send_message(message.chat.id, domen_text, parse_mode='html')
-                    else:
-                        bot.send_message(message.chat.id, "Sizda domen yo'q 🤷🏻")
+                                domen_text += f'{num}. {i["mydomainname"]}.uz, ' \
+                                              f'{i["status"]}, {i["expired"]}\n'
 
-                bot.register_next_step_handler(message, uslugi_uz)
-            elif message.text == "VDS'larim 🗄":
-                for i in check:
-                    id = i["b_userid"]
-                    id_connect = connection.cursor()
-                    id_connect.execute(
-                        'SELECT `vdscontract`.`vdshostname`, '
-                        '`vds_tariffs`.`tariffname` ,'
-                        '`vdscontract`.`status`  FROM  '
-                        '`vdscontract`, `vds_tariffs` WHERE '
-                        ' `vdscontract`.`vdsid` = `vds_tariffs`.`idvds` AND user_id=%(user_id)s ORDER BY vdscontract.status = 1 DESC;',
-                        {'user_id': id})
-                    checkContact = id_connect.fetchall()
-                    num = 1
-                    vds_text = ''
-                    if checkContact:
-                        for i in checkContact:
-                            if i["status"] == 1:
-                                i["status"] = 'Active ✅'
-                            elif i["status"] == 0:
-                                i["status"] = 'Block 🚫'
-                            else:
-                                i["status"] = 'Deleted ❌'
-                            if i["status"] == 'Deleted ❌' or i["status"] == 'Block 🚫':
-                                vds_text += f'{num}. {i["vdshostname"]}, {i["status"]}\n'
-                            else:
-                                vds_text += f'{num}. {i["vdshostname"]}, {i["tariffname"]}, {i["status"]}\n'
-                            num += 1
-                        bot.send_message(message.chat.id, vds_text, parse_mode='html')
-                    else:
-                        bot.send_message(message.chat.id, "Sizda vds ijarasi xizmati mavjud emas 🤷🏻")
+                                num += 1
+                            bot.send_message(message.chat.id, domen_text, parse_mode='html')
+                        else:
+                            bot.send_message(message.chat.id, "Sizda domen yo'q 🤷🏻")
 
-                bot.register_next_step_handler(message, uslugi_uz)
-            elif message.text == 'Serverlarim 💾':
-                for i in check:
-                    id = i["b_userid"]
-                    id_connect = connection.cursor()
-                    id_connect.execute(
-                        "SELECT * FROM colcontract WHERE user_id=%(user_id)s", {'user_id': id})
-                    checkContact = id_connect.fetchall()
-                    num = 1
-                    ser_text = ''
-                    if checkContact:
-                        for i in checkContact:
-                            if i["status"] == 1:
-                                i["status"] = 'Active ✅'
-                            elif i["status"] == 2:
-                                i["status"] = 'Block 🚫'
-                            ser_text += f'{num}. <b>{i["colhostname"]}</b>, <b>{i["status"]}</b>\n'
-                            num += 1
-                        bot.send_message(message.chat.id, ser_text, parse_mode='html')
-                    else:
-                        bot.send_message(message.chat.id, "Sizda server ijarasi xizmati mavjud emas 🤷🏻")
+                    bot.register_next_step_handler(message, uslugi_uz)
+                elif message.text == "VDS'larim 🗄":
+                    for i in check:
+                        id = i["b_userid"]
+                        id_connect = connection.cursor()
+                        id_connect.execute(
+                            'SELECT `vdscontract`.`vdshostname`, '
+                            '`vds_tariffs`.`tariffname` ,'
+                            '`vdscontract`.`status`  FROM  '
+                            '`vdscontract`, `vds_tariffs` WHERE '
+                            ' `vdscontract`.`vdsid` = `vds_tariffs`.`idvds` AND user_id=%(user_id)s ORDER BY vdscontract.status = 1 DESC;',
+                            {'user_id': id})
+                        checkContact = id_connect.fetchall()
+                        num = 1
+                        vds_text = ''
+                        if checkContact:
+                            for i in checkContact:
+                                if i["status"] == 1:
+                                    i["status"] = 'Active ✅'
+                                elif i["status"] == 0:
+                                    i["status"] = 'Block 🚫'
+                                else:
+                                    i["status"] = 'Deleted ❌'
+                                if i["status"] == 'Deleted ❌' or i["status"] == 'Block 🚫':
+                                    vds_text += f'{num}. {i["vdshostname"]}, {i["status"]}\n'
+                                else:
+                                    vds_text += f'{num}. {i["vdshostname"]}, {i["tariffname"]}, {i["status"]}\n'
+                                num += 1
+                            bot.send_message(message.chat.id, vds_text, parse_mode='html')
+                        else:
+                            bot.send_message(message.chat.id, "Sizda vds ijarasi xizmati mavjud emas 🤷🏻")
 
-                bot.register_next_step_handler(message, uslugi_uz)
-            elif message.text == 'Qaytish 🔙':
-                markup_uz = types.InlineKeyboardMarkup(row_width=2)
-                lg1 = types.InlineKeyboardButton("Mening xizmatlarim 📊", callback_data='xizmatlarim')
-                lg2 = types.InlineKeyboardButton("Mening kontaktlarim 📋", callback_data='kontaktlarim')
-                lg3 = types.InlineKeyboardButton("Kirish 🔐", callback_data="ro'yxatdan_o'tish")
-                lg4 = types.InlineKeyboardButton("Menejer bilan aloqa 👨🏻‍💻", callback_data="connect_admin",
-                                                 url='https://t.me/hostmaster_support')
-                lg5 = types.InlineKeyboardButton("Roʻyxatdan o'tish 📝", callback_data="site", url='https://hostmaster.uz/site/signup')
-                lg6 = types.InlineKeyboardButton("Sozlamalar 🛠", callback_data='sozlamalar')
-                markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
-                bot.send_message(message.chat.id,
-                                 "<b>Hostmaster</b> botiga xush kelibsiz.\nXosting, VDS, serverlar, domenlar O'zbekistonda, Toshkentda.\n\n",
-                                 reply_markup=markup_uz, parse_mode='html')
+                    bot.register_next_step_handler(message, uslugi_uz)
+                elif message.text == 'Serverlarim 💾':
+                    for i in check:
+                        id = i["b_userid"]
+                        id_connect = connection.cursor()
+                        id_connect.execute(
+                            "SELECT * FROM colcontract WHERE user_id=%(user_id)s", {'user_id': id})
+                        checkContact = id_connect.fetchall()
+                        num = 1
+                        ser_text = ''
+                        if checkContact:
+                            for i in checkContact:
+                                if i["status"] == 1:
+                                    i["status"] = 'Active ✅'
+                                elif i["status"] == 2:
+                                    i["status"] = 'Block 🚫'
+                                ser_text += f'{num}. <b>{i["colhostname"]}</b>, <b>{i["status"]}</b>\n'
+                                num += 1
+                            bot.send_message(message.chat.id, ser_text, parse_mode='html')
+                        else:
+                            bot.send_message(message.chat.id, "Sizda server ijarasi xizmati mavjud emas 🤷🏻")
 
-        markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
-        lg1 = types.KeyboardButton('Xostinglarim 🗂')
-        lg2 = types.KeyboardButton('Domenlarim 🔠')
-        lg3 = types.KeyboardButton("VDS'larim 🗄")
-        lg4 = types.KeyboardButton('Serverlarim 💾')
+                    bot.register_next_step_handler(message, uslugi_uz)
+                elif message.text == 'Qaytish 🔙':
+                    markup_uz = types.InlineKeyboardMarkup(row_width=2)
+                    lg1 = types.InlineKeyboardButton("Mening xizmatlarim 📊", callback_data='xizmatlarim')
+                    lg2 = types.InlineKeyboardButton("Mening kontaktlarim 📋", callback_data='kontaktlarim')
+                    lg3 = types.InlineKeyboardButton("Kirish 🔐", callback_data="ro'yxatdan_o'tish")
+                    lg4 = types.InlineKeyboardButton("Menejer bilan aloqa 👨🏻‍💻", callback_data="connect_admin",
+                                                     url='https://t.me/hostmaster_support')
+                    lg5 = types.InlineKeyboardButton("Roʻyxatdan o'tish 📝", callback_data="site",
+                                                     url='https://hostmaster.uz/site/signup')
+                    lg6 = types.InlineKeyboardButton("Sozlamalar 🛠", callback_data='sozlamalar')
+                    markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
+                    bot.send_message(message.chat.id,
+                                     "<b>Hostmaster</b> botiga xush kelibsiz.\nXosting, VDS, serverlar, domenlar O'zbekistonda, Toshkentda.\n\n",
+                                     reply_markup=markup_uz, parse_mode='html')
 
-        lg5 = types.KeyboardButton('Qaytish 🔙')
-        markup.add(lg1, lg2, lg3, lg4, lg5)
-        bot.send_message(call.message.chat.id, 'Mening xizmatlarim 📊', reply_markup=markup)
-        bot.register_next_step_handler(call.message, uslugi_uz)
+            markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
+            lg1 = types.KeyboardButton('Xostinglarim 🗂')
+            lg2 = types.KeyboardButton('Domenlarim 🔠')
+            lg3 = types.KeyboardButton("VDS'larim 🗄")
+            lg4 = types.KeyboardButton('Serverlarim 💾')
+
+            lg5 = types.KeyboardButton('Qaytish 🔙')
+            markup.add(lg1, lg2, lg3, lg4, lg5)
+            bot.send_message(call.message.chat.id, 'Mening xizmatlarim 📊', reply_markup=markup)
+            bot.register_next_step_handler(call.message, uslugi_uz)
+        else:
+            bot.send_message(call.message.chat.id, """Agar siz ro'yxatdan o'tgan mijoz bo'lsangiz - «Kirish»ni tanlashingiz kerak, agar yangi mijoz bo'lsangiz - "Ro'yxatdan o'tish»""")
     elif call.data == 'kontaktlarim':
-        bot_con = pymysql.connect(host='62.209.143.131',
-                                  user='hostmasteruz_pbot',
-                                  password='bcaxoZyAXDGc',
-                                  database='hostmasteruz_bot',
-                                  charset='utf8mb4',
-                                  cursorclass=pymysql.cursors.DictCursor
-                                  )
-        min = bot_con.cursor()
-        tg_id = call.message.chat.id
+        tg_con = pymysql.connect(host='62.209.143.131',
+                                 user='hostmasteruz_pbot',
+                                 password='bcaxoZyAXDGc',
+                                 database='hostmasteruz_bot',
+                                 charset='utf8mb4',
+                                 cursorclass=pymysql.cursors.DictCursor
+                                 )
+        min = tg_con.cursor()
         min.execute(
-            'SELECT `hostmasteruz_base`.`contact`.*,'
-            '`hostmasteruz_bot`.`sardorbot`.`b_userid` '
-            'FROM `hostmasteruz_base`.`contact`, '
-            '`hostmasteruz_bot`.`sardorbot` WHERE'
-            ' `hostmasteruz_bot`.`sardorbot`.`tg_id` = %(tg_id)s '
-            'AND `hostmasteruz_base`.`contact`.`userid` '
-            '= `hostmasteruz_bot`.`sardorbot`.`b_userid`;',
-            {'tg_id': tg_id})
-        check = min.fetchall()
-        text = ''
-        num = 1
-        for i in check:
-            if i["contactcompany"] is None:
-                text += f'{num}. {i["contactname"]}\nBalans: <b>{i["balance"]} sum 💰</b>\n'
-            else:
-                text += f'{num}. {i["contactcompany"]}\nBalans: <b>{i["balance"]} sum 💰</b>\n'
-            num += 1
-        bot.send_message(call.message.chat.id, 'Kontaktlar')
-        bot.send_message(call.message.chat.id, text, parse_mode='html')
+            "SELECT `tg_id` FROM sardorbot ")
+
+        td_check = min.fetchall()
+        arr = []
+        for i in td_check:
+            arr.append(i["tg_id"])
+        if call.message.chat.id in arr:
+            bot_con = pymysql.connect(host='62.209.143.131',
+                                      user='hostmasteruz_pbot',
+                                      password='bcaxoZyAXDGc',
+                                      database='hostmasteruz_bot',
+                                      charset='utf8mb4',
+                                      cursorclass=pymysql.cursors.DictCursor
+                                      )
+            min = bot_con.cursor()
+            tg_id = call.message.chat.id
+            min.execute(
+                'SELECT `hostmasteruz_base`.`contact`.*,'
+                '`hostmasteruz_bot`.`sardorbot`.`b_userid` '
+                'FROM `hostmasteruz_base`.`contact`, '
+                '`hostmasteruz_bot`.`sardorbot` WHERE'
+                ' `hostmasteruz_bot`.`sardorbot`.`tg_id` = %(tg_id)s '
+                'AND `hostmasteruz_base`.`contact`.`userid` '
+                '= `hostmasteruz_bot`.`sardorbot`.`b_userid`;',
+                {'tg_id': tg_id})
+            check = min.fetchall()
+            text = ''
+            num = 1
+            for i in check:
+                if i["contactcompany"] is None:
+                    text += f'{num}. {i["contactname"]}\nBalans: <b>{i["balance"]} sum 💰</b>\n'
+                else:
+                    text += f'{num}. {i["contactcompany"]}\nBalans: <b>{i["balance"]} sum 💰</b>\n'
+                num += 1
+            bot.send_message(call.message.chat.id, 'Kontaktlar')
+            bot.send_message(call.message.chat.id, text, parse_mode='html')
+        else:
+            bot.send_message(call.message.chat.id, """Agar siz ro'yxatdan o'tgan mijoz bo'lsangiz - «Kirish»ni tanlashingiz kerak, agar yangi mijoz bo'lsangiz - "Ro'yxatdan o'tish»""")
     elif call.data == 'sozlamalar':
         mark = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
         lg1 = types.KeyboardButton('🇷🇺Russian🇷🇺')
