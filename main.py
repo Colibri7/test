@@ -759,7 +759,7 @@ def log(message):
         checkUsername = cursor.fetchall()
         list = []
         for i in checkUsername:
-            list.append(i["username"])
+            list.append(i["username"].strip())
 
         if message.text in list:
             cursor.execute('SELECT password_hash FROM user WHERE username=%(username)s', {'username': login})
