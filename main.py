@@ -129,7 +129,7 @@ def domen_10_days_schedule():
         print('id ', some_id)
         if i["contactcompany"] is None:
 
-            bot.send_message(332749197, f'Уважаемый <b>{i["contactname"]}!</b> Уведомляем Вас о том, '
+            bot.send_message(some_id, f'Уважаемый <b>{i["contactname"]}!</b> Уведомляем Вас о том, '
                                         f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
                                         f'истекает <b>{date}</b> '
                                         f'года . Для продления регистрации домена Вам необходимо оплатить '
@@ -137,7 +137,7 @@ def domen_10_days_schedule():
                                         f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
                                         f'лицом.\n<b>С уважением, команда Hostmaster!</b>', parse_mode='html')
         else:
-            bot.send_message(332749197, f'Уважаемый <b>{i["contactcompany"]}!</b> Уведомляем Вас о том, '
+            bot.send_message(some_id, f'Уважаемый <b>{i["contactcompany"]}!</b> Уведомляем Вас о том, '
                                         f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
                                         f'истекает <b>{date}</b> '
                                         f'года . Для продления регистрации домена Вам необходимо оплатить '
@@ -172,7 +172,7 @@ def domen_1_days_schedule():
         some_id = i["tg_id"]
         print('id ', some_id)
         if i["contactcompany"] is None:
-            bot.send_message(332749197, f'Уважаемый <b>{i["contactname"]}!</b> Уведомляем Вас о том, '
+            bot.send_message(some_id, f'Уважаемый <b>{i["contactname"]}!</b> Уведомляем Вас о том, '
                                         f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
                                         f'истек сегодня, <b>{date}</b> года. Для продления регистрации '
                                         f'домена Вам необходимо оплатить сумму согласно действующим '
@@ -181,7 +181,7 @@ def domen_1_days_schedule():
                                         f'регистрации другим лицом.\n<b>С уважением, команда Hostmaster!</b>',
                              parse_mode='html')
         else:
-            bot.send_message(332749197, f'Уважаемый <b>{i["contactcompany"]}!</b> Уведомляем Вас о том, '
+            bot.send_message(some_id, f'Уважаемый <b>{i["contactcompany"]}!</b> Уведомляем Вас о том, '
                                         f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
                                         f'истек сегодня, <b>{date}</b> года. Для продления регистрации '
                                         f'домена Вам необходимо оплатить сумму согласно действующим '
@@ -1702,7 +1702,6 @@ def callback(call):
                 bot.register_next_step_handler(message, uslugi_uz)
             elif message.text == 'Serverlarim 💾':
                 for i in check:
-
                     id = i["b_userid"]
                     id_connect = connection.cursor()
                     id_connect.execute(
@@ -1804,7 +1803,7 @@ if __name__ == "__main__":
     schedule.every().day.at("17:11").do(domen_60_days_schedule)
     schedule.every().day.at("17:07").do(domen_30_days_schedule)
     schedule.every().day.at("15:41").do(domen_10_days_schedule)
-    schedule.every().day.at("15:41").do(domen_1_days_schedule)
+    schedule.every().day.at("11:33").do(domen_1_days_schedule)
     # schedule.every().day.at('12:14').do(vds_schedule)
     # schedule.every().day.at("12:15").do(hosting_schedule)
     Thread(target=schedule_checker).start()
