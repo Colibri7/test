@@ -308,7 +308,7 @@ def log(message):
                                 if i["status"] == -2:
                                     i["status"] = 'A_REG'
                                 elif i["status"] == 0:
-                                    i["status"] = 'R_REG'
+                                    i["status"] = 'R_REG ⏰'
                                 elif i["status"] == 1:
                                     i["status"] = 'Active ✅'
                                 elif i["status"] == 3:
@@ -848,7 +848,7 @@ def log_uz(message):
                                 if i["status"] == -2:
                                     i["status"] = 'A_REG'
                                 elif i["status"] == 0:
-                                    i["status"] = 'R_REG'
+                                    i["status"] = 'R_REG ⏰'
                                 elif i["status"] == 1:
                                     i["status"] = 'Active ✅'
                                 elif i["status"] == 3:
@@ -1517,7 +1517,7 @@ def callback(call):
                                 if i["status"] == -2:
                                     i["status"] = 'A_REG'
                                 elif i["status"] == 0:
-                                    i["status"] = 'R_REG'
+                                    i["status"] = 'R_REG ⏰'
                                 elif i["status"] == 1:
                                     i["status"] = 'Active ✅'
                                 elif i["status"] == 3:
@@ -1718,7 +1718,7 @@ def callback(call):
                                 if i["status"] == -2:
                                     i["status"] = 'A_REG'
                                 elif i["status"] == 0:
-                                    i["status"] = 'R_REG'
+                                    i["status"] = 'R_REG ⏰'
                                 elif i["status"] == 1:
                                     i["status"] = 'Active ✅'
                                 elif i["status"] == 3:
