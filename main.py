@@ -205,7 +205,7 @@ def func(message):
                                          callback_data='connect_admin', url='https://t.me/hostmaster_support')
         lg5 = types.InlineKeyboardButton('Зарегистрироваться 📝', callback_data='site',
                                          url='https://hostmaster.uz/site/signup')
-        lg6 = types.InlineKeyboardButton('Настройки 🛠', callback_data='settings')
+        lg6 = types.InlineKeyboardButton("O'zb 🇺🇿", callback_data='uz')
 
         markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
         bot.send_message(message.chat.id,
@@ -222,7 +222,7 @@ def func(message):
                                          url='https://t.me/hostmaster_support')
         lg5 = types.InlineKeyboardButton("Roʻyxatdan o'tish 📝", callback_data="site",
                                          url='https://hostmaster.uz/site/signup')
-        lg6 = types.InlineKeyboardButton('Sozlamalar 🛠', callback_data='sozlamalar')
+        lg6 = types.InlineKeyboardButton('Rus 🇷🇺', callback_data='ru')
         markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
         bot.send_message(message.chat.id,
                          "<b>Hostmaster</b> botiga xush kelibsiz.\nXosting, VDS, serverlar, domenlar O'zbekistonda, Toshkentda.\n\n",
@@ -244,7 +244,7 @@ def send_welcome(message):
                                      url='https://t.me/hostmaster_support')
     lg5 = types.InlineKeyboardButton('Зарегистрироваться 📝', callback_data='site',
                                      url='https://hostmaster.uz/site/signup')
-    lg6 = types.InlineKeyboardButton('Настройки 🛠', callback_data='settings')
+    lg6 = types.InlineKeyboardButton("O'zb 🇺🇿", callback_data='uz')
 
     markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
     bot.send_message(message.chat.id,
@@ -600,7 +600,7 @@ def log(message):
                                                  url='https://t.me/hostmaster_support')
                 lg5 = types.InlineKeyboardButton('Зарегистрироваться 📝', callback_data='site',
                                                  url='https://hostmaster.uz/site/signup')
-                lg6 = types.InlineKeyboardButton('Настройки 🛠', callback_data='settings')
+                lg6 = types.InlineKeyboardButton("O'zb 🇺🇿", callback_data='uz')
 
                 markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
                 bot.send_message(message.chat.id,
@@ -660,7 +660,7 @@ def log(message):
                                                  url='https://t.me/hostmaster_support')
                 lg5 = types.InlineKeyboardButton('Зарегистрироваться 📝', callback_data='site',
                                                  url='https://hostmaster.uz/site/signup')
-                lg6 = types.InlineKeyboardButton('Настройки 🛠', callback_data='settings')
+                lg6 = types.InlineKeyboardButton("O'zb 🇺🇿", callback_data='uz')
 
                 markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
                 bot_con = pymysql.connect(host='62.209.143.131',
@@ -703,7 +703,7 @@ def log(message):
                                                  url='https://t.me/hostmaster_support')
                 lg5 = types.InlineKeyboardButton('Зарегистрироваться 📝', callback_data='site',
                                                  url='https://hostmaster.uz/site/signup')
-                lg6 = types.InlineKeyboardButton('Настройки 🛠', callback_data='settings')
+                lg6 = types.InlineKeyboardButton("O'zb 🇺🇿", callback_data='uz')
 
                 markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
                 bot.send_message(message.chat.id,
@@ -729,7 +729,7 @@ def log(message):
                                          url='https://t.me/hostmaster_support')
         lg5 = types.InlineKeyboardButton('Зарегистрироваться 📝', callback_data='site',
                                          url='https://hostmaster.uz/site/signup')
-        lg6 = types.InlineKeyboardButton('Настройки 🛠', callback_data='settings')
+        lg6 = types.InlineKeyboardButton("O'zb 🇺🇿", callback_data='uz')
 
         markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
         bot.send_message(message.chat.id,
@@ -776,7 +776,7 @@ def log(message):
                                              url='https://t.me/hostmaster_support')
             lg5 = types.InlineKeyboardButton('Зарегистрироваться 📝', callback_data='site',
                                              url='https://hostmaster.uz/site/signup')
-            lg6 = types.InlineKeyboardButton('Настройки 🛠', callback_data='settings')
+            lg6 = types.InlineKeyboardButton("O'zb 🇺🇿", callback_data='uz')
 
             markup_ru.add(lg1, lg2, lg3, lg4, lg5, lg6)
             bot.send_message(message.chat.id,
@@ -1146,7 +1146,7 @@ def log_uz(message):
                                                  url='https://t.me/hostmaster_support')
                 lg5 = types.InlineKeyboardButton('Зарегистрироваться 📝', callback_data='site',
                                                  url='https://hostmaster.uz/site/signup')
-                lg6 = types.InlineKeyboardButton('Настройки 🛠', callback_data='settings')
+                lg6 = types.InlineKeyboardButton("O'zb 🇺🇿", callback_data='uz')
 
                 markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
                 bot.send_message(message.chat.id,
@@ -1203,7 +1203,7 @@ def log_uz(message):
                                                  url='https://t.me/hostmaster_support')
                 lg5 = types.InlineKeyboardButton("Roʻyxatdan o'tish 📝", callback_data="site",
                                                  url='https://hostmaster.uz/site/signup')
-                lg6 = types.InlineKeyboardButton('Sozlamalar 🛠', callback_data='sozlamalar')
+                lg6 = types.InlineKeyboardButton('Rus 🇷🇺', callback_data='ru')
                 markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
 
                 bot_con = pymysql.connect(host='62.209.143.131',
@@ -1245,7 +1245,7 @@ def log_uz(message):
                                                  url='https://t.me/hostmaster_support')
                 lg5 = types.InlineKeyboardButton("Roʻyxatdan o'tish 📝", callback_data="site",
                                                  url='https://hostmaster.uz/site/signup')
-                lg6 = types.InlineKeyboardButton('Sozlamalar 🛠', callback_data='sozlamalar')
+                lg6 = types.InlineKeyboardButton('Rus 🇷🇺', callback_data='ru')
                 markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
                 bot.send_message(message.chat.id,
                                  "<b>Hostmaster</b> botiga xush kelibsiz.\nXosting, VDS, serverlar, domenlar O'zbekistonda, Toshkentda.\n\n",
@@ -1270,7 +1270,7 @@ def log_uz(message):
                                          url='https://t.me/hostmaster_support')
         lg5 = types.InlineKeyboardButton("Roʻyxatdan o'tish 📝", callback_data="site",
                                          url='https://hostmaster.uz/site/signup')
-        lg6 = types.InlineKeyboardButton('Sozlamalar 🛠', callback_data='sozlamalar')
+        lg6 = types.InlineKeyboardButton('Rus 🇷🇺', callback_data='ru')
         markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
         bot.send_message(message.chat.id,
                          "<b>Hostmaster</b> botiga xush kelibsiz.\nXosting, VDS, serverlar, domenlar O'zbekistonda, Toshkentda.\n\n",
@@ -1313,7 +1313,7 @@ def log_uz(message):
                                              url='https://t.me/hostmaster_support')
             lg5 = types.InlineKeyboardButton("Roʻyxatdan o'tish 📝", callback_data="site",
                                              url='https://hostmaster.uz/site/signup')
-            lg6 = types.InlineKeyboardButton('Sozlamalar 🛠', callback_data='sozlamalar')
+            lg6 = types.InlineKeyboardButton('Rus 🇷🇺', callback_data='ru')
             markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
             bot.send_message(message.chat.id,
                              "<b>Hostmaster</b> botiga xush kelibsiz.\nXosting, VDS, serverlar, domenlar O'zbekistonda, Toshkentda.\n\n",
@@ -1334,7 +1334,7 @@ def log_uz(message):
 
 @bot.message_handler(content_types=['text'])
 def language(message):
-    if message.text == '🇺🇿Uzbek🇺🇿':
+    if message.text == "O'zb 🇺🇿":
         markup_uz = types.InlineKeyboardMarkup(row_width=2)
         lg1 = types.InlineKeyboardButton('Mening xizmatlarim 📊', callback_data='xizmatlarim')
         lg2 = types.InlineKeyboardButton('Mening kontaktlarim 📋', callback_data='kontaktlarim')
@@ -1343,13 +1343,13 @@ def language(message):
                                          url='https://t.me/hostmaster_support')
         lg5 = types.InlineKeyboardButton("Roʻyxatdan o'tish 📝", callback_data="site",
                                          url='https://hostmaster.uz/site/signup')
-        lg6 = types.InlineKeyboardButton('Sozlamalar 🛠', callback_data='sozlamalar')
+        lg6 = types.InlineKeyboardButton('Rus 🇷🇺', callback_data='ru')
         markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
         bot.send_message(message.chat.id,
                          "<b>Hostmaster</b> botiga xush kelibsiz.\nXosting, VDS, serverlar, domenlar O'zbekistonda, Toshkentda.\n\n",
                          reply_markup=markup_uz, parse_mode='html')
 
-    elif message.text == '🇷🇺Russian🇷🇺':
+    elif message.text == 'Rus 🇷🇺':
         markup_ru = types.InlineKeyboardMarkup(row_width=2)
         lg1 = types.InlineKeyboardButton('Мои услуги 📊', callback_data='my_services')
         lg2 = types.InlineKeyboardButton('Мои контакты 📋', callback_data='my_contacts')
@@ -1358,7 +1358,7 @@ def language(message):
                                          url='https://t.me/hostmaster_support')
         lg5 = types.InlineKeyboardButton('Зарегистрироваться 📝', callback_data='site',
                                          url='https://hostmaster.uz/site/signup')
-        lg6 = types.InlineKeyboardButton('Настройки 🛠', callback_data='settings')
+        lg6 = types.InlineKeyboardButton("O'zb 🇺🇿", callback_data='uz')
 
         markup_ru.add(lg1, lg2, lg3, lg4, lg5, lg6)
         bot.send_message(message.chat.id,
@@ -1596,7 +1596,7 @@ def callback(call):
                                                      url='https://t.me/hostmaster_support')
                     lg5 = types.InlineKeyboardButton('Зарегистрироваться 📝', callback_data='site',
                                                      url='https://hostmaster.uz/site/signup')
-                    lg6 = types.InlineKeyboardButton('Настройки 🛠', callback_data='settings')
+                    lg6 = types.InlineKeyboardButton("O'zb 🇺🇿", callback_data='uz')
 
                     markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
                     bot.send_message(message.chat.id,
@@ -1617,14 +1617,42 @@ def callback(call):
         else:
             bot.send_message(call.message.chat.id, 'Если Вы зарегистрированный клиент - Вам необходимо выбрать «Авторизация», если новый - «Зарегистрироваться»')
         tg_con.close()
-    elif call.data == 'settings':
-        mark = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
-        lg1 = types.KeyboardButton('🇷🇺Russian🇷🇺')
-        lg2 = types.KeyboardButton('🇺🇿Uzbek🇺🇿')
-
-        mark.add(lg1, lg2)
-        bot.send_message(call.message.chat.id, 'Смена языка', reply_markup=mark)
-        bot.register_next_step_handler(call.message, language)
+    elif call.data =='ru':
+        markup_uz = types.InlineKeyboardMarkup(row_width=2)
+        lg1 = types.InlineKeyboardButton('Mening xizmatlarim 📊', callback_data='xizmatlarim')
+        lg2 = types.InlineKeyboardButton('Mening kontaktlarim 📋', callback_data='kontaktlarim')
+        lg3 = types.InlineKeyboardButton("Kirish 🔐", callback_data="ro'yxatdan_o'tish")
+        lg4 = types.InlineKeyboardButton("Menejer bilan aloqa 👨🏻‍💻", callback_data="connect_admin",
+                                         url='https://t.me/hostmaster_support')
+        lg5 = types.InlineKeyboardButton("Roʻyxatdan o'tish 📝", callback_data="site",
+                                         url='https://hostmaster.uz/site/signup')
+        lg6 = types.InlineKeyboardButton('Rus 🇷🇺', callback_data='ru')
+        markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
+        bot.send_message(call.message.chat.id,
+                         "<b>Hostmaster</b> botiga xush kelibsiz.\nXosting, VDS, serverlar, domenlar O'zbekistonda, Toshkentda.\n\n",
+                         reply_markup=markup_uz, parse_mode='html')
+    elif call.data=='uz':
+        markup_uz = types.InlineKeyboardMarkup(row_width=2)
+        lg1 = types.InlineKeyboardButton('Mening xizmatlarim 📊', callback_data='xizmatlarim')
+        lg2 = types.InlineKeyboardButton('Mening kontaktlarim 📋', callback_data='kontaktlarim')
+        lg3 = types.InlineKeyboardButton("Kirish 🔐", callback_data="ro'yxatdan_o'tish")
+        lg4 = types.InlineKeyboardButton("Menejer bilan aloqa 👨🏻‍💻", callback_data="connect_admin",
+                                         url='https://t.me/hostmaster_support')
+        lg5 = types.InlineKeyboardButton("Roʻyxatdan o'tish 📝", callback_data="site",
+                                         url='https://hostmaster.uz/site/signup')
+        lg6 = types.InlineKeyboardButton('Rus 🇷🇺', callback_data='ru')
+        markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
+        bot.send_message(call.message.chat.id,
+                         "<b>Hostmaster</b> botiga xush kelibsiz.\nXosting, VDS, serverlar, domenlar O'zbekistonda, Toshkentda.\n\n",
+                         reply_markup=markup_uz, parse_mode='html')
+    # elif call.data == 'settings':
+    #     mark = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
+    #     lg1 = types.KeyboardButton('🇷🇺Russian🇷🇺')
+    #     lg2 = types.KeyboardButton('🇺🇿Uzbek🇺🇿')
+    #
+    #     mark.add(lg1, lg2)
+    #     bot.send_message(call.message.chat.id, 'Смена языка', reply_markup=mark)
+    #     bot.register_next_step_handler(call.message, language)
     elif call.data == "ro'yxatdan_o'tish":
         mark = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
         menu = types.KeyboardButton('Qaytish 🔙')
@@ -1796,7 +1824,7 @@ def callback(call):
                                                      url='https://t.me/hostmaster_support')
                     lg5 = types.InlineKeyboardButton("Roʻyxatdan o'tish 📝", callback_data="site",
                                                      url='https://hostmaster.uz/site/signup')
-                    lg6 = types.InlineKeyboardButton("Sozlamalar 🛠", callback_data='sozlamalar')
+                    lg6 = types.InlineKeyboardButton("Rus 🇷🇺", callback_data='ru')
                     markup_uz.add(lg1, lg2, lg3, lg4, lg5, lg6)
                     bot.send_message(message.chat.id,
                                      "<b>Hostmaster</b> botiga xush kelibsiz.\nXosting, VDS, serverlar, domenlar O'zbekistonda, Toshkentda.\n\n",
@@ -1862,14 +1890,14 @@ def callback(call):
             bot.send_message(call.message.chat.id, text, parse_mode='html')
         else:
             bot.send_message(call.message.chat.id, """Agar siz ro'yxatdan o'tgan mijoz bo'lsangiz - «Kirish»ni tanlashingiz kerak, agar yangi mijoz bo'lsangiz - "Ro'yxatdan o'tish»""")
-    elif call.data == 'sozlamalar':
-        mark = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
-        lg1 = types.KeyboardButton('🇷🇺Russian🇷🇺')
-        lg2 = types.KeyboardButton('🇺🇿Uzbek🇺🇿')
-        mark.add(lg1, lg2)
-        bot.send_message(call.message.chat.id, 'Til ozgartirish', reply_markup=mark)
-
-        bot.register_next_step_handler(call.message, language)
+    # elif call.data == 'sozlamalar':
+    #     mark = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
+    #     lg1 = types.KeyboardButton('🇷🇺Russian🇷🇺')
+    #     lg2 = types.KeyboardButton('🇺🇿Uzbek🇺🇿')
+    #     mark.add(lg1, lg2)
+    #     bot.send_message(call.message.chat.id, 'Til ozgartirish', reply_markup=mark)
+    #
+    #     bot.register_next_step_handler(call.message, language)
 
 
 def job2():
