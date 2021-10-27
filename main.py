@@ -213,7 +213,7 @@ def func(message):
         markup_uz = types.InlineKeyboardMarkup(row_width=2)
         lg1 = types.InlineKeyboardButton('Mening xizmatlarim 📊', callback_data='xizmatlarim')
         lg2 = types.InlineKeyboardButton('Mening kontaktlarim 📋', callback_data='kontaktlarim')
-        lg3 = types.InlineKeyboardButton("Ro'yxatdan o'tish 🔐", callback_data="ro'yxatdan_o'tish")
+        lg3 = types.InlineKeyboardButton("Kirish 🔐", callback_data="ro'yxatdan_o'tish")
         lg4 = types.InlineKeyboardButton("Menejer bilan aloqa 👨🏻‍💻", callback_data="connect_admin",
                                          url='https://t.me/hostmaster_support')
         lg5 = types.InlineKeyboardButton("Roʻyxatdan o'tish 📝", callback_data="site", url='https://hostmaster.uz/site/signup')
@@ -1192,7 +1192,7 @@ def log_uz(message):
                 markup_uz = types.InlineKeyboardMarkup(row_width=2)
                 lg1 = types.InlineKeyboardButton('Mening xizmatlarim 📊', callback_data='xizmatlarim')
                 lg2 = types.InlineKeyboardButton('Mening kontaktlarim 📋', callback_data='kontaktlarim')
-                lg3 = types.InlineKeyboardButton("Ro'yxatdan o'tish 🔐", callback_data="ro'yxatdan_o'tish")
+                lg3 = types.InlineKeyboardButton("Kirish 🔐", callback_data="ro'yxatdan_o'tish")
                 lg4 = types.InlineKeyboardButton("Menejer bilan aloqa 👨🏻‍💻", callback_data="connect_admin",
                                                  url='https://t.me/hostmaster_support')
                 lg5 = types.InlineKeyboardButton("Roʻyxatdan o'tish 📝", callback_data="site", url='https://hostmaster.uz/site/signup')
@@ -1233,7 +1233,7 @@ def log_uz(message):
                 markup_uz = types.InlineKeyboardMarkup(row_width=2)
                 lg1 = types.InlineKeyboardButton('Mening xizmatlarim 📊', callback_data='xizmatlarim')
                 lg2 = types.InlineKeyboardButton('Mening kontaktlarim 📋', callback_data='kontaktlarim')
-                lg3 = types.InlineKeyboardButton("Ro'yxatdan o'tish 🔐", callback_data="ro'yxatdan_o'tish")
+                lg3 = types.InlineKeyboardButton("Kirish 🔐", callback_data="ro'yxatdan_o'tish")
                 lg4 = types.InlineKeyboardButton("Menejer bilan aloqa 👨🏻‍💻", callback_data="connect_admin",
                                                  url='https://t.me/hostmaster_support')
                 lg5 = types.InlineKeyboardButton("Roʻyxatdan o'tish 📝", callback_data="site", url='https://hostmaster.uz/site/signup')
@@ -1257,7 +1257,7 @@ def log_uz(message):
         markup_uz = types.InlineKeyboardMarkup(row_width=2)
         lg1 = types.InlineKeyboardButton('Mening xizmatlarim 📊', callback_data='xizmatlarim')
         lg2 = types.InlineKeyboardButton('Mening kontaktlarim 📋', callback_data='kontaktlarim')
-        lg3 = types.InlineKeyboardButton("Ro'yxatdan o'tish 🔐", callback_data="ro'yxatdan_o'tish")
+        lg3 = types.InlineKeyboardButton("Kirish 🔐", callback_data="ro'yxatdan_o'tish")
         lg4 = types.InlineKeyboardButton("Menejer bilan aloqa 👨🏻‍💻", callback_data="connect_admin",
                                          url='https://t.me/hostmaster_support')
         lg5 = types.InlineKeyboardButton("Roʻyxatdan o'tish 📝", callback_data="site", url='https://hostmaster.uz/site/signup')
@@ -1299,7 +1299,7 @@ def log_uz(message):
             markup_uz = types.InlineKeyboardMarkup(row_width=2)
             lg1 = types.InlineKeyboardButton('Mening xizmatlarim 📊', callback_data='xizmatlarim')
             lg2 = types.InlineKeyboardButton('Mening kontaktlarim 📋', callback_data='kontaktlarim')
-            lg3 = types.InlineKeyboardButton("Ro'yxatdan o'tish 🔐", callback_data="ro'yxatdan_o'tish")
+            lg3 = types.InlineKeyboardButton("Kirish 🔐", callback_data="ro'yxatdan_o'tish")
             lg4 = types.InlineKeyboardButton("Menejer bilan aloqa 👨🏻‍💻", callback_data="connect_admin",
                                              url='https://t.me/hostmaster_support')
             lg5 = types.InlineKeyboardButton("Roʻyxatdan o'tish 📝", callback_data="site", url='https://hostmaster.uz/site/signup')
@@ -1328,7 +1328,7 @@ def language(message):
         markup_uz = types.InlineKeyboardMarkup(row_width=2)
         lg1 = types.InlineKeyboardButton('Mening xizmatlarim 📊', callback_data='xizmatlarim')
         lg2 = types.InlineKeyboardButton('Mening kontaktlarim 📋', callback_data='kontaktlarim')
-        lg3 = types.InlineKeyboardButton("Ro'yxatdan o'tish 🔐", callback_data="ro'yxatdan_o'tish")
+        lg3 = types.InlineKeyboardButton("Kirish 🔐", callback_data="ro'yxatdan_o'tish")
         lg4 = types.InlineKeyboardButton("Menejer bilan aloqa 👨🏻‍💻", callback_data="connect_admin",
                                          url='https://t.me/hostmaster_support')
         lg5 = types.InlineKeyboardButton("Roʻyxatdan o'tish 📝", callback_data="site", url='https://hostmaster.uz/site/signup')
@@ -1727,7 +1727,7 @@ def callback(call):
                 markup_uz = types.InlineKeyboardMarkup(row_width=2)
                 lg1 = types.InlineKeyboardButton("Mening xizmatlarim 📊", callback_data='xizmatlarim')
                 lg2 = types.InlineKeyboardButton("Mening kontaktlarim 📋", callback_data='kontaktlarim')
-                lg3 = types.InlineKeyboardButton("Ro'yxatdan o'tish 🔐", callback_data="ro'yxatdan_o'tish")
+                lg3 = types.InlineKeyboardButton("Kirish 🔐", callback_data="ro'yxatdan_o'tish")
                 lg4 = types.InlineKeyboardButton("Menejer bilan aloqa 👨🏻‍💻", callback_data="connect_admin",
                                                  url='https://t.me/hostmaster_support')
                 lg5 = types.InlineKeyboardButton("Roʻyxatdan o'tish 📝", callback_data="site", url='https://hostmaster.uz/site/signup')
