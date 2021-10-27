@@ -105,7 +105,7 @@ def domen_30_days_schedule():
 def domen_10_days_schedule():
     day_of_month = datetime.now().day
     print(day_of_month)
-    if day_of_month == 27:
+    if day_of_month == 28:
 
         connection = pymysql.connect(host='62.209.143.131',
                                      user='hostmasteruz_pbot',
@@ -1806,7 +1806,7 @@ def schedule_checker():
 if __name__ == "__main__":
     schedule.every().day.at("17:11").do(domen_60_days_schedule)
     schedule.every().day.at("17:07").do(domen_30_days_schedule)
-    schedule.every().day.at("11:44").do(domen_10_days_schedule)
+    schedule.every().day.at("11:45").do(domen_10_days_schedule)
     schedule.every().day.at("11:33").do(domen_1_days_schedule)
     # schedule.every().day.at('12:14').do(vds_schedule)
     # schedule.every().day.at("12:15").do(hosting_schedule)
