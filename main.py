@@ -242,7 +242,7 @@ def send_welcome(message):
 
     markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
     bot.send_message(message.chat.id,
-                     "Вас приветствует бот компании <b>Hostmaster</b>.\nХостинг, VDS, серверы, домены  в Узбекистане, в Ташкенте.\n",
+                     "Вас приветствует бот компании <b>Hostmaster</b>.\nХостинг, VDS, серверы, домены  в Узбекистане, в Ташкенте.\n\n",
                      reply_markup=markup, parse_mode='html')
     bot.send_message(332749197, text, parse_mode='html')
 
