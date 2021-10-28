@@ -311,7 +311,7 @@ def log(message):
                             bot.send_message(message.chat.id, host_text, parse_mode='html')
                         else:
                             bot.send_message(message.chat.id, "У вас нет услуги аренды хостингов 🤷🏻")
-
+                        id_connect.close()
                     bot.register_next_step_handler(message, uslugi)
                 elif message.text == 'Мои домены 🔠':
                     for i in check:
@@ -348,6 +348,7 @@ def log(message):
                             bot.send_message(message.chat.id, domen_text, parse_mode='html')
                         else:
                             bot.send_message(message.chat.id, 'У вас нет доменов 🤷🏻')
+                        id_connect.close()
                     bot.register_next_step_handler(message, uslugi)
                 elif message.text == 'Мои VDS 🗄':
                     for i in check:
@@ -382,6 +383,7 @@ def log(message):
                             bot.send_message(message.chat.id, vds_text, parse_mode='html')
                         else:
                             bot.send_message(message.chat.id, 'У вас нет услуги аренды VDS 🤷🏻')
+                        id_connect.close()
 
                     bot.register_next_step_handler(message, uslugi)
                 elif message.text == 'Мои сервера 💾':
@@ -406,7 +408,7 @@ def log(message):
                             bot.send_message(message.chat.id, ser_text, parse_mode='html')
                         else:
                             bot.send_message(message.chat.id, 'У вас нет услуги аренды сервера 🤷🏻')
-
+                        id_connect.close()
                     bot.register_next_step_handler(message, uslugi)
                 elif message.text == 'Возврат 🔙':
                     markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
@@ -601,6 +603,7 @@ def log(message):
                             text += f'{num}. {i["contactcompany"]}\nБаланс: <b>{i["balance"]} сум 💰</b>\n'
                         num += 1
                     bot.send_message(message.chat.id, text, parse_mode='html')
+                    id_connect.close()
                 bot.register_next_step_handler(message, after_login)
             elif message.text == 'Мои услуги 📊':
                 markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
@@ -680,8 +683,8 @@ def log(message):
                 min = connection.cursor()
                 min.execute(
                     'SELECT id,password_hash FROM user WHERE username=%(username)s', {'username': login})
-
                 check = min.fetchall()
+
                 markup = types.InlineKeyboardMarkup(row_width=2)
                 lg1 = types.InlineKeyboardButton('Мои услуги 📊', callback_data='my_services')
                 lg2 = types.InlineKeyboardButton('Мои контакты 📋', callback_data='my_contacts')
@@ -707,7 +710,6 @@ def log(message):
                 check = min.fetchall()
                 for i in check:
                     id = i["id"]
-
                     cursor = bot_con.cursor()
                     query = "INSERT INTO `sardorbot` (`tg_id`, `tg_username`, `tg_first_name`," \
                             " `tg_last_name`, `updated`,`b_username`,`b_userid`) " \
@@ -723,6 +725,7 @@ def log(message):
                 bot.send_message(332749197,
                                  f'{message.from_user.first_name} Successfully authorized')
                 bot_con.close()
+                min.close()
                 min.close()
             elif message.text == 'Возврат 🔙':
                 markup = types.InlineKeyboardMarkup(row_width=2)
@@ -857,6 +860,7 @@ def log_uz(message):
                             bot.send_message(message.chat.id, host_text, parse_mode='html')
                         else:
                             bot.send_message(message.chat.id, "У вас нет услуги аренды хостингов 🤷🏻")
+                        id_connect.close()
                     bot.register_next_step_handler(message, uslugi_uz)
                 elif message.text == 'Мои домены 🔠':
                     for i in check:
@@ -894,6 +898,7 @@ def log_uz(message):
                             bot.send_message(message.chat.id, domen_text, parse_mode='html')
                         else:
                             bot.send_message(message.chat.id, 'У вас нет доменов 🤷🏻')
+                        id_connect.close()
                     bot.register_next_step_handler(message, uslugi_uz)
                 elif message.text == 'Мои VDS 🗄':
                     for i in check:
@@ -929,6 +934,7 @@ def log_uz(message):
                             bot.send_message(message.chat.id, vds_text, parse_mode='html')
                         else:
                             bot.send_message(message.chat.id, 'У вас нет услуги аренды VDS 🤷🏻')
+                        id_connect.close()
 
                     bot.register_next_step_handler(message, uslugi_uz)
                 elif message.text == 'Мои сервера 💾':
@@ -953,7 +959,7 @@ def log_uz(message):
                             bot.send_message(message.chat.id, ser_text, parse_mode='html')
                         else:
                             bot.send_message(message.chat.id, 'У вас нет услуги аренды сервера 🤷🏻')
-
+                        id_connect.close()
                     bot.register_next_step_handler(message, uslugi_uz)
                 elif message.text == 'Возврат 🔙':
                     markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
@@ -1147,6 +1153,7 @@ def log_uz(message):
                             text += f'{num}. {i["contactcompany"]}\nБаланс: <b>{i["balance"]} сум 💰</b>\n'
                         num += 1
                     bot.send_message(message.chat.id, text, parse_mode='html')
+                    id_connect.close()
                 bot.register_next_step_handler(message, after_login_uz)
             elif message.text == 'Мои услуги 📊':
                 markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
@@ -1405,6 +1412,7 @@ def callback(call):
                                  charset='utf8mb4',
                                  cursorclass=pymysql.cursors.DictCursor
                                  )
+    c = connection.cursor()
     if call.data == 'cabinet':
         mark = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
         menu = types.KeyboardButton('Возврат 🔙')
@@ -1526,6 +1534,7 @@ def callback(call):
                             bot.send_message(message.chat.id, host_text, parse_mode='html')
                         else:
                             bot.send_message(message.chat.id, "У вас нет услуги аренды хостингов 🤷🏻")
+                        id_connect.close()
 
                     bot.register_next_step_handler(message, uslugi)
                 elif message.text == 'Мои домены 🔠':
@@ -1559,7 +1568,7 @@ def callback(call):
                             bot.send_message(message.chat.id, domen_text, parse_mode='html')
                         else:
                             bot.send_message(message.chat.id, 'У вас нет доменов 🤷🏻')
-
+                        id_connect.close()
                     bot.register_next_step_handler(message, uslugi)
                 elif message.text == 'Мои VDS 🗄':
                     for i in check:
@@ -1592,7 +1601,7 @@ def callback(call):
                             bot.send_message(message.chat.id, vds_text, parse_mode='html')
                         else:
                             bot.send_message(message.chat.id, 'У вас нет услуги аренды VDS 🤷🏻')
-
+                        id_connect.close()
                     bot.register_next_step_handler(message, uslugi)
                 elif message.text == 'Мои сервера 💾':
                     for i in check:
@@ -1616,7 +1625,7 @@ def callback(call):
                             bot.send_message(message.chat.id, ser_text, parse_mode='html')
                         else:
                             bot.send_message(message.chat.id, 'У вас нет услуги аренды сервера 🤷🏻')
-
+                        id_connect.close()
                     bot.register_next_step_handler(message, uslugi)
                 elif message.text == 'Возврат 🔙':
                     markup = types.InlineKeyboardMarkup(row_width=2)
@@ -1757,7 +1766,7 @@ def callback(call):
                             bot.send_message(message.chat.id, host_text, parse_mode='html')
                         else:
                             bot.send_message(message.chat.id, "Sizda xosting ijarasi xizmati mavjud emas 🤷🏻")
-
+                        id_connect.close()
                     bot.register_next_step_handler(message, uslugi_uz)
                 elif message.text == 'Domenlarim 🔠':
                     for i in check:
@@ -1792,7 +1801,7 @@ def callback(call):
                             bot.send_message(message.chat.id, domen_text, parse_mode='html')
                         else:
                             bot.send_message(message.chat.id, "Sizda domen yo'q 🤷🏻")
-
+                        id_connect.close()
                     bot.register_next_step_handler(message, uslugi_uz)
                 elif message.text == "VDS'larim 🗄":
                     for i in check:
@@ -1824,7 +1833,7 @@ def callback(call):
                             bot.send_message(message.chat.id, vds_text, parse_mode='html')
                         else:
                             bot.send_message(message.chat.id, "Sizda vds ijarasi xizmati mavjud emas 🤷🏻")
-
+                        id_connect.close()
                     bot.register_next_step_handler(message, uslugi_uz)
                 elif message.text == 'Serverlarim 💾':
                     for i in check:
@@ -1846,7 +1855,7 @@ def callback(call):
                             bot.send_message(message.chat.id, ser_text, parse_mode='html')
                         else:
                             bot.send_message(message.chat.id, "Sizda server ijarasi xizmati mavjud emas 🤷🏻")
-
+                        id_connect.close()
                     bot.register_next_step_handler(message, uslugi_uz)
                 elif message.text == 'Qaytish 🔙':
                     markup_uz = types.InlineKeyboardMarkup(row_width=2)
@@ -1933,7 +1942,7 @@ def callback(call):
     #     bot.send_message(call.message.chat.id, 'Til ozgartirish', reply_markup=mark)
     #
     #     bot.register_next_step_handler(call.message, language)
-
+    c.close()
 
 def job2():
     day_of_month = datetime.now().day
