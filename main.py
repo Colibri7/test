@@ -1893,11 +1893,11 @@ def callback(call):
                                  charset='utf8mb4',
                                  cursorclass=pymysql.cursors.DictCursor
                                  )
-        min = tg_con.cursor()
-        min.execute(
+        min_tg_con = tg_con.cursor()
+        min_tg_con.execute(
             "SELECT `tg_id` FROM sardorbot ")
 
-        td_check = min.fetchall()
+        td_check = min_tg_con.fetchall()
         arr = []
         for i in td_check:
             arr.append(i["tg_id"])
@@ -1931,9 +1931,11 @@ def callback(call):
                 num += 1
             bot.send_message(call.message.chat.id, 'Kontaktlar')
             bot.send_message(call.message.chat.id, text, parse_mode='html')
+            min.close()
         else:
             bot.send_message(call.message.chat.id,
                              """Agar siz ro'yxatdan o'tgan mijoz bo'lsangiz - «Kirish»ni tanlashingiz kerak, agar yangi mijoz bo'lsangiz - "Ro'yxatdan o'tish»""")
+        min_tg_con.close()
     # elif call.data == 'sozlamalar':
     #     mark = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
     #     lg1 = types.KeyboardButton('🇷🇺Russian🇷🇺')
