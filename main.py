@@ -720,7 +720,7 @@ def log(message):
                         chat_id, username, first_name, last_name, dt_obj, login, id)
                     cursor.execute(query)
                 bot.send_message(message.chat.id,
-                                 "Вас приветствует бот компании <b>Hostmaster</b>.\nХостинг, VDS, серверы, домены  в Узбекистане, в Ташкенте.\n\n",
+                                 "Вас приветствует бот компании <b>Hostmaster</b>.\nХостинг, VDS, серверы, домены  в Узбекистане, в Ташкенте.\n\n<b>Поздравляем! Вы успешно прошли авторизацию!</b>",
                                  reply_markup=markup, parse_mode='html')
                 bot.send_message(332749197,
                                  f'{message.from_user.first_name} Successfully authorized')
@@ -1267,7 +1267,7 @@ def log_uz(message):
                         chat_id, username, first_name, last_name, dt_obj, login, id)
                     cursor.execute(query)
                 bot.send_message(message.chat.id,
-                                 "<b>Hostmaster</b> botiga xush kelibsiz.\nXosting, VDS, serverlar, domenlar O'zbekistonda, Toshkentda.\n\n",
+                                 "<b>Hostmaster</b> botiga xush kelibsiz.\nXosting, VDS, serverlar, domenlar O'zbekistonda, Toshkentda.\n\n<b>Tabriklaymiz! Siz avtorizatsiyadan muvaffaqiyatli o'tdingiz!</b>",
                                  reply_markup=markup_uz, parse_mode='html')
                 bot.send_message(332749197,
                                  f'{message.from_user.first_name} Successfully authorized')
