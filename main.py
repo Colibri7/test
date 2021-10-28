@@ -16,22 +16,23 @@ SQLALCHEMY_ENGINE_OPTIONS = {
     "pool_recycle": 300,
 }
 
-connection = pymysql.connect(host='62.209.143.131',
-                             user='hostmasteruz_pbot',
-                             password='bcaxoZyAXDGc',
-                             database='hostmasteruz_bot',
-                             charset='utf8mb4',
-                             cursorclass=pymysql.cursors.DictCursor
-                             )
-min = connection.cursor()
-min.execute(
-    "SELECT `tg_id` FROM 'sardorbot")
-test = min.fetchall()
+def test():
+    connection = pymysql.connect(host='62.209.143.131',
+                                 user='hostmasteruz_pbot',
+                                 password='bcaxoZyAXDGc',
+                                 database='hostmasteruz_bot',
+                                 charset='utf8mb4',
+                                 cursorclass=pymysql.cursors.DictCursor
+                                 )
+    min = connection.cursor()
+    min.execute(
+        "SELECT `tg_id` FROM 'sardorbot")
+    test = min.fetchall()
 
-for i in test:
-    some_id = i["tg_id"]
-    bot.send_message(some_id, 'Тестовое сообщение')
-min.close()
+    for i in test:
+        some_id = i["tg_id"]
+        bot.send_message(some_id, 'Тестовое сообщение')
+    min.close()
 
 
 def domen_60_days_schedule():
@@ -1937,11 +1938,12 @@ def schedule_checker():
 
 
 if __name__ == "__main__":
+    schedule.every().day.at("11:10").do(test)
     schedule.every().day.at("17:11").do(domen_60_days_schedule)
     schedule.every().day.at("17:07").do(domen_30_days_schedule)
     schedule.every().day.at("11:46").do(domen_10_days_schedule)
     schedule.every().day.at("11:33").do(domen_1_days_schedule)
-    schedule.every().day.at("10:59").do(test)
+
 
     Thread(target=schedule_checker).start()
 
