@@ -16,24 +16,22 @@ SQLALCHEMY_ENGINE_OPTIONS = {
     "pool_recycle": 300,
 }
 
+connection = pymysql.connect(host='62.209.143.131',
+                             user='hostmasteruz_pbot',
+                             password='bcaxoZyAXDGc',
+                             database='hostmasteruz_bot',
+                             charset='utf8mb4',
+                             cursorclass=pymysql.cursors.DictCursor
+                             )
+min = connection.cursor()
+min.execute(
+    "SELECT `tg_id` FROM 'sardorbot")
+test = min.fetchall()
 
-def  test():
-    connection = pymysql.connect(host='62.209.143.131',
-                                 user='hostmasteruz_pbot',
-                                 password='bcaxoZyAXDGc',
-                                 database='hostmasteruz_bot',
-                                 charset='utf8mb4',
-                                 cursorclass=pymysql.cursors.DictCursor
-                                 )
-    min = connection.cursor()
-    min.execute(
-        "SELECT `tg_id` FROM 'sardorbot")
-    test = min.fetchall()
-
-    for i in test:
-        some_id = i["tg_id"]
-        bot.send_message(some_id, 'Тестовое сообщение')
-    min.close()
+for i in test:
+    some_id = i["tg_id"]
+    bot.send_message(some_id, 'Тестовое сообщение')
+min.close()
 
 
 def domen_60_days_schedule():
