@@ -33,7 +33,7 @@ def test():
     for i in check:
         some_id = i["tg_id"]
         print('id ', some_id)
-        f = open("/test$/juma.jpg", 'rb')
+        f = open("test/juma.jpg", 'rb')
         bot.send_photo(some_id, f,
                        caption="Do'stlar!\n\nSizni va barcha yaqinlaringizni muqaddas Qurbon Hayit bayrami bilan samimiy muborakbod etamiz! Barchangizga yaxshilik, tinchlik va eng muhimi, sog'liq tilaymiz! Uylaringizda farovonlik, iliqlik va totuvlik hukm sursin!\n\n"
                                "Друзья!\n\nОт души поздравляем вас и ваших близких со священным праздником Курбан Хайит! Желаем всем добра, мира и самое главное - здоровья! Пусть в ваших домах царят уют, тепло и гармония!")
@@ -1944,7 +1944,7 @@ def schedule_checker():
 
 
 if __name__ == "__main__":
-    schedule.every().day.at("12:16").do(test)
+    schedule.every().day.at("12:18").do(test)
     schedule.every().day.at("17:11").do(domen_60_days_schedule)
     schedule.every().day.at("17:07").do(domen_30_days_schedule)
     schedule.every().day.at("11:46").do(domen_10_days_schedule)
