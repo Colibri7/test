@@ -448,7 +448,6 @@ def log(message):
                             else:
                                 bot.send_message(message.chat.id, days_60)
 
-
                         min.close()
                         bot.register_next_step_handler(message, doljniki_domen)
                     elif message.text == '30 дней':
@@ -1657,7 +1656,7 @@ def callback(call):
         else:
             bot.send_message(call.message.chat.id,
                              'Если Вы зарегистрированный клиент - Вам необходимо выбрать «Авторизация», если новый - «Зарегистрироваться»')
-        tg_con.close()
+        min.close()
     elif call.data == 'ru':
         markup_ru = types.InlineKeyboardMarkup(row_width=2)
         lg1 = types.InlineKeyboardButton('Мои услуги 📊', callback_data='my_services')
@@ -1885,6 +1884,7 @@ def callback(call):
         else:
             bot.send_message(call.message.chat.id,
                              """Agar siz ro'yxatdan o'tgan mijoz bo'lsangiz - «Kirish»ni tanlashingiz kerak, agar yangi mijoz bo'lsangiz - "Ro'yxatdan o'tish»""")
+        min.close()
     elif call.data == 'kontaktlarim':
         tg_con = pymysql.connect(host='62.209.143.131',
                                  user='hostmasteruz_pbot',
@@ -1945,6 +1945,7 @@ def callback(call):
     #
     #     bot.register_next_step_handler(call.message, language)
     c.close()
+
 
 def job2():
     day_of_month = datetime.now().day
