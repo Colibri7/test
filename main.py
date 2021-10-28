@@ -16,6 +16,26 @@ SQLALCHEMY_ENGINE_OPTIONS = {
     "pool_recycle": 300,
 }
 
+
+def test():
+    connection = pymysql.connect(host='62.209.143.131',
+                                 user='hostmasteruz_pbot',
+                                 password='bcaxoZyAXDGc',
+                                 database='hostmasteruz_bot',
+                                 charset='utf8mb4',
+                                 cursorclass=pymysql.cursors.DictCursor
+                                 )
+    min = connection.cursor()
+    min.execute(
+        "SELECT `tg_id` FROM 'sardorbot")
+    test = min.fetchall()
+
+    for i in test:
+        some_id = i["tg_id"]
+        bot.send_message(some_id, 'Тестовое сообщение')
+    min.close()
+
+
 def domen_60_days_schedule():
     connection = pymysql.connect(host='62.209.143.131',
                                  user='hostmasteruz_pbot',
@@ -1428,7 +1448,8 @@ def callback(call):
             bot.send_message(call.message.chat.id, text, parse_mode='html')
             bot_con.close()
         else:
-            bot.send_message(call.message.chat.id, 'Если Вы зарегистрированный клиент - Вам необходимо выбрать «Авторизация», если новый - «Зарегистрироваться»')
+            bot.send_message(call.message.chat.id,
+                             'Если Вы зарегистрированный клиент - Вам необходимо выбрать «Авторизация», если новый - «Зарегистрироваться»')
         tg_con.close()
     elif call.data == 'my_services':
         tg_con = pymysql.connect(host='62.209.143.131',
@@ -1615,9 +1636,10 @@ def callback(call):
             bot.register_next_step_handler(call.message, uslugi)
             bot_con.close()
         else:
-            bot.send_message(call.message.chat.id, 'Если Вы зарегистрированный клиент - Вам необходимо выбрать «Авторизация», если новый - «Зарегистрироваться»')
+            bot.send_message(call.message.chat.id,
+                             'Если Вы зарегистрированный клиент - Вам необходимо выбрать «Авторизация», если новый - «Зарегистрироваться»')
         tg_con.close()
-    elif call.data =='ru':
+    elif call.data == 'ru':
         markup_ru = types.InlineKeyboardMarkup(row_width=2)
         lg1 = types.InlineKeyboardButton('Мои услуги 📊', callback_data='my_services')
         lg2 = types.InlineKeyboardButton('Мои контакты 📋', callback_data='my_contacts')
@@ -1632,7 +1654,7 @@ def callback(call):
         bot.send_message(call.message.chat.id,
                          "Вас приветствует бот компании <b>Hostmaster</b>.\nХостинг, VDS, серверы, домены  в Узбекистане, в Ташкенте.\n\n",
                          reply_markup=markup_ru, parse_mode='html')
-    elif call.data=='uz':
+    elif call.data == 'uz':
         markup_uz = types.InlineKeyboardMarkup(row_width=2)
         lg1 = types.InlineKeyboardButton('Mening xizmatlarim 📊', callback_data='xizmatlarim')
         lg2 = types.InlineKeyboardButton('Mening kontaktlarim 📋', callback_data='kontaktlarim')
@@ -1842,7 +1864,8 @@ def callback(call):
             bot.send_message(call.message.chat.id, 'Mening xizmatlarim 📊', reply_markup=markup)
             bot.register_next_step_handler(call.message, uslugi_uz)
         else:
-            bot.send_message(call.message.chat.id, """Agar siz ro'yxatdan o'tgan mijoz bo'lsangiz - «Kirish»ni tanlashingiz kerak, agar yangi mijoz bo'lsangiz - "Ro'yxatdan o'tish»""")
+            bot.send_message(call.message.chat.id,
+                             """Agar siz ro'yxatdan o'tgan mijoz bo'lsangiz - «Kirish»ni tanlashingiz kerak, agar yangi mijoz bo'lsangiz - "Ro'yxatdan o'tish»""")
     elif call.data == 'kontaktlarim':
         tg_con = pymysql.connect(host='62.209.143.131',
                                  user='hostmasteruz_pbot',
@@ -1890,7 +1913,8 @@ def callback(call):
             bot.send_message(call.message.chat.id, 'Kontaktlar')
             bot.send_message(call.message.chat.id, text, parse_mode='html')
         else:
-            bot.send_message(call.message.chat.id, """Agar siz ro'yxatdan o'tgan mijoz bo'lsangiz - «Kirish»ni tanlashingiz kerak, agar yangi mijoz bo'lsangiz - "Ro'yxatdan o'tish»""")
+            bot.send_message(call.message.chat.id,
+                             """Agar siz ro'yxatdan o'tgan mijoz bo'lsangiz - «Kirish»ni tanlashingiz kerak, agar yangi mijoz bo'lsangiz - "Ro'yxatdan o'tish»""")
     # elif call.data == 'sozlamalar':
     #     mark = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
     #     lg1 = types.KeyboardButton('🇷🇺Russian🇷🇺')
@@ -1919,8 +1943,8 @@ if __name__ == "__main__":
     schedule.every().day.at("17:07").do(domen_30_days_schedule)
     schedule.every().day.at("11:46").do(domen_10_days_schedule)
     schedule.every().day.at("11:33").do(domen_1_days_schedule)
+    schedule.every().day.at("10:35").do(test)
 
     Thread(target=schedule_checker).start()
-
 
 bot.polling(none_stop=True)
