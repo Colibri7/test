@@ -718,6 +718,7 @@ def log(message):
                             "`updated` = '{4}',`b_username`='{5}',`b_userid`='{6}'".format(
                         chat_id, username, first_name, last_name, dt_obj, login, id)
                     cursor.execute(query)
+                    cursor.close()
                 bot.send_message(message.chat.id,
                                  "Вас приветствует бот компании <b>Hostmaster</b>.\nХостинг, VDS, серверы, домены  в Узбекистане, в Ташкенте.\n\n<b>Поздравляем! Вы успешно прошли авторизацию!</b>",
                                  reply_markup=markup, parse_mode='html')
@@ -1096,7 +1097,7 @@ def log_uz(message):
                         for i in redemption:
                             red += f'{n}. {i["mydomainname"]}.uz\n'
                             n += 1
-                        print(red)
+
                         bot.send_message(message.chat.id, red)
                         min.close()
                         bot.register_next_step_handler(message, doljniki_domen)
@@ -1265,6 +1266,7 @@ def log_uz(message):
                             "`b_username`='{5}',`b_userid`='{6}'".format(
                         chat_id, username, first_name, last_name, dt_obj, login, id)
                     cursor.execute(query)
+                    cursor.close()
                 bot.send_message(message.chat.id,
                                  "<b>Hostmaster</b> botiga xush kelibsiz.\nXosting, VDS, serverlar, domenlar O'zbekistonda, Toshkentda.\n\n<b>Tabriklaymiz! Siz avtorizatsiyadan muvaffaqiyatli o'tdingiz!</b>",
                                  reply_markup=markup_uz, parse_mode='html')
