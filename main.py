@@ -1443,9 +1443,9 @@ def callback(call):
                                       charset='utf8mb4',
                                       cursorclass=pymysql.cursors.DictCursor
                                       )
-            min = bot_con.cursor()
+            min_bot_con = bot_con.cursor()
             tg_id = call.message.chat.id
-            min.execute(
+            min_bot_con.execute(
                 'SELECT `hostmasteruz_base`.`contact`.*, '
                 '`hostmasteruz_bot`.`sardorbot`.`b_userid`'
                 ' FROM `hostmasteruz_base`.`contact`, '
@@ -1453,7 +1453,7 @@ def callback(call):
                 '`hostmasteruz_bot`.`sardorbot`.`tg_id` = %(tg_id)s AND'
                 ' `hostmasteruz_base`.`contact`.`userid` = `hostmasteruz_bot`.`sardorbot`.`b_userid`;',
                 {'tg_id': tg_id})
-            check = min.fetchall()
+            check = min_bot_con.fetchall()
             text = ''
             num = 1
             for i in check:
@@ -1464,11 +1464,11 @@ def callback(call):
                 num += 1
             bot.send_message(call.message.chat.id, 'Контакты')
             bot.send_message(call.message.chat.id, text, parse_mode='html')
-            bot_con.close()
+            min_bot_con.close()
         else:
             bot.send_message(call.message.chat.id,
                              'Если Вы зарегистрированный клиент - Вам необходимо выбрать «Авторизация», если новый - «Зарегистрироваться»')
-        tg_con.close()
+        min.close()
     elif call.data == 'my_services':
         tg_con = pymysql.connect(host='62.209.143.131',
                                  user='hostmasteruz_pbot',
