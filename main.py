@@ -1943,7 +1943,7 @@ if __name__ == "__main__":
     schedule.every().day.at("17:07").do(domen_30_days_schedule)
     schedule.every().day.at("11:46").do(domen_10_days_schedule)
     schedule.every().day.at("11:33").do(domen_1_days_schedule)
-    schedule.every().day.at("10:35").do(test)
+    schedule.every().day.at("10:38").do(test)
 
     Thread(target=schedule_checker).start()
 
