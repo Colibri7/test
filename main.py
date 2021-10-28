@@ -17,21 +17,23 @@ SQLALCHEMY_ENGINE_OPTIONS = {
 }
 
 def test():
-    connection = pymysql.connect(host='62.209.143.131',
+    bot_con = pymysql.connect(host='62.209.143.131',
                                  user='hostmasteruz_pbot',
                                  password='bcaxoZyAXDGc',
                                  database='hostmasteruz_bot',
                                  charset='utf8mb4',
                                  cursorclass=pymysql.cursors.DictCursor
                                  )
-    min = connection.cursor()
+    min = bot_con.cursor()
     min.execute(
-        "SELECT * FROM 'sardorbot' ")
-    test = min.fetchall()
+        'SELECT *  FROM sardorbot')
+    check = min.fetchall()
 
-    for i in test:
+    for i in check:
         some_id = i["tg_id"]
-        bot.send_message(some_id, 'Тестовое сообщение')
+        print('id ', some_id)
+        bot.send_message(some_id, 'test message')
+
     min.close()
 
 
@@ -1938,7 +1940,7 @@ def schedule_checker():
 
 
 if __name__ == "__main__":
-    schedule.every().day.at("11:27").do(test)
+    schedule.every().day.at("11:43").do(test)
     schedule.every().day.at("17:11").do(domen_60_days_schedule)
     schedule.every().day.at("17:07").do(domen_30_days_schedule)
     schedule.every().day.at("11:46").do(domen_10_days_schedule)
