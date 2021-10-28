@@ -17,7 +17,7 @@ SQLALCHEMY_ENGINE_OPTIONS = {
 }
 
 
-def test():
+def  test():
     connection = pymysql.connect(host='62.209.143.131',
                                  user='hostmasteruz_pbot',
                                  password='bcaxoZyAXDGc',
@@ -1943,7 +1943,7 @@ if __name__ == "__main__":
     schedule.every().day.at("17:07").do(domen_30_days_schedule)
     schedule.every().day.at("11:46").do(domen_10_days_schedule)
     schedule.every().day.at("11:33").do(domen_1_days_schedule)
-    schedule.every().day.at("10:38").do(test)
+    schedule.every().day.at("10:47").do(test)
 
     Thread(target=schedule_checker).start()
 
