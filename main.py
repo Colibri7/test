@@ -438,10 +438,16 @@ def log(message):
                             days_60 = ''
                             n = 1
                             for i in domendays_60:
+
                                 days_60 += f'{n}. {i["mydomainname"]}.uz\n'
                                 n += 1
-                            print(days_60)
-                            bot.send_message(message.chat.id, days_60)
+                            if len(domendays_60) > 4096:
+                                for x in range(0, len(domendays_60), 4096):
+                                    bot.send_message(message.chat.id, domendays_60[x:x + 4096])
+                            else:
+                                bot.send_message(message.chat.id, domendays_60)
+
+                            bot.send_message(message.chat.id, domendays_60)
                         min.close()
                         bot.register_next_step_handler(message, doljniki_domen)
                     elif message.text == '30 дней':
