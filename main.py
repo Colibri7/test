@@ -355,7 +355,7 @@ def log(message):
                                 num += 1
                             bot.send_message(message.chat.id, host_text, parse_mode='html')
                         else:
-                            bot.send_message(message.chat.id, "У вас нет услуги аренды хостингов 🤷🏻")
+                            bot.send_message(message.chat.id, "У вас нет услуги аренды веб-хостинга 🤷🏻")
                         id_connect.close()
                     bot.register_next_step_handler(message, uslugi)
                 elif message.text == 'Мои домены 🔠':
@@ -904,7 +904,7 @@ def log_uz(message):
                                 num += 1
                             bot.send_message(message.chat.id, host_text, parse_mode='html')
                         else:
-                            bot.send_message(message.chat.id, "У вас нет услуги аренды хостингов 🤷🏻")
+                            bot.send_message(message.chat.id, "У вас нет услуги аренды веб-хостинга 🤷🏻")
                         id_connect.close()
                     bot.register_next_step_handler(message, uslugi_uz)
                 elif message.text == 'Мои домены 🔠':
@@ -1579,7 +1579,7 @@ def callback(call):
                                 num += 1
                             bot.send_message(message.chat.id, host_text, parse_mode='html')
                         else:
-                            bot.send_message(message.chat.id, "У вас нет услуги аренды хостингов 🤷🏻")
+                            bot.send_message(message.chat.id, "У вас нет услуги аренды веб-хостинга 🤷🏻")
                         id_connect.close()
 
                     bot.register_next_step_handler(message, uslugi)
