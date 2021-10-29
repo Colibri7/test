@@ -37,11 +37,11 @@ def r_reg():
         " AND mydomain.mydomaincontactcust = contact.idcontact AND mydomain.status=0;")
     domen_30 = id_connect.fetchall()
     for i in domen_30:
-        print(i)
+
         date = '{:%d-%m-%Y}'.format(i["expired"])
         some_id = i["tg_id"]
         delta = i["now_datetime"] - i["expired"]
-        print(delta.days)
+
 
         if delta.days == -7:
             if i["contactcompany"] is None:
@@ -78,7 +78,7 @@ def juma():
 
     for i in check:
         some_id = i["tg_id"]
-        print('id ', some_id)
+
         f = open("juma.jpg", 'rb')
         bot.send_photo(332749197, f,
                        caption="Do'stlar!\n\nSizni va barcha yaqinlaringizni muqaddas Qurbon Hayit bayrami bilan samimiy muborakbod etamiz! Barchangizga yaxshilik, tinchlik va eng muhimi, sog'liq tilaymiz! Uylaringizda farovonlik, iliqlik va totuvlik hukm sursin!\n\n"
@@ -103,7 +103,7 @@ def domen_60_days_schedule():
     for i in domen:
         date = '{:%d-%m-%Y}'.format(i["expired"])
         some_id = i["tg_id"]
-        print('id ', some_id)
+
         if i["contactcompany"] == None:
             bot.send_message(some_id,
                              f'Уважаемый <b>{i["contactname"]}!</b> Уведомляем Вас о том, '
@@ -150,7 +150,7 @@ def domen_30_days_schedule():
     for i in domen_30:
         date = '{:%d-%m-%Y}'.format(i["expired"])
         some_id = i["tg_id"]
-        print('id ', some_id)
+
         if i["contactcompany"] is None:
 
             bot.send_message(some_id, f'Уважаемый <b>{i["contactname"]}!</b> Уведомляем Вас о том, '
@@ -174,7 +174,7 @@ def domen_30_days_schedule():
 
 def domen_10_days_schedule():
     day_of_month = datetime.now().day
-    print(day_of_month)
+
     if day_of_month == 28:
 
         connection = pymysql.connect(host='62.209.143.131',
@@ -200,7 +200,7 @@ def domen_10_days_schedule():
         for i in domen_30:
             date = '{:%d-%m-%Y}'.format(i["expired"])
             some_id = i["tg_id"]
-            print('id ', some_id)
+
             if i["contactcompany"] is None:
 
                 bot.send_message(some_id, f'Уважаемый <b>{i["contactname"]}!</b> Уведомляем Вас о том, '
@@ -244,7 +244,7 @@ def domen_1_days_schedule():
     for i in domen_1:
         date = '{:%d-%m-%Y}'.format(i["expired"])
         some_id = i["tg_id"]
-        print('id ', some_id)
+
         if i["contactcompany"] is None:
             bot.send_message(some_id, f'Уважаемый <b>{i["contactname"]}!</b> Уведомляем Вас о том, '
                                       f'что срок действия домена <b>{i["mydomainname"]}.uz</b> '
@@ -434,7 +434,7 @@ def log(message):
                     bot.register_next_step_handler(message, uslugi)
                 elif message.text == 'Мои сервера 💾':
                     for i in check:
-                        print(i)
+
                         id = i["id"]
                         id_connect = connection.cursor()
                         id_connect.execute(
@@ -519,7 +519,7 @@ def log(message):
                             for i in domendays_30:
                                 days_30 += f'{n}. {i["mydomainname"]}.uz\n'
                                 n += 1
-                            print(days_30)
+
                             bot.send_message(message.chat.id, days_30)
                         min.close()
                         bot.register_next_step_handler(message, doljniki_domen)
@@ -546,7 +546,7 @@ def log(message):
                             for i in domendays_10:
                                 days_10 += f'{n}. {i["mydomainname"]}.uz\n'
                                 n += 1
-                            print(days_10)
+
                             bot.send_message(message.chat.id, days_10)
                         min.close()
                         bot.register_next_step_handler(message, doljniki_domen)
@@ -573,7 +573,7 @@ def log(message):
                             for i in domendays_1:
                                 days_1 += f'{n}. {i["mydomainname"]}.uz\n'
                                 n += 1
-                            print(days_1)
+
                             bot.send_message(message.chat.id, days_1)
                         min.close()
                         bot.register_next_step_handler(message, doljniki_domen)
@@ -596,7 +596,7 @@ def log(message):
                         for i in redemption:
                             red += f'{n}. {i["mydomainname"]}.uz\n'
                             n += 1
-                        print(red)
+
                         bot.send_message(message.chat.id, red)
                         min.close()
                         bot.register_next_step_handler(message, doljniki_domen)
@@ -824,7 +824,7 @@ def log(message):
         timestamp = message.date
         dt_obj = datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d %H:%M:%S')
 
-        print(dt_obj)
+
         connection = pymysql.connect(host='62.209.143.131',
                                      user='hostmasteruz_pbot',
                                      password='bcaxoZyAXDGc',
@@ -985,7 +985,7 @@ def log_uz(message):
                     bot.register_next_step_handler(message, uslugi_uz)
                 elif message.text == 'Мои сервера 💾':
                     for i in check:
-                        print(i)
+
                         id = i["id"]
                         id_connect = connection.cursor()
                         id_connect.execute(
@@ -1039,7 +1039,7 @@ def log_uz(message):
                             for i in domendays_60:
                                 days_60 += f'{n}. {i["mydomainname"]}.uz\n'
                                 n += 1
-                            print(days_60)
+
                             bot.send_message(message.chat.id, days_60)
                         min.close()
                         bot.register_next_step_handler(message, doljniki_domen)
@@ -1066,7 +1066,7 @@ def log_uz(message):
                             for i in domendays_30:
                                 days_30 += f'{n}. {i["mydomainname"]}.uz\n'
                                 n += 1
-                            print(days_30)
+
                             bot.send_message(message.chat.id, days_30)
                         min.close()
                         bot.register_next_step_handler(message, doljniki_domen)
@@ -1093,7 +1093,7 @@ def log_uz(message):
                             for i in domendays_10:
                                 days_10 += f'{n}. {i["mydomainname"]}.uz\n'
                                 n += 1
-                            print(days_10)
+
                             bot.send_message(message.chat.id, days_10)
                         min.close()
                         bot.register_next_step_handler(message, doljniki_domen)
@@ -1120,7 +1120,7 @@ def log_uz(message):
                             for i in domendays_1:
                                 days_1 += f'{n}. {i["mydomainname"]}.uz\n'
                                 n += 1
-                            print(days_1)
+
                             bot.send_message(message.chat.id, days_1)
                         min.close()
                         bot.register_next_step_handler(message, doljniki_domen)
@@ -1542,15 +1542,14 @@ def callback(call):
                                       )
             min = bot_con.cursor()
             tg_id = call.message.chat.id
-            print(tg_id)
+
             min.execute(
                 'SELECT `sardorbot`.`b_userid` FROM '
                 '`hostmasteruz_bot`.`sardorbot` WHERE '
                 '`hostmasteruz_bot`.`sardorbot`.`tg_id` = %(tg_id)s',
                 {'tg_id': tg_id})
             check = min.fetchall()
-            for i in check:
-                print(i["b_userid"])
+
 
             def uslugi(message):
                 if message.text == 'Мои хостинги 🗂':
@@ -1652,7 +1651,7 @@ def callback(call):
                     bot.register_next_step_handler(message, uslugi)
                 elif message.text == 'Мои сервера 💾':
                     for i in check:
-                        print(i)
+
                         id = i["b_userid"]
                         id_connect = connection.cursor()
                         id_connect.execute(
@@ -1767,15 +1766,14 @@ def callback(call):
                                       )
             min = bot_con.cursor()
             tg_id = call.message.chat.id
-            print(tg_id)
+
             min.execute(
                 'SELECT `sardorbot`.`b_userid` FROM '
                 '`hostmasteruz_bot`.`sardorbot` WHERE '
                 '`hostmasteruz_bot`.`sardorbot`.`tg_id` = %(tg_id)s',
                 {'tg_id': tg_id})
             check = min.fetchall()
-            for i in check:
-                print(i["b_userid"])
+
 
             def uslugi_uz(message):
                 if message.text == 'Xostinglarim 🗂':
@@ -1983,7 +1981,7 @@ def callback(call):
 
 def job2():
     day_of_month = datetime.now().day
-    print(day_of_month)
+
     if day_of_month == 27:
         bot.send_message(332749197, 'hello')
 
