@@ -17,7 +17,52 @@ SQLALCHEMY_ENGINE_OPTIONS = {
 }
 
 
-def test():
+def r_reg():
+    bot_con = pymysql.connect(host='62.209.143.131',
+                              user='hostmasteruz_pbot',
+                              password='bcaxoZyAXDGc',
+                              database='hostmasteruz_bot',
+                              charset='utf8mb4',
+                              cursorclass=pymysql.cursors.DictCursor
+                              )
+    id_connect = bot_con.cursor()
+    id_connect.execute(
+        "SELECT tg_id, idmydomain, mydomain.userid,status, "
+        "mydomainname, NOW() as now_datetime, expired,"
+        "contactname, contactcompany FROM"
+        " hostmasteruz_base.mydomain,"
+        " hostmasteruz_bot.sardorbot,"
+        "hostmasteruz_base.contact  "
+        "WHERE sardorbot.b_userid = mydomain.userid"
+        " AND mydomain.mydomaincontactcust = contact.idcontact AND mydomain.status=0;")
+    domen_30 = id_connect.fetchall()
+    for i in domen_30:
+        print(i)
+        date = '{:%d-%m-%Y}'.format(i["expired"])
+        some_id = i["tg_id"]
+        delta = i["now_datetime"] - i["expired"]
+        print(delta.days)
+
+        if delta.days == -7:
+            if i["contactcompany"] is None:
+                bot.send_message(332749197, f"Уважаемый {i['contactname']}! Уведомляем Вас о том, что срок "
+                                            f"бронирования домена {i['mydomainname']}.uz истекает завтра {date} года . "
+                                            f"Для завершения регистрации домена Вам необходимо оплатить сумму "
+                                            f"согласно действующим тарифам через личный кабинет на нашем сайте. "
+                                            f"В случае неоплаты, ваш домен будет свободен для регистрации другим лицом.\n"
+                                            f"<b>С уважением, команда Hostmaster!</b>", parse_mode='html')
+            else:
+                bot.send_message(332749197, f"Уважаемый {i['contactcompany']}! Уведомляем Вас о том, что срок "
+                                            f"бронирования домена {i['mydomainname']}.uz истекает завтра {date} года . "
+                                            f"Для завершения регистрации домена Вам необходимо оплатить сумму "
+                                            f"согласно действующим тарифам через личный кабинет на нашем сайте. "
+                                            f"В случае неоплаты, ваш домен будет свободен для регистрации другим лицом.\n"
+                                            f"<b>С уважением, команда Hostmaster!</b>", parse_mode='html')
+        else:
+            print(f'YEshe ne vrema')
+
+
+def juma():
     bot_con = pymysql.connect(host='62.209.143.131',
                               user='hostmasteruz_pbot',
                               password='bcaxoZyAXDGc',
@@ -34,7 +79,7 @@ def test():
         some_id = i["tg_id"]
         print('id ', some_id)
         f = open("juma.jpg", 'rb')
-        bot.send_photo(some_id, f,
+        bot.send_photo(332749197, f,
                        caption="Do'stlar!\n\nSizni va barcha yaqinlaringizni muqaddas Qurbon Hayit bayrami bilan samimiy muborakbod etamiz! Barchangizga yaxshilik, tinchlik va eng muhimi, sog'liq tilaymiz! Uylaringizda farovonlik, iliqlik va totuvlik hukm sursin!\n\n"
                                "Друзья!\n\nОт души поздравляем вас и ваших близких со священным праздником Курбан Хайит! Желаем всем добра, мира и самое главное - здоровья! Пусть в ваших домах царят уют, тепло и гармония!")
 
