@@ -60,6 +60,7 @@ def r_reg():
                                             f"<b>С уважением, команда Hostmaster!</b>", parse_mode='html')
         else:
             print(f'YEshe ne vrema')
+    id_connect.close()
 
 
 def juma():
@@ -1733,14 +1734,7 @@ def callback(call):
         bot.send_message(call.message.chat.id,
                          "<b>Hostmaster</b> botiga xush kelibsiz.\nXosting, VDS, serverlar, domenlar O'zbekistonda, Toshkentda.\n\n",
                          reply_markup=markup_uz, parse_mode='html')
-    # elif call.data == 'settings':
-    #     mark = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
-    #     lg1 = types.KeyboardButton('🇷🇺Russian🇷🇺')
-    #     lg2 = types.KeyboardButton('🇺🇿Uzbek🇺🇿')
-    #
-    #     mark.add(lg1, lg2)
-    #     bot.send_message(call.message.chat.id, 'Смена языка', reply_markup=mark)
-    #     bot.register_next_step_handler(call.message, language)
+
     elif call.data == "ro'yxatdan_o'tish":
         mark = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
         menu = types.KeyboardButton('Qaytish 🔙')
@@ -1983,14 +1977,7 @@ def callback(call):
             bot.send_message(call.message.chat.id,
                              """Agar siz ro'yxatdan o'tgan mijoz bo'lsangiz - «Kirish»ni tanlashingiz kerak, agar yangi mijoz bo'lsangiz - "Ro'yxatdan o'tish»""")
         min_tg_con.close()
-    # elif call.data == 'sozlamalar':
-    #     mark = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
-    #     lg1 = types.KeyboardButton('🇷🇺Russian🇷🇺')
-    #     lg2 = types.KeyboardButton('🇺🇿Uzbek🇺🇿')
-    #     mark.add(lg1, lg2)
-    #     bot.send_message(call.message.chat.id, 'Til ozgartirish', reply_markup=mark)
-    #
-    #     bot.register_next_step_handler(call.message, language)
+
     c.close()
 
 
