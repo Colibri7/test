@@ -1689,13 +1689,14 @@ def callback(call):
                                      "Вас приветствует бот компании <b>Hostmaster</b>.\nХостинг, VDS, серверы, домены  в Узбекистане, в Ташкенте.\n\n",
                                      reply_markup=markup, parse_mode='html')
 
-            markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=True)
+
+            markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
             lg1 = types.KeyboardButton('Мои хостинги 🗂')
             lg2 = types.KeyboardButton('Мои домены 🔠')
             lg3 = types.KeyboardButton('Мои VDS 🗄')
             lg4 = types.KeyboardButton('Мои сервера 💾')
-
             lg5 = types.KeyboardButton('Возврат 🔙')
+
             markup.add(lg1, lg2, lg3, lg4, lg5)
             bot.send_message(call.message.chat.id, 'Мои услуги 📊', reply_markup=markup)
             bot.register_next_step_handler(call.message, uslugi)
