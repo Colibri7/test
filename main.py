@@ -8,7 +8,7 @@ import telebot
 from telebot import types
 import pymysql
 
-bot = telebot.TeleBot('1978328105:AAGgX54kvP-MUIWTGTxWNlKLZfZyuEjkFmQ', threaded=False)
+bot = telebot.TeleBot('1241604248:AAFp3m9JztG0E_IUVDvZwqWO50YVOiQXaCU', threaded=False)
 bot.delete_webhook()
 
 SQLALCHEMY_ENGINE_OPTIONS = {
@@ -80,6 +80,27 @@ def juma():
         some_id = i["tg_id"]
 
         f = open("juma.jpg", 'rb')
+        bot.send_photo(332749197, f,
+                       caption="Do'stlar!\n\nSizni va barcha yaqinlaringizni muqaddas Qurbon Hayit bayrami bilan samimiy muborakbod etamiz! Barchangizga yaxshilik, tinchlik va eng muhimi, sog'liq tilaymiz! Uylaringizda farovonlik, iliqlik va totuvlik hukm sursin!\n\n"
+                               "Друзья!\n\nОт души поздравляем вас и ваших близких со священным праздником Курбан Хайит! Желаем всем добра, мира и самое главное - здоровья! Пусть в ваших домах царят уют, тепло и гармония!")
+
+    min.close()
+def juma2():
+    bot_con = pymysql.connect(host='62.209.143.131',
+                              user='hostmasteruz_pbot',
+                              password='bcaxoZyAXDGc',
+                              database='hostmasteruz_bot',
+                              charset='utf8mb4',
+                              cursorclass=pymysql.cursors.DictCursor
+                              )
+    min = bot_con.cursor()
+    min.execute(
+        'SELECT * FROM sardorbot')
+    check = min.fetchall()
+
+    for i in check:
+        some_id = i["tg_id"]
+        f = open("juma2.jpg", 'rb')
         bot.send_photo(332749197, f,
                        caption="Do'stlar!\n\nSizni va barcha yaqinlaringizni muqaddas Qurbon Hayit bayrami bilan samimiy muborakbod etamiz! Barchangizga yaxshilik, tinchlik va eng muhimi, sog'liq tilaymiz! Uylaringizda farovonlik, iliqlik va totuvlik hukm sursin!\n\n"
                                "Друзья!\n\nОт души поздравляем вас и ваших близких со священным праздником Курбан Хайит! Желаем всем добра, мира и самое главное - здоровья! Пусть в ваших домах царят уют, тепло и гармония!")
@@ -1999,6 +2020,7 @@ if __name__ == "__main__":
     schedule.every().day.at("10:00").do(domen_30_days_schedule)
     schedule.every().day.at("10:00").do(domen_10_days_schedule)
     schedule.every().day.at("10:00").do(domen_1_days_schedule)
+    schedule.every().day.at("10:43").do(juma2)
 
     Thread(target=schedule_checker).start()
 
