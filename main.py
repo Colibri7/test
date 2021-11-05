@@ -1688,7 +1688,7 @@ def callback(call):
                     bot.send_message(message.chat.id,
                                      "Вас приветствует бот компании <b>Hostmaster</b>.\nХостинг, VDS, серверы, домены  в Узбекистане, в Ташкенте.\n\n",
                                      reply_markup=markup, parse_mode='html')
-
+# sad
 
             markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
             lg1 = types.KeyboardButton('Мои хостинги 🗂')
