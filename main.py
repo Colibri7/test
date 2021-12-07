@@ -324,29 +324,29 @@ def send_welcome(message):
     text = f'Bot in action:\nname: <b>{message.from_user.first_name}</b>\n' \
            f'chat_id: <b>{message.chat.id}</b>\n' \
            f'username: <b>@{message.from_user.username}</b>'
-    chat_id = message.chat.id
-    username = message.from_user.username
-    first_name = message.from_user.first_name
-    last_name = message.from_user.last_name
-    timestamp = message.date
-    dt_obj = datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d %H:%M:%S')
-    bot_con = pymysql.connect(host='62.209.143.131',
-                                 user='hostmasteruz_pbot',
-                                 password='bcaxoZyAXDGc',
-                                 database='hostmasteruz_base',
-                                 charset='utf8mb4',
-                                 cursorclass=pymysql.cursors.DictCursor
-                                 )
-    cursor = bot_con.cursor()
-    query = "INSERT INTO `sardorbot` (`tg_id`, `tg_username`, `tg_first_name`," \
-            " `tg_last_name`, `updated`) " \
-            "VALUES ({0},'{1}','{2}','{3}','{4}') " \
-            "ON DUPLICATE KEY UPDATE `tg_username` = '{1}'," \
-            " `tg_first_name` = '{2}', `tg_last_name` = '{3}', " \
-            "`updated` = '{4}'".format(
-        chat_id, username, first_name, last_name, dt_obj)
-    cursor.execute(query)
-    cursor.close()
+    # chat_id = message.chat.id
+    # username = message.from_user.username
+    # first_name = message.from_user.first_name
+    # last_name = message.from_user.last_name
+    # timestamp = message.date
+    # dt_obj = datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d %H:%M:%S')
+    # bot_con = pymysql.connect(host='62.209.143.131',
+    #                              user='hostmasteruz_pbot',
+    #                              password='bcaxoZyAXDGc',
+    #                              database='hostmasteruz_base',
+    #                              charset='utf8mb4',
+    #                              cursorclass=pymysql.cursors.DictCursor
+    #                              )
+    # cursor = bot_con.cursor()
+    # query = "INSERT INTO `sardorbot` (`tg_id`, `tg_username`, `tg_first_name`," \
+    #         " `tg_last_name`, `updated`) " \
+    #         "VALUES ({0},'{1}','{2}','{3}','{4}') " \
+    #         "ON DUPLICATE KEY UPDATE `tg_username` = '{1}'," \
+    #         " `tg_first_name` = '{2}', `tg_last_name` = '{3}', " \
+    #         "`updated` = '{4}'".format(
+    #     chat_id, username, first_name, last_name, dt_obj)
+    # cursor.execute(query)
+    # cursor.close()
 
     markup = types.InlineKeyboardMarkup(row_width=2)
     lg1 = types.InlineKeyboardButton('Мои услуги 📊', callback_data='my_services')
