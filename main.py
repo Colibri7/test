@@ -17,6 +17,28 @@ SQLALCHEMY_ENGINE_OPTIONS = {
 }
 
 
+def cons():
+    bot_con = pymysql.connect(host='62.209.143.131',
+                              user='hostmasteruz_pbot',
+                              password='bcaxoZyAXDGc',
+                              database='hostmasteruz_bot',
+                              charset='utf8mb4',
+                              cursorclass=pymysql.cursors.DictCursor
+                              )
+    min = bot_con.cursor()
+    min.execute(
+        'SELECT *  FROM sardorbot')
+    check = min.fetchall()
+
+    for i in check:
+        some_id = i["tg_id"]
+
+        f = open("конс.jpg", 'rb')
+        bot.send_photo(332749197, f,
+                       caption="O‘zbekiston Respublikasi Konstitutsiyasi qabul qilingan kun bilan tabriklaymiz! 🇺🇿\n\nПоздравляем с Днём Конституции Республики Узбекистан! 🇺🇿")
+
+    min.close()
+
 def r_reg():
     bot_con = pymysql.connect(host='62.209.143.131',
                               user='hostmasteruz_pbot',
@@ -61,8 +83,6 @@ def r_reg():
         else:
             print(f'YEshe ne vrema')
     id_connect.close()
-
-
 def juma():
     bot_con = pymysql.connect(host='62.209.143.131',
                               user='hostmasteruz_pbot',
@@ -103,8 +123,6 @@ def juma2():
         f = open("juma2.jpg", 'rb')
         bot.send_photo(some_id, f)
     min.close()
-
-
 def domen_60_days_schedule():
     connection = pymysql.connect(host='62.209.143.131',
                                  user='hostmasteruz_pbot',
@@ -2040,6 +2058,7 @@ if __name__ == "__main__":
     schedule.every().day.at("10:00").do(domen_30_days_schedule)
     schedule.every().day.at("10:00").do(domen_10_days_schedule)
     schedule.every().day.at("10:00").do(domen_1_days_schedule)
+    schedule.every().day.at("12:14").do(cons)
     # schedule.every().day.at("10:15").do(juma2)
 
     Thread(target=schedule_checker).start()
