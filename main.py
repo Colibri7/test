@@ -32,12 +32,12 @@ def cons():
 
     for i in check:
         some_id = i["tg_id"]
-
         f = open("конс.jpg", 'rb')
-        bot.send_photo(332749197, f,
+        bot.send_photo(some_id, f,
                        caption="O‘zbekiston Respublikasi Konstitutsiyasi qabul qilingan kun bilan tabriklaymiz! 🇺🇿\n\nПоздравляем с Днём Конституции Республики Узбекистан! 🇺🇿")
 
     min.close()
+
 
 def r_reg():
     bot_con = pymysql.connect(host='62.209.143.131',
@@ -64,7 +64,6 @@ def r_reg():
         some_id = i["tg_id"]
         delta = i["now_datetime"] - i["expired"]
 
-
         if delta.days == -7:
             if i["contactcompany"] is None:
                 bot.send_message(332749197, f"Уважаемый {i['contactname']}! Уведомляем Вас о том, что срок "
@@ -83,6 +82,8 @@ def r_reg():
         else:
             print(f'YEshe ne vrema')
     id_connect.close()
+
+
 def juma():
     bot_con = pymysql.connect(host='62.209.143.131',
                               user='hostmasteruz_pbot',
@@ -105,6 +106,8 @@ def juma():
                                "Друзья!\n\nОт души поздравляем вас и ваших близких со священным праздником Курбан Хайит! Желаем всем добра, мира и самое главное - здоровья! Пусть в ваших домах царят уют, тепло и гармония!")
 
     min.close()
+
+
 def juma2():
     bot_con = pymysql.connect(host='62.209.143.131',
                               user='hostmasteruz_pbot',
@@ -123,6 +126,8 @@ def juma2():
         f = open("juma2.jpg", 'rb')
         bot.send_photo(some_id, f)
     min.close()
+
+
 def domen_60_days_schedule():
     connection = pymysql.connect(host='62.209.143.131',
                                  user='hostmasteruz_pbot',
@@ -883,7 +888,6 @@ def log(message):
         timestamp = message.date
         dt_obj = datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d %H:%M:%S')
 
-
         connection = pymysql.connect(host='62.209.143.131',
                                      user='hostmasteruz_pbot',
                                      password='bcaxoZyAXDGc',
@@ -1609,7 +1613,6 @@ def callback(call):
                 {'tg_id': tg_id})
             check = min.fetchall()
 
-
             def uslugi(message):
                 if message.text == 'Мои хостинги 🗂':
                     for i in check:
@@ -1747,7 +1750,8 @@ def callback(call):
                     bot.send_message(message.chat.id,
                                      "Вас приветствует бот компании <b>Hostmaster</b>.\nХостинг, VDS, серверы, домены  в Узбекистане, в Ташкенте.\n\n",
                                      reply_markup=markup, parse_mode='html')
-# sad
+
+            # sad
 
             markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
             lg1 = types.KeyboardButton('Мои хостинги 🗂')
@@ -1833,7 +1837,6 @@ def callback(call):
                 '`hostmasteruz_bot`.`sardorbot`.`tg_id` = %(tg_id)s',
                 {'tg_id': tg_id})
             check = min.fetchall()
-
 
             def uslugi_uz(message):
                 if message.text == 'Xostinglarim 🗂':
@@ -2053,12 +2056,11 @@ def schedule_checker():
 
 
 if __name__ == "__main__":
-
     schedule.every().day.at("10:00").do(domen_60_days_schedule)
     schedule.every().day.at("10:00").do(domen_30_days_schedule)
     schedule.every().day.at("10:00").do(domen_10_days_schedule)
     schedule.every().day.at("10:00").do(domen_1_days_schedule)
-    schedule.every().day.at("12:14").do(cons)
+    schedule.every().day.at("12:18").do(cons)
     # schedule.every().day.at("10:15").do(juma2)
 
     Thread(target=schedule_checker).start()
