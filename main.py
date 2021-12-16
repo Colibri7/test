@@ -17,7 +17,7 @@ SQLALCHEMY_ENGINE_OPTIONS = {
 }
 
 
-def cons():
+def dedicated():
     bot_con = pymysql.connect(host='62.209.143.131',
                               user='hostmasteruz_pbot',
                               password='bcaxoZyAXDGc',
@@ -30,13 +30,14 @@ def cons():
         'SELECT *  FROM sardorbot')
     check = min.fetchall()
 
-    for i in check:
-        some_id = i["tg_id"]
-        f = open("конс.jpg", 'rb')
-        bot.send_photo(some_id, f,
-                       caption="O‘zbekiston Respublikasi Konstitutsiyasi qabul qilingan kun bilan tabriklaymiz! 🇺🇿\n\nПоздравляем с Днём Конституции Республики Узбекистан! 🇺🇿")
+    # for i in check:
+    #     some_id = i["tg_id"]
+    f = open("dedicated.jpg", 'rb')
+    bot.send_photo(332749197, f,
+                   caption="Hostmaster Dedicated Server Sale ⚡️⚡️⚡️ o'tkazmoqda!\n\nYangi yil arafasida ajratilgan serverlar ijarasi uchun chegirmalar 🔥🔥🔥 e'lon qilamiz.\n\nServerlar soni cheklangan.\nXizmatlar va tariflar haqida batafsil maʼlumot bu yerda: http://hostmaster.uz/ds\n\n——————\n\nHostmaster проводит Dedicated Server Sale ⚡️⚡️⚡️!\n\nВ преддверии Нового года мы объявляем скидки 🔥🔥🔥 на аренду выделенных серверов.\n\nКоличество серверов ограничено.\nПодробнее об услуге и тарифах здесь:  http://hostmaster.uz/ds")
 
-    min.close()
+
+min.close()
 
 
 def r_reg():
@@ -2060,7 +2061,7 @@ if __name__ == "__main__":
     schedule.every().day.at("10:00").do(domen_30_days_schedule)
     schedule.every().day.at("10:00").do(domen_10_days_schedule)
     schedule.every().day.at("10:00").do(domen_1_days_schedule)
-    # schedule.every().day.at("12:18").do(cons)
+    schedule.every().day.at("10:56").do(dedicated)
     # schedule.every().day.at("10:15").do(juma2)
 
     Thread(target=schedule_checker).start()
