@@ -138,7 +138,7 @@ def hosting_4_days_schedule():
                                  )
     min = connection.cursor()
     min.execute(
-        "Select `tg_id`,`hostcontract`.`user_id`, `hostcontract`.`hostcontractdomain`, `hosting`.`hostingname`, `hostcontract`.`hostcontractdate`, `contact`.`balance`, `contact`.`contactname`, `hosting`.`hostingmcost` FROM `hostmasteruz_bot`.`sardorbot`,`contact`, `hostcontract`, `hosting` WHERE `hostcontract`.`status` = 1 AND DAY(`hostcontract`.`hostcontractdate`) = DAY(DATE_ADD(NOW(), INTERVAL 3 DAY)) AND `hostcontract`.`hostingid` = `hosting`.`idhosting` AND `hostcontract`.`contactid` = `contact`.`idcontact` AND `hostcontract`.`user_id` = `contact`.`userid` AND `contact`.`balance` < `hosting`.`hostingmcost` AND `sardorbot`.`b_userid` = `hostcontract`.`user_id` AND `hosting`.`hostingname` LIKE '%Месяц%';")
+        "Select DAY(DATE_ADD(NOW(), INTERVAL 3 day )) as expired_day,month(DATE_ADD(NOW(), INTERVAL 0 month )) as expired_month ,year(DATE_ADD(NOW(), INTERVAL 0 year )) as expired_year ,`tg_id`,`hostcontract`.`user_id`, `hostcontract`.`hostcontractdomain`, `hosting`.`hostingname`, `hostcontract`.`hostcontractdate`, `contact`.`balance`, `contact`.`contactname`, `hosting`.`hostingmcost` FROM `hostmasteruz_bot`.`sardorbot`,`contact`, `hostcontract`, `hosting` WHERE `hostcontract`.`status` = 1 AND DAY(`hostcontract`.`hostcontractdate`) = DAY(DATE_ADD(NOW(), INTERVAL 3 DAY)) AND `hostcontract`.`hostingid` = `hosting`.`idhosting` AND `hostcontract`.`contactid` = `contact`.`idcontact` AND `hostcontract`.`user_id` = `contact`.`userid` AND `contact`.`balance` < `hosting`.`hostingmcost` AND `sardorbot`.`b_userid` = `hostcontract`.`user_id` AND `hosting`.`hostingname` LIKE '%Месяц%';")
     host = min.fetchall()
 
     for i in host:
@@ -147,7 +147,7 @@ def hosting_4_days_schedule():
         bot.send_message(332749197,
                          f'Автоматическое уведомление:\n'
                          f'Уважаемый <b>{i["contactname"]}!</b>\n'
-                         f'Срок действия хостинга {i["hostcontractdomain"]} истекает <b>{exp_date}-22 г.</b> '
+                         f'Срок действия хостинга {i["hostcontractdomain"]} истекает <b>{i["expired_day"]}.{i["expired_month"]}.{i["expired_year"]} г.</b> '
                          f'\nДля продления услуги, вам необходимо оплатить сумму, согласно тарифу {i["hostingname"]} '
                          f'\n\nТекущий остаток: <b>{i["balance"]} сум💰</b>\n'
                          f'Сумма абон.платы по тарифу: <b>{i["hostingmcost"]} сум💰</b>\n\n'
@@ -167,7 +167,7 @@ def domen_60_days_schedule():
                                  )
     min = connection.cursor()
     min.execute(
-        "SELECT DAY(DATE_ADD(NOW(), INTERVAL 3 day )) as expired_day,month(DATE_ADD(NOW(), INTERVAL 0 month )) as expired_month ,year(DATE_ADD(NOW(), INTERVAL 0 year )) as expired_year ,`tg_id`, `idmydomain`, `mydomain`.userid, `mydomainname`, NOW() as now_datetime, `expired`,`contactname`, `contactcompany` FROM `hostmasteruz_base`.`mydomain`, `hostmasteruz_bot`.`sardorbot`,`hostmasteruz_base`.`contact`  WHERE DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 60 DAY)) AND `sardorbot`.`b_userid` = `mydomain`.`userid` AND `mydomain`.`mydomaincontactcust` = `contact`.`idcontact`;")
+        "SELECT `tg_id`, `idmydomain`, `mydomain`.userid, `mydomainname`, NOW() as now_datetime, `expired`,`contactname`, `contactcompany` FROM `hostmasteruz_base`.`mydomain`, `hostmasteruz_bot`.`sardorbot`,`hostmasteruz_base`.`contact`  WHERE DATE(`expired`) = DATE(DATE_ADD(NOW(),INTERVAL 60 DAY)) AND `sardorbot`.`b_userid` = `mydomain`.`userid` AND `mydomain`.`mydomaincontactcust` = `contact`.`idcontact`;")
     domen = min.fetchall()
 
     for i in domen:
@@ -177,7 +177,7 @@ def domen_60_days_schedule():
         if i["contactcompany"] == None:
             bot.send_message(some_id,
                              f'Уважаемый <b>{i["contactname"]}!</b> Уведомляем Вас о том, '
-                             f'что срок действия домена <b>{i["mydomainname"]}.uz</b> истекает <b>{i["expired_day"]}.{i["expired_month"]}.{i["expired_year"]} г.</b> '
+                             f'что срок действия домена <b>{i["mydomainname"]}.uz</b> истекает <b>{date}</b> '
                              f'года . Для продления регистрации домена Вам необходимо оплатить '
                              f'сумму согласно действующим тарифам на нашем сайте. '
                              f'В случае неоплаты, ваш домен будет свободен для регистрации другим '
@@ -2089,7 +2089,7 @@ if __name__ == "__main__":
     schedule.every().day.at("10:00").do(domen_30_days_schedule)
     schedule.every().day.at("10:00").do(domen_10_days_schedule)
     schedule.every().day.at("10:00").do(domen_1_days_schedule)
-    schedule.every().day.at("18:14").do(hosting_4_days_schedule)
+    schedule.every().day.at("18:17").do(hosting_4_days_schedule)
     # schedule.every().day.at("15:00").do(dedicated)
     # schedule.every().day.at("10:15").do(juma2)
 
