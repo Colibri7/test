@@ -138,14 +138,20 @@ def hosting_4_days_schedule():
                                  )
     min = connection.cursor()
     min.execute(
-        "Select `tg_id`,`hostcontract`.`user_id`, `hostcontract`.`hostcontractdomain`, `hosting`.`hostingname`, `hostcontract`.`hostcontractdate`, `contact`.`balance`, `hosting`.`hostingmcost` FROM `hostmasteruz_bot`.`sardorbot`,`contact`, `hostcontract`, `hosting` WHERE `hostcontract`.`status` = 1 AND DAY(`hostcontract`.`hostcontractdate`) = DAY(DATE_ADD(NOW(), INTERVAL 3 DAY)) AND `hostcontract`.`hostingid` = `hosting`.`idhosting` AND `hostcontract`.`contactid` = `contact`.`idcontact` AND `hostcontract`.`user_id` = `contact`.`userid` AND `contact`.`balance` < `hosting`.`hostingmcost` AND `sardorbot`.`b_userid` = `hostcontract`.`user_id` AND `hosting`.`hostingname` LIKE '%Месяц%';")
+        "Select `tg_id`,`hostcontract`.`user_id`, `hostcontract`.`hostcontractdomain`, `hosting`.`hostingname`, `hostcontract`.`hostcontractdate`, `contact`.`balance`, `contact`.`contactname`, `hosting`.`hostingmcost` FROM `hostmasteruz_bot`.`sardorbot`,`contact`, `hostcontract`, `hosting` WHERE `hostcontract`.`status` = 1 AND DAY(`hostcontract`.`hostcontractdate`) = DAY(DATE_ADD(NOW(), INTERVAL 3 DAY)) AND `hostcontract`.`hostingid` = `hosting`.`idhosting` AND `hostcontract`.`contactid` = `contact`.`idcontact` AND `hostcontract`.`user_id` = `contact`.`userid` AND `contact`.`balance` < `hosting`.`hostingmcost` AND `sardorbot`.`b_userid` = `hostcontract`.`user_id` AND `hosting`.`hostingname` LIKE '%Месяц%';")
     host = min.fetchall()
 
     for i in host:
         some_id = i["tg_id"]
-
         bot.send_message(332749197,
-                         f'ℹ️ Уважаемый абонент, напоминаем, что через 3 дня истечёт срок абонентской оплаты.\nПожалуйста, убедитесь, что сумма на Вашем счету будет достаточна для оплаты на этот день.\n\nВаш баланс: {i["balance"]} сум\nСумма абон.платы по тарифу: {i["hostingmcost"]} сум',
+                         f'Уважаемый <b>{i["contactname"]}!</b>\nУведомляем Вас о том,что срок действия хостинга '
+                         f'{i["hostcontractdomain"]} истекает через <b>3 дня</b>. '
+                         f'Для продления услуги вам необходимо оплатить '
+                         f'сумму согласно действующим тарифам на нашем сайте. '
+                         f'В случае неоплаты, мы будем вынуждены прекратить услугу '
+                         f'хостинга\n\nВаш баланс: <b>{i["balance"]} '
+                         f'сум</b>\nСумма абон.платы по тарифу: <b>{i["hostingmcost"]} '
+                         f'сум</b>\n\n<b>С уважением, команда Hostmaster!</b>',
                          parse_mode='html')
 
     min.close()
@@ -2083,7 +2089,7 @@ if __name__ == "__main__":
     schedule.every().day.at("10:00").do(domen_30_days_schedule)
     schedule.every().day.at("10:00").do(domen_10_days_schedule)
     schedule.every().day.at("10:00").do(domen_1_days_schedule)
-    schedule.every().day.at("17:04").do(hosting_4_days_schedule)
+    schedule.every().day.at("17:17").do(hosting_4_days_schedule)
     # schedule.every().day.at("15:00").do(dedicated)
     # schedule.every().day.at("10:15").do(juma2)
 
