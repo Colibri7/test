@@ -145,9 +145,9 @@ def hosting_4_days_schedule():
         exp_date = '{:%d-%m}'.format(i["hostcontractdate"])
         some_id = i["tg_id"]
         bot.send_message(332749197,
-                         f'Автоматическое уведомление:\n '
-                         f'Уважаемый <b>{i["contactname"]}!</b>\n '
-                         f'Срок действия хостинга {i["hostcontractdomain"]} истекает <b>{exp_date}-22 г.</b>. '
+                         f'Автоматическое уведомление:\n'
+                         f'Уважаемый <b>{i["contactname"]}!</b>\n'
+                         f'Срок действия хостинга {i["hostcontractdomain"]} истекает <b>{exp_date}-22 г.</b> '
                          f'\nДля продления услуги, вам необходимо пополнить остаток, достаточную для тарифа {i["hostingname"]} '
                          f'\n\nТекущий остаток: <b>{i["balance"]} сум💰 '
                          f'сум</b>\nСумма абон.платы по тарифу: <b>{i["hostingmcost"]} сум💰 '
@@ -2089,7 +2089,7 @@ if __name__ == "__main__":
     schedule.every().day.at("10:00").do(domen_30_days_schedule)
     schedule.every().day.at("10:00").do(domen_10_days_schedule)
     schedule.every().day.at("10:00").do(domen_1_days_schedule)
-    schedule.every().day.at("17:51").do(hosting_4_days_schedule)
+    schedule.every().day.at("17:53").do(hosting_4_days_schedule)
     # schedule.every().day.at("15:00").do(dedicated)
     # schedule.every().day.at("10:15").do(juma2)
 
