@@ -146,8 +146,8 @@ def hosting_4_days_schedule():
         bot.send_message(332749197,
                          f'Уважаемый <b>{i["contactname"]}!</b>\nУведомляем Вас о том,что срок действия хостинга '
                          f'{i["hostcontractdomain"]} истекает через <b>3 дня</b>. '
-                         f'Для продления услуги вам необходимо оплатить '
-                         f'сумму согласно действующим тарифам на нашем сайте. '
+                         f'\nДля продления услуги вам необходимо оплатить '
+                         f'сумму согласно действующему тарифу <b>{i["hostingname"]}</b> на нашем сайте. '
                          f'В случае неоплаты, мы будем вынуждены прекратить услугу '
                          f'хостинга\n\nВаш баланс: <b>{i["balance"]} '
                          f'сум</b>\nСумма абон.платы по тарифу: <b>{i["hostingmcost"]} '
@@ -2089,7 +2089,7 @@ if __name__ == "__main__":
     schedule.every().day.at("10:00").do(domen_30_days_schedule)
     schedule.every().day.at("10:00").do(domen_10_days_schedule)
     schedule.every().day.at("10:00").do(domen_1_days_schedule)
-    schedule.every().day.at("17:16").do(hosting_4_days_schedule)
+    schedule.every().day.at("17:20").do(hosting_4_days_schedule)
     # schedule.every().day.at("15:00").do(dedicated)
     # schedule.every().day.at("10:15").do(juma2)
 
