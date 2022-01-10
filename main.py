@@ -145,9 +145,8 @@ def hosting_4_days_schedule():
         some_id = i["tg_id"]
 
         bot.send_message(332749197,
-                         f'Уважаемый у вас долг по хостингу',
+                         f'ℹ️ Уважаемый абонент, напоминаем, что через 3 дня истечёт срок абонентской оплаты.\nПожалуйста, убедитесь, что сумма на Вашем счету будет достаточна для оплаты на этот день.\n\nВаш баланс: {i["balance"]} сум\nСумма абон.платы по тарифу: {i["hostingmcost"]} сум',
                          parse_mode='html')
-
 
     min.close()
 
@@ -2084,7 +2083,7 @@ if __name__ == "__main__":
     schedule.every().day.at("10:00").do(domen_30_days_schedule)
     schedule.every().day.at("10:00").do(domen_10_days_schedule)
     schedule.every().day.at("10:00").do(domen_1_days_schedule)
-    schedule.every().day.at("16:42").do(hosting_4_days_schedule)
+    schedule.every().day.at("17:04").do(hosting_4_days_schedule)
     # schedule.every().day.at("15:00").do(dedicated)
     # schedule.every().day.at("10:15").do(juma2)
 
