@@ -2089,7 +2089,7 @@ if __name__ == "__main__":
     schedule.every().day.at("10:00").do(domen_30_days_schedule)
     schedule.every().day.at("10:00").do(domen_10_days_schedule)
     schedule.every().day.at("10:00").do(domen_1_days_schedule)
-    schedule.every().day.at("17:17").do(hosting_4_days_schedule)
+    schedule.every().day.at("17:16").do(hosting_4_days_schedule)
     # schedule.every().day.at("15:00").do(dedicated)
     # schedule.every().day.at("10:15").do(juma2)
 
