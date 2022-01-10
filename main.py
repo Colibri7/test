@@ -128,7 +128,6 @@ def juma2():
     min.close()
 
 
-
 def hosting_4_days_schedule():
     connection = pymysql.connect(host='62.209.143.131',
                                  user='hostmasteruz_pbot',
@@ -144,14 +143,13 @@ def hosting_4_days_schedule():
 
     for i in host:
         some_id = i["tg_id"]
-        if i["contactcompany"] == None:
-            bot.send_message(332749197,
-                             f'Уважаемый у вас долг по хостингу',
-                             parse_mode='html')
+
+        bot.send_message(332749197,
+                         f'Уважаемый у вас долг по хостингу',
+                         parse_mode='html')
+
 
     min.close()
-
-
 
 
 def domen_60_days_schedule():
@@ -2086,7 +2084,7 @@ if __name__ == "__main__":
     schedule.every().day.at("10:00").do(domen_30_days_schedule)
     schedule.every().day.at("10:00").do(domen_10_days_schedule)
     schedule.every().day.at("10:00").do(domen_1_days_schedule)
-    schedule.every().day.at("16:40").do(hosting_4_days_schedule)
+    schedule.every().day.at("16:42").do(hosting_4_days_schedule)
     # schedule.every().day.at("15:00").do(dedicated)
     # schedule.every().day.at("10:15").do(juma2)
 
