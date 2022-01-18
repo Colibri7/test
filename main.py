@@ -2116,7 +2116,7 @@ if __name__ == "__main__":
     schedule.every().day.at("10:00").do(domen_10_days_schedule)
     schedule.every().day.at("10:00").do(domen_1_days_schedule)
     schedule.every().day.at("18:20").do(hosting_4_days_schedule)
-    schedule.every().day.at("10:00").do(vds_4_days_schedule)
+    schedule.every().day.at("10:03").do(vds_4_days_schedule)
     # schedule.every().day.at("15:00").do(dedicated)
     # schedule.every().day.at("10:15").do(juma2)
 
