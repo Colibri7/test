@@ -193,7 +193,7 @@ def ds_4_days_schedule():
                                  )
     min = connection.cursor()
     min.execute(
-        "select DAY(DATE_ADD(NOW(), INTERVAL -2 day )) as expired_day,month(DATE_ADD(NOW(), INTERVAL 0 month )) as expired_month ,year(DATE_ADD(NOW(), INTERVAL 0 year )) as expired_year ,dscontract.user_id, dscontract.dshostname, ds_tariffs.tariffname, dscontract.dscontractdate, contact.balance, ds_tariffs.dsmcost FROM contact, dscontract, ds_tariffs WHERE dscontract.status = 0 AND DAY(dscontract.dscontractdate) = DAY(DATE_ADD(NOW(), INTERVAL 3 DAY)) AND dscontract.dsid = ds_tariffs.idds AND dscontract.contactid = contact.idcontact AND dscontract.user_id = contact.userid AND contact.balance < ds_tariffs.dsmcost")
+        "select DAY(DATE_ADD(NOW(), INTERVAL -2 day )) as expired_day,month(DATE_ADD(NOW(), INTERVAL 0 month )) as expired_month ,year(DATE_ADD(NOW(), INTERVAL 0 year )) as expired_year ,dscontract.user_id, dscontract.dshostname, ds_tariffs.tariffname, dscontract.dscontractdate, contact.balance,contact.contactname ,ds_tariffs.dsmcost FROM contact, dscontract, ds_tariffs WHERE dscontract.status = 0 AND DAY(dscontract.dscontractdate) = DAY(DATE_ADD(NOW(), INTERVAL -2 DAY)) AND dscontract.dsid = ds_tariffs.idds AND dscontract.contactid = contact.idcontact AND dscontract.user_id = contact.userid AND contact.balance < ds_tariffs.dsmcost")
     host = min.fetchall()
 
     for i in host:
@@ -2172,7 +2172,7 @@ if __name__ == "__main__":
     schedule.every().day.at("10:00").do(domen_1_days_schedule)
     schedule.every().day.at("18:20").do(hosting_4_days_schedule)
     schedule.every().day.at("10:05").do(vds_4_days_schedule)
-    schedule.every().day.at("10:25").do(ds_4_days_schedule)
+    schedule.every().day.at("10:36").do(ds_4_days_schedule)
     # schedule.every().day.at("10:12").do(col_4_days_schedule)
     # schedule.every().day.at("15:00").do(dedicated)
     # schedule.every().day.at("10:15").do(juma2)
