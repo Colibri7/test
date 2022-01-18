@@ -155,6 +155,33 @@ def hosting_4_days_schedule():
                          parse_mode='html')
 
     min.close()
+def vds_4_days_schedule():
+    connection = pymysql.connect(host='62.209.143.131',
+                                 user='hostmasteruz_pbot',
+                                 password='bcaxoZyAXDGc',
+                                 database='hostmasteruz_base',
+                                 charset='utf8mb4',
+                                 cursorclass=pymysql.cursors.DictCursor
+                                 )
+    min = connection.cursor()
+    min.execute(
+        "select DAY(DATE_ADD(NOW(), INTERVAL -12 day )) as expired_day,month(DATE_ADD(NOW(), INTERVAL 0 month )) as expired_month ,year(DATE_ADD(NOW(), INTERVAL 0 year )) as expired_year ,vdscontract.user_id, vdscontract.vdshostname, vds_tariffs.tariffname, vdscontract.vdscontractdate, contact.balance, vds_tariffs.vdsmcost FROM contact, vdscontract, vds_tariffs WHERE vdscontract.status = 1 AND DAY(vdscontract.vdscontractdate) = DAY(DATE_ADD(NOW(), INTERVAL -12 DAY)) AND vdscontract.vdsid = vds_tariffs.idvds AND vdscontract.contactid = contact.idcontact AND vdscontract.user_id = contact.userid AND contact.balance < vds_tariffs.vdsmcost AND vds_tariffs.tariffname LIKE '%Годовой%'")
+    host = min.fetchall()
+
+    for i in host:
+        exp_date = '{:%d-%m}'.format(i["vdscontractdate"])
+        some_id = i["tg_id"]
+        bot.send_message(332749197,
+                         f'Автоматическое уведомление ℹ️:\n'
+                         f'Уважаемый <b>{i["contactname"]}!</b>\n'
+                         f'Срок действия VDS {i["vdshostname"]} истекает <b>{i["expired_day"]}.0{i["expired_month"]}.{i["expired_year"]} г.</b> '
+                         f'Для продления услуги, вам необходимо оплатить сумму, согласно тарифу {i["tariffname"]}. '
+                         f'\n\nТекущий остаток: <b>{i["balance"]} сум💰</b>\n'
+                         f'Сумма абон.платы по тарифу: <b>{i["vdsmcost"]} сум💰</b>\n\n'
+                         f'<b>С уважением, команда Hostmaster!</b>',
+                         parse_mode='html')
+
+    min.close()
 
 
 def domen_60_days_schedule():
@@ -2090,6 +2117,7 @@ if __name__ == "__main__":
     schedule.every().day.at("10:00").do(domen_10_days_schedule)
     schedule.every().day.at("10:00").do(domen_1_days_schedule)
     schedule.every().day.at("18:20").do(hosting_4_days_schedule)
+    schedule.every().day.at("10:00").do(vds_4_days_schedule)
     # schedule.every().day.at("15:00").do(dedicated)
     # schedule.every().day.at("10:15").do(juma2)
 
