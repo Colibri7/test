@@ -165,7 +165,7 @@ def vds_4_days_schedule():
                                  )
     min = connection.cursor()
     min.execute(
-        "select DAY(DATE_ADD(NOW(), INTERVAL -12 day )) as expired_day,month(DATE_ADD(NOW(), INTERVAL 0 month )) as expired_month ,year(DATE_ADD(NOW(), INTERVAL 0 year )) as expired_year ,vdscontract.user_id, vdscontract.vdshostname, vds_tariffs.tariffname, vdscontract.vdscontractdate, contact.balance, vds_tariffs.vdsmcost FROM contact, vdscontract, vds_tariffs WHERE vdscontract.status = 1 AND DAY(vdscontract.vdscontractdate) = DAY(DATE_ADD(NOW(), INTERVAL -12 DAY)) AND vdscontract.vdsid = vds_tariffs.idvds AND vdscontract.contactid = contact.idcontact AND vdscontract.user_id = contact.userid AND contact.balance < vds_tariffs.vdsmcost AND vds_tariffs.tariffname LIKE '%Годовой%'")
+        "select DAY(DATE_ADD(NOW(), INTERVAL -12 day )) as expired_day,month(DATE_ADD(NOW(), INTERVAL 0 month )) as expired_month ,year(DATE_ADD(NOW(), INTERVAL 0 year )) as expired_year ,vdscontract.user_id, vdscontract.vdshostname, vds_tariffs.tariffname, vdscontract.vdscontractdate, contact.balance,contact.contactname, vds_tariffs.vdsmcost FROM contact, vdscontract, vds_tariffs WHERE vdscontract.status = 1 AND DAY(vdscontract.vdscontractdate) = DAY(DATE_ADD(NOW(), INTERVAL -12 DAY)) AND vdscontract.vdsid = vds_tariffs.idvds AND vdscontract.contactid = contact.idcontact AND vdscontract.user_id = contact.userid AND contact.balance < vds_tariffs.vdsmcost AND vds_tariffs.tariffname LIKE '%Годовой%'")
     host = min.fetchall()
 
     for i in host:
@@ -2116,7 +2116,7 @@ if __name__ == "__main__":
     schedule.every().day.at("10:00").do(domen_10_days_schedule)
     schedule.every().day.at("10:00").do(domen_1_days_schedule)
     schedule.every().day.at("18:20").do(hosting_4_days_schedule)
-    schedule.every().day.at("10:03").do(vds_4_days_schedule)
+    schedule.every().day.at("10:05").do(vds_4_days_schedule)
     # schedule.every().day.at("15:00").do(dedicated)
     # schedule.every().day.at("10:15").do(juma2)
 
