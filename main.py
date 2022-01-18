@@ -169,8 +169,7 @@ def vds_4_days_schedule():
     host = min.fetchall()
 
     for i in host:
-        exp_date = '{:%d-%m}'.format(i["vdscontractdate"])
-        some_id = i["tg_id"]
+        # some_id = i["tg_id"]
         bot.send_message(332749197,
                          f'Автоматическое уведомление ℹ️:\n'
                          f'Уважаемый <b>{i["contactname"]}!</b>\n'
