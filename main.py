@@ -17,118 +17,96 @@ SQLALCHEMY_ENGINE_OPTIONS = {
 }
 
 
-def dedicated():
-    bot_con = pymysql.connect(host='62.209.143.131',
-                              user='hostmasteruz_pbot',
-                              password='bcaxoZyAXDGc',
-                              database='hostmasteruz_bot',
-                              charset='utf8mb4',
-                              cursorclass=pymysql.cursors.DictCursor
-                              )
-    min = bot_con.cursor()
-    min.execute(
-        'SELECT *  FROM sardorbot')
-    check = min.fetchall()
-
-    for i in check:
-        some_id = i["tg_id"]
-        f = open("dedicated.jpg", 'rb')
-        bot.send_photo(some_id, f,
-                       caption="Hostmaster Dedicated Server Sale ⚡️⚡️⚡️ o'tkazmoqda!\n\nYangi yil arafasida ajratilgan serverlar ijarasi uchun chegirmalar 🔥🔥🔥 e'lon qilamiz.\n\nServerlar soni cheklangan.\nXizmatlar va tariflar haqida batafsil maʼlumot bu yerda: http://hostmaster.uz/ds\n\n——————\n\nHostmaster проводит Dedicated Server Sale ⚡️⚡️⚡️!\n\nВ преддверии Нового года мы объявляем скидки 🔥🔥🔥 на аренду выделенных серверов.\n\nКоличество серверов ограничено.\nПодробнее об услуге и тарифах здесь:  http://hostmaster.uz/ds")
-
-    min.close()
-
-
-def r_reg():
-    bot_con = pymysql.connect(host='62.209.143.131',
-                              user='hostmasteruz_pbot',
-                              password='bcaxoZyAXDGc',
-                              database='hostmasteruz_bot',
-                              charset='utf8mb4',
-                              cursorclass=pymysql.cursors.DictCursor
-                              )
-    id_connect = bot_con.cursor()
-    id_connect.execute(
-        "SELECT tg_id, idmydomain, mydomain.userid,status, "
-        "mydomainname, NOW() as now_datetime, expired,"
-        "contactname, contactcompany FROM"
-        " hostmasteruz_base.mydomain,"
-        " hostmasteruz_bot.sardorbot,"
-        "hostmasteruz_base.contact  "
-        "WHERE sardorbot.b_userid = mydomain.userid"
-        " AND mydomain.mydomaincontactcust = contact.idcontact AND mydomain.status=0;")
-    domen_30 = id_connect.fetchall()
-    for i in domen_30:
-
-        date = '{:%d-%m-%Y}'.format(i["expired"])
-        some_id = i["tg_id"]
-        delta = i["now_datetime"] - i["expired"]
-
-        if delta.days == -7:
-            if i["contactcompany"] is None:
-                bot.send_message(332749197, f"Уважаемый {i['contactname']}! Уведомляем Вас о том, что срок "
-                                            f"бронирования домена {i['mydomainname']}.uz истекает завтра {date} года . "
-                                            f"Для завершения регистрации домена Вам необходимо оплатить сумму "
-                                            f"согласно действующим тарифам через личный кабинет на нашем сайте. "
-                                            f"В случае неоплаты, ваш домен будет свободен для регистрации другим лицом.\n"
-                                            f"<b>С уважением, команда Hostmaster!</b>", parse_mode='html')
-            else:
-                bot.send_message(332749197, f"Уважаемый {i['contactcompany']}! Уведомляем Вас о том, что срок "
-                                            f"бронирования домена {i['mydomainname']}.uz истекает завтра {date} года . "
-                                            f"Для завершения регистрации домена Вам необходимо оплатить сумму "
-                                            f"согласно действующим тарифам через личный кабинет на нашем сайте. "
-                                            f"В случае неоплаты, ваш домен будет свободен для регистрации другим лицом.\n"
-                                            f"<b>С уважением, команда Hostmaster!</b>", parse_mode='html')
-        else:
-            print(f'YEshe ne vrema')
-    id_connect.close()
+# def r_reg():
+#     bot_con = pymysql.connect(host='62.209.143.131',
+#                               user='hostmasteruz_pbot',
+#                               password='bcaxoZyAXDGc',
+#                               database='hostmasteruz_bot',
+#                               charset='utf8mb4',
+#                               cursorclass=pymysql.cursors.DictCursor
+#                               )
+#     id_connect = bot_con.cursor()
+#     id_connect.execute(
+#         "SELECT tg_id, idmydomain, mydomain.userid,status, "
+#         "mydomainname, NOW() as now_datetime, expired,"
+#         "contactname, contactcompany FROM"
+#         " hostmasteruz_base.mydomain,"
+#         " hostmasteruz_bot.sardorbot,"
+#         "hostmasteruz_base.contact  "
+#         "WHERE sardorbot.b_userid = mydomain.userid"
+#         " AND mydomain.mydomaincontactcust = contact.idcontact AND mydomain.status=0;")
+#     domen_30 = id_connect.fetchall()
+#     for i in domen_30:
+#
+#         date = '{:%d-%m-%Y}'.format(i["expired"])
+#         some_id = i["tg_id"]
+#         delta = i["now_datetime"] - i["expired"]
+#
+#         if delta.days == -7:
+#             if i["contactcompany"] is None:
+#                 bot.send_message(332749197, f"Уважаемый {i['contactname']}! Уведомляем Вас о том, что срок "
+#                                             f"бронирования домена {i['mydomainname']}.uz истекает завтра {date} года . "
+#                                             f"Для завершения регистрации домена Вам необходимо оплатить сумму "
+#                                             f"согласно действующим тарифам через личный кабинет на нашем сайте. "
+#                                             f"В случае неоплаты, ваш домен будет свободен для регистрации другим лицом.\n"
+#                                             f"<b>С уважением, команда Hostmaster!</b>", parse_mode='html')
+#             else:
+#                 bot.send_message(332749197, f"Уважаемый {i['contactcompany']}! Уведомляем Вас о том, что срок "
+#                                             f"бронирования домена {i['mydomainname']}.uz истекает завтра {date} года . "
+#                                             f"Для завершения регистрации домена Вам необходимо оплатить сумму "
+#                                             f"согласно действующим тарифам через личный кабинет на нашем сайте. "
+#                                             f"В случае неоплаты, ваш домен будет свободен для регистрации другим лицом.\n"
+#                                             f"<b>С уважением, команда Hostmaster!</b>", parse_mode='html')
+#         else:
+#             print(f'YEshe ne vrema')
+#     id_connect.close()
 
 
-def juma():
-    bot_con = pymysql.connect(host='62.209.143.131',
-                              user='hostmasteruz_pbot',
-                              password='bcaxoZyAXDGc',
-                              database='hostmasteruz_bot',
-                              charset='utf8mb4',
-                              cursorclass=pymysql.cursors.DictCursor
-                              )
-    min = bot_con.cursor()
-    min.execute(
-        'SELECT *  FROM sardorbot')
-    check = min.fetchall()
-
-    for i in check:
-        some_id = i["tg_id"]
-
-        f = open("juma.jpg", 'rb')
-        bot.send_photo(332749197, f,
-                       caption="Do'stlar!\n\nSizni va barcha yaqinlaringizni muqaddas Qurbon Hayit bayrami bilan samimiy muborakbod etamiz! Barchangizga yaxshilik, tinchlik va eng muhimi, sog'liq tilaymiz! Uylaringizda farovonlik, iliqlik va totuvlik hukm sursin!\n\n"
-                               "Друзья!\n\nОт души поздравляем вас и ваших близких со священным праздником Курбан Хайит! Желаем всем добра, мира и самое главное - здоровья! Пусть в ваших домах царят уют, тепло и гармония!")
-
-    min.close()
-
-
-def juma2():
-    bot_con = pymysql.connect(host='62.209.143.131',
-                              user='hostmasteruz_pbot',
-                              password='bcaxoZyAXDGc',
-                              database='hostmasteruz_bot',
-                              charset='utf8mb4',
-                              cursorclass=pymysql.cursors.DictCursor
-                              )
-    min = bot_con.cursor()
-    min.execute(
-        'SELECT * FROM sardorbot')
-    check = min.fetchall()
-
-    for i in check:
-        some_id = i["tg_id"]
-        f = open("juma2.jpg", 'rb')
-        bot.send_photo(some_id, f)
-    min.close()
+# def juma():
+#     bot_con = pymysql.connect(host='62.209.143.131',
+#                               user='hostmasteruz_pbot',
+#                               password='bcaxoZyAXDGc',
+#                               database='hostmasteruz_bot',
+#                               charset='utf8mb4',
+#                               cursorclass=pymysql.cursors.DictCursor
+#                               )
+#     min = bot_con.cursor()
+#     min.execute(
+#         'SELECT *  FROM sardorbot')
+#     check = min.fetchall()
+#
+#     for i in check:
+#         some_id = i["tg_id"]
+#
+#         f = open("juma.jpg", 'rb')
+#         bot.send_photo(332749197, f,
+#                        caption="Do'stlar!\n\nSizni va barcha yaqinlaringizni muqaddas Qurbon Hayit bayrami bilan samimiy muborakbod etamiz! Barchangizga yaxshilik, tinchlik va eng muhimi, sog'liq tilaymiz! Uylaringizda farovonlik, iliqlik va totuvlik hukm sursin!\n\n"
+#                                "Друзья!\n\nОт души поздравляем вас и ваших близких со священным праздником Курбан Хайит! Желаем всем добра, мира и самое главное - здоровья! Пусть в ваших домах царят уют, тепло и гармония!")
+#
+#     min.close()
 
 
-def hosting_4_days_schedule():
+# def juma2():
+#     bot_con = pymysql.connect(host='62.209.143.131',
+#                               user='hostmasteruz_pbot',
+#                               password='bcaxoZyAXDGc',
+#                               database='hostmasteruz_bot',
+#                               charset='utf8mb4',
+#                               cursorclass=pymysql.cursors.DictCursor
+#                               )
+#     min = bot_con.cursor()
+#     min.execute(
+#         'SELECT * FROM sardorbot')
+#     check = min.fetchall()
+#
+#     for i in check:
+#         some_id = i["tg_id"]
+#         f = open("juma2.jpg", 'rb')
+#         bot.send_photo(some_id, f)
+#     min.close()
+
+
+def hosting_2_days_schedule():
     connection = pymysql.connect(host='62.209.143.131',
                                  user='hostmasteruz_pbot',
                                  password='bcaxoZyAXDGc',
@@ -138,13 +116,12 @@ def hosting_4_days_schedule():
                                  )
     min = connection.cursor()
     min.execute(
-        "Select DAY(DATE_ADD(NOW(), INTERVAL 3 day )) as expired_day,month(DATE_ADD(NOW(), INTERVAL 0 month )) as expired_month ,year(DATE_ADD(NOW(), INTERVAL 0 year )) as expired_year ,`tg_id`,`hostcontract`.`user_id`, `hostcontract`.`hostcontractdomain`, `hosting`.`hostingname`, `hostcontract`.`hostcontractdate`, `contact`.`balance`, `contact`.`contactname`, `hosting`.`hostingmcost` FROM `hostmasteruz_bot`.`sardorbot`,`contact`, `hostcontract`, `hosting` WHERE `hostcontract`.`status` = 1 AND DAY(`hostcontract`.`hostcontractdate`) = DAY(DATE_ADD(NOW(), INTERVAL 3 DAY)) AND `hostcontract`.`hostingid` = `hosting`.`idhosting` AND `hostcontract`.`contactid` = `contact`.`idcontact` AND `hostcontract`.`user_id` = `contact`.`userid` AND `contact`.`balance` < `hosting`.`hostingmcost` AND `sardorbot`.`b_userid` = `hostcontract`.`user_id` AND `hosting`.`hostingname` LIKE '%Месяц%';")
+        "Select tg_id,DAY(DATE_ADD(NOW(), INTERVAL 2 day )) as expired_day,month(DATE_ADD(NOW(), INTERVAL 0 month )) as expired_month ,year(DATE_ADD(NOW(), INTERVAL 0 year )) as expired_year ,`tg_id`,`hostcontract`.`user_id`, `hostcontract`.`hostcontractdomain`, `hosting`.`hostingname`, `hostcontract`.`hostcontractdate`, `contact`.`balance`, `contact`.`contactname`, `hosting`.`hostingmcost` FROM `hostmasteruz_bot`.`sardorbot`,`contact`, `hostcontract`, `hosting` WHERE `hostcontract`.`status` = 1 AND DAY(`hostcontract`.`hostcontractdate`) = DAY(DATE_ADD(NOW(), INTERVAL 3 DAY)) AND `hostcontract`.`hostingid` = `hosting`.`idhosting` AND `hostcontract`.`contactid` = `contact`.`idcontact` AND `hostcontract`.`user_id` = `contact`.`userid` AND `contact`.`balance` < `hosting`.`hostingmcost` AND `sardorbot`.`b_userid` = `hostcontract`.`user_id` AND `hosting`.`hostingname` LIKE '%Месяц%';")
     host = min.fetchall()
 
     for i in host:
-        exp_date = '{:%d-%m}'.format(i["hostcontractdate"])
         some_id = i["tg_id"]
-        bot.send_message(332749197,
+        bot.send_message(some_id,
                          f'Автоматическое уведомление ℹ️:\n'
                          f'Уважаемый <b>{i["contactname"]}!</b>\n'
                          f'Срок действия хостинга {i["hostcontractdomain"]} истекает <b>{i["expired_day"]}.0{i["expired_month"]}.{i["expired_year"]} г.</b> '
@@ -157,7 +134,7 @@ def hosting_4_days_schedule():
     min.close()
 
 
-def vds_4_days_schedule():
+def hosting_1_days_schedule():
     connection = pymysql.connect(host='62.209.143.131',
                                  user='hostmasteruz_pbot',
                                  password='bcaxoZyAXDGc',
@@ -167,12 +144,68 @@ def vds_4_days_schedule():
                                  )
     min = connection.cursor()
     min.execute(
-        "select DAY(DATE_ADD(NOW(), INTERVAL -12 day )) as expired_day,month(DATE_ADD(NOW(), INTERVAL 0 month )) as expired_month ,year(DATE_ADD(NOW(), INTERVAL 0 year )) as expired_year ,vdscontract.user_id, vdscontract.vdshostname, vds_tariffs.tariffname, vdscontract.vdscontractdate, contact.balance,contact.contactname, vds_tariffs.vdsmcost FROM contact, vdscontract, vds_tariffs WHERE vdscontract.status = 1 AND DAY(vdscontract.vdscontractdate) = DAY(DATE_ADD(NOW(), INTERVAL -12 DAY)) AND vdscontract.vdsid = vds_tariffs.idvds AND vdscontract.contactid = contact.idcontact AND vdscontract.user_id = contact.userid AND contact.balance < vds_tariffs.vdsmcost AND vds_tariffs.tariffname LIKE '%Месяц%'")
+        "Select tg_id,DAY(DATE_ADD(NOW(), INTERVAL 1 day )) as expired_day,month(DATE_ADD(NOW(), INTERVAL 0 month )) as expired_month ,year(DATE_ADD(NOW(), INTERVAL 0 year )) as expired_year ,`tg_id`,`hostcontract`.`user_id`, `hostcontract`.`hostcontractdomain`, `hosting`.`hostingname`, `hostcontract`.`hostcontractdate`, `contact`.`balance`, `contact`.`contactname`, `hosting`.`hostingmcost` FROM `hostmasteruz_bot`.`sardorbot`,`contact`, `hostcontract`, `hosting` WHERE `hostcontract`.`status` = 1 AND DAY(`hostcontract`.`hostcontractdate`) = DAY(DATE_ADD(NOW(), INTERVAL 1 DAY)) AND `hostcontract`.`hostingid` = `hosting`.`idhosting` AND `hostcontract`.`contactid` = `contact`.`idcontact` AND `hostcontract`.`user_id` = `contact`.`userid` AND `contact`.`balance` < `hosting`.`hostingmcost` AND `sardorbot`.`b_userid` = `hostcontract`.`user_id` AND `hosting`.`hostingname` LIKE '%Месяц%';")
     host = min.fetchall()
 
     for i in host:
-        # some_id = i["tg_id"]
-        bot.send_message(332749197,
+        some_id = i["tg_id"]
+        bot.send_message(some_id,
+                         f'Автоматическое уведомление ℹ️:\n'
+                         f'Уважаемый <b>{i["contactname"]}!</b>\n'
+                         f'Срок действия хостинга {i["hostcontractdomain"]} истекает <b>{i["expired_day"]}.0{i["expired_month"]}.{i["expired_year"]} г.</b> '
+                         f'Для продления услуги, вам необходимо оплатить сумму, согласно тарифу {i["hostingname"]}. '
+                         f'\n\nТекущий остаток: <b>{i["balance"]} сум💰</b>\n'
+                         f'Сумма абон.платы по тарифу: <b>{i["hostingmcost"]} сум💰</b>\n\n'
+                         f'<b>С уважением, команда Hostmaster!</b>',
+                         parse_mode='html')
+
+    min.close()
+
+
+def hosting_0_days_schedule():
+    connection = pymysql.connect(host='62.209.143.131',
+                                 user='hostmasteruz_pbot',
+                                 password='bcaxoZyAXDGc',
+                                 database='hostmasteruz_base',
+                                 charset='utf8mb4',
+                                 cursorclass=pymysql.cursors.DictCursor
+                                 )
+    min = connection.cursor()
+    min.execute(
+        "Select tg_id,DAY(DATE_ADD(NOW(), INTERVAL 0 day )) as expired_day,month(DATE_ADD(NOW(), INTERVAL 0 month )) as expired_month ,year(DATE_ADD(NOW(), INTERVAL 0 year )) as expired_year ,`tg_id`,`hostcontract`.`user_id`, `hostcontract`.`hostcontractdomain`, `hosting`.`hostingname`, `hostcontract`.`hostcontractdate`, `contact`.`balance`, `contact`.`contactname`, `hosting`.`hostingmcost` FROM `hostmasteruz_bot`.`sardorbot`,`contact`, `hostcontract`, `hosting` WHERE `hostcontract`.`status` = 1 AND DAY(`hostcontract`.`hostcontractdate`) = DAY(DATE_ADD(NOW(), INTERVAL 0 DAY)) AND `hostcontract`.`hostingid` = `hosting`.`idhosting` AND `hostcontract`.`contactid` = `contact`.`idcontact` AND `hostcontract`.`user_id` = `contact`.`userid` AND `contact`.`balance` < `hosting`.`hostingmcost` AND `sardorbot`.`b_userid` = `hostcontract`.`user_id` AND `hosting`.`hostingname` LIKE '%Месяц%';")
+    host = min.fetchall()
+
+    for i in host:
+        some_id = i["tg_id"]
+        bot.send_message(some_id,
+                         f'Автоматическое уведомление ℹ️:\n'
+                         f'Уважаемый <b>{i["contactname"]}!</b>\n'
+                         f'Срок действия хостинга {i["hostcontractdomain"]} истекает <b>{i["expired_day"]}.0{i["expired_month"]}.{i["expired_year"]} г.</b> '
+                         f'Для продления услуги, вам необходимо оплатить сумму, согласно тарифу {i["hostingname"]}. '
+                         f'\n\nТекущий остаток: <b>{i["balance"]} сум💰</b>\n'
+                         f'Сумма абон.платы по тарифу: <b>{i["hostingmcost"]} сум💰</b>\n\n'
+                         f'<b>С уважением, команда Hostmaster!</b>',
+                         parse_mode='html')
+
+    min.close()
+
+
+def vds_2_days_schedule():
+    connection = pymysql.connect(host='62.209.143.131',
+                                 user='hostmasteruz_pbot',
+                                 password='bcaxoZyAXDGc',
+                                 database='hostmasteruz_base',
+                                 charset='utf8mb4',
+                                 cursorclass=pymysql.cursors.DictCursor
+                                 )
+    min = connection.cursor()
+    min.execute(
+        "select tg_id,DAY(DATE_ADD(NOW(), INTERVAL 2 day )) as expired_day,month(DATE_ADD(NOW(), INTERVAL 0 month )) as expired_month ,year(DATE_ADD(NOW(), INTERVAL 0 year )) as expired_year ,vdscontract.user_id, vdscontract.vdshostname, vds_tariffs.tariffname, vdscontract.vdscontractdate, contact.balance,contact.contactname, vds_tariffs.vdsmcost FROM `hostmasteruz_bot`.`sardorbot`,contact, vdscontract, vds_tariffs WHERE vdscontract.status = 1 AND DAY(vdscontract.vdscontractdate) = DAY(DATE_ADD(NOW(), INTERVAL 2 DAY)) AND vdscontract.vdsid = vds_tariffs.idvds AND vdscontract.contactid = contact.idcontact AND vdscontract.user_id = contact.userid AND contact.balance < vds_tariffs.vdsmcost AND vds_tariffs.tariffname LIKE '%Месяц%'")
+    host = min.fetchall()
+
+    for i in host:
+        some_id = i["tg_id"]
+        bot.send_message(some_id,
                          f'Автоматическое уведомление ℹ️:\n'
                          f'Уважаемый <b>{i["contactname"]}!</b>\n'
                          f'Срок действия вашего vds {i["vdshostname"]} истекает <b>{i["expired_day"]}.0{i["expired_month"]}.{i["expired_year"]} г.</b> '
@@ -183,7 +216,9 @@ def vds_4_days_schedule():
                          parse_mode='html')
 
     min.close()
-def ds_4_days_schedule():
+
+
+def vds_1_days_schedule():
     connection = pymysql.connect(host='62.209.143.131',
                                  user='hostmasteruz_pbot',
                                  password='bcaxoZyAXDGc',
@@ -193,12 +228,68 @@ def ds_4_days_schedule():
                                  )
     min = connection.cursor()
     min.execute(
-        "select DAY(DATE_ADD(NOW(), INTERVAL -2 day )) as expired_day,month(DATE_ADD(NOW(), INTERVAL 0 month )) as expired_month ,year(DATE_ADD(NOW(), INTERVAL 0 year )) as expired_year ,dscontract.user_id, dscontract.dshostname, ds_tariffs.tariffname, dscontract.dscontractdate, contact.balance,contact.contactname ,ds_tariffs.dsmcost FROM contact, dscontract, ds_tariffs WHERE dscontract.status = 0 AND DAY(dscontract.dscontractdate) = DAY(DATE_ADD(NOW(), INTERVAL -2 DAY)) AND dscontract.dsid = ds_tariffs.idds AND dscontract.contactid = contact.idcontact AND dscontract.user_id = contact.userid AND contact.balance < ds_tariffs.dsmcost")
+        "select tg_id,DAY(DATE_ADD(NOW(), INTERVAL 1 day )) as expired_day,month(DATE_ADD(NOW(), INTERVAL 0 month )) as expired_month ,year(DATE_ADD(NOW(), INTERVAL 0 year )) as expired_year ,vdscontract.user_id, vdscontract.vdshostname, vds_tariffs.tariffname, vdscontract.vdscontractdate, contact.balance,contact.contactname, vds_tariffs.vdsmcost FROM `hostmasteruz_bot`.`sardorbot`,contact, vdscontract, vds_tariffs WHERE vdscontract.status = 1 AND DAY(vdscontract.vdscontractdate) = DAY(DATE_ADD(NOW(), INTERVAL 1 DAY)) AND vdscontract.vdsid = vds_tariffs.idvds AND vdscontract.contactid = contact.idcontact AND vdscontract.user_id = contact.userid AND contact.balance < vds_tariffs.vdsmcost AND vds_tariffs.tariffname LIKE '%Месяц%'")
     host = min.fetchall()
 
     for i in host:
-        # some_id = i["tg_id"]
-        bot.send_message(332749197,
+        some_id = i["tg_id"]
+        bot.send_message(some_id,
+                         f'Автоматическое уведомление ℹ️:\n'
+                         f'Уважаемый <b>{i["contactname"]}!</b>\n'
+                         f'Срок действия вашего vds {i["vdshostname"]} истекает <b>{i["expired_day"]}.0{i["expired_month"]}.{i["expired_year"]} г.</b> '
+                         f'Для продления услуги, вам необходимо оплатить сумму, согласно тарифу {i["tariffname"]}. '
+                         f'\n\nТекущий остаток: <b>{i["balance"]} сум💰</b>\n'
+                         f'Сумма абон.платы по тарифу: <b>{i["vdsmcost"]} сум💰</b>\n\n'
+                         f'<b>С уважением, команда Hostmaster!</b>',
+                         parse_mode='html')
+
+    min.close()
+
+
+def vds_0_days_schedule():
+    connection = pymysql.connect(host='62.209.143.131',
+                                 user='hostmasteruz_pbot',
+                                 password='bcaxoZyAXDGc',
+                                 database='hostmasteruz_base',
+                                 charset='utf8mb4',
+                                 cursorclass=pymysql.cursors.DictCursor
+                                 )
+    min = connection.cursor()
+    min.execute(
+        "select tg_id,DAY(DATE_ADD(NOW(), INTERVAL 0 day )) as expired_day,month(DATE_ADD(NOW(), INTERVAL 0 month )) as expired_month ,year(DATE_ADD(NOW(), INTERVAL 0 year )) as expired_year ,vdscontract.user_id, vdscontract.vdshostname, vds_tariffs.tariffname, vdscontract.vdscontractdate, contact.balance,contact.contactname, vds_tariffs.vdsmcost FROM `hostmasteruz_bot`.`sardorbot`,contact, vdscontract, vds_tariffs WHERE vdscontract.status = 1 AND DAY(vdscontract.vdscontractdate) = DAY(DATE_ADD(NOW(), INTERVAL 0 DAY)) AND vdscontract.vdsid = vds_tariffs.idvds AND vdscontract.contactid = contact.idcontact AND vdscontract.user_id = contact.userid AND contact.balance < vds_tariffs.vdsmcost AND vds_tariffs.tariffname LIKE '%Месяц%'")
+    host = min.fetchall()
+
+    for i in host:
+        some_id = i["tg_id"]
+        bot.send_message(some_id,
+                         f'Автоматическое уведомление ℹ️:\n'
+                         f'Уважаемый <b>{i["contactname"]}!</b>\n'
+                         f'Срок действия вашего vds {i["vdshostname"]} истекает <b>{i["expired_day"]}.0{i["expired_month"]}.{i["expired_year"]} г.</b> '
+                         f'Для продления услуги, вам необходимо оплатить сумму, согласно тарифу {i["tariffname"]}. '
+                         f'\n\nТекущий остаток: <b>{i["balance"]} сум💰</b>\n'
+                         f'Сумма абон.платы по тарифу: <b>{i["vdsmcost"]} сум💰</b>\n\n'
+                         f'<b>С уважением, команда Hostmaster!</b>',
+                         parse_mode='html')
+
+    min.close()
+
+
+def ds_2_days_schedule():
+    connection = pymysql.connect(host='62.209.143.131',
+                                 user='hostmasteruz_pbot',
+                                 password='bcaxoZyAXDGc',
+                                 database='hostmasteruz_base',
+                                 charset='utf8mb4',
+                                 cursorclass=pymysql.cursors.DictCursor
+                                 )
+    min = connection.cursor()
+    min.execute(
+        "select tg_id,DAY(DATE_ADD(NOW(), INTERVAL 2 day )) as expired_day,month(DATE_ADD(NOW(), INTERVAL 0 month )) as expired_month ,year(DATE_ADD(NOW(), INTERVAL 0 year )) as expired_year ,dscontract.user_id, dscontract.dshostname, ds_tariffs.tariffname, dscontract.dscontractdate, contact.balance,contact.contactname ,ds_tariffs.dsmcost FROM `hostmasteruz_bot`.`sardorbot`,contact, dscontract, ds_tariffs WHERE dscontract.status = 1 AND DAY(dscontract.dscontractdate) = DAY(DATE_ADD(NOW(), INTERVAL 2 DAY)) AND dscontract.dsid = ds_tariffs.idds AND dscontract.contactid = contact.idcontact AND dscontract.user_id = contact.userid AND contact.balance < ds_tariffs.dsmcost")
+    host = min.fetchall()
+
+    for i in host:
+        some_id = i["tg_id"]
+        bot.send_message(some_id,
                          f'Автоматическое уведомление ℹ️:\n'
                          f'Уважаемый <b>{i["contactname"]}!</b>\n'
                          f'Срок действия DS {i["dshostname"]} истекает <b>{i["expired_day"]}.0{i["expired_month"]}.{i["expired_year"]} г.</b> '
@@ -210,32 +301,61 @@ def ds_4_days_schedule():
 
     min.close()
 
-# def col_4_days_schedule():
-#     connection = pymysql.connect(host='62.209.143.131',
-#                                  user='hostmasteruz_pbot',
-#                                  password='bcaxoZyAXDGc',
-#                                  database='hostmasteruz_base',
-#                                  charset='utf8mb4',
-#                                  cursorclass=pymysql.cursors.DictCursor
-#                                  )
-#     min = connection.cursor()
-#     min.execute(
-#         "select DAY(DATE_ADD(NOW(), INTERVAL 9 day )) as expired_day,month(DATE_ADD(NOW(), INTERVAL 0 month )) as expired_month ,year(DATE_ADD(NOW(), INTERVAL 0 year )) as expired_year ,colcontract.user_id, colcontract.colhostname, col_tariffs.tariffname, colcontract.colcontractdate, contact.balance, contact.contactname,col_tariffs.colmcost FROM contact, colcontract, col_tariffs WHERE colcontract.status = 1 AND DAY(colcontract.colcontractdate) = DAY(DATE_ADD(NOW(), INTERVAL 9 DAY)) AND colcontract.colid = col_tariffs.idcol AND colcontract.contactid = contact.idcontact AND colcontract.user_id = contact.userid AND contact.balance < col_tariffs.colmcost")
-#     host = min.fetchall()
-#
-#     for i in host:
-#         # some_id = i["tg_id"]
-#         bot.send_message(332749197,
-#                          f'Автоматическое уведомление ℹ️:\n'
-#                          f'Уважаемый <b>{i["contactname"]}!</b>\n'
-#                          f'Срок действия {i["colhostname"]} истекает <b>{i["expired_day"]}.0{i["expired_month"]}.{i["expired_year"]} г.</b> '
-#                          f'Для продления услуги, вам необходимо оплатить сумму, согласно тарифу {i["tariffname"]}. '
-#                          f'\n\nТекущий остаток: <b>{i["balance"]} сум💰</b>\n'
-#                          f'Сумма абон.платы по тарифу: <b>{i["colmcost"]} сум💰</b>\n\n'
-#                          f'<b>С уважением, команда Hostmaster!</b>',
-#                          parse_mode='html')
-#
-#     min.close()
+
+def ds_1_days_schedule():
+    connection = pymysql.connect(host='62.209.143.131',
+                                 user='hostmasteruz_pbot',
+                                 password='bcaxoZyAXDGc',
+                                 database='hostmasteruz_base',
+                                 charset='utf8mb4',
+                                 cursorclass=pymysql.cursors.DictCursor
+                                 )
+    min = connection.cursor()
+    min.execute(
+        "select tg_id,DAY(DATE_ADD(NOW(), INTERVAL 1 day )) as expired_day,month(DATE_ADD(NOW(), INTERVAL 0 month )) as expired_month ,year(DATE_ADD(NOW(), INTERVAL 0 year )) as expired_year ,dscontract.user_id, dscontract.dshostname, ds_tariffs.tariffname, dscontract.dscontractdate, contact.balance,contact.contactname ,ds_tariffs.dsmcost FROM `hostmasteruz_bot`.`sardorbot`,contact, dscontract, ds_tariffs WHERE dscontract.status = 1 AND DAY(dscontract.dscontractdate) = DAY(DATE_ADD(NOW(), INTERVAL 1 DAY)) AND dscontract.dsid = ds_tariffs.idds AND dscontract.contactid = contact.idcontact AND dscontract.user_id = contact.userid AND contact.balance < ds_tariffs.dsmcost")
+    host = min.fetchall()
+
+    for i in host:
+        some_id = i["tg_id"]
+        bot.send_message(some_id,
+                         f'Автоматическое уведомление ℹ️:\n'
+                         f'Уважаемый <b>{i["contactname"]}!</b>\n'
+                         f'Срок действия DS {i["dshostname"]} истекает <b>{i["expired_day"]}.0{i["expired_month"]}.{i["expired_year"]} г.</b> '
+                         f'Для продления услуги, вам необходимо оплатить сумму, согласно тарифу {i["tariffname"]}. '
+                         f'\n\nТекущий остаток: <b>{i["balance"]} сум💰</b>\n'
+                         f'Сумма абон.платы по тарифу: <b>{i["dsmcost"]} сум💰</b>\n\n'
+                         f'<b>С уважением, команда Hostmaster!</b>',
+                         parse_mode='html')
+
+    min.close()
+
+
+def ds_0_days_schedule():
+    connection = pymysql.connect(host='62.209.143.131',
+                                 user='hostmasteruz_pbot',
+                                 password='bcaxoZyAXDGc',
+                                 database='hostmasteruz_base',
+                                 charset='utf8mb4',
+                                 cursorclass=pymysql.cursors.DictCursor
+                                 )
+    min = connection.cursor()
+    min.execute(
+        "select tg_id,DAY(DATE_ADD(NOW(), INTERVAL 0 day )) as expired_day,month(DATE_ADD(NOW(), INTERVAL 0 month )) as expired_month ,year(DATE_ADD(NOW(), INTERVAL 0 year )) as expired_year ,dscontract.user_id, dscontract.dshostname, ds_tariffs.tariffname, dscontract.dscontractdate, contact.balance,contact.contactname ,ds_tariffs.dsmcost FROM `hostmasteruz_bot`.`sardorbot`,contact, dscontract, ds_tariffs WHERE dscontract.status = 1 AND DAY(dscontract.dscontractdate) = DAY(DATE_ADD(NOW(), INTERVAL 0 DAY)) AND dscontract.dsid = ds_tariffs.idds AND dscontract.contactid = contact.idcontact AND dscontract.user_id = contact.userid AND contact.balance < ds_tariffs.dsmcost")
+    host = min.fetchall()
+
+    for i in host:
+        some_id = i["tg_id"]
+        bot.send_message(some_id,
+                         f'Автоматическое уведомление ℹ️:\n'
+                         f'Уважаемый <b>{i["contactname"]}!</b>\n'
+                         f'Срок действия DS {i["dshostname"]} истекает <b>{i["expired_day"]}.0{i["expired_month"]}.{i["expired_year"]} г.</b> '
+                         f'Для продления услуги, вам необходимо оплатить сумму, согласно тарифу {i["tariffname"]}. '
+                         f'\n\nТекущий остаток: <b>{i["balance"]} сум💰</b>\n'
+                         f'Сумма абон.платы по тарифу: <b>{i["dsmcost"]} сум💰</b>\n\n'
+                         f'<b>С уважением, команда Hostmaster!</b>',
+                         parse_mode='html')
+
+    min.close()
 
 
 def domen_60_days_schedule():
@@ -2170,9 +2290,15 @@ if __name__ == "__main__":
     schedule.every().day.at("10:00").do(domen_30_days_schedule)
     schedule.every().day.at("10:00").do(domen_10_days_schedule)
     schedule.every().day.at("10:00").do(domen_1_days_schedule)
-    schedule.every().day.at("18:20").do(hosting_4_days_schedule)
-    schedule.every().day.at("10:05").do(vds_4_days_schedule)
-    schedule.every().day.at("10:36").do(ds_4_days_schedule)
+    schedule.every().day.at("10:05").do(hosting_2_days_schedule)
+    schedule.every().day.at("10:05").do(hosting_1_days_schedule)
+    schedule.every().day.at("10:05").do(hosting_0_days_schedule)
+    schedule.every().day.at("10:05").do(vds_2_days_schedule)
+    schedule.every().day.at("10:05").do(vds_1_days_schedule)
+    schedule.every().day.at("10:05").do(vds_0_days_schedule)
+    schedule.every().day.at("10:05").do(ds_2_days_schedule)
+    schedule.every().day.at("10:05").do(ds_1_days_schedule)
+    schedule.every().day.at("10:05").do(ds_1_days_schedule)
     # schedule.every().day.at("10:12").do(col_4_days_schedule)
     # schedule.every().day.at("15:00").do(dedicated)
     # schedule.every().day.at("10:15").do(juma2)
