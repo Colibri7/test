@@ -105,7 +105,32 @@ SQLALCHEMY_ENGINE_OPTIONS = {
 #         bot.send_photo(some_id, f)
 #     min.close()
 
+def hosting_year_schedule():
+    connection = pymysql.connect(host='62.209.143.131',
+                                 user='hostmasteruz_pbot',
+                                 password='bcaxoZyAXDGc',
+                                 database='hostmasteruz_base',
+                                 charset='utf8mb4',
+                                 cursorclass=pymysql.cursors.DictCursor
+                                 )
+    min = connection.cursor()
+    min.execute(
+        "select DAY(`hostcontract`.`hostcontractdate`) as expired_day,MONTH(`hostcontract`.`hostcontractdate`) as expired_month, `hostcontract`.`user_id`, `hostcontract`.`hostcontractdomain`, `hosting`.`hostingname`, `hostcontract`.`hostcontractdate`, `contact`.`balance`,`contact`.`contactname`, `hosting`.`hostingmcost` FROM `contact`, `hostcontract`, `hosting` WHERE `hostcontract`.`status` = 1 AND DAY(`hostcontract`.`hostcontractdate`) = DAY(DATE_ADD(NOW(), INTERVAL 3 DAY)) AND MONTH(`hostcontract`.`hostcontractdate`) = MONTH(DATE_ADD(NOW(), INTERVAL 1 MONTH)) AND `hostcontract`.`hostingid` = `hosting`.`idhosting` AND `hostcontract`.`contactid` = `contact`.`idcontact` AND `hostcontract`.`user_id` = `contact`.`userid` AND `contact`.`balance` < `hosting`.`hostingmcost` AND `hosting`.`hostingname` LIKE '%годовой%'")
+    host = min.fetchall()
 
+    for i in host:
+        some_id = i["tg_id"]
+        bot.send_message(some_id,
+                         f'Автоматическое уведомление ℹ️:\n'
+                         f'Уважаемый <b>{i["contactname"]}!</b>\n'
+                         f'Срок действия хостинга {i["hostcontractdomain"]} истекает <b>{i["expired_day"]}.0{i["expired_month"]}.2022 г.</b> '
+                         f'Для продления услуги, вам необходимо оплатить сумму, согласно тарифу {i["hostingname"]}. '
+                         f'\n\nТекущий остаток: <b>{i["balance"]} сум💰</b>\n'
+                         f'Сумма абон.платы по тарифу: <b>{i["hostingmcost"]} сум💰</b>\n\n'
+                         f'<b>С уважением, команда Hostmaster!</b>',
+                         parse_mode='html')
+
+    min.close()
 def hosting_2_days_schedule():
     connection = pymysql.connect(host='62.209.143.131',
                                  user='hostmasteruz_pbot',
@@ -132,8 +157,6 @@ def hosting_2_days_schedule():
                          parse_mode='html')
 
     min.close()
-
-
 def hosting_1_days_schedule():
     connection = pymysql.connect(host='62.209.143.131',
                                  user='hostmasteruz_pbot',
@@ -160,8 +183,6 @@ def hosting_1_days_schedule():
                          parse_mode='html')
 
     min.close()
-
-
 def hosting_0_days_schedule():
     connection = pymysql.connect(host='62.209.143.131',
                                  user='hostmasteruz_pbot',
@@ -189,7 +210,32 @@ def hosting_0_days_schedule():
 
     min.close()
 
+def vds_year_schedule():
+    connection = pymysql.connect(host='62.209.143.131',
+                                 user='hostmasteruz_pbot',
+                                 password='bcaxoZyAXDGc',
+                                 database='hostmasteruz_base',
+                                 charset='utf8mb4',
+                                 cursorclass=pymysql.cursors.DictCursor
+                                 )
+    min = connection.cursor()
+    min.execute(
+        "select tg_id, DAY(vdscontract.vdscontractdate) as expired_day, month(vdscontract.vdscontractdate) as expired_month,vdscontract.user_id, vdscontract.vdshostname, vds_tariffs.tariffname, vdscontract.vdscontractdate, contact.balance,contact.contactname, vds_tariffs.vdsmcost FROM `hostmasteruz_bot`.`sardorbot`, contact, vdscontract, vds_tariffs WHERE vdscontract.status = 1 AND DAY(vdscontract.vdscontractdate) = DAY(DATE_ADD(NOW(), INTERVAL 2 DAY)) AND month(vdscontract.vdscontractdate) = MONTH(DATE_ADD(NOW(), INTERVAL 9 MONTH)) AND vdscontract.vdsid = vds_tariffs.idvds AND vdscontract.contactid = contact.idcontact AND vdscontract.user_id = contact.userid AND contact.balance < vds_tariffs.vdsmcost AND vds_tariffs.tariffname LIKE '%годовой%'")
+    host = min.fetchall()
 
+    for i in host:
+        some_id = i["tg_id"]
+        bot.send_message(some_id,
+                         f'Автоматическое уведомление ℹ️:\n'
+                         f'Уважаемый <b>{i["contactname"]}!</b>\n'
+                         f'Срок действия вашего vds {i["vdshostname"]} истекает <b>{i["expired_day"]}.0{i["expired_month"]}.2022 г.</b> '
+                         f'Для продления услуги, вам необходимо оплатить сумму, согласно тарифу {i["tariffname"]}. '
+                         f'\n\nТекущий остаток: <b>{i["balance"]} сум💰</b>\n'
+                         f'Сумма абон.платы по тарифу: <b>{i["vdsmcost"]} сум💰</b>\n\n'
+                         f'<b>С уважением, команда Hostmaster!</b>',
+                         parse_mode='html')
+
+    min.close()
 def vds_2_days_schedule():
     connection = pymysql.connect(host='62.209.143.131',
                                  user='hostmasteruz_pbot',
@@ -2293,12 +2339,12 @@ if __name__ == "__main__":
     schedule.every().day.at("10:05").do(hosting_2_days_schedule)
     schedule.every().day.at("10:05").do(hosting_1_days_schedule)
     schedule.every().day.at("10:05").do(hosting_0_days_schedule)
-    schedule.every().day.at("10:05").do(vds_2_days_schedule)
-    schedule.every().day.at("10:05").do(vds_1_days_schedule)
-    schedule.every().day.at("10:05").do(vds_0_days_schedule)
-    schedule.every().day.at("10:05").do(ds_2_days_schedule)
-    schedule.every().day.at("10:05").do(ds_1_days_schedule)
-    schedule.every().day.at("10:05").do(ds_1_days_schedule)
+    # schedule.every().day.at("10:05").do(vds_2_days_schedule)
+    # schedule.every().day.at("10:05").do(vds_1_days_schedule)
+    # schedule.every().day.at("10:05").do(vds_0_days_schedule)
+    # schedule.every().day.at("10:05").do(ds_2_days_schedule)
+    # schedule.every().day.at("10:05").do(ds_1_days_schedule)
+    # schedule.every().day.at("10:05").do(ds_1_days_schedule)
     # schedule.every().day.at("10:12").do(col_4_days_schedule)
     # schedule.every().day.at("15:00").do(dedicated)
     # schedule.every().day.at("10:15").do(juma2)
