@@ -104,7 +104,32 @@ SQLALCHEMY_ENGINE_OPTIONS = {
 #         f = open("juma2.jpg", 'rb')
 #         bot.send_photo(some_id, f)
 #     min.close()
+def vds_year_schedule():
+    connection = pymysql.connect(host='62.209.143.131',
+                                 user='hostmasteruz_pbot',
+                                 password='bcaxoZyAXDGc',
+                                 database='hostmasteruz_base',
+                                 charset='utf8mb4',
+                                 cursorclass=pymysql.cursors.DictCursor
+                                 )
+    min = connection.cursor()
+    min.execute(
+        "select tg_id, DAY(vdscontract.vdscontractdate) as expired_day, month(vdscontract.vdscontractdate) as expired_month,vdscontract.user_id, vdscontract.vdshostname, vds_tariffs.tariffname, vdscontract.vdscontractdate, contact.balance,contact.contactname, vds_tariffs.vdsmcost FROM `hostmasteruz_bot`.`sardorbot`, contact, vdscontract, vds_tariffs WHERE vdscontract.status = 1 AND DAY(vdscontract.vdscontractdate) = DAY(DATE_ADD(NOW(), INTERVAL 2 DAY)) AND month(vdscontract.vdscontractdate) = MONTH(DATE_ADD(NOW(), INTERVAL 9 MONTH)) AND vdscontract.vdsid = vds_tariffs.idvds AND vdscontract.contactid = contact.idcontact AND vdscontract.user_id = contact.userid AND contact.balance < vds_tariffs.vdsmcost AND vds_tariffs.tariffname LIKE '%годовой%'")
+    host = min.fetchall()
 
+    for i in host:
+        some_id = i["tg_id"]
+        bot.send_message(some_id,
+                         f'Автоматическое уведомление ℹ️:\n'
+                         f'Уважаемый <b>{i["contactname"]}!</b>\n'
+                         f'Срок действия вашего vds {i["vdshostname"]} истекает <b>{i["expired_day"]}.0{i["expired_month"]}.2022 г.</b> '
+                         f'Для продления услуги, вам необходимо оплатить сумму, согласно тарифу {i["tariffname"]}. '
+                         f'\n\nТекущий остаток: <b>{i["balance"]} сум💰</b>\n'
+                         f'Сумма абон.платы по тарифу: <b>{i["vdsmcost"]} сум💰</b>\n\n'
+                         f'<b>С уважением, команда Hostmaster!</b>',
+                         parse_mode='html')
+
+    min.close()
 def hosting_year_schedule():
     connection = pymysql.connect(host='62.209.143.131',
                                  user='hostmasteruz_pbot',
@@ -131,6 +156,8 @@ def hosting_year_schedule():
                          parse_mode='html')
 
     min.close()
+
+
 def hosting_2_days_schedule():
     connection = pymysql.connect(host='62.209.143.131',
                                  user='hostmasteruz_pbot',
@@ -209,33 +236,6 @@ def hosting_0_days_schedule():
                          parse_mode='html')
 
     min.close()
-
-def vds_year_schedule():
-    connection = pymysql.connect(host='62.209.143.131',
-                                 user='hostmasteruz_pbot',
-                                 password='bcaxoZyAXDGc',
-                                 database='hostmasteruz_base',
-                                 charset='utf8mb4',
-                                 cursorclass=pymysql.cursors.DictCursor
-                                 )
-    min = connection.cursor()
-    min.execute(
-        "select tg_id, DAY(vdscontract.vdscontractdate) as expired_day, month(vdscontract.vdscontractdate) as expired_month,vdscontract.user_id, vdscontract.vdshostname, vds_tariffs.tariffname, vdscontract.vdscontractdate, contact.balance,contact.contactname, vds_tariffs.vdsmcost FROM `hostmasteruz_bot`.`sardorbot`, contact, vdscontract, vds_tariffs WHERE vdscontract.status = 1 AND DAY(vdscontract.vdscontractdate) = DAY(DATE_ADD(NOW(), INTERVAL 2 DAY)) AND month(vdscontract.vdscontractdate) = MONTH(DATE_ADD(NOW(), INTERVAL 9 MONTH)) AND vdscontract.vdsid = vds_tariffs.idvds AND vdscontract.contactid = contact.idcontact AND vdscontract.user_id = contact.userid AND contact.balance < vds_tariffs.vdsmcost AND vds_tariffs.tariffname LIKE '%годовой%'")
-    host = min.fetchall()
-
-    for i in host:
-        some_id = i["tg_id"]
-        bot.send_message(some_id,
-                         f'Автоматическое уведомление ℹ️:\n'
-                         f'Уважаемый <b>{i["contactname"]}!</b>\n'
-                         f'Срок действия вашего vds {i["vdshostname"]} истекает <b>{i["expired_day"]}.0{i["expired_month"]}.2022 г.</b> '
-                         f'Для продления услуги, вам необходимо оплатить сумму, согласно тарифу {i["tariffname"]}. '
-                         f'\n\nТекущий остаток: <b>{i["balance"]} сум💰</b>\n'
-                         f'Сумма абон.платы по тарифу: <b>{i["vdsmcost"]} сум💰</b>\n\n'
-                         f'<b>С уважением, команда Hostmaster!</b>',
-                         parse_mode='html')
-
-    min.close()
 def vds_2_days_schedule():
     connection = pymysql.connect(host='62.209.143.131',
                                  user='hostmasteruz_pbot',
@@ -246,7 +246,7 @@ def vds_2_days_schedule():
                                  )
     min = connection.cursor()
     min.execute(
-        "select tg_id,DAY(DATE_ADD(NOW(), INTERVAL 2 day )) as expired_day,month(DATE_ADD(NOW(), INTERVAL 0 month )) as expired_month ,year(DATE_ADD(NOW(), INTERVAL 0 year )) as expired_year ,vdscontract.user_id, vdscontract.vdshostname, vds_tariffs.tariffname, vdscontract.vdscontractdate, contact.balance,contact.contactname, vds_tariffs.vdsmcost FROM `hostmasteruz_bot`.`sardorbot`,contact, vdscontract, vds_tariffs WHERE vdscontract.status = 1 AND DAY(vdscontract.vdscontractdate) = DAY(DATE_ADD(NOW(), INTERVAL 2 DAY)) AND vdscontract.vdsid = vds_tariffs.idvds AND vdscontract.contactid = contact.idcontact AND vdscontract.user_id = contact.userid AND contact.balance < vds_tariffs.vdsmcost AND vds_tariffs.tariffname LIKE '%Месяц%'")
+        "select tg_id,DAY(DATE_ADD(NOW(), INTERVAL 2 day )) as expired_day,month(DATE_ADD(NOW(), INTERVAL 0 month )) as expired_month ,year(DATE_ADD(NOW(), INTERVAL 0 year )) as expired_year ,vdscontract.user_id, vdscontract.vdshostname, vds_tariffs.tariffname, vdscontract.vdscontractdate, contact.balance,contact.contactname, vds_tariffs.vdsmcost FROM `hostmasteruz_bot`.`sardorbot`,contact, vdscontract, vds_tariffs WHERE vdscontract.status = 1 AND DAY(vdscontract.vdscontractdate) = DAY(DATE_ADD(NOW(), INTERVAL 2 DAY)) AND vdscontract.vdsid = vds_tariffs.idvds AND vdscontract.contactid = contact.idcontact AND vdscontract.user_id = contact.userid AND contact.balance < vds_tariffs.vdsmcost AND `sardorbot`.`b_userid` = `vdscontract`.`user_id` AND vds_tariffs.tariffname LIKE '%Месяц%'")
     host = min.fetchall()
 
     for i in host:
@@ -262,8 +262,6 @@ def vds_2_days_schedule():
                          parse_mode='html')
 
     min.close()
-
-
 def vds_1_days_schedule():
     connection = pymysql.connect(host='62.209.143.131',
                                  user='hostmasteruz_pbot',
@@ -274,7 +272,7 @@ def vds_1_days_schedule():
                                  )
     min = connection.cursor()
     min.execute(
-        "select tg_id,DAY(DATE_ADD(NOW(), INTERVAL 1 day )) as expired_day,month(DATE_ADD(NOW(), INTERVAL 0 month )) as expired_month ,year(DATE_ADD(NOW(), INTERVAL 0 year )) as expired_year ,vdscontract.user_id, vdscontract.vdshostname, vds_tariffs.tariffname, vdscontract.vdscontractdate, contact.balance,contact.contactname, vds_tariffs.vdsmcost FROM `hostmasteruz_bot`.`sardorbot`,contact, vdscontract, vds_tariffs WHERE vdscontract.status = 1 AND DAY(vdscontract.vdscontractdate) = DAY(DATE_ADD(NOW(), INTERVAL 1 DAY)) AND vdscontract.vdsid = vds_tariffs.idvds AND vdscontract.contactid = contact.idcontact AND vdscontract.user_id = contact.userid AND contact.balance < vds_tariffs.vdsmcost AND vds_tariffs.tariffname LIKE '%Месяц%'")
+        "select tg_id,DAY(DATE_ADD(NOW(), INTERVAL 1 day )) as expired_day,month(DATE_ADD(NOW(), INTERVAL 0 month )) as expired_month ,year(DATE_ADD(NOW(), INTERVAL 0 year )) as expired_year ,vdscontract.user_id, vdscontract.vdshostname, vds_tariffs.tariffname, vdscontract.vdscontractdate, contact.balance,contact.contactname, vds_tariffs.vdsmcost FROM `hostmasteruz_bot`.`sardorbot`,contact, vdscontract, vds_tariffs WHERE vdscontract.status = 1 AND DAY(vdscontract.vdscontractdate) = DAY(DATE_ADD(NOW(), INTERVAL 1 DAY)) AND vdscontract.vdsid = vds_tariffs.idvds AND vdscontract.contactid = contact.idcontact AND vdscontract.user_id = contact.userid AND contact.balance < vds_tariffs.vdsmcost AND `sardorbot`.`b_userid` = `vdscontract`.`user_id` AND vds_tariffs.tariffname LIKE '%Месяц%'")
     host = min.fetchall()
 
     for i in host:
@@ -290,8 +288,6 @@ def vds_1_days_schedule():
                          parse_mode='html')
 
     min.close()
-
-
 def vds_0_days_schedule():
     connection = pymysql.connect(host='62.209.143.131',
                                  user='hostmasteruz_pbot',
@@ -302,7 +298,7 @@ def vds_0_days_schedule():
                                  )
     min = connection.cursor()
     min.execute(
-        "select tg_id,DAY(DATE_ADD(NOW(), INTERVAL 0 day )) as expired_day,month(DATE_ADD(NOW(), INTERVAL 0 month )) as expired_month ,year(DATE_ADD(NOW(), INTERVAL 0 year )) as expired_year ,vdscontract.user_id, vdscontract.vdshostname, vds_tariffs.tariffname, vdscontract.vdscontractdate, contact.balance,contact.contactname, vds_tariffs.vdsmcost FROM `hostmasteruz_bot`.`sardorbot`,contact, vdscontract, vds_tariffs WHERE vdscontract.status = 1 AND DAY(vdscontract.vdscontractdate) = DAY(DATE_ADD(NOW(), INTERVAL 0 DAY)) AND vdscontract.vdsid = vds_tariffs.idvds AND vdscontract.contactid = contact.idcontact AND vdscontract.user_id = contact.userid AND contact.balance < vds_tariffs.vdsmcost AND vds_tariffs.tariffname LIKE '%Месяц%'")
+        "select tg_id,DAY(DATE_ADD(NOW(), INTERVAL 0 day )) as expired_day,month(DATE_ADD(NOW(), INTERVAL 0 month )) as expired_month ,year(DATE_ADD(NOW(), INTERVAL 0 year )) as expired_year ,vdscontract.user_id, vdscontract.vdshostname, vds_tariffs.tariffname, vdscontract.vdscontractdate, contact.balance,contact.contactname, vds_tariffs.vdsmcost FROM `hostmasteruz_bot`.`sardorbot`,contact, vdscontract, vds_tariffs WHERE vdscontract.status = 1 AND DAY(vdscontract.vdscontractdate) = DAY(DATE_ADD(NOW(), INTERVAL 0 DAY)) AND vdscontract.vdsid = vds_tariffs.idvds AND vdscontract.contactid = contact.idcontact AND vdscontract.user_id = contact.userid AND contact.balance < vds_tariffs.vdsmcost AND `sardorbot`.`b_userid` = `vdscontract`.`user_id` AND vds_tariffs.tariffname LIKE '%Месяц%'")
     host = min.fetchall()
 
     for i in host:
@@ -318,8 +314,6 @@ def vds_0_days_schedule():
                          parse_mode='html')
 
     min.close()
-
-
 def ds_2_days_schedule():
     connection = pymysql.connect(host='62.209.143.131',
                                  user='hostmasteruz_pbot',
@@ -330,7 +324,7 @@ def ds_2_days_schedule():
                                  )
     min = connection.cursor()
     min.execute(
-        "select tg_id,DAY(DATE_ADD(NOW(), INTERVAL 2 day )) as expired_day,month(DATE_ADD(NOW(), INTERVAL 0 month )) as expired_month ,year(DATE_ADD(NOW(), INTERVAL 0 year )) as expired_year ,dscontract.user_id, dscontract.dshostname, ds_tariffs.tariffname, dscontract.dscontractdate, contact.balance,contact.contactname ,ds_tariffs.dsmcost FROM `hostmasteruz_bot`.`sardorbot`,contact, dscontract, ds_tariffs WHERE dscontract.status = 1 AND DAY(dscontract.dscontractdate) = DAY(DATE_ADD(NOW(), INTERVAL 2 DAY)) AND dscontract.dsid = ds_tariffs.idds AND dscontract.contactid = contact.idcontact AND dscontract.user_id = contact.userid AND contact.balance < ds_tariffs.dsmcost")
+        "select tg_id,DAY(DATE_ADD(NOW(), INTERVAL 2 day )) as expired_day,month(DATE_ADD(NOW(), INTERVAL 0 month )) as expired_month ,year(DATE_ADD(NOW(), INTERVAL 0 year )) as expired_year ,dscontract.user_id, dscontract.dshostname, ds_tariffs.tariffname, dscontract.dscontractdate, contact.balance,contact.contactname ,ds_tariffs.dsmcost FROM `hostmasteruz_bot`.`sardorbot`,contact, dscontract, ds_tariffs WHERE dscontract.status = 1 AND DAY(dscontract.dscontractdate) = DAY(DATE_ADD(NOW(), INTERVAL 2 DAY)) AND dscontract.dsid = ds_tariffs.idds AND dscontract.contactid = contact.idcontact AND dscontract.user_id = contact.userid AND contact.balance < ds_tariffs.dsmcost AND `sardorbot`.`b_userid` = `dscontract`.`user_id`")
     host = min.fetchall()
 
     for i in host:
@@ -346,8 +340,6 @@ def ds_2_days_schedule():
                          parse_mode='html')
 
     min.close()
-
-
 def ds_1_days_schedule():
     connection = pymysql.connect(host='62.209.143.131',
                                  user='hostmasteruz_pbot',
@@ -358,7 +350,7 @@ def ds_1_days_schedule():
                                  )
     min = connection.cursor()
     min.execute(
-        "select tg_id,DAY(DATE_ADD(NOW(), INTERVAL 1 day )) as expired_day,month(DATE_ADD(NOW(), INTERVAL 0 month )) as expired_month ,year(DATE_ADD(NOW(), INTERVAL 0 year )) as expired_year ,dscontract.user_id, dscontract.dshostname, ds_tariffs.tariffname, dscontract.dscontractdate, contact.balance,contact.contactname ,ds_tariffs.dsmcost FROM `hostmasteruz_bot`.`sardorbot`,contact, dscontract, ds_tariffs WHERE dscontract.status = 1 AND DAY(dscontract.dscontractdate) = DAY(DATE_ADD(NOW(), INTERVAL 1 DAY)) AND dscontract.dsid = ds_tariffs.idds AND dscontract.contactid = contact.idcontact AND dscontract.user_id = contact.userid AND contact.balance < ds_tariffs.dsmcost")
+        "select tg_id,DAY(DATE_ADD(NOW(), INTERVAL 1 day )) as expired_day,month(DATE_ADD(NOW(), INTERVAL 0 month )) as expired_month ,year(DATE_ADD(NOW(), INTERVAL 0 year )) as expired_year ,dscontract.user_id, dscontract.dshostname, ds_tariffs.tariffname, dscontract.dscontractdate, contact.balance,contact.contactname ,ds_tariffs.dsmcost FROM `hostmasteruz_bot`.`sardorbot`,contact, dscontract, ds_tariffs WHERE dscontract.status = 1 AND DAY(dscontract.dscontractdate) = DAY(DATE_ADD(NOW(), INTERVAL 1 DAY)) AND dscontract.dsid = ds_tariffs.idds AND dscontract.contactid = contact.idcontact AND dscontract.user_id = contact.userid AND contact.balance < ds_tariffs.dsmcost AND `sardorbot`.`b_userid` = `dscontract`.`user_id`")
     host = min.fetchall()
 
     for i in host:
@@ -374,8 +366,6 @@ def ds_1_days_schedule():
                          parse_mode='html')
 
     min.close()
-
-
 def ds_0_days_schedule():
     connection = pymysql.connect(host='62.209.143.131',
                                  user='hostmasteruz_pbot',
@@ -386,7 +376,7 @@ def ds_0_days_schedule():
                                  )
     min = connection.cursor()
     min.execute(
-        "select tg_id,DAY(DATE_ADD(NOW(), INTERVAL 0 day )) as expired_day,month(DATE_ADD(NOW(), INTERVAL 0 month )) as expired_month ,year(DATE_ADD(NOW(), INTERVAL 0 year )) as expired_year ,dscontract.user_id, dscontract.dshostname, ds_tariffs.tariffname, dscontract.dscontractdate, contact.balance,contact.contactname ,ds_tariffs.dsmcost FROM `hostmasteruz_bot`.`sardorbot`,contact, dscontract, ds_tariffs WHERE dscontract.status = 1 AND DAY(dscontract.dscontractdate) = DAY(DATE_ADD(NOW(), INTERVAL 0 DAY)) AND dscontract.dsid = ds_tariffs.idds AND dscontract.contactid = contact.idcontact AND dscontract.user_id = contact.userid AND contact.balance < ds_tariffs.dsmcost")
+        "select tg_id,DAY(DATE_ADD(NOW(), INTERVAL 0 day )) as expired_day,month(DATE_ADD(NOW(), INTERVAL 0 month )) as expired_month ,year(DATE_ADD(NOW(), INTERVAL 0 year )) as expired_year ,dscontract.user_id, dscontract.dshostname, ds_tariffs.tariffname, dscontract.dscontractdate, contact.balance,contact.contactname ,ds_tariffs.dsmcost FROM `hostmasteruz_bot`.`sardorbot`,contact, dscontract, ds_tariffs WHERE dscontract.status = 1 AND DAY(dscontract.dscontractdate) = DAY(DATE_ADD(NOW(), INTERVAL 0 DAY)) AND dscontract.dsid = ds_tariffs.idds AND dscontract.contactid = contact.idcontact AND dscontract.user_id = contact.userid AND contact.balance < ds_tariffs.dsmcost AND `sardorbot`.`b_userid` = `dscontract`.`user_id`")
     host = min.fetchall()
 
     for i in host:
@@ -2336,15 +2326,15 @@ if __name__ == "__main__":
     schedule.every().day.at("10:00").do(domen_30_days_schedule)
     schedule.every().day.at("10:00").do(domen_10_days_schedule)
     schedule.every().day.at("10:00").do(domen_1_days_schedule)
-    schedule.every().day.at("10:05").do(hosting_2_days_schedule)
-    schedule.every().day.at("10:05").do(hosting_1_days_schedule)
-    schedule.every().day.at("10:05").do(hosting_0_days_schedule)
-    # schedule.every().day.at("10:05").do(vds_2_days_schedule)
-    # schedule.every().day.at("10:05").do(vds_1_days_schedule)
-    # schedule.every().day.at("10:05").do(vds_0_days_schedule)
-    # schedule.every().day.at("10:05").do(ds_2_days_schedule)
-    # schedule.every().day.at("10:05").do(ds_1_days_schedule)
-    # schedule.every().day.at("10:05").do(ds_1_days_schedule)
+    schedule.every().day.at("10:00").do(hosting_2_days_schedule)
+    schedule.every().day.at("10:00").do(hosting_1_days_schedule)
+    schedule.every().day.at("10:00").do(hosting_0_days_schedule)
+    schedule.every().day.at("10:05").do(vds_2_days_schedule)
+    schedule.every().day.at("10:05").do(vds_1_days_schedule)
+    schedule.every().day.at("10:05").do(vds_0_days_schedule)
+    schedule.every().day.at("10:10").do(ds_2_days_schedule)
+    schedule.every().day.at("10:10").do(ds_1_days_schedule)
+    schedule.every().day.at("10:10").do(ds_0_days_schedule)
     # schedule.every().day.at("10:12").do(col_4_days_schedule)
     # schedule.every().day.at("15:00").do(dedicated)
     # schedule.every().day.at("10:15").do(juma2)
