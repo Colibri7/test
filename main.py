@@ -2441,7 +2441,7 @@ if __name__ == "__main__":
     schedule.every().day.at("10:10").do(ds_2_days_schedule)
     schedule.every().day.at("10:10").do(ds_1_days_schedule)
     schedule.every().day.at("10:10").do(ds_0_days_schedule)
-    schedule.every().day.at("14:52").do(send_domain_list_every_day)
+    schedule.every().day.at("14:58").do(send_domain_list_every_day)
 
     Thread(target=schedule_checker).start()
 
