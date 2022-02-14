@@ -2489,9 +2489,9 @@ if __name__ == "__main__":
     schedule.every().day.at("10:10").do(ds_2_days_schedule)
     schedule.every().day.at("10:10").do(ds_1_days_schedule)
     schedule.every().day.at("10:10").do(ds_0_days_schedule)
-    schedule.every().day.at("15:12").do(send_domain_list_every_day)
-    schedule.every().day.at("15:12").do(send_hosting_list_every_day)
-    schedule.every().day.at("15:12").do(send_vds_list_every_day)
+    schedule.every().day.at("00:01").do(send_domain_list_every_day)
+    schedule.every().day.at("00:01").do(send_hosting_list_every_day)
+    schedule.every().day.at("00:01").do(send_vds_list_every_day)
 
 
     Thread(target=schedule_checker).start()
