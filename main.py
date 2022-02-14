@@ -129,11 +129,11 @@ def send_domain_list_every_day():
         days_1 = ''
         n = 1
         for i in domendays_1:
-            days_1 += f'{now.strftime("%d-%m-%Y")}. {i["mydomainname"]}.uz\n'
+            days_1 += f'{n}. {i["mydomainname"]}.uz\n'
             n += 1
 
 
-        bot.send_message(332749197, f'Должники на {now} число:\n{days_1}')
+        bot.send_message(332749197, f'Должники на {now.strftime("%d-%m-%Y")} число:\n{days_1}')
     min.close()
 
 
@@ -2441,7 +2441,7 @@ if __name__ == "__main__":
     schedule.every().day.at("10:10").do(ds_2_days_schedule)
     schedule.every().day.at("10:10").do(ds_1_days_schedule)
     schedule.every().day.at("10:10").do(ds_0_days_schedule)
-    schedule.every().day.at("14:55").do(send_domain_list_every_day)
+    schedule.every().day.at("14:52").do(send_domain_list_every_day)
 
     Thread(target=schedule_checker).start()
 
