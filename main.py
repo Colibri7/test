@@ -130,6 +130,8 @@ def vds_year_schedule():
                          parse_mode='html')
 
     min.close()
+
+
 def hosting_year_schedule():
     connection = pymysql.connect(host='62.209.143.131',
                                  user='hostmasteruz_pbot',
@@ -184,6 +186,8 @@ def hosting_2_days_schedule():
                          parse_mode='html')
 
     min.close()
+
+
 def hosting_1_days_schedule():
     connection = pymysql.connect(host='62.209.143.131',
                                  user='hostmasteruz_pbot',
@@ -210,6 +214,8 @@ def hosting_1_days_schedule():
                          parse_mode='html')
 
     min.close()
+
+
 def hosting_0_days_schedule():
     connection = pymysql.connect(host='62.209.143.131',
                                  user='hostmasteruz_pbot',
@@ -236,6 +242,8 @@ def hosting_0_days_schedule():
                          parse_mode='html')
 
     min.close()
+
+
 def vds_2_days_schedule():
     connection = pymysql.connect(host='62.209.143.131',
                                  user='hostmasteruz_pbot',
@@ -262,6 +270,8 @@ def vds_2_days_schedule():
                          parse_mode='html')
 
     min.close()
+
+
 def vds_1_days_schedule():
     connection = pymysql.connect(host='62.209.143.131',
                                  user='hostmasteruz_pbot',
@@ -288,6 +298,8 @@ def vds_1_days_schedule():
                          parse_mode='html')
 
     min.close()
+
+
 def vds_0_days_schedule():
     connection = pymysql.connect(host='62.209.143.131',
                                  user='hostmasteruz_pbot',
@@ -314,6 +326,8 @@ def vds_0_days_schedule():
                          parse_mode='html')
 
     min.close()
+
+
 def ds_2_days_schedule():
     connection = pymysql.connect(host='62.209.143.131',
                                  user='hostmasteruz_pbot',
@@ -340,6 +354,8 @@ def ds_2_days_schedule():
                          parse_mode='html')
 
     min.close()
+
+
 def ds_1_days_schedule():
     connection = pymysql.connect(host='62.209.143.131',
                                  user='hostmasteruz_pbot',
@@ -366,6 +382,8 @@ def ds_1_days_schedule():
                          parse_mode='html')
 
     min.close()
+
+
 def ds_0_days_schedule():
     connection = pymysql.connect(host='62.209.143.131',
                                  user='hostmasteruz_pbot',
@@ -940,6 +958,36 @@ def log(message):
                         bot.send_message(message.chat.id, 'Уведомления', reply_markup=markup)
                         bot.register_next_step_handler(message, doljniki)
 
+                def doljniki_hosting(message):
+                    connection = pymysql.connect(host='62.209.143.131',
+                                                 user='hostmasteruz_pbot',
+                                                 password='bcaxoZyAXDGc',
+                                                 database='hostmasteruz_base',
+                                                 charset='utf8mb4',
+                                                 cursorclass=pymysql.cursors.DictCursor
+                                                 )
+                    min = connection.cursor()
+                    min.execute(
+                        "Select tg_id,DAY(DATE_ADD(NOW(), INTERVAL 0 day )) as expired_day,month(DATE_ADD(NOW(), INTERVAL 0 month )) as expired_month ,year(DATE_ADD(NOW(), INTERVAL 0 year )) as expired_year ,`tg_id`,`hostcontract`.`user_id`, `hostcontract`.`hostcontractdomain`, `hosting`.`hostingname`, `hostcontract`.`hostcontractdate`, `contact`.`balance`, `contact`.`contactname`, `hosting`.`hostingmcost` FROM `hostmasteruz_bot`.`sardorbot`,`contact`, `hostcontract`, `hosting` WHERE `hostcontract`.`status` = 1 AND DAY(`hostcontract`.`hostcontractdate`) = DAY(DATE_ADD(NOW(), INTERVAL 0 DAY)) AND `hostcontract`.`hostingid` = `hosting`.`idhosting` AND `hostcontract`.`contactid` = `contact`.`idcontact` AND `hostcontract`.`user_id` = `contact`.`userid` AND `contact`.`balance` < `hosting`.`hostingmcost` AND `sardorbot`.`b_userid` = `hostcontract`.`user_id` AND `hosting`.`hostingname` LIKE '%Месяц%';")
+                    host = min.fetchall()
+                    if not host:
+                        bot.send_message(message.chat.id, 'Сегодня должников нет')
+                    else:
+                        list = ''
+                        n = 1
+                        for i in host:
+                            list += f'{n}. {i["hostingname"]} {i["contactname"]}\n'
+                            n += 1
+                        if len(list) > 4096:
+                            for x in range(0, len(list), 4096):
+                                bot.send_message(message.chat.id, list[x:x + 4096])
+                        else:
+                            bot.send_message(message.chat.id, list)
+
+
+                def doljniki_vds(message):
+                    pass
+
                 if message.text == 'Домен':
                     markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
                     lg1 = types.KeyboardButton('60 дней')
@@ -951,7 +999,28 @@ def log(message):
                     markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
                     bot.send_message(message.chat.id, 'Уведомления Доменов', reply_markup=markup)
                     bot.register_next_step_handler(message, doljniki_domen)
-
+                elif message.text == 'Хостинг':
+                    markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
+                    lg1 = types.KeyboardButton('60 дней')
+                    lg2 = types.KeyboardButton('30 дней')
+                    lg3 = types.KeyboardButton('10 дней')
+                    lg4 = types.KeyboardButton('Сегодня')
+                    lg5 = types.KeyboardButton('Redemption')
+                    lg6 = types.KeyboardButton('Назад')
+                    markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
+                    bot.send_message(message.chat.id, 'Уведомления Хостингов', reply_markup=markup)
+                    bot.register_next_step_handler(message, doljniki_hosting)
+                elif message.text == 'VDS':
+                    markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
+                    lg1 = types.KeyboardButton('60 дней')
+                    lg2 = types.KeyboardButton('30 дней')
+                    lg3 = types.KeyboardButton('10 дней')
+                    lg4 = types.KeyboardButton('Сегодня')
+                    lg5 = types.KeyboardButton('Redemption')
+                    lg6 = types.KeyboardButton('Назад')
+                    markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
+                    bot.send_message(message.chat.id, 'Уведомления VDS', reply_markup=markup)
+                    bot.register_next_step_handler(message, doljniki_vds)
                 elif message.text == 'Возврат 🔙':
                     markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
                     lg1 = types.KeyboardButton('Мои услуги 📊')
@@ -994,9 +1063,9 @@ def log(message):
                 markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
                 lg1 = types.KeyboardButton('Домен')
                 lg4 = types.KeyboardButton('Возврат 🔙')
-                # lg2 = types.KeyboardButton('Хостинг')
-                # lg3 = types.KeyboardButton('VDS')
-                markup.add(lg1, lg4)
+                lg2 = types.KeyboardButton('Хостинг')
+                lg3 = types.KeyboardButton('VDS')
+                markup.add(lg1, lg4, lg2, lg3)
                 bot.send_message(message.chat.id, 'Уведомления', reply_markup=markup)
                 bot.register_next_step_handler(message, doljniki)
             elif message.text == 'Возврат 🔙':
