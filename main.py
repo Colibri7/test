@@ -959,6 +959,24 @@ def log(message):
                         bot.register_next_step_handler(message, doljniki)
 
                 def doljniki_hosting(message):
+                    pass
+
+
+                def doljniki_vds(message):
+                    pass
+
+                if message.text == 'Домен':
+                    markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
+                    lg1 = types.KeyboardButton('60 дней')
+                    lg2 = types.KeyboardButton('30 дней')
+                    lg3 = types.KeyboardButton('10 дней')
+                    lg4 = types.KeyboardButton('Сегодня')
+                    lg5 = types.KeyboardButton('Redemption')
+                    lg6 = types.KeyboardButton('Назад')
+                    markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
+                    bot.send_message(message.chat.id, 'Уведомления Доменов', reply_markup=markup)
+                    bot.register_next_step_handler(message, doljniki_domen)
+                elif message.text == 'Хостинг':
                     connection = pymysql.connect(host='62.209.143.131',
                                                  user='hostmasteruz_pbot',
                                                  password='bcaxoZyAXDGc',
@@ -984,32 +1002,6 @@ def log(message):
                         else:
                             bot.send_message(message.chat.id, list)
 
-
-                def doljniki_vds(message):
-                    pass
-
-                if message.text == 'Домен':
-                    markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
-                    lg1 = types.KeyboardButton('60 дней')
-                    lg2 = types.KeyboardButton('30 дней')
-                    lg3 = types.KeyboardButton('10 дней')
-                    lg4 = types.KeyboardButton('Сегодня')
-                    lg5 = types.KeyboardButton('Redemption')
-                    lg6 = types.KeyboardButton('Назад')
-                    markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
-                    bot.send_message(message.chat.id, 'Уведомления Доменов', reply_markup=markup)
-                    bot.register_next_step_handler(message, doljniki_domen)
-                elif message.text == 'Хостинг':
-                    markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
-                    lg1 = types.KeyboardButton('60 дней')
-                    lg2 = types.KeyboardButton('30 дней')
-                    lg3 = types.KeyboardButton('10 дней')
-                    lg4 = types.KeyboardButton('Сегодня')
-                    lg5 = types.KeyboardButton('Redemption')
-                    lg6 = types.KeyboardButton('Назад')
-                    markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
-                    bot.send_message(message.chat.id, 'Уведомления Хостингов', reply_markup=markup)
-                    bot.register_next_step_handler(message, doljniki_hosting)
                 elif message.text == 'VDS':
                     markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
                     lg1 = types.KeyboardButton('60 дней')
