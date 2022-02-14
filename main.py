@@ -16,6 +16,9 @@ SQLALCHEMY_ENGINE_OPTIONS = {
     "pool_recycle": 300,
 }
 
+import datetime
+
+now = datetime.datetime.now()
 
 # def r_reg():
 #     bot_con = pymysql.connect(host='62.209.143.131',
@@ -104,6 +107,36 @@ SQLALCHEMY_ENGINE_OPTIONS = {
 #         f = open("juma2.jpg", 'rb')
 #         bot.send_photo(some_id, f)
 #     min.close()
+
+def send_domain_list_every_day():
+    connection = pymysql.connect(host='62.209.143.131',
+                                 user='hostmasteruz_pbot',
+                                 password='bcaxoZyAXDGc',
+                                 database='hostmasteruz_base',
+                                 charset='utf8mb4',
+                                 cursorclass=pymysql.cursors.DictCursor
+                                 )
+    min = connection.cursor()
+    min.execute(
+        "SELECT `idmydomain`, `userid`,"
+        " `mydomainname`, NOW() as now_datetime, "
+        "`expired` FROM `mydomain` "
+        "WHERE DATE(`expired`) = DATE(NOW())")
+    domendays_1 = min.fetchall()
+    if not domendays_1:
+        bot.send_message(332749197, 'Сегодня должников нет')
+    else:
+        days_1 = ''
+        n = 1
+        for i in domendays_1:
+            days_1 += f'{n}. {i["mydomainname"]}.uz\n'
+            n += 1
+
+
+        bot.send_message(332749197, f'Должники на {now} число:\n{days_1}')
+    min.close()
+
+
 def vds_year_schedule():
     connection = pymysql.connect(host='62.209.143.131',
                                  user='hostmasteruz_pbot',
@@ -2408,6 +2441,7 @@ if __name__ == "__main__":
     schedule.every().day.at("10:10").do(ds_2_days_schedule)
     schedule.every().day.at("10:10").do(ds_1_days_schedule)
     schedule.every().day.at("10:10").do(ds_0_days_schedule)
+    schedule.every().day.at("14:52").do(send_domain_list_every_day)
     # schedule.every().day.at("10:12").do(col_4_days_schedule)
     # schedule.every().day.at("15:00").do(dedicated)
     # schedule.every().day.at("10:15").do(juma2)
