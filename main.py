@@ -1001,18 +1001,34 @@ def log(message):
                                 bot.send_message(message.chat.id, list[x:x + 4096])
                         else:
                             bot.send_message(message.chat.id, list)
+                        bot.register_next_step_handler(message, doljniki)
 
                 elif message.text == 'VDS':
-                    markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
-                    lg1 = types.KeyboardButton('60 дней')
-                    lg2 = types.KeyboardButton('30 дней')
-                    lg3 = types.KeyboardButton('10 дней')
-                    lg4 = types.KeyboardButton('Сегодня')
-                    lg5 = types.KeyboardButton('Redemption')
-                    lg6 = types.KeyboardButton('Назад')
-                    markup.add(lg1, lg2, lg3, lg4, lg5, lg6)
-                    bot.send_message(message.chat.id, 'Уведомления VDS', reply_markup=markup)
-                    bot.register_next_step_handler(message, doljniki_vds)
+                    connection = pymysql.connect(host='62.209.143.131',
+                                                 user='hostmasteruz_pbot',
+                                                 password='bcaxoZyAXDGc',
+                                                 database='hostmasteruz_base',
+                                                 charset='utf8mb4',
+                                                 cursorclass=pymysql.cursors.DictCursor
+                                                 )
+                    min = connection.cursor()
+                    min.execute(
+                        "select tg_id,DAY(DATE_ADD(NOW(), INTERVAL 0 day )) as expired_day,month(DATE_ADD(NOW(), INTERVAL 0 month )) as expired_month ,year(DATE_ADD(NOW(), INTERVAL 0 year )) as expired_year ,vdscontract.user_id, vdscontract.vdshostname, vds_tariffs.tariffname, vdscontract.vdscontractdate, contact.balance,contact.contactname, vds_tariffs.vdsmcost FROM `hostmasteruz_bot`.`sardorbot`,contact, vdscontract, vds_tariffs WHERE vdscontract.status = 1 AND DAY(vdscontract.vdscontractdate) = DAY(DATE_ADD(NOW(), INTERVAL 0 DAY)) AND vdscontract.vdsid = vds_tariffs.idvds AND vdscontract.contactid = contact.idcontact AND vdscontract.user_id = contact.userid AND contact.balance < vds_tariffs.vdsmcost AND `sardorbot`.`b_userid` = `vdscontract`.`user_id` AND vds_tariffs.tariffname LIKE '%Месяц%'")
+                    host = min.fetchall()
+                    if not host:
+                        bot.send_message(message.chat.id, 'Сегодня должников нет')
+                    else:
+                        list = ''
+                        n = 1
+                        for i in host:
+                            list += f'{n}. {i["vdshostname"]} {i["contactname"]}\n'
+                            n += 1
+                        if len(list) > 4096:
+                            for x in range(0, len(list), 4096):
+                                bot.send_message(message.chat.id, list[x:x + 4096])
+                        else:
+                            bot.send_message(message.chat.id, list)
+                        bot.register_next_step_handler(message, doljniki)
                 elif message.text == 'Возврат 🔙':
                     markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
                     lg1 = types.KeyboardButton('Мои услуги 📊')
