@@ -124,7 +124,7 @@ def send_domain_list_every_day():
         "WHERE DATE(`expired`) = DATE(NOW())")
     domendays_1 = min.fetchall()
     if not domendays_1:
-        bot.send_message(332749197, 'Сегодня должников нет')
+        bot.send_message(332749197, 'Сегодня должников по Домену нет')
     else:
         days_1 = ''
         n = 1
@@ -148,7 +148,7 @@ def send_hosting_list_every_day():
         "Select tg_id,DAY(DATE_ADD(NOW(), INTERVAL 0 day )) as expired_day,month(DATE_ADD(NOW(), INTERVAL 0 month )) as expired_month ,year(DATE_ADD(NOW(), INTERVAL 0 year )) as expired_year ,`tg_id`,`hostcontract`.`user_id`, `hostcontract`.`hostcontractdomain`, `hosting`.`hostingname`, `hostcontract`.`hostcontractdate`, `contact`.`balance`, `contact`.`contactname`, `hosting`.`hostingmcost` FROM `hostmasteruz_bot`.`sardorbot`,`contact`, `hostcontract`, `hosting` WHERE `hostcontract`.`status` = 1 AND DAY(`hostcontract`.`hostcontractdate`) = DAY(DATE_ADD(NOW(), INTERVAL 0 DAY)) AND `hostcontract`.`hostingid` = `hosting`.`idhosting` AND `hostcontract`.`contactid` = `contact`.`idcontact` AND `hostcontract`.`user_id` = `contact`.`userid` AND `contact`.`balance` < `hosting`.`hostingmcost` AND `sardorbot`.`b_userid` = `hostcontract`.`user_id` AND `hosting`.`hostingname` LIKE '%Месяц%';")
     hosting = min.fetchall()
     if not hosting:
-        bot.send_message(332749197, 'Сегодня должников нет')
+        bot.send_message(332749197, 'Сегодня должников по Хостингу нет')
     else:
         days_1 = ''
         n = 1
@@ -172,7 +172,7 @@ def send_vds_list_every_day():
         "select tg_id,DAY(DATE_ADD(NOW(), INTERVAL 0 day )) as expired_day,month(DATE_ADD(NOW(), INTERVAL 0 month )) as expired_month ,year(DATE_ADD(NOW(), INTERVAL 0 year )) as expired_year ,vdscontract.user_id, vdscontract.vdshostname, vds_tariffs.tariffname, vdscontract.vdscontractdate, contact.balance,contact.contactname, vds_tariffs.vdsmcost FROM `hostmasteruz_bot`.`sardorbot`,contact, vdscontract, vds_tariffs WHERE vdscontract.status = 1 AND DAY(vdscontract.vdscontractdate) = DAY(DATE_ADD(NOW(), INTERVAL 0 DAY)) AND vdscontract.vdsid = vds_tariffs.idvds AND vdscontract.contactid = contact.idcontact AND vdscontract.user_id = contact.userid AND contact.balance < vds_tariffs.vdsmcost AND `sardorbot`.`b_userid` = `vdscontract`.`user_id` AND vds_tariffs.tariffname LIKE '%Месяц%'")
     domendays_1 = min.fetchall()
     if not domendays_1:
-        bot.send_message(332749197, 'Сегодня должников нет')
+        bot.send_message(332749197, 'Сегодня должников по VDS нет')
     else:
         days_1 = ''
         n = 1
