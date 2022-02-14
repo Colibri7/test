@@ -958,13 +958,6 @@ def log(message):
                         bot.send_message(message.chat.id, 'Уведомления', reply_markup=markup)
                         bot.register_next_step_handler(message, doljniki)
 
-                def doljniki_hosting(message):
-                    pass
-
-
-                def doljniki_vds(message):
-                    pass
-
                 if message.text == 'Домен':
                     markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
                     lg1 = types.KeyboardButton('60 дней')
@@ -1001,7 +994,8 @@ def log(message):
                                 bot.send_message(message.chat.id, list[x:x + 4096])
                         else:
                             bot.send_message(message.chat.id, list)
-                        bot.register_next_step_handler(message, doljniki)
+                    min.close()
+                    bot.register_next_step_handler(message, doljniki)
 
                 elif message.text == 'VDS':
                     connection = pymysql.connect(host='62.209.143.131',
@@ -1028,7 +1022,9 @@ def log(message):
                                 bot.send_message(message.chat.id, list[x:x + 4096])
                         else:
                             bot.send_message(message.chat.id, list)
-                        bot.register_next_step_handler(message, doljniki)
+                    min.close()
+                    bot.register_next_step_handler(message, doljniki)
+
                 elif message.text == 'Возврат 🔙':
                     markup_ru = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True, one_time_keyboard=True)
                     lg1 = types.KeyboardButton('Мои услуги 📊')
