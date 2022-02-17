@@ -18,7 +18,7 @@ SQLALCHEMY_ENGINE_OPTIONS = {
 
 import datetime
 
-now = datetime.datetime.now()
+# now = datetime.datetime.now()
 
 # def r_reg():
 #     bot_con = pymysql.connect(host='62.209.143.131',
