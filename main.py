@@ -1305,8 +1305,7 @@ def log(message):
         last_name = message.chat.last_name
         username = message.chat.username
         timestamp = message.date
-        dt_obj = datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d %H:%M:%S')
-
+        dt_obj = time.strptime(timestamp,  '%Y-%m-%d %H:%M:%S')
         connection = pymysql.connect(host='62.209.143.131',
                                      user='hostmasteruz_pbot',
                                      password='bcaxoZyAXDGc',
@@ -1849,7 +1848,8 @@ def log_uz(message):
         last_name = message.chat.last_name
         username = message.chat.username
         timestamp = message.date
-        dt_obj = datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d %H:%M:%S')
+        # dt_obj = datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d %H:%M:%S')
+        dt_obj = time.strptime(timestamp, '%Y-%m-%d %H:%M:%S')
         connection = pymysql.connect(host='62.209.143.131',
                                      user='hostmasteruz_pbot',
                                      password='bcaxoZyAXDGc',
