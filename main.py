@@ -7,7 +7,7 @@ import telebot
 from telebot import types
 import pymysql
 
-bot = telebot.TeleBot('1241604248:AAFp3m9JztG0E_IUVDvZwqWO50YVOiQXaCU', threaded=False)
+bot = telebot.TeleBot('1241604248:AAHJzB-vpudVO6R0bRHaWb5GQe4Y_ArF4VU', threaded=False)
 bot.delete_webhook()
 
 SQLALCHEMY_ENGINE_OPTIONS = {
