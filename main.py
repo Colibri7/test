@@ -15,9 +15,8 @@ SQLALCHEMY_ENGINE_OPTIONS = {
     "pool_recycle": 300,
 }
 
-import datetime
+now = dt.now()
 
-now = datetime.datetime.now()
 
 # def r_reg():
 #     bot_con = pymysql.connect(host='62.209.143.131',
@@ -122,18 +121,21 @@ def send_domain_list_every_day():
         "`expired` FROM `mydomain` "
         "WHERE DATE(`expired`) = DATE(NOW())")
     domendays_1 = min.fetchall()
-    if not domendays_1:
-        bot.send_message(332749197, 'Сегодня должников по Домену нет')
-    else:
-        days_1 = ''
-        n = 1
-        for i in domendays_1:
-            days_1 += f'{n}. {i["mydomainname"]}.uz\n'
-            n += 1
+    me_and_arlen_id = [1861511730, 332749197]
+    for i in me_and_arlen_id:
+        if not domendays_1:
+            bot.send_message(i, 'Сегодня должников по Домену нет')
+        else:
+            days_1 = ''
+            n = 1
+            for i in domendays_1:
+                days_1 += f'{n}. {i["mydomainname"]}.uz\n'
+                n += 1
 
-
-        bot.send_message(332749197, f'Должники на {now.strftime("%d-%m-%Y")} число по Домену:\n{days_1}')
+            bot.send_message(i, f'Должники на {now.strftime("%d-%m-%Y")} число по Домену:\n{days_1}')
     min.close()
+
+
 def send_hosting_list_every_day():
     connection = pymysql.connect(host='62.209.143.131',
                                  user='hostmasteruz_pbot',
@@ -155,9 +157,10 @@ def send_hosting_list_every_day():
             days_1 += f'{n}. {i["hostingname"]} - {i["contactname"]}\n'
             n += 1
 
-
         bot.send_message(332749197, f'Должники на {now.strftime("%d-%m-%Y")} число по Хостингу:\n{days_1}')
     min.close()
+
+
 def send_vds_list_every_day():
     connection = pymysql.connect(host='62.209.143.131',
                                  user='hostmasteruz_pbot',
@@ -178,7 +181,6 @@ def send_vds_list_every_day():
         for i in domendays_1:
             days_1 += f'{n}. {i["vdshostname"]} - {i["contactname"]}\n'
             n += 1
-
 
         bot.send_message(332749197, f'Должники на {now.strftime("%d-%m-%Y")} число по VDS:\n{days_1}')
     min.close()
@@ -578,7 +580,7 @@ def domen_30_days_schedule():
 
 
 def domen_10_days_schedule():
-    day_of_month = datetime.now().day
+    day_of_month = dt.now().day
 
     if day_of_month == 28:
 
@@ -2462,7 +2464,7 @@ def callback(call):
 
 
 def job2():
-    day_of_month = datetime.now().day
+    day_of_month = dt.now().day
 
     if day_of_month == 27:
         bot.send_message(332749197, 'hello')
@@ -2488,10 +2490,9 @@ if __name__ == "__main__":
     schedule.every().day.at("10:10").do(ds_2_days_schedule)
     # schedule.every().day.at("10:10").do(ds_1_days_schedule)
     # schedule.every().day.at("10:10").do(ds_0_days_schedule)
-    schedule.every().day.at("00:01").do(send_domain_list_every_day)
+    schedule.every().day.at("12:47").do(send_domain_list_every_day)
     schedule.every().day.at("00:01").do(send_hosting_list_every_day)
     schedule.every().day.at("00:01").do(send_vds_list_every_day)
-
 
     Thread(target=schedule_checker).start()
 
