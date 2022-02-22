@@ -122,9 +122,9 @@ def send_domain_list_every_day():
         "WHERE DATE(`expired`) = DATE(NOW())")
     domendays_1 = min.fetchall()
     me_and_arlen_id = [1861511730, 332749197]
-    for i in me_and_arlen_id:
+    for j in me_and_arlen_id:
         if not domendays_1:
-            bot.send_message(i, 'Сегодня должников по Домену нет')
+            bot.send_message(j, 'Сегодня должников по Домену нет')
         else:
             days_1 = ''
             n = 1
@@ -132,7 +132,7 @@ def send_domain_list_every_day():
                 days_1 += f'{n}. {i["mydomainname"]}.uz\n'
                 n += 1
 
-            bot.send_message(i, f'Должники на {now.strftime("%d-%m-%Y")} число по Домену:\n{days_1}')
+            bot.send_message(j, f'Должники на {now.strftime("%d-%m-%Y")} число по Домену:\n{days_1}')
     min.close()
 
 
@@ -2490,7 +2490,7 @@ if __name__ == "__main__":
     schedule.every().day.at("10:10").do(ds_2_days_schedule)
     # schedule.every().day.at("10:10").do(ds_1_days_schedule)
     # schedule.every().day.at("10:10").do(ds_0_days_schedule)
-    schedule.every().day.at("12:47").do(send_domain_list_every_day)
+    schedule.every().day.at("12:50").do(send_domain_list_every_day)
     schedule.every().day.at("00:01").do(send_hosting_list_every_day)
     schedule.every().day.at("00:01").do(send_vds_list_every_day)
 
